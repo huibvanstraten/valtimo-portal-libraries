@@ -2,6 +2,12 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "paths": {
+      "@valtimo-portal/nl-material": [
+        "dist/valtimo-portal/nl-material/valtimo-portal-nl-material",
+        "dist/valtimo-portal/nl-material"
+      ]
+    },
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,

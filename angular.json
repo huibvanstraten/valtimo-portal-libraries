@@ -125,6 +125,46 @@
           }
         }
       }
+    },
+    "@valtimo-portal/nl-material": {
+      "projectType": "library",
+      "root": "projects/valtimo-portal/nl-material",
+      "sourceRoot": "projects/valtimo-portal/nl-material/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "tsConfig": "projects/valtimo-portal/nl-material/tsconfig.lib.json",
+            "project": "projects/valtimo-portal/nl-material/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/valtimo-portal/nl-material/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/valtimo-portal/nl-material/src/test.ts",
+            "tsConfig": "projects/valtimo-portal/nl-material/tsconfig.spec.json",
+            "karmaConfig": "projects/valtimo-portal/nl-material/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/valtimo-portal/nl-material/tsconfig.lib.json",
+              "projects/valtimo-portal/nl-material/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "valtimo-portal"

@@ -1,4 +1,5 @@
 @import '~@angular/material/theming';
+
 @include mat-core();
 
 $nl-material-primary-palette: (
@@ -87,22 +88,22 @@ $nl-material-warn-palette: (
     100 : #000000,
     200 : #000000,
     300 : #000000,
-    400 : #000000,
-    500 : #000000,
+    400 : #ffffff,
+    500 : #ffffff,
     600 : #ffffff,
     700 : #ffffff,
     800 : #ffffff,
     900 : #ffffff,
     A100 : #000000,
     A200 : #000000,
-    A400 : #000000,
-    A700 : #000000,
+    A400 : #ffffff,
+    A700 : #ffffff,
   )
 );
 
 $nl-material-primary: mat-palette($nl-material-primary-palette);
-$nl-material-accent:  mat-palette($nl-material-accent-palette);
-$nl-material-warn:    mat-palette($nl-material-warn-palette);
+$nl-material-accent: mat-palette($nl-material-accent-palette);
+$nl-material-warn: mat-palette($nl-material-warn-palette);
 
 $nl-material-theme: mat-light-theme((
   color: (

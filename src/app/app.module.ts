@@ -1,10 +1,10 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
 
-import {NlMaterialModule} from '@valtimo-portal/nl-material';
+import {ToolbarModule} from '@valtimo-portal/nl-material';
 
 @NgModule({
   declarations: [
@@ -13,9 +13,10 @@ import {NlMaterialModule} from '@valtimo-portal/nl-material';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NlMaterialModule
+    ToolbarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

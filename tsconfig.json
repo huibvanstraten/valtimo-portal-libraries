@@ -7,7 +7,6 @@
         "dist/valtimo-portal/nl-material/valtimo-portal-nl-material",
         "dist/valtimo-portal/nl-material"
       ],
-      "@root/*": ["*"],
       "@app/*": ["src/app/*"],
       "@cases/*": ["src/app/cases/*"],
       "@home/*": ["src/app/home/*"],

@@ -1,1 +1,1 @@
-export * from './navigation-menu-item';
+export * from './navigation-menu';

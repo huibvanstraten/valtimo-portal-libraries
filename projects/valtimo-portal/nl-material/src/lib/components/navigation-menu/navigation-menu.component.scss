@@ -1,24 +1,44 @@
 @import 'variables';
 @import 'palettes';
 
+.navigator, nav {
+  height: 100%;
+  align-items: center;
+}
+
 a {
   color: inherit;
   text-decoration: none;
   font-size: $font-smaller;
   text-align: center;
+  display: grid;
+  transition: color 0.1s;
 
-  &::after {
-    display: block;
-    content: attr(title);
-    font-weight: bold;
-    height: 1px;
-    color: transparent;
-    overflow: hidden;
-    visibility: hidden;
+  &:hover {
+    color: $nl-material-primary;
+  }
+
+  span {
+    grid-column: 1;
+    grid-row: 1;
+    opacity: 1;
+    transition: opacity 0.1s;
+
+    &.hide {
+      opacity: 0;
+    }
   }
 }
 
 .active {
-  color: map-get($nl-material-primary-palette, 500);
+  color: $nl-material-primary;
   font-weight: bold;
+}
+
+.indicator {
+  position: relative;
+  height: 3px;
+  background-color: $nl-material-primary;
+  margin-bottom: -3px;
+  transition: all 0.3s ease;
 }

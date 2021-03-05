@@ -31,6 +31,8 @@ $nl-material-primary-palette: (
   )
 );
 
+$nl-material-primary: map-get($nl-material-primary-palette, 500);
+
 $nl-material-accent-palette: (
   50 : #e4efe8,
   100 : #bcd7c5,
@@ -64,6 +66,8 @@ $nl-material-accent-palette: (
   )
 );
 
+$nl-material-accent: map-get($nl-material-accent-palette, 500);
+
 $nl-material-warn-palette: (
   50 : #fbeee1,
   100 : #f6d4b3,
@@ -96,3 +100,5 @@ $nl-material-warn-palette: (
     A700 : #ffffff,
   )
 );
+
+$nl-material-warn: map-get($nl-material-warn-palette, 500);

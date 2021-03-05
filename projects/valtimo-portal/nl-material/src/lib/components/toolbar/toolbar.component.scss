@@ -1,0 +1,16 @@
+@import 'variables';
+
+@include layout-bp(gt-xs) {
+  mat-toolbar, mat-toolbar-row {
+    min-height: $header-height;
+  }
+}
+
+mat-toolbar {
+  background: none;
+}
+
+mat-toolbar-row {
+  width: 100%;
+  max-width: $max-width;
+}

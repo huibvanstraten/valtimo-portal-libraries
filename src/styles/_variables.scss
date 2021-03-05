@@ -1,0 +1,6 @@
+@import 'node_modules/@angular/flex-layout/mq'; // import media queries from Angular flex layout
+
+/* General */
+
+$max-width: 1024px; // Maximum size to which site is expanded horizontally
+$header-height: 78px; // Height of the header at top containing nav and logo

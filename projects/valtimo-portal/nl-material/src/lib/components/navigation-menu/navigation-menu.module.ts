@@ -1,17 +1,17 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {ToolbarComponent} from './toolbar.component';
+import {NavigationMenuComponent} from './navigation-menu.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {FlexLayoutModule} from '@angular/flex-layout';
 
 @NgModule({
-  declarations: [ToolbarComponent],
+  declarations: [NavigationMenuComponent],
   imports: [
     MatToolbarModule,
     CommonModule,
     FlexLayoutModule
   ],
-  exports: [ToolbarComponent]
+  exports: [NavigationMenuComponent]
 })
-export class ToolbarModule {
+export class NavigationMenuModule {
 }

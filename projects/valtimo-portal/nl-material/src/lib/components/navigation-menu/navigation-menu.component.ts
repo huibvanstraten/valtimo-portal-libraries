@@ -22,7 +22,11 @@ export class NavigationMenuComponent implements OnInit, AfterViewInit, OnDestroy
 
   currentUrl$: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
-  activeNavLinkIndicator$: BehaviorSubject<ActiveNavLinkIndicator> = new BehaviorSubject<ActiveNavLinkIndicator>({width: 0, offset: 0});
+  activeNavLinkIndicator$: BehaviorSubject<ActiveNavLinkIndicator> = new BehaviorSubject<ActiveNavLinkIndicator>({
+    width: 0,
+    offset: 0,
+    previousOffset: 0
+  });
 
   private routerSubscription!: Subscription;
 
@@ -48,6 +52,13 @@ export class NavigationMenuComponent implements OnInit, AfterViewInit, OnDestroy
     this.navLinksSubscription?.unsubscribe();
   }
 
+  getTransitionDuration(indicator: ActiveNavLinkIndicator): string {
+    const baseSpeed = 0.2;
+    const difference = Math.abs(indicator.offset - indicator.previousOffset);
+    const multiplier = difference / 150;
+    return (Math.round((multiplier > 1 ? (baseSpeed * multiplier) : baseSpeed) * 100) / 100).toString();
+  }
+
   private handleRouterEvent(event: Event): void {
     if (event instanceof NavigationEnd) {
       this.currentUrl$.next(event.url);
@@ -69,7 +80,11 @@ export class NavigationMenuComponent implements OnInit, AfterViewInit, OnDestroy
     const activeElementRelativeOffset = (activeElementAbsolutetOffset && firstElementAbsoluteOffset) ?
       (activeElementAbsolutetOffset - firstElementAbsoluteOffset) : 0;
 
-    this.activeNavLinkIndicator$.next({width: activeElementWidth, offset: activeElementRelativeOffset});
+    this.activeNavLinkIndicator$.next({
+      width: activeElementWidth,
+      offset: activeElementRelativeOffset,
+      previousOffset: this.activeNavLinkIndicator$.getValue().offset
+    });
   }
 
 }

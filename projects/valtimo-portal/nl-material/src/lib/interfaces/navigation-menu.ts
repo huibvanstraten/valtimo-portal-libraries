@@ -10,6 +10,7 @@ interface NavigationMenuItem {
 interface ActiveNavLinkIndicator {
   width: number;
   offset: number;
+  previousOffset: number;
 }
 
 export {NavigationMenuItem, NavLinkElements, ActiveNavLinkIndicator};

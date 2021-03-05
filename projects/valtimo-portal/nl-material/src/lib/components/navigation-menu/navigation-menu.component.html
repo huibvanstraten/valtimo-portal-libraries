@@ -1,5 +1,10 @@
-<nav>
-  <a *ngFor="let item of items" [routerLink]="item.link">
+<nav fxLayout="row" fxLayoutGap="20px" *ngIf="currentUrl$ | async as currentUrl">
+  <a
+    *ngFor="let item of items"
+    [routerLink]="item.link"
+    [ngClass]="{'active': currentUrl === ('/' + item.link)}"
+    [title]="item.title"
+  >
     {{item.title}}
   </a>
 </nav>

@@ -1,1 +1,11 @@
-<p>menu-icon works!</p>
+<div
+  #icon
+  class="menu-icon"
+  [ngClass]="{'open': open$ | async}"
+  (click)="handleClick()"
+>
+  <span></span>
+  <span></span>
+  <span></span>
+  <span></span>
+</div>

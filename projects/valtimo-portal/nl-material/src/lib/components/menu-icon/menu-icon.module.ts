@@ -9,5 +9,5 @@ import {MenuIconComponent} from './menu-icon.component';
   ],
   exports: [MenuIconComponent]
 })
-export class NavigationMenuModule {
+export class MenuIconModule {
 }

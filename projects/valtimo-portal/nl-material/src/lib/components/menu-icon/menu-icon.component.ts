@@ -1,16 +1,17 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, HostListener, OnInit, ViewChild} from '@angular/core';
+import {BehaviorSubject} from 'rxjs';
 
 @Component({
-  selector: 'lib-menu-icon',
+  selector: 'nl-material-menu-icon',
   templateUrl: './menu-icon.component.html',
   styleUrls: ['./menu-icon.component.scss']
 })
-export class MenuIconComponent implements OnInit {
+export class MenuIconComponent {
+  @ViewChild('icon') iconRef!: ElementRef<HTMLDivElement>;
 
-  constructor() {
+  open$ = new BehaviorSubject<boolean>(false);
+
+  handleClick(): void {
+    this.open$.next(!this.open$.getValue());
   }
-
-  ngOnInit(): void {
-  }
-
 }

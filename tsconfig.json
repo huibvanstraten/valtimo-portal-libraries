@@ -7,11 +7,21 @@
         "dist/valtimo-portal/nl-material/valtimo-portal-nl-material",
         "dist/valtimo-portal/nl-material"
       ],
-      "@app/*": ["src/app/*"],
-      "@cases/*": ["src/app/cases/*"],
-      "@home/*": ["src/app/home/*"],
-      "@notifications/*": ["src/app/notifications/*"],
-      "@tasks/*": ["src/app/tasks/*"]
+      "@app/*": [
+        "src/app/*"
+      ],
+      "@cases/*": [
+        "src/app/cases/*"
+      ],
+      "@home/*": [
+        "src/app/home/*"
+      ],
+      "@notifications/*": [
+        "src/app/notifications/*"
+      ],
+      "@tasks/*": [
+        "src/app/tasks/*"
+      ]
     },
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",

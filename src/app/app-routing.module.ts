@@ -1,18 +1,41 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
+import {PortalRoute} from '@app/interfaces';
 
-const routes: Routes = [
+const titles: { [key: string]: string } = {
+  home: 'Home',
+  notifications: 'Meldingen',
+  cases: 'Aanvragen',
+  tasks: 'Taken'
+};
+
+const getPath = (title: string) => title.toLowerCase();
+
+const routes: Array<PortalRoute> = [
   {
-    path: '', loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
+    path: '', loadChildren: () => import('./modules/home/home.module').then(m => m.HomeModule),
+    data: {
+      title: titles.home
+    }
   },
   {
-    path: 'meldingen', loadChildren: () => import('./notifications/notifications.module').then(m => m.NotificationsModule)
+    path: getPath(titles.notifications),
+    loadChildren: () => import('./modules/notifications/notifications.module').then(m => m.NotificationsModule),
+    data: {
+      title: titles.notifications
+    }
   },
   {
-    path: 'aanvragen', loadChildren: () => import('./cases/cases.module').then(m => m.CasesModule)
+    path: getPath(titles.cases), loadChildren: () => import('./modules/cases/cases.module').then(m => m.CasesModule),
+    data: {
+      title: titles.cases
+    }
   },
   {
-    path: 'taken', loadChildren: () => import('./tasks/tasks.module').then(m => m.TasksModule)
+    path: getPath(titles.tasks), loadChildren: () => import('./modules/tasks/tasks.module').then(m => m.TasksModule),
+    data: {
+      title: titles.tasks
+    }
   }
 ];
 
@@ -20,5 +43,7 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule {
+class AppRoutingModule {
 }
+
+export {routes, AppRoutingModule};

@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {routes} from '@app/app-routing.module';
+import {NavigationMenuItem} from '@valtimo-portal/nl-material';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'valtimo-portal';
+  navigationMenuItems: Array<NavigationMenuItem> = routes
+    .filter((route) => !route.data?.hideInNav)
+    .map((route) => ({link: String(route.path), title: String(route.data?.title)}));
 }

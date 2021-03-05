@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import {ToolbarModule} from '@valtimo-portal/nl-material';
+import {ToolbarModule, NavigationMenuModule} from '@valtimo-portal/nl-material';
 
 @NgModule({
   declarations: [
@@ -12,6 +12,7 @@ import {ToolbarModule} from '@valtimo-portal/nl-material';
     BrowserModule,
     AppRoutingModule,
     ToolbarModule,
+    NavigationMenuModule
   ],
   providers: [],
   bootstrap: [AppComponent]

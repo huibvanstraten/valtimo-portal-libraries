@@ -5,6 +5,7 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 import {RouterModule} from '@angular/router';
 import {MenuIconModule} from '../menu-icon';
 import {LayoutModule} from '@angular/cdk/layout';
+import {SidenavServiceModule} from '../../services';
 
 @NgModule({
   declarations: [NavigationMenuComponent],
@@ -13,7 +14,8 @@ import {LayoutModule} from '@angular/cdk/layout';
     FlexLayoutModule,
     RouterModule,
     MenuIconModule,
-    LayoutModule
+    LayoutModule,
+    SidenavServiceModule
   ],
   exports: [NavigationMenuComponent]
 })

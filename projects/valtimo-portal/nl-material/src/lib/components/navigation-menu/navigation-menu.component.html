@@ -1,4 +1,4 @@
-<div class="navigator" fxHide.xs>
+<div class="navigator" fxHide.xs *ngIf="items$ | async as items">
   <ng-container *ngIf="activeNavLinkIndicator$ | async as indicator">
     <div *ngIf="indicator.width !== 0" class="indicator" [style.width.px]="indicator.width"
          [style.left.px]="indicator.offset"

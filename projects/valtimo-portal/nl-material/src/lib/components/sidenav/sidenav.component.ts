@@ -1,13 +1,16 @@
-import {Component} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {SidenavService} from '../../services';
 import {Observable} from 'rxjs';
+import {NavigationMenuItem} from '../../interfaces';
 
 @Component({
   selector: 'nl-material-sidenav',
   templateUrl: './sidenav.component.html',
   styleUrls: ['./sidenav.component.scss']
 })
-export class SidenavComponent {
+export class SidenavComponent implements OnInit {
+
+  @Input() items!: Array<NavigationMenuItem>;
 
   open$!: Observable<boolean>;
 
@@ -15,8 +18,11 @@ export class SidenavComponent {
     this.open$ = this.sidenavService.open$;
   }
 
-  onOpenedChange(opened: boolean): void {
-    this.sidenavService.open = opened;
+  ngOnInit(): void {
+    this.sidenavService.items = this.items;
   }
 
+  onOpenedChange(opened: boolean = false): void {
+    this.sidenavService.open = opened;
+  }
 }

@@ -8,8 +8,9 @@ import {
 } from '@angular/core';
 import {ActiveNavLinkIndicator, NavigationMenuItem, NavLinkElements} from '../../interfaces';
 import {Event, NavigationEnd, Router} from '@angular/router';
-import {BehaviorSubject, combineLatest, Subscription} from 'rxjs';
+import {BehaviorSubject, combineLatest, Observable, Subscription} from 'rxjs';
 import {BreakpointObserver} from '@angular/cdk/layout';
+import {SidenavService} from '../../services';
 
 @Component({
   selector: 'nl-material-navigation-menu',
@@ -19,7 +20,7 @@ import {BreakpointObserver} from '@angular/cdk/layout';
 export class NavigationMenuComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChildren('navLink') navLinks!: NavLinkElements;
 
-  @Input() items!: Array<NavigationMenuItem>;
+  items$!: Observable<Array<NavigationMenuItem>>;
 
   currentUrl$: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
@@ -35,7 +36,8 @@ export class NavigationMenuComponent implements OnInit, AfterViewInit, OnDestroy
 
   private breakPointSubscription!: Subscription;
 
-  constructor(private router: Router, private observer: BreakpointObserver) {
+  constructor(private router: Router, private observer: BreakpointObserver, private sidenavService: SidenavService) {
+    this.items$ = this.sidenavService.items$;
   }
 
   ngOnInit(): void {

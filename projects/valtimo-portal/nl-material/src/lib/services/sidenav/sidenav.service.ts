@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject, Observable} from 'rxjs';
+import {BehaviorSubject, Observable, Subject} from 'rxjs';
+import {NavigationMenuItem} from '../../interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -7,6 +8,8 @@ import {BehaviorSubject, Observable} from 'rxjs';
 export class SidenavService {
 
   private _open$ = new BehaviorSubject<boolean>(false);
+
+  private _items$ = new BehaviorSubject<Array<NavigationMenuItem>>([]);
 
   constructor() {
   }
@@ -17,5 +20,13 @@ export class SidenavService {
 
   set open(open: boolean) {
     this._open$.next(open);
+  }
+
+  get items$(): Observable<Array<NavigationMenuItem>> {
+    return this._items$.asObservable();
+  }
+
+  set items(items: Array<NavigationMenuItem>) {
+    this._items$.next(items);
   }
 }

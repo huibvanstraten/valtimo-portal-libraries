@@ -1,5 +1,15 @@
-nl-material-navigation-menu {
+nl-material-sidenav, nl-material-navigation-menu, .page-container {
   height: 100%;
+}
+
+nl-material-navigation-menu, .page-container {
   display: flex;
+}
+
+nl-material-navigation-menu {
   align-items: center;
+}
+
+.page-container {
+  flex-direction: column;
 }

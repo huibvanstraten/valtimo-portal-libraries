@@ -1,11 +1,13 @@
-<nl-material-sidenav [items]="navigationMenuItems">
+<div class="page-container">
   <header>
     <nl-material-toolbar>
       <nl-material-navigation-menu></nl-material-navigation-menu>
     </nl-material-toolbar>
   </header>
-  <main>
-    <router-outlet></router-outlet>
-  </main>
-</nl-material-sidenav>
+  <nl-material-sidenav [items]="navigationMenuItems">
+    <main>
+      <router-outlet></router-outlet>
+    </main>
+  </nl-material-sidenav>
+</div>
 

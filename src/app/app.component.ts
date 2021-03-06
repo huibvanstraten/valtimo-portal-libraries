@@ -12,5 +12,5 @@ export class AppComponent {
 
   navigationMenuItems: Array<NavigationMenuItem> = routes
     .filter((route) => !route.data?.hideInNav)
-    .map((route) => ({link: String(route.path), title: String(route.data?.title)}));
+    .map((route) => ({link: String(route.path), title: String(route.data?.title), icon: String(route.data?.icon)}));
 }

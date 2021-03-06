@@ -1,3 +1,18 @@
+@import 'palettes';
+
 .mat-drawer-container {
   background: none;
+}
+
+.mat-sidenav-container {
+  height: 100% !important;
+}
+
+.nav-caption {
+  display: inline-block;
+  padding-left: 16px;
+}
+
+.primary-color-icon {
+  color: $nl-material-primary;
 }

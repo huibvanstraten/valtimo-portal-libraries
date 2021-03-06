@@ -5,6 +5,7 @@ type NavLinkElements = QueryList<ElementRef<HTMLLinkElement>>;
 interface NavigationMenuItem {
   link: string;
   title: string;
+  icon: string;
 }
 
 interface ActiveNavLinkIndicator {

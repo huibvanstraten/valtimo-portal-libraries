@@ -9,6 +9,7 @@ import {
 import {ActiveNavLinkIndicator, NavigationMenuItem, NavLinkElements} from '../../interfaces';
 import {Event, NavigationEnd, Router} from '@angular/router';
 import {BehaviorSubject, combineLatest, Subscription} from 'rxjs';
+import {BreakpointObserver} from '@angular/cdk/layout';
 
 @Component({
   selector: 'nl-material-navigation-menu',
@@ -32,24 +33,24 @@ export class NavigationMenuComponent implements OnInit, AfterViewInit, OnDestroy
 
   private navLinksSubscription!: Subscription;
 
-  constructor(private router: Router) {
+  private breakPointSubscription!: Subscription;
+
+  constructor(private router: Router, private observer: BreakpointObserver) {
   }
 
   ngOnInit(): void {
-    this.routerSubscription = this.router.events.subscribe((event) => {
-      this.handleRouterEvent(event);
-    });
+    this.openRouterSubscription();
   }
 
   ngAfterViewInit(): void {
-    this.navLinksSubscription = combineLatest([this.navLinks.changes, this.currentUrl$]).subscribe(([navLinks, currentUrl]) => {
-      this.setActiveNavLink(navLinks, currentUrl);
-    });
+    this.openNavLinksSubscription();
+    this.openBreakpointSubscription();
   }
 
   ngOnDestroy(): void {
     this.routerSubscription?.unsubscribe();
     this.navLinksSubscription?.unsubscribe();
+    this.breakPointSubscription?.unsubscribe();
   }
 
   getTransitionDuration(indicator: ActiveNavLinkIndicator): string {
@@ -57,6 +58,24 @@ export class NavigationMenuComponent implements OnInit, AfterViewInit, OnDestroy
     const difference = Math.abs(indicator.offset - indicator.previousOffset);
     const multiplier = difference / 150;
     return (Math.round((multiplier > 1 ? (baseSpeed * multiplier) : baseSpeed) * 100) / 100).toString();
+  }
+
+  private openBreakpointSubscription(): void {
+    this.breakPointSubscription = this.observer.observe('(min-width: 600px)').subscribe(result => {
+      this.setActiveNavLink(this.navLinks, this.currentUrl$.getValue());
+    });
+  }
+
+  private openRouterSubscription(): void {
+    this.routerSubscription = this.router.events.subscribe((event) => {
+      this.handleRouterEvent(event);
+    });
+  }
+
+  private openNavLinksSubscription(): void {
+    this.navLinksSubscription = combineLatest([this.navLinks.changes, this.currentUrl$]).subscribe(([navLinks, currentUrl]) => {
+      this.setActiveNavLink(navLinks, currentUrl);
+    });
   }
 
   private handleRouterEvent(event: Event): void {
@@ -80,11 +99,13 @@ export class NavigationMenuComponent implements OnInit, AfterViewInit, OnDestroy
     const activeElementRelativeOffset = (activeElementAbsolutetOffset && firstElementAbsoluteOffset) ?
       (activeElementAbsolutetOffset - firstElementAbsoluteOffset) : 0;
 
-    this.activeNavLinkIndicator$.next({
-      width: activeElementWidth,
-      offset: activeElementRelativeOffset,
-      previousOffset: this.activeNavLinkIndicator$.getValue().offset
-    });
-  }
 
+    if (activeElementWidth && (activeElementRelativeOffset || activeElementRelativeOffset === 0)) {
+      this.activeNavLinkIndicator$.next({
+        width: activeElementWidth,
+        offset: activeElementRelativeOffset,
+        previousOffset: this.activeNavLinkIndicator$.getValue().offset
+      });
+    }
+  }
 }

@@ -4,6 +4,7 @@ import {NavigationMenuComponent} from './navigation-menu.component';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {RouterModule} from '@angular/router';
 import {MenuIconModule} from '../menu-icon';
+import {LayoutModule} from '@angular/cdk/layout';
 
 @NgModule({
   declarations: [NavigationMenuComponent],
@@ -11,7 +12,8 @@ import {MenuIconModule} from '../menu-icon';
     CommonModule,
     FlexLayoutModule,
     RouterModule,
-    MenuIconModule
+    MenuIconModule,
+    LayoutModule
   ],
   exports: [NavigationMenuComponent]
 })

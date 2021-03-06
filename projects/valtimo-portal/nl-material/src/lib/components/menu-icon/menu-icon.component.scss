@@ -17,7 +17,7 @@
   span {
     display: block;
     position: absolute;
-    height: 8px;
+    height: 6px;
     width: 100%;
     background-color: $nl-material-primary;
     border-radius: 3px;
@@ -40,17 +40,17 @@
   }
 
   span:nth-child(2), span:nth-child(3) {
-    top: 12px;
+    top: 13px;
 
   }
 
   span:nth-child(4) {
-    top: 24px;
+    top: 26px;
   }
 
   &.open {
     span:nth-child(1) {
-      top: 12px;
+      top: 13px;
       width: 0%;
       left: 50%;
     }
@@ -70,7 +70,7 @@
     }
 
     span:nth-child(4) {
-      top: 12px;
+      top: 13px;
       width: 0%;
       left: 50%;
     }

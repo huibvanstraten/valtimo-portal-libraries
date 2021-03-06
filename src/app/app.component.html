@@ -1,8 +1,11 @@
-<header>
-  <nl-material-toolbar>
-    <nl-material-navigation-menu [items]="navigationMenuItems"></nl-material-navigation-menu>
-  </nl-material-toolbar>
-</header>
-<main>
-  <router-outlet></router-outlet>
-</main>
+<nl-material-sidenav>
+  <header>
+    <nl-material-toolbar>
+      <nl-material-navigation-menu [items]="navigationMenuItems"></nl-material-navigation-menu>
+    </nl-material-toolbar>
+  </header>
+  <main>
+    <router-outlet></router-outlet>
+  </main>
+</nl-material-sidenav>
+

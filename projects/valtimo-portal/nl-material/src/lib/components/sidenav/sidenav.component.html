@@ -1,5 +1,5 @@
-<mat-sidenav-container>
-  <mat-sidenav #sidenav role="navigation">
+<mat-sidenav-container fullscreen>
+  <mat-sidenav role="navigation" [opened]="open$ | async" (openedChange)="onOpenedChange($event)">
     test
   </mat-sidenav>
   <mat-sidenav-content>

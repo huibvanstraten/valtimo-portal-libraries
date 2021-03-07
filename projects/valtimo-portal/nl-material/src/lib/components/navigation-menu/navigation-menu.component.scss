@@ -43,3 +43,10 @@ a {
   background-color: $nl-material-primary;
   margin-bottom: -3px;
 }
+
+.sidenav-shadow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 56px;
+}

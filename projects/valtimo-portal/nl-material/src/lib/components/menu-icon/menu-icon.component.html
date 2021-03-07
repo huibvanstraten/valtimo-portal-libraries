@@ -1,10 +1,9 @@
-<ng-container *ngIf="{open: open$ | async, marginLeft: marginLeft$ | async } as obs">
+<ng-container *ngIf="{open: open$ | async } as obs">
   <div
     #icon
     class="menu-icon"
     [ngClass]="{'open': obs.open}"
     (click)="handleClick()"
-    [style.marginLeft.px]="obs.open ? obs.marginLeft: 0"
   >
     <span></span>
     <span></span>

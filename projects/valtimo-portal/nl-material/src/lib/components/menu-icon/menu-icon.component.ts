@@ -14,16 +14,9 @@ export class MenuIconComponent {
   @ViewChild('icon') iconRef!: ElementRef<HTMLDivElement>;
 
   open$!: Observable<boolean>;
-  marginLeft$!: Observable<number>;
 
   constructor(private sidenavService: SidenavService) {
     this.open$ = this.sidenavService.open$;
-    this.marginLeft$ = this.sidenavService.sidenavWidth$.pipe(
-      debounceTime(10),
-      map((width) => {
-        const margin = width - 60;
-        return margin > 0 ? margin : 0;
-      }));
   }
 
   handleClick(): void {

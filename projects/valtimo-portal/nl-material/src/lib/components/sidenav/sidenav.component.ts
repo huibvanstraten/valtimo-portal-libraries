@@ -1,16 +1,14 @@
-import {AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {SidenavService} from '../../services';
 import {Observable} from 'rxjs';
 import {NavigationMenuItem} from '../../interfaces';
-import {MatSidenav} from '@angular/material/sidenav';
 
 @Component({
   selector: 'nl-material-sidenav',
   templateUrl: './sidenav.component.html',
   styleUrls: ['./sidenav.component.scss']
 })
-export class SidenavComponent implements OnInit, AfterViewInit {
-  @ViewChild('sidenav') sidenav!: MatSidenav;
+export class SidenavComponent implements OnInit {
 
   @Input() items!: Array<NavigationMenuItem>;
 
@@ -26,9 +24,5 @@ export class SidenavComponent implements OnInit, AfterViewInit {
 
   onOpenedChange(opened: boolean = false): void {
     this.sidenavService.open = opened;
-  }
-
-  ngAfterViewInit(): void {
-    this.sidenavService.sidenavWidth = this.sidenav._getWidth();
   }
 }

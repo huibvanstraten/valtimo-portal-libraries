@@ -11,8 +11,6 @@ export class SidenavService {
 
   private _items$ = new BehaviorSubject<Array<NavigationMenuItem>>([]);
 
-  private _sidenavWidth$ = new BehaviorSubject<number>(0);
-
   get open$(): Observable<boolean> {
     return this._open$.asObservable();
   }
@@ -27,13 +25,5 @@ export class SidenavService {
 
   set items(items: Array<NavigationMenuItem>) {
     this._items$.next(items);
-  }
-
-  get sidenavWidth$(): Observable<number> {
-    return this._sidenavWidth$.asObservable();
-  }
-
-  set sidenavWidth(width: number) {
-    this._sidenavWidth$.next(width);
   }
 }

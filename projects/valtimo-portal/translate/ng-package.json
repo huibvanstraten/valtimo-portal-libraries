@@ -1,0 +1,7 @@
+{
+  "$schema": "../../../node_modules/ng-packagr/ng-package.schema.json",
+  "dest": "../../../dist/valtimo-portal/translate",
+  "lib": {
+    "entryFile": "src/projects/valtimo-portal/nl-material/src/lib.ts"
+  }
+}

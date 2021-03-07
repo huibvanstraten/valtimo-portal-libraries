@@ -21,6 +21,10 @@
       ],
       "@tasks/*": [
         "src/app/modules/tasks/*"
+      ],
+      "@valtimo-portal/translate": [
+        "dist/valtimo-portal/translate/valtimo-portal-translate",
+        "dist/valtimo-portal/translate"
       ]
     },
     "baseUrl": "./",

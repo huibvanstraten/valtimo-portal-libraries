@@ -6,6 +6,7 @@ import {SidenavServiceModule} from '../../services';
 import {MatListModule} from '@angular/material/list';
 import {RouterModule} from '@angular/router';
 import {MatIconModule} from '@angular/material/icon';
+import {TranslateModule} from "@ngx-translate/core";
 
 @NgModule({
   declarations: [SidenavComponent],
@@ -15,7 +16,8 @@ import {MatIconModule} from '@angular/material/icon';
     MatListModule,
     SidenavServiceModule,
     RouterModule,
-    MatIconModule
+    MatIconModule,
+    TranslateModule
   ],
   exports: [SidenavComponent]
 })

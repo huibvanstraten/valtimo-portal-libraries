@@ -6,6 +6,7 @@ import {RouterModule} from '@angular/router';
 import {MenuIconModule} from '../menu-icon';
 import {LayoutModule} from '@angular/cdk/layout';
 import {SidenavServiceModule} from '../../services';
+import {TranslateModule} from "@ngx-translate/core";
 
 @NgModule({
   declarations: [NavigationMenuComponent],
@@ -15,7 +16,8 @@ import {SidenavServiceModule} from '../../services';
     RouterModule,
     MenuIconModule,
     LayoutModule,
-    SidenavServiceModule
+    SidenavServiceModule,
+    TranslateModule
   ],
   exports: [NavigationMenuComponent]
 })

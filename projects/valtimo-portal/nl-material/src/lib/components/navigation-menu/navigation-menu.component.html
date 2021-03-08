@@ -9,11 +9,11 @@
       #navLink
       *ngFor="let item of items"
       [routerLink]="item.link"
-      [title]="item.link"
+      [attr.data-link]="item.link"
     >
       <ng-container *ngIf="{active: currentUrl === ('/' + item.link)} as vars">
-        <span [ngClass]="{'hide':vars.active}">{{item.title}}</span>
-        <span class="active" [ngClass]="{'hide': !vars.active}">{{item.title}}</span>
+        <span [ngClass]="{'hide':vars.active}">{{item.title | translate}}</span>
+        <span class="active" [ngClass]="{'hide': !vars.active}">{{item.title | translate}}</span>
       </ng-container>
     </a>
   </nav>

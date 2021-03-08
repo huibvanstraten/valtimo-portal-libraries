@@ -1,16 +1,10 @@
-import {
-  AfterViewInit,
-  Component,
-  Input,
-  OnDestroy,
-  OnInit,
-  ViewChildren
-} from '@angular/core';
+import {AfterViewInit, Component, OnDestroy, OnInit, ViewChildren} from '@angular/core';
 import {ActiveNavLinkIndicator, NavigationMenuItem, NavLinkElements} from '../../interfaces';
 import {Event, NavigationEnd, Router} from '@angular/router';
 import {BehaviorSubject, combineLatest, Observable, Subscription} from 'rxjs';
 import {BreakpointObserver} from '@angular/cdk/layout';
 import {SidenavService} from '../../services';
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'nl-material-navigation-menu',
@@ -36,7 +30,7 @@ export class NavigationMenuComponent implements OnInit, AfterViewInit, OnDestroy
 
   private breakPointSubscription!: Subscription;
 
-  constructor(private router: Router, private observer: BreakpointObserver, private sidenavService: SidenavService) {
+  constructor(private router: Router, private observer: BreakpointObserver, private sidenavService: SidenavService, private translateService: TranslateService) {
     this.items$ = this.sidenavService.items$;
   }
 
@@ -90,11 +84,13 @@ export class NavigationMenuComponent implements OnInit, AfterViewInit, OnDestroy
   }
 
   private setActiveNavLink(navLinks: NavLinkElements, currentUrl: string): void {
+    const removeSlashes = (string: string) => string.replace(/\\|\//g, '');
+
     const nativeElements = navLinks.toArray().map((link) => link.nativeElement);
-    const elementLinks = nativeElements.map((element) => element.getAttribute('title'));
+    const elementLinks = nativeElements.map((element) => element.getAttribute('data-link'));
 
     const currentLink = currentUrl.substring(1);
-    const currentElementIndex = elementLinks.findIndex((link) => link === currentLink);
+    const currentElementIndex = elementLinks.findIndex((link) => removeSlashes(String(link)) === removeSlashes(currentLink));
 
     const firstElementAbsoluteOffset = nativeElements[0]?.offsetLeft;
 

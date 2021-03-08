@@ -36,7 +36,7 @@
               "src/assets",
               {
                 "glob": "**/*",
-                "input": "./src/assets/translate",
+                "input": "./src/assets/locales",
                 "output": "./translate/"
               }
             ],

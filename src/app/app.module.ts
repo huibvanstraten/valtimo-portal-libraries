@@ -9,7 +9,7 @@ import {MultiTranslateHttpLoader} from 'ngx-translate-multi-http-loader';
 import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
 
 export const HttpLoaderFactory = (http: HttpClient) => new MultiTranslateHttpLoader(http, [
-  {prefix: './translate/core/', suffix: '.json'}
+  {prefix: './translate/', suffix: '.json'}
 ]);
 
 @NgModule({

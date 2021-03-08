@@ -1,0 +1,9 @@
+{
+  "ROUTES.notifications": "notifications",
+  "ROUTES.cases": "cases",
+  "ROUTES.tasks": "tasks",
+  "TITLES.home": "Home",
+  "TITLES.notifications": "Notifications",
+  "TITLES.cases": "Cases",
+  "TITLES.tasks": "Tasks"
+}

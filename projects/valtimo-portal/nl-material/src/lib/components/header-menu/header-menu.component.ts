@@ -1,15 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import {Component} from '@angular/core';
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
-  selector: 'lib-header-menu',
+  selector: 'nl-material-header-menu',
   templateUrl: './header-menu.component.html',
   styleUrls: ['./header-menu.component.css']
 })
-export class HeaderMenuComponent implements OnInit {
+export class HeaderMenuComponent {
 
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor(private translateService: TranslateService) {
   }
 
+  useLanguage(language: string): void {
+    this.translateService.use(language);
+  }
 }

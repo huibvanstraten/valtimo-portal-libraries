@@ -1,1 +1,10 @@
-<p>header-menu works!</p>
+<button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+</button>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item (click)="useLanguage('nl')">
+    <span>NL</span>
+  </button>
+  <button mat-menu-item (click)="useLanguage('en')">
+    <span>EN</span>
+  </button>
+</mat-menu>

@@ -1,0 +1,12 @@
+{
+  "titles": {
+    "home": "Home",
+    "notifications": "Meldingen",
+    "cases": "Aanvragen",
+    "tasks": "Taken"
+  },
+  "home": "nl",
+  "notifications": "nl/meldingen",
+  "cases": "nl/aanvragen",
+  "tasks": "nl/taken"
+}

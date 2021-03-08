@@ -33,7 +33,12 @@
             "aot": true,
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              {
+                "glob": "**/*",
+                "input": "./src/assets/translate",
+                "output": "./translate/"
+              }
             ],
             "styles": [
               "src/styles.scss",

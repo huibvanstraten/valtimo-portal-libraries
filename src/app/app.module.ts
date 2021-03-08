@@ -4,6 +4,13 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {ToolbarModule, NavigationMenuModule, SidenavModule} from '@valtimo-portal/nl-material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {MultiTranslateHttpLoader} from 'ngx-translate-multi-http-loader';
+import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
+
+export const HttpLoaderFactory = (http: HttpClient) => new MultiTranslateHttpLoader(http, [
+  {prefix: './translate/core/', suffix: '.json'}
+]);
 
 @NgModule({
   declarations: [
@@ -11,6 +18,14 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    }),
     AppRoutingModule,
     BrowserAnimationsModule,
     ToolbarModule,
@@ -21,4 +36,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
   bootstrap: [AppComponent]
 })
 export class AppModule {
+  constructor(private translateService: TranslateService) {
+    translateService.setDefaultLang('nl');
+  }
 }

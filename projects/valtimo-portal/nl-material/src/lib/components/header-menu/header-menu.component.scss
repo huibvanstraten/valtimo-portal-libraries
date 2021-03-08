@@ -1,3 +1,5 @@
+@import 'colors';
+
 ::ng-deep .header-menu {
   .mat-form-field-wrapper, .mat-form-field-infix {
     padding: 0;
@@ -10,7 +12,7 @@
     font-weight: bold;
     line-height: 16px;
     border-radius: 3px;
-    border: 0.5px solid #d2d2d2;
+    border: 0.5px solid $nl-medium-gray;
     padding: 8px 12px;
     width: 72px;
     font-size: 16px;

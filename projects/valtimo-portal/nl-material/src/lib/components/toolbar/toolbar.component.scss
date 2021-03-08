@@ -1,3 +1,4 @@
+@import 'colors';
 @import 'variables';
 
 @include layout-bp(gt-xs) {
@@ -8,6 +9,7 @@
 
 mat-toolbar {
   background: none;
+  border-bottom: solid 1px $nl-medium-gray;
 }
 
 mat-toolbar-row {

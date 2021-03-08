@@ -1,13 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {CardType} from '../../interfaces';
 
 @Component({
-  selector: 'lib-card',
+  selector: 'nl-material-card',
   templateUrl: './card.component.html',
-  styleUrls: ['./card.component.css']
+  styleUrls: ['./card.component.scss'],
 })
 export class CardComponent implements OnInit {
+  @Input() type: CardType = CardType.default;
+  @Input() title!: string;
+  @Input() subtitle!: string;
+  @Input() content!: string;
 
-  constructor() { }
+  readonly introductionType = CardType.introduction;
+
+  constructor() {
+  }
 
   ngOnInit(): void {
   }

@@ -1,0 +1,24 @@
+@import 'palettes';
+@import 'variables';
+
+.introduction {
+  padding: 0;
+  box-shadow: none;
+
+  mat-card-title, mat-card-subtitle {
+    color: $nl-material-primary;
+  }
+
+  mat-card-title {
+    font-size: $font-xl;
+    font-weight: bold;
+  }
+
+  mat-card-subtitle {
+    font-size: $font-large;
+  }
+
+  mat-card-content {
+    font-size: $font-medium;
+  }
+}

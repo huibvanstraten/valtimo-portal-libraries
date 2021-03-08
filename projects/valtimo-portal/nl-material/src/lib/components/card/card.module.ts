@@ -7,7 +7,7 @@ import {MatCardModule} from '@angular/material/card';
   declarations: [CardComponent],
   imports: [
     CommonModule,
-    MatCardModule
+    MatCardModule,
   ],
   exports: [CardComponent]
 })

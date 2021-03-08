@@ -1,3 +1,5 @@
+@import "_variables.scss";
+
 nl-material-sidenav, nl-material-navigation-menu, .page-container {
   height: 100%;
 }
@@ -12,4 +14,9 @@ nl-material-navigation-menu {
 
 .page-container {
   flex-direction: column;
+
+  main {
+    max-width: $max-width;
+    margin: 0 auto;
+  }
 }

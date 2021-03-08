@@ -4,6 +4,7 @@ interface PortalRouteData extends Data {
   hideInNav?: boolean;
   title: string;
   icon: string;
+  animation?: string;
 }
 
 interface PortalRoute extends Route {

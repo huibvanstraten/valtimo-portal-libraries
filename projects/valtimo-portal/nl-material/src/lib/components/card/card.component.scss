@@ -4,6 +4,7 @@
 .introduction {
   padding: 0;
   box-shadow: none;
+  transition: none;
 
   mat-card-title, mat-card-subtitle {
     color: $nl-material-primary;

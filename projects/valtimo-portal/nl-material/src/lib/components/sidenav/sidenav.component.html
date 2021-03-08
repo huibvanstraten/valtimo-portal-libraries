@@ -1,5 +1,5 @@
 <mat-sidenav-container (backdropClick)="onOpenedChange()">
-  <mat-sidenav #sidenav role="navigation" mode="push" [opened]="open$ | async" (openedChange)="onOpenedChange($event)">
+  <mat-sidenav #sidenav role="navigation" [opened]="open$ | async" (openedChange)="onOpenedChange($event)">
     <mat-nav-list>
       <a
         mat-list-item

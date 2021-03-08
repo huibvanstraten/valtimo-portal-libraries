@@ -1,0 +1,16 @@
+@import 'palettes';
+
+/* Material */
+
+$nl-material-primary: map-get($nl-material-primary-palette, 500);
+$nl-material-accent: map-get($nl-material-accent-palette, 500);
+$nl-material-warn: map-get($nl-material-warn-palette, 500);
+
+/* Grey tints from NL design theme */
+
+$nl-lightest-gray: #FAFAFA;
+$nl-light-gray: #F1F1F1;
+$nl-lighter-gray: #E0E0E0;
+$nl-medium-gray: #D2D2D2;
+$nl-darker: #7A7A7A;
+$nl-dark-gray: #4B4B4B;

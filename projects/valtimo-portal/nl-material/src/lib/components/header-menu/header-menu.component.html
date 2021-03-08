@@ -1,7 +1,9 @@
-<mat-form-field>
-  <mat-select [(ngModel)]="selectedLocale">
-    <mat-option *ngFor="let locale of locales" [value]="locale" (click)="useLanguage(locale)">
-      {{locale.toUpperCase()}}
-    </mat-option>
-  </mat-select>
-</mat-form-field>
+<div class="header-menu">
+  <mat-form-field>
+    <mat-select [(ngModel)]="selectedLocale" [disableOptionCentering]="true">
+      <mat-option *ngFor="let locale of locales" [value]="locale" (click)="useLanguage(locale)">
+        {{locale.toUpperCase()}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>

@@ -1,0 +1,28 @@
+::ng-deep .header-menu {
+  .mat-form-field-wrapper, .mat-form-field-infix {
+    padding: 0;
+    border: 0;
+  }
+
+  .mat-form-field-flex {
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    line-height: 16px;
+    border-radius: 3px;
+    border: 0.5px solid #d2d2d2;
+    padding: 8px 12px;
+    width: 72px;
+    font-size: 16px;
+  }
+
+  .mat-form-field-infix {
+    border-top: 0;
+  }
+
+  .mat-form-field-underline {
+    display: none;
+  }
+}
+
+

@@ -10,6 +10,7 @@ import {
 } from "@gilsdav/ngx-translate-router";
 import {TranslateService} from '@ngx-translate/core';
 
+const locales: Array<string> = ['nl', 'en'];
 
 const routes: Array<PortalRoute> = [
   {
@@ -52,7 +53,7 @@ const routes: Array<PortalRoute> = [
     parser: {
       provide: LocalizeParser,
       useFactory: (translate: TranslateService, location: Location, settings: LocalizeRouterSettings) =>
-        new ManualParserLoader(translate, location, settings, ['en', 'nl'], 'ROUTES.'),
+        new ManualParserLoader(translate, location, settings, locales, 'ROUTES.'),
       deps: [TranslateService, Location, LocalizeRouterSettings]
     }
   })],
@@ -61,4 +62,4 @@ const routes: Array<PortalRoute> = [
 class AppRoutingModule {
 }
 
-export {routes, AppRoutingModule};
+export {routes, locales, AppRoutingModule};

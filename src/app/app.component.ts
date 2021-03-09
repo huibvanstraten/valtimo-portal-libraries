@@ -21,7 +21,8 @@ export class AppComponent {
     .map((route) => ({
       link: String(route.path),
       title: String(route.data?.title),
-      icon: String(route.data?.icon)
+      icon: String(route.data?.icon),
+      isHome: route.data?.isHome
     }));
 
   readonly locales: Array<string> = locales;

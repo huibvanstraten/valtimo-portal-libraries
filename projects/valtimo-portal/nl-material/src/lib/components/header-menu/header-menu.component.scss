@@ -3,6 +3,10 @@
 ::ng-deep .header-menu {
   margin-top: -2px;
 
+  .mat-select-disabled {
+    color: $nl-darker-gray;
+  }
+
   .mat-form-field-wrapper, .mat-form-field-infix {
     padding: 0;
     border: 0;

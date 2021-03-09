@@ -5,6 +5,7 @@ interface PortalRouteData extends Data {
   title: string;
   icon: string;
   animation?: string;
+  isHome?: boolean;
 }
 
 interface PortalRoute extends Route {

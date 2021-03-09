@@ -6,6 +6,7 @@ interface NavigationMenuItem {
   link: string;
   title: string;
   icon: string;
+  isHome?: boolean;
 }
 
 interface ActiveNavLinkIndicator {

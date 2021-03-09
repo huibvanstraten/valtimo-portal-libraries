@@ -18,7 +18,8 @@ const routes: Array<PortalRoute> = [
     data: {
       title: 'TITLES.home',
       icon: 'home',
-      animation: 'HomePage'
+      animation: 'HomePage',
+      isHome: true
     }
   },
   {

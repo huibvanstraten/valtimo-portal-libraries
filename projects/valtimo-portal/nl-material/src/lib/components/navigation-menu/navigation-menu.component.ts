@@ -84,13 +84,12 @@ export class NavigationMenuComponent implements OnInit, AfterViewInit, OnDestroy
   }
 
   private setActiveNavLink(navLinks: NavLinkElements, currentUrl: string): void {
-    const removeSlashes = (string: string) => string.replace(/\\|\//g, '');
+    const removeSlashes = (text: string) => text.replace(/\\|\//g, '');
 
     const nativeElements = navLinks.toArray().map((link) => link.nativeElement);
     const elementLinks = nativeElements.map((element) => element.getAttribute('data-link'));
 
-    const currentLink = currentUrl.substring(1);
-    const currentElementIndex = elementLinks.findIndex((link) => removeSlashes(String(link)) === removeSlashes(currentLink));
+    const currentElementIndex = elementLinks.findIndex((link) => removeSlashes(link || '') === removeSlashes(currentUrl));
 
     const firstElementAbsoluteOffset = nativeElements[0]?.offsetLeft;
 

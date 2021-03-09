@@ -4,6 +4,7 @@ import {HeaderMenuComponent} from './header-menu.component';
 import {TranslateModule} from "@ngx-translate/core";
 import {MatSelectModule} from '@angular/material/select';
 import {FormsModule} from "@angular/forms";
+import {SidenavServiceModule} from "../../services";
 
 @NgModule({
   declarations: [HeaderMenuComponent],
@@ -11,7 +12,8 @@ import {FormsModule} from "@angular/forms";
     CommonModule,
     MatSelectModule,
     TranslateModule,
-    FormsModule
+    FormsModule,
+    SidenavServiceModule
   ],
   exports: [HeaderMenuComponent]
 })

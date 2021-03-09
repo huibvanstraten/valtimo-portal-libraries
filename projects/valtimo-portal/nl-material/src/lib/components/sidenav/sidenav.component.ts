@@ -12,6 +12,8 @@ export class SidenavComponent implements OnInit {
 
   @Input() items!: Array<NavigationMenuItem>;
 
+  items$!: Observable<Array<NavigationMenuItem>>;
+
   open$!: Observable<boolean>;
 
   constructor(private sidenavService: SidenavService) {
@@ -20,6 +22,7 @@ export class SidenavComponent implements OnInit {
 
   ngOnInit(): void {
     this.sidenavService.items = this.items;
+    this.items$ = this.sidenavService.items$;
   }
 
   onOpenedChange(opened: boolean = false): void {

@@ -1,6 +1,8 @@
 @import 'colors';
 
 ::ng-deep .header-menu {
+  margin-top: -2px;
+
   .mat-form-field-wrapper, .mat-form-field-infix {
     padding: 0;
     border: 0;

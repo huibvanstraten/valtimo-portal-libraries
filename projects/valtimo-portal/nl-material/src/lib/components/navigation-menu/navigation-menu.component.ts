@@ -5,6 +5,7 @@ import {BehaviorSubject, combineLatest, Observable, Subscription} from 'rxjs';
 import {BreakpointObserver} from '@angular/cdk/layout';
 import {SidenavService} from '../../services';
 import {TranslateService} from "@ngx-translate/core";
+import {delay} from "rxjs/operators";
 
 @Component({
   selector: 'nl-material-navigation-menu',
@@ -72,9 +73,11 @@ export class NavigationMenuComponent implements OnInit, AfterViewInit, OnDestroy
   }
 
   private openNavLinksSubscription(): void {
-    this.navLinksSubscription = combineLatest([this.navLinks.changes, this.currentUrl$]).subscribe(([navLinks, currentUrl]) => {
-      this.setActiveNavLink(navLinks, currentUrl);
-    });
+    this.navLinksSubscription = combineLatest([this.navLinks.changes, this.currentUrl$])
+      .pipe(delay(100))
+      .subscribe(([navLinks, currentUrl]) => {
+        this.setActiveNavLink(navLinks, currentUrl);
+      });
   }
 
   private handleRouterEvent(event: Event): void {
@@ -98,7 +101,6 @@ export class NavigationMenuComponent implements OnInit, AfterViewInit, OnDestroy
     const activeElementAbsolutetOffset = activeElement?.offsetLeft;
     const activeElementRelativeOffset = (activeElementAbsolutetOffset && firstElementAbsoluteOffset) ?
       (activeElementAbsolutetOffset - firstElementAbsoluteOffset) : 0;
-
 
     if (activeElementWidth && (activeElementRelativeOffset || activeElementRelativeOffset === 0)) {
       this.activeNavLinkIndicator$.next({

@@ -1,5 +1,5 @@
 <ng-container *ngIf="breadCrumbs$ | async as breadcrumbs">
-  <div class="breadcrumbs-container" *ngIf="breadcrumbs.length > 1">
+  <div @fade class="breadcrumbs-container" *ngIf="breadcrumbs.length > 1">
     <div class="breadcrumbs">
       <div class="breadcrumb" *ngFor="let breadcrumb of breadcrumbs; let i = index">
         <a [routerLink]="breadcrumb.link"

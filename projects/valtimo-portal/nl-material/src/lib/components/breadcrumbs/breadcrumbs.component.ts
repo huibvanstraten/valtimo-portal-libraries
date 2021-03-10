@@ -35,7 +35,7 @@ export class BreadcrumbsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.routerSubscription = combineLatest([this.router.events, this.sidenavService.currentLang$])
-      .subscribe(([event, currentLang]) => {
+      .subscribe(([event]) => {
         const routes = this.router.config[0].children as Routes;
         if (event instanceof NavigationEnd) {
           this.breadCrumbs$.next(

@@ -1,5 +1,15 @@
+@import 'colors';
+@import 'variables';
+
+.breadcrumbs-container {
+  display: flex;
+  justify-content: center;
+}
+
 .breadcrumbs {
   display: flex;
+  width: 100%;
+  max-width: calc(#{$max-width} - 32px);
   padding: 16px;
 }
 
@@ -8,8 +18,8 @@
   align-items: center;
 
   a {
-    font-size: 14px;
-    line-height: 16px;
+    font-size: $font-small;
+    line-height: $font-smaller;
     color: #4b4b4b;
     text-decoration: none;
 
@@ -24,7 +34,7 @@
   }
 
   .mat-icon {
-    font-size: 10px;
+    font-size: $font-extra-small;
     margin: 0 16px;
   }
 }

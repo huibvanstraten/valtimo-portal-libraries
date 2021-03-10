@@ -6,8 +6,8 @@
     </nl-material-toolbar>
   </header>
   <nl-material-sidenav [items]="navigationMenuItems">
+    <nl-material-breadcrumbs></nl-material-breadcrumbs>
     <main [@routeAnimations]="prepareRoute(outlet)">
-      <nl-material-breadcrumbs></nl-material-breadcrumbs>
       <router-outlet #outlet="outlet"></router-outlet>
     </main>
   </nl-material-sidenav>

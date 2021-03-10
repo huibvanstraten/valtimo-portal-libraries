@@ -1,6 +1,33 @@
 @import 'colors';
 @import 'variables';
 
+mat-card {
+  display: flex;
+
+  .mat-icon {
+    margin-right: 20px;
+    margin-bottom: 20px;
+    width: 30px;
+  }
+
+  @include layout-bp(lt-sm) {
+    flex-direction: column;
+
+    .mat-icon {
+      align-self: flex-end;
+      margin-right: 0;
+    }
+
+    &.has-icon {
+      mat-card-title {
+        margin-top: -48px;
+        padding-right: 50px;
+        margin-bottom: 16px;
+      }
+    }
+  }
+}
+
 .introduction {
   padding: 0;
   box-shadow: none;
@@ -21,6 +48,7 @@
 
   mat-card-content {
     font-size: $font-medium;
+    margin-bottom: 0;
   }
 }
 
@@ -38,5 +66,9 @@
   mat-card-content {
     font-size: $font-smaller;
     line-height: $font-larger;
+  }
+
+  .mat-icon {
+    color: $nl-material-warn;
   }
 }

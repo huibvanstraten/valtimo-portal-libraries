@@ -31,10 +31,19 @@
       cursor: default;
       pointer-events: none;
     }
+
+    @include layout-bp(lt-sm) {
+      font-size: $font-smaller;
+      line-height: $font-medium;
+    }
   }
 
   .chevron {
     font-size: $font-extra-small;
     margin: 0 16px;
+
+    @include layout-bp(lt-sm) {
+      font-size: $font-small;
+    }
   }
 }

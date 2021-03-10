@@ -1,5 +1,11 @@
-<mat-card [ngClass]="{'introduction': type === introductionType, 'reminder': type === reminderType}">
-  <mat-card-title>{{title}}</mat-card-title>
-  <mat-card-subtitle>{{subtitle}}</mat-card-subtitle>
-  <mat-card-content>{{content}}</mat-card-content>
+<mat-card [ngClass]="{'has-icon': icon,'introduction': type === introductionType, 'reminder': type === reminderType}">
+  <mat-icon *ngIf="icon" fontSet="fa" [fontIcon]="'fa-' + icon"></mat-icon>
+  <div class="mat-card-content-container">
+    <mat-card-title>{{title}}</mat-card-title>
+    <mat-card-subtitle>{{subtitle}}</mat-card-subtitle>
+    <mat-card-content>{{content}}</mat-card-content>
+    <ng-container *ngIf="buttonText && type === reminderType">
+      <button mat-flat-button color="warn">{{buttonText}}</button>
+    </ng-container>
+  </div>
 </mat-card>

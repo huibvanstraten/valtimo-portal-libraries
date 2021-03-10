@@ -12,8 +12,8 @@ import {animate, style, transition, trigger} from "@angular/animations";
   animations: [
     trigger('fade', [
       transition('void => *', [
-        style({opacity: 0}),
-        animate('200ms ease-in-out', style({opacity: 1}))
+        style({opacity: 0, marginLeft: '-16px'}),
+        animate('200ms ease-in-out', style({opacity: 1, marginLeft: '0'}))
       ])
     ])
   ]

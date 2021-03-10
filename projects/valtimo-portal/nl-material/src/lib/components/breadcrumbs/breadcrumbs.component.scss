@@ -1,0 +1,30 @@
+.breadcrumbs {
+  display: flex;
+  padding: 16px;
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+
+  a {
+    font-size: 14px;
+    line-height: 16px;
+    color: #4b4b4b;
+    text-decoration: none;
+
+    &.home {
+      font-weight: bold;
+    }
+
+    &.last {
+      cursor: default;
+      pointer-events: none;
+    }
+  }
+
+  .mat-icon {
+    font-size: 10px;
+    margin: 0 16px;
+  }
+}

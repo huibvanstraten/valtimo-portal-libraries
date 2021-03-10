@@ -2,7 +2,13 @@ import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import {HeaderMenuModule, NavigationMenuModule, SidenavModule, ToolbarModule} from '@valtimo-portal/nl-material';
+import {
+  BreadcrumbsModule,
+  HeaderMenuModule,
+  NavigationMenuModule,
+  SidenavModule,
+  ToolbarModule
+} from '@valtimo-portal/nl-material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {MultiTranslateHttpLoader} from 'ngx-translate-multi-http-loader';
@@ -32,6 +38,7 @@ export const HttpLoaderFactory = (http: HttpClient) => new MultiTranslateHttpLoa
     NavigationMenuModule,
     SidenavModule,
     HeaderMenuModule,
+    BreadcrumbsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,1 +1,9 @@
-<p>breadcrumbs works!</p>
+<div class="breadcrumbs" *ngIf="breadCrumbs$ | async as breadcrumbs">
+  <ng-container *ngIf="breadcrumbs.length > 1">
+    <div class="breadcrumb" *ngFor="let breadcrumb of breadcrumbs; let i = index">
+      <a [routerLink]="breadcrumb.link"
+         [ngClass]="{'home': i === 0, 'last': i === (breadcrumbs.length - 1)}">{{breadcrumb.title | translate}}</a>
+      <mat-icon *ngIf="i !== (breadcrumbs.length - 1)" fontSet="fa" fontIcon="fa-chevron-right"></mat-icon>
+    </div>
+  </ng-container>
+</div>

@@ -1,7 +1,8 @@
 <ng-container *ngIf="breadCrumbs$ | async as breadcrumbs">
-  <div @fade class="breadcrumbs-container" *ngIf="breadcrumbs.length > 1">
+  <div @breadcrumbsFade class="breadcrumbs-container" *ngIf="breadcrumbs.length > 1">
     <div class="breadcrumbs">
-      <div class="breadcrumb" *ngFor="let breadcrumb of breadcrumbs; let i = index" @fade [@.disabled]="i === 0">
+      <div class="breadcrumb" *ngFor="let breadcrumb of breadcrumbs; let i = index" @breadcrumbFade
+           [@.disabled]="i === 0">
         <a [routerLink]="breadcrumb.link"
            [ngClass]="{'home': i === 0, 'last': i === (breadcrumbs.length - 1)}"
         >

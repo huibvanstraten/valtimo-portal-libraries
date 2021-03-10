@@ -11,8 +11,10 @@ export class CardComponent implements OnInit {
   @Input() title!: string;
   @Input() subtitle!: string;
   @Input() content!: string;
+  @Input() buttonText!: string;
 
   readonly introductionType = CardType.introduction;
+  readonly reminderType = CardType.reminder;
 
   constructor() {
   }

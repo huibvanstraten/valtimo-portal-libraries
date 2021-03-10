@@ -12,8 +12,8 @@ import {animate, style, transition, trigger} from "@angular/animations";
   animations: [
     trigger('breadcrumbsFade', [
       transition('void => *', [
-        style({opacity: 0, marginBottom: '-28px'}),
-        animate('300ms 200ms ease-in-out', style({opacity: 1, marginBottom: 0}))
+        style({opacity: 0, marginBottom: '-58px'}),
+        animate('200ms 300ms ease-in-out', style({opacity: 1, marginBottom: 0}))
       ])
     ]),
     trigger('breadcrumbFade', [

@@ -9,6 +9,7 @@ import {CardType} from "@valtimo-portal/nl-material";
 export class HomeComponent implements OnInit {
 
   readonly introductionType = CardType.introduction;
+  readonly reminderType = CardType.reminder;
 
   constructor() {
   }

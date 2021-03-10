@@ -5,6 +5,7 @@ import {HomeRoutingModule} from './home-routing.module';
 import {HomeComponent} from './home.component';
 import {CardModule} from '@valtimo-portal/nl-material';
 import {FlexLayoutModule} from "@angular/flex-layout";
+import {TranslateModule} from "@ngx-translate/core";
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import {FlexLayoutModule} from "@angular/flex-layout";
     CommonModule,
     HomeRoutingModule,
     CardModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    TranslateModule
   ]
 })
 export class HomeModule {

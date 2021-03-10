@@ -23,3 +23,20 @@
     font-size: $font-medium;
   }
 }
+
+.reminder {
+  box-shadow: none;
+  background-color: rgba(245, 156, 4, 0.1);
+  padding: 26px;
+
+  mat-card-title {
+    font-size: $font-medium;
+    line-height: $font-large;
+    font-weight: bold;
+  }
+
+  mat-card-content {
+    font-size: $font-smaller;
+    line-height: $font-larger;
+  }
+}

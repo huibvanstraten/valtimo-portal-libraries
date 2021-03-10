@@ -1,0 +1,14 @@
+{
+  "home": {
+    "introduction": {
+      "title": "Hi, Rutger",
+      "subtitle": "How can we help you?",
+      "content": "On this website you can handle your municipal affairs. You can request services, talk to a municipal official, and view the progress of your requests online. Of course you're always welcome at your local municipality, if this has your preference."
+    },
+    "reminder": {
+      "title": "Don't forget to submit your project idea before the 31st of April",
+      "content": "Your grant application still lacks a project idea. Make sure you submit this before the 31st of April, so that we can process your application.",
+      "buttonText": "Submit project idea"
+    }
+  }
+}

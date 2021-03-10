@@ -39,20 +39,22 @@ export class BreadcrumbsComponent implements OnInit, OnDestroy {
         const routes = this.router.config[0].children as Routes;
         if (event instanceof NavigationEnd) {
           this.breadCrumbs$.next(
-            event.url.split('/').reduce((acc: Array<Breadcrumb>, curr) => {
-              if (curr) {
-                const findRoute = routes.find((route) => route.path === curr);
-                const previousLinks = acc.reduce((link, linkPart) => `${link}/${linkPart.link}`, '');
-                return [
-                  ...acc,
-                  {
-                    link: `${previousLinks}/${curr}`.replace(/\/\//g, '/'),
-                    title: findRoute ? findRoute.data?.title : routes[0] ? routes[0].data?.title : ''
-                  }
-                ];
-              }
-              return acc;
-            }, [])
+            event.url
+              .split('/')
+              .reduce((acc: Array<Breadcrumb>, curr) => {
+                if (curr) {
+                  const findRoute = routes.find((route) => route.path === curr);
+                  const previousLinks = acc.reduce((link, linkPart) => `${link}/${linkPart.link}`, '');
+                  return [
+                    ...acc,
+                    {
+                      link: `${previousLinks}/${curr}`.replace(/\/\//g, '/'),
+                      title: findRoute ? findRoute.data?.title : routes[0] ? routes[0].data?.title : ''
+                    }
+                  ];
+                }
+                return acc;
+              }, [])
           );
         }
       });

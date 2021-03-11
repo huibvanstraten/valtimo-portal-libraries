@@ -19,6 +19,12 @@
   background-color: rgba(0, 0, 0, 0.1) !important;
 }
 
+.mat-flat-button {
+  font-size: $font-smaller;
+  line-height: $font-large !important;
+  padding: 10px 16px !important;
+}
+
 @include layout-bp(xs) {
   .ng-animating {
     left: 0 !important;

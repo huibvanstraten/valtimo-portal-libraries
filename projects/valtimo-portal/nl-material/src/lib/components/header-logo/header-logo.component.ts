@@ -1,11 +1,12 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'nl-material-header-logo',
   templateUrl: './header-logo.component.html',
-  styleUrls: ['./header-logo.component.css']
+  styleUrls: ['./header-logo.component.scss']
 })
 export class HeaderLogoComponent implements OnInit {
+  @Input() logoImagePath!: string;
 
   constructor() {
   }

@@ -1,6 +1,6 @@
 <div class="logo-container">
   <div class="logo-container-inner">
-    <div class="border-blocker"></div>
+    <div fxHide.lt-md class="border-blocker"></div>
     <a [routerLink]="'/' + (currentLang$ | async)">
       <img [src]="logoImagePath"/>
     </a>

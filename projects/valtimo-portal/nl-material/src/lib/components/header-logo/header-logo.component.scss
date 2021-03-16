@@ -11,13 +11,15 @@
     position: relative;
     left: -50%;
     width: 100px;
-    margin: 25px 0;
+    margin-top: 25px;
     cursor: pointer;
     z-index: 999;
-    transition: transform 0.2s ease-in-out;
+    transition: all 0.1s ease-in-out;
+    filter: brightness(1);
 
     &:hover {
-      transform: scale(1.03);
+      transform: scale(1.02);
+      filter: brightness(1.03);
     }
   }
 

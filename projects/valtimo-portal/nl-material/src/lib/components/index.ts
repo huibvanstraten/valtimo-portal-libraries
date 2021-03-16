@@ -5,3 +5,4 @@ export * from './sidenav';
 export * from './card';
 export * from './header-menu';
 export * from './breadcrumbs';
+export * from './header-logo';

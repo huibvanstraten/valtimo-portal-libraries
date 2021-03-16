@@ -4,7 +4,6 @@ import {Event, NavigationEnd, Router} from '@angular/router';
 import {BehaviorSubject, combineLatest, Observable, Subscription} from 'rxjs';
 import {BreakpointObserver} from '@angular/cdk/layout';
 import {SidenavService} from '../../services';
-import {TranslateService} from "@ngx-translate/core";
 import {delay} from "rxjs/operators";
 
 @Component({
@@ -31,7 +30,7 @@ export class NavigationMenuComponent implements OnInit, AfterViewInit, OnDestroy
 
   private breakPointSubscription!: Subscription;
 
-  constructor(private router: Router, private observer: BreakpointObserver, private sidenavService: SidenavService, private translateService: TranslateService) {
+  constructor(private router: Router, private observer: BreakpointObserver, private sidenavService: SidenavService) {
     this.items$ = this.sidenavService.items$;
   }
 

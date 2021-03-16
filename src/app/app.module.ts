@@ -4,6 +4,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {
   BreadcrumbsModule,
+  HeaderLogoModule,
   HeaderMenuModule,
   NavigationMenuModule,
   SidenavModule,
@@ -13,7 +14,6 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {MultiTranslateHttpLoader} from 'ngx-translate-multi-http-loader';
 import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
-import {HeaderLogoModule} from "../../projects/valtimo-portal/nl-material/src/lib/components/header-logo/header-logo.module";
 
 export const HttpLoaderFactory = (http: HttpClient) => new MultiTranslateHttpLoader(http, [
   {prefix: './translate/', suffix: '.json'},
@@ -37,11 +37,11 @@ export const HttpLoaderFactory = (http: HttpClient) => new MultiTranslateHttpLoa
     AppRoutingModule,
     BrowserAnimationsModule,
     ToolbarModule,
+    HeaderLogoModule,
     NavigationMenuModule,
     SidenavModule,
     HeaderMenuModule,
     BreadcrumbsModule,
-    HeaderLogoModule
   ],
   providers: [],
   bootstrap: [AppComponent]

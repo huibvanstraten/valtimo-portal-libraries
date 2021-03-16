@@ -3,9 +3,30 @@
   left: 50%;
   top: 0;
 
+  .logo-container-inner {
+    position: absolute;
+  }
+
   img {
     position: relative;
     left: -50%;
-    width: 150px;
+    width: 100px;
+    margin: 25px 0;
+    cursor: pointer;
+    z-index: 999;
+    transition: transform 0.2s ease-in-out;
+
+    &:hover {
+      transform: scale(1.03);
+    }
+  }
+
+  .border-blocker {
+    width: 228px;
+    position: absolute;
+    height: 1px;
+    top: 78px;
+    background-color: white;
+    left: -114px;
   }
 }

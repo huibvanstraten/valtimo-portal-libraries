@@ -1,17 +1,18 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
+import {SidenavService} from "../../services";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'nl-material-header-logo',
   templateUrl: './header-logo.component.html',
   styleUrls: ['./header-logo.component.scss']
 })
-export class HeaderLogoComponent implements OnInit {
+export class HeaderLogoComponent {
   @Input() logoImagePath!: string;
 
-  constructor() {
-  }
+  currentLang$!: Observable<string>;
 
-  ngOnInit(): void {
+  constructor(private sidenavService: SidenavService) {
+    this.currentLang$ = this.sidenavService.currentLang$;
   }
-
 }

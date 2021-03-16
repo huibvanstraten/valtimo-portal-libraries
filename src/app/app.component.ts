@@ -4,6 +4,7 @@ import {NavigationMenuItem} from '@valtimo-portal/nl-material';
 import {RouterOutlet} from "@angular/router";
 import {slideInAnimation} from "@app/animations";
 import {locales} from './app-routing.module'
+import {environment} from "../environments/environment";
 
 @Component({
   selector: 'app-root',
@@ -14,7 +15,8 @@ import {locales} from './app-routing.module'
   ]
 })
 export class AppComponent {
-  title = 'valtimo-portal';
+  readonly title = 'valtimo-portal';
+  readonly imgSrc = environment.logoImagePath;
 
   readonly navigationMenuItems: Array<NavigationMenuItem> = routes
     .filter((route) => !route.data?.hideInNav)

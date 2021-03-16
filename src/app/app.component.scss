@@ -16,8 +16,20 @@
 
 @import "_variables.scss";
 
-nl-material-sidenav, nl-material-navigation-menu, .page-container {
+nl-material-navigation-menu, .page-container {
   height: 100%;
+}
+
+nl-material-sidenav {
+  height: 100%;
+
+  @include layout-bp(sm) {
+    height: calc(100% - 79px);
+  }
+
+  @include layout-bp(xs) {
+    height: calc(100% - 57px);
+  }
 }
 
 nl-material-navigation-menu, .page-container {
@@ -30,6 +42,10 @@ nl-material-navigation-menu {
 
 .page-container {
   flex-direction: column;
+
+  @include layout-bp(lt-md) {
+    overflow: hidden;
+  }
 
   main {
     max-width: $max-width;

@@ -21,3 +21,9 @@ nl-material-navigation-menu {
     margin-top: 30px;
   }
 }
+
+header {
+  @include layout-bp(gt-sm) {
+    margin-bottom: 16px;
+  }
+}

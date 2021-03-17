@@ -1,11 +1,27 @@
-<mat-form-field>
-  <mat-select
-    [(ngModel)]="selectedLocale"
-    [disableOptionCentering]="true"
-    [disabled]="!!(open$ | async)"
-  >
-    <mat-option *ngFor="let locale of locales" [value]="locale" (click)="useLanguage(locale)">
+<ng-container *ngIf="mode === dropdownMode">
+  <mat-form-field>
+    <mat-select
+      [(ngModel)]="selectedLocale"
+      [disableOptionCentering]="true"
+      [disabled]="!!(open$ | async)"
+    >
+      <mat-option *ngFor="let locale of locales" [value]="locale" (click)="useLanguage(locale)">
+        {{locale.toUpperCase()}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</ng-container>
+
+<ng-container *ngIf="mode === toggleMode">
+  <mat-button-toggle-group [(ngModel)]="selectedLocale">
+    <mat-button-toggle
+      *ngFor="let locale of locales"
+      [value]="locale"
+      (click)="$event.stopPropagation(); useLanguage(locale)"
+    >
       {{locale.toUpperCase()}}
-    </mat-option>
-  </mat-select>
-</mat-form-field>
+    </mat-button-toggle>
+  </mat-button-toggle-group>
+</ng-container>
+
+

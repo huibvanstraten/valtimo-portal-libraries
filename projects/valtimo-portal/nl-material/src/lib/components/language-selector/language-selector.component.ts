@@ -3,6 +3,7 @@ import {Observable} from "rxjs";
 import {TranslateService} from "@ngx-translate/core";
 import {LocalizeRouterService} from "@gilsdav/ngx-translate-router";
 import {SidenavService} from "../../services";
+import {LanguageSelectorMode} from "../../interfaces";
 
 @Component({
   selector: 'nl-material-language-selector',
@@ -13,9 +14,14 @@ export class LanguageSelectorComponent {
 
   @Input() locales: Array<string> = [];
 
+  @Input() mode: LanguageSelectorMode = LanguageSelectorMode.dropdown;
+
   open$!: Observable<boolean>;
 
   selectedLocale!: string;
+
+  readonly dropdownMode = LanguageSelectorMode.dropdown;
+  readonly toggleMode = LanguageSelectorMode.toggleButtons;
 
   constructor(private translateService: TranslateService, private localizeService: LocalizeRouterService, private sidenavService: SidenavService) {
     const currentLang = this.translateService.currentLang;

@@ -15,7 +15,7 @@
   -->
 
 <div class="header-menu" fxHide.lt-sm>
-  <nl-material-language-selector [locales]="locales"></nl-material-language-selector>
+  <nl-material-language-selector [locales]="locales" [mode]="dropdownMode"></nl-material-language-selector>
 </div>
 
 <div fxHide.gt-xs>
@@ -23,17 +23,11 @@
     <mat-icon fontSet="fa" fontIcon="fa-ellipsis-v" class="menu-toggle-button"></mat-icon>
   </button>
   <mat-menu #menu="matMenu">
+    <div class="language-selector-container">
+      <nl-material-language-selector [locales]="locales" [mode]="toggleMode"></nl-material-language-selector>
+    </div>
     <button mat-menu-item>
-      <mat-icon fontSet="fa" fontIcon="fa-home"></mat-icon>
-      <span>Redial</span>
-    </button>
-    <button mat-menu-item disabled>
-      <mat-icon fontSet="fa" fontIcon="fa-home"></mat-icon>
-      <span>Check voice mail</span>
-    </button>
-    <button mat-menu-item>
-      <mat-icon fontSet="fa" fontIcon="fa-home"></mat-icon>
-      <span>Disable alerts</span>
+      test
     </button>
   </mat-menu>
   <div>

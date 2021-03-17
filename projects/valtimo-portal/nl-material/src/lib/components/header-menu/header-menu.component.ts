@@ -15,6 +15,7 @@
  */
 
 import {Component, Input} from '@angular/core';
+import {LanguageSelectorMode} from "../../interfaces";
 
 @Component({
   selector: 'nl-material-header-menu',
@@ -22,6 +23,8 @@ import {Component, Input} from '@angular/core';
   styleUrls: ['./header-menu.component.scss']
 })
 export class HeaderMenuComponent {
-
   @Input() locales: Array<string> = [];
+
+  readonly dropdownMode = LanguageSelectorMode.dropdown;
+  readonly toggleMode = LanguageSelectorMode.toggleButtons;
 }

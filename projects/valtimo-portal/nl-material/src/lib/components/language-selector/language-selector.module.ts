@@ -21,6 +21,7 @@ import {MatSelectModule} from "@angular/material/select";
 import {TranslateModule} from "@ngx-translate/core";
 import {FormsModule} from "@angular/forms";
 import {SidenavServiceModule} from "../../services";
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 
 @NgModule({
   declarations: [LanguageSelectorComponent],
@@ -29,7 +30,8 @@ import {SidenavServiceModule} from "../../services";
     MatSelectModule,
     TranslateModule,
     FormsModule,
-    SidenavServiceModule
+    SidenavServiceModule,
+    MatButtonToggleModule
   ],
   exports: [LanguageSelectorComponent]
 })

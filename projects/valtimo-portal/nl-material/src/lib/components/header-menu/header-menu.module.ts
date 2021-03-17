@@ -21,6 +21,10 @@ import {TranslateModule} from "@ngx-translate/core";
 import {MatSelectModule} from '@angular/material/select';
 import {FormsModule} from "@angular/forms";
 import {SidenavServiceModule} from "../../services";
+import {MatMenuModule} from "@angular/material/menu";
+import {MatIconModule} from "@angular/material/icon";
+import {FlexLayoutModule} from "@angular/flex-layout";
+import {MatButtonModule} from "@angular/material/button";
 
 @NgModule({
   declarations: [HeaderMenuComponent],
@@ -29,7 +33,11 @@ import {SidenavServiceModule} from "../../services";
     MatSelectModule,
     TranslateModule,
     FormsModule,
-    SidenavServiceModule
+    SidenavServiceModule,
+    MatMenuModule,
+    MatIconModule,
+    FlexLayoutModule,
+    MatButtonModule
   ],
   exports: [HeaderMenuComponent]
 })

@@ -15,6 +15,7 @@
  */
 
 @import 'colors';
+@import 'variables';
 
 .menu-icon {
   height: 32px;
@@ -32,6 +33,11 @@
   transition-duration: 450ms;
   transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
   transition-property: transform, margin-left, margin-right;
+
+  @include layout-bp(lt-sm) {
+    height: 24px;
+    width: 24px;
+  }
 
   span {
     display: block;
@@ -61,10 +67,17 @@
   span:nth-child(2), span:nth-child(3) {
     top: 15px;
 
+    @include layout-bp(lt-sm) {
+      top: 10.5px;
+    }
   }
 
   span:nth-child(4) {
     top: 29px;
+
+    @include layout-bp(lt-sm) {
+      top: 21px;
+    }
   }
 
   &.open {
@@ -72,6 +85,10 @@
       top: 15px;
       width: 0%;
       left: 50%;
+
+      @include layout-bp(lt-sm) {
+        top: 10.5px;
+      }
     }
 
     span:nth-child(2) {
@@ -92,6 +109,10 @@
       top: 15px;
       width: 0%;
       left: 50%;
+
+      @include layout-bp(lt-sm) {
+        top: 10.5px;
+      }
     }
   }
 }

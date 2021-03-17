@@ -15,6 +15,7 @@
  */
 
 @import 'colors';
+@import 'variables';
 
 .mat-drawer-container {
   background: none;
@@ -31,9 +32,14 @@
 
 .primary-color-icon {
   color: $nl-material-primary;
-  width: 32px;
   width: 26px;
   margin: 0 3px;
+
+
+  @include layout-bp(lt-sm) {
+    width: 24px;
+    margin: 0;
+  }
 }
 
 .mat-drawer {

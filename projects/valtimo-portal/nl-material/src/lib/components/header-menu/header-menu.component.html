@@ -15,17 +15,7 @@
   -->
 
 <div class="header-menu" fxHide.lt-sm>
-  <mat-form-field>
-    <mat-select
-      [(ngModel)]="selectedLocale"
-      [disableOptionCentering]="true"
-      [disabled]="!!(open$ | async)"
-    >
-      <mat-option *ngFor="let locale of locales" [value]="locale" (click)="useLanguage(locale)">
-        {{locale.toUpperCase()}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
+  <nl-material-language-selector [locales]="locales"></nl-material-language-selector>
 </div>
 
 <div fxHide.gt-xs>

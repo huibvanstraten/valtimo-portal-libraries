@@ -17,11 +17,19 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {LanguageSelectorComponent} from './language-selector.component';
+import {MatSelectModule} from "@angular/material/select";
+import {TranslateModule} from "@ngx-translate/core";
+import {FormsModule} from "@angular/forms";
+import {SidenavServiceModule} from "../../services";
 
 @NgModule({
   declarations: [LanguageSelectorComponent],
   imports: [
-    CommonModule
+    CommonModule,
+    MatSelectModule,
+    TranslateModule,
+    FormsModule,
+    SidenavServiceModule
   ],
   exports: [LanguageSelectorComponent]
 })

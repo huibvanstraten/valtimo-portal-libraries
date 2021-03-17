@@ -14,12 +14,5 @@
  * limitations under the License.
  */
 
-export * from './toolbar';
-export * from './navigation-menu';
-export * from './menu-icon';
-export * from './sidenav';
-export * from './card';
-export * from './header-menu';
-export * from './breadcrumbs';
-export * from './header-logo';
-export * from './language-selector';
+export * from './language-selector.module';
+export * from './language-selector.component';

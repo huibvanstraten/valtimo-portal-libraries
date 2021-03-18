@@ -11,9 +11,7 @@ import {LanguageSelectorMode} from "../../interfaces";
   styleUrls: ['./language-selector.component.scss']
 })
 export class LanguageSelectorComponent implements OnInit, OnDestroy {
-
   @Input() locales: Array<string> = [];
-
   @Input() mode: LanguageSelectorMode = LanguageSelectorMode.dropdown;
 
   open$!: Observable<boolean>;
@@ -28,7 +26,7 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
   constructor(
     private translateService: TranslateService,
     private localizeService: LocalizeRouterService,
-    private sidenavService: SidenavService
+    private sidenavService: SidenavService,
   ) {
     const currentLang = this.translateService.currentLang;
     this.selectedLocale = currentLang;
@@ -37,9 +35,7 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.localeSubscription = this.sidenavService.currentLang$.subscribe((lang) => {
-      this.selectedLocale = lang;
-    });
+    this.openLocaleSubscription();
   }
 
   ngOnDestroy(): void {
@@ -49,5 +45,11 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
   useLanguage(language: string): void {
     this.localizeService.changeLanguage(language);
     this.sidenavService.currentLang = language;
+  }
+
+  private openLocaleSubscription(): void {
+    this.localeSubscription = this.sidenavService.currentLang$.subscribe((lang) => {
+      this.selectedLocale = lang;
+    });
   }
 }

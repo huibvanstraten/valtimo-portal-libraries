@@ -14,25 +14,46 @@
  * limitations under the License.
  */
 
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {LanguageSelectorMode} from "../../interfaces";
 import {SidenavService} from "../../services";
+import {BreakpointObserver} from "@angular/cdk/layout";
+import {Subscription} from "rxjs";
+import {MatMenuTrigger} from "@angular/material/menu";
 
 @Component({
   selector: 'nl-material-header-menu',
   templateUrl: './header-menu.component.html',
   styleUrls: ['./header-menu.component.scss']
 })
-export class HeaderMenuComponent {
+export class HeaderMenuComponent implements OnInit, OnDestroy {
+  @ViewChild('menuTrigger') menuTrigger!: MatMenuTrigger;
+
   @Input() locales: Array<string> = [];
 
   readonly dropdownMode = LanguageSelectorMode.dropdown;
   readonly toggleMode = LanguageSelectorMode.toggleButtons;
 
-  constructor(private sidenavService: SidenavService) {
+  private breakPointSubscription!: Subscription;
+
+  constructor(private sidenavService: SidenavService, private observer: BreakpointObserver) {
+  }
+
+  ngOnInit(): void {
+    this.openBreakpointSubscription();
+  }
+
+  ngOnDestroy(): void {
+    this.breakPointSubscription.unsubscribe();
   }
 
   handleClick(): void {
     this.sidenavService.open = false;
+  }
+
+  private openBreakpointSubscription(): void {
+    this.breakPointSubscription = this.observer.observe('(min-width: 600px)').subscribe(() => {
+      this.menuTrigger?.closeMenu();
+    });
   }
 }

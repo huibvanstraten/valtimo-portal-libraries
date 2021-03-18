@@ -19,7 +19,7 @@
 </div>
 
 <div fxHide.gt-xs>
-  <button mat-icon-button [matMenuTriggerFor]="menu" (click)="handleClick()">
+  <button mat-icon-button [matMenuTriggerFor]="menu" #menuTrigger="matMenuTrigger" (click)="handleClick()">
     <mat-icon fontSet="fa" fontIcon="fa-ellipsis-v" class="menu-toggle-button"></mat-icon>
   </button>
   <mat-menu #menu="matMenu" [hasBackdrop]="true" backdropClass="header-menu-backdrop">

@@ -73,7 +73,7 @@ export class NavigationMenuComponent implements OnInit, AfterViewInit, OnDestroy
   }
 
   private openBreakpointSubscription(): void {
-    this.breakPointSubscription = this.observer.observe('(min-width: 600px)').subscribe(result => {
+    this.breakPointSubscription = this.observer.observe('(min-width: 960px)').subscribe(result => {
       this.setActiveNavLink(this.navLinks, this.currentUrl$.getValue());
       if (result.matches) {
         this.sidenavService.open = false;

@@ -28,14 +28,18 @@
   margin-left: -4px;
 }
 
+.mat-menu-panel {
+  border-width: 1px;
+}
+
 .mat-option-text {
   font-size: 16px;
   font-weight: 700;
   color: rgba(0, 0, 0, 0.87);
 }
 
-.mat-drawer-backdrop.mat-drawer-shown {
-  background-color: rgba(0, 0, 0, 0.1) !important;
+.mat-drawer-backdrop.mat-drawer-shown, .header-menu-backdrop {
+  background-color: rgba(0, 0, 0, 0.15) !important;
 }
 
 .mat-flat-button {

@@ -16,6 +16,7 @@
 
 import {Component, Input} from '@angular/core';
 import {LanguageSelectorMode} from "../../interfaces";
+import {SidenavService} from "../../services";
 
 @Component({
   selector: 'nl-material-header-menu',
@@ -27,4 +28,11 @@ export class HeaderMenuComponent {
 
   readonly dropdownMode = LanguageSelectorMode.dropdown;
   readonly toggleMode = LanguageSelectorMode.toggleButtons;
+
+  constructor(private sidenavService: SidenavService) {
+  }
+
+  handleClick(): void {
+    this.sidenavService.open = false;
+  }
 }

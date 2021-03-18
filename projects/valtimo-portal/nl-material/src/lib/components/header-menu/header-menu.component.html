@@ -22,12 +22,21 @@
   <button mat-icon-button [matMenuTriggerFor]="menu">
     <mat-icon fontSet="fa" fontIcon="fa-ellipsis-v" class="menu-toggle-button"></mat-icon>
   </button>
-  <mat-menu #menu="matMenu">
-    <div class="language-selector-container">
-      <nl-material-language-selector [locales]="locales" [mode]="toggleMode"></nl-material-language-selector>
-    </div>
-    <button mat-menu-item>
-      test
-    </button>
+  <mat-menu #menu="matMenu" [hasBackdrop]="true">
+    <mat-list class="header-menu-mat-list">
+      <h3 matSubheader>Taal</h3>
+      <mat-list-item>
+        <div class="language-selector-container">
+          <nl-material-language-selector [locales]="locales" [mode]="toggleMode"></nl-material-language-selector>
+        </div>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <h3 matSubheader>Overig</h3>
+      <mat-list-item>
+        <button mat-menu-item>
+          test
+        </button>
+      </mat-list-item>
+    </mat-list>
   </mat-menu>
-  <div>
+</div>

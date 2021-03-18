@@ -26,6 +26,7 @@ import {MatIconModule} from "@angular/material/icon";
 import {FlexLayoutModule} from "@angular/flex-layout";
 import {MatButtonModule} from "@angular/material/button";
 import {LanguageSelectorModule} from "../language-selector/language-selector.module";
+import {MatListModule} from "@angular/material/list";
 
 @NgModule({
   declarations: [HeaderMenuComponent],
@@ -39,7 +40,8 @@ import {LanguageSelectorModule} from "../language-selector/language-selector.mod
     MatIconModule,
     FlexLayoutModule,
     MatButtonModule,
-    LanguageSelectorModule
+    LanguageSelectorModule,
+    MatListModule
   ],
   exports: [HeaderMenuComponent]
 })

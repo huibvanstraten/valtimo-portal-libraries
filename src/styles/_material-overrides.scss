@@ -17,10 +17,13 @@
 @import 'colors';
 @import 'variables';
 
-.mat-select-panel {
+.mat-menu-panel, .mat-select-panel {
   box-shadow: none !important;
   border-radius: 3px;
   border: 0.5px solid $nl-medium-gray;
+}
+
+.mat-select-panel {
   margin-top: -12px;
   margin-left: -4px;
 }

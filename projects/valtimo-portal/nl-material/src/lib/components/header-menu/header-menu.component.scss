@@ -49,6 +49,10 @@
   }
 }
 
+.header-menu-mat-list {
+  padding-top: 0;
+}
+
 .menu-toggle-button {
   font-size: 18px;
   color: $nl-material-primary;
@@ -58,8 +62,5 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 16px;
-  margin-top: 0;
+  margin-bottom: 16px;
 }
-
-

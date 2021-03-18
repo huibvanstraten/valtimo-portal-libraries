@@ -13,11 +13,11 @@
 </ng-container>
 
 <ng-container *ngIf="mode === toggleMode">
-  <mat-button-toggle-group [(ngModel)]="selectedLocale">
+  <mat-button-toggle-group #group="matButtonToggleGroup" [(value)]="selectedLocale" (change)="useLanguage(group.value)">
     <mat-button-toggle
       *ngFor="let locale of locales"
       [value]="locale"
-      (click)="$event.stopPropagation(); useLanguage(locale)"
+      (click)="$event.stopPropagation()"
     >
       {{locale.toUpperCase()}}
     </mat-button-toggle>

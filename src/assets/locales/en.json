@@ -1,9 +1,13 @@
 {
-  "ROUTES.notifications": "notifications",
-  "ROUTES.cases": "cases",
-  "ROUTES.tasks": "tasks",
-  "TITLES.home": "Home",
-  "TITLES.notifications": "Notifications",
-  "TITLES.cases": "Cases",
-  "TITLES.tasks": "Tasks"
+  "ROUTES": {
+    "notifications": "notifications",
+    "cases": "cases",
+    "tasks": "tasks"
+  },
+  "TITLES": {
+    "home": "Home",
+    "notifications": "Notifications",
+    "cases": "Cases",
+    "tasks": "Tasks"
+  }
 }

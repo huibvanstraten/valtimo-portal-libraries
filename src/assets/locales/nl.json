@@ -1,9 +1,13 @@
 {
-  "ROUTES.notifications": "meldingen",
-  "ROUTES.cases": "aanvragen",
-  "ROUTES.tasks": "taken",
-  "TITLES.home": "Home",
-  "TITLES.notifications": "Meldingen",
-  "TITLES.cases": "Aanvragen",
-  "TITLES.tasks": "Taken"
+  "ROUTES": {
+    "notifications": "meldingen",
+    "cases": "aanvragen",
+    "tasks": "taken"
+  },
+  "TITLES": {
+    "home": "Home",
+    "notifications": "Meldingen",
+    "cases": "Aanvragen",
+    "tasks": "Taken"
+  }
 }

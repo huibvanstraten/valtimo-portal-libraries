@@ -64,7 +64,7 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
   }
 
   private openCloseSelectSubscription(): void {
-    this.localeSubscription = this.closeLanguageSelectDropdown.subscribe(() => {
+    this.closeSelectSubscription = this.closeLanguageSelectDropdown.subscribe(() => {
       this.matSelect?.close();
     });
   }

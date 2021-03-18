@@ -70,7 +70,7 @@ mat-card {
 
 .reminder {
   box-shadow: none;
-  background-color: rgba(245, 156, 4, 0.1);
+  background-color: $nl-material-warn-background;
   padding: 26px;
 
   mat-card-title {

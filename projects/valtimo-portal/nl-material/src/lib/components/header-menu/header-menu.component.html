@@ -15,7 +15,11 @@
   -->
 
 <div class="header-menu" fxHide.lt-sm>
-  <nl-material-language-selector [locales]="locales" [mode]="dropdownMode"></nl-material-language-selector>
+  <nl-material-language-selector
+    [closeLanguageSelectDropdown]="closeLanguageSelectDropdown"
+    [locales]="locales"
+    [mode]="dropdownMode">
+  </nl-material-language-selector>
 </div>
 
 <div fxHide.gt-xs>
@@ -24,14 +28,14 @@
   </button>
   <mat-menu #menu="matMenu" [hasBackdrop]="true" backdropClass="header-menu-backdrop">
     <mat-list class="header-menu-mat-list">
-      <h3 matSubheader>Taal</h3>
+      <h3 matSubheader>{{'headerMenu.language' | translate}}</h3>
       <mat-list-item>
         <div class="language-selector-container">
           <nl-material-language-selector [locales]="locales" [mode]="toggleMode"></nl-material-language-selector>
         </div>
       </mat-list-item>
       <mat-divider></mat-divider>
-      <h3 matSubheader>Overig</h3>
+      <h3 matSubheader>{{'headerMenu.user' | translate}}</h3>
       <mat-list-item>
         <button mat-menu-item>
           test

@@ -1,9 +1,10 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {Observable, Subscription} from "rxjs";
+import {Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Observable, Subject, Subscription} from "rxjs";
 import {TranslateService} from "@ngx-translate/core";
 import {LocalizeRouterService} from "@gilsdav/ngx-translate-router";
 import {SidenavService} from "../../services";
 import {LanguageSelectorMode} from "../../interfaces";
+import {MatSelect} from "@angular/material/select";
 
 @Component({
   selector: 'nl-material-language-selector',
@@ -11,8 +12,11 @@ import {LanguageSelectorMode} from "../../interfaces";
   styleUrls: ['./language-selector.component.scss']
 })
 export class LanguageSelectorComponent implements OnInit, OnDestroy {
+  @ViewChild('matSelect') matSelect!: MatSelect;
+
   @Input() locales: Array<string> = [];
   @Input() mode: LanguageSelectorMode = LanguageSelectorMode.dropdown;
+  @Input() closeLanguageSelectDropdown!: Subject<any>;
 
   open$!: Observable<boolean>;
 
@@ -22,6 +26,7 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
   readonly toggleMode = LanguageSelectorMode.toggleButtons;
 
   private localeSubscription!: Subscription;
+  private closeSelectSubscription!: Subscription;
 
   constructor(
     private translateService: TranslateService,
@@ -36,10 +41,15 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.openLocaleSubscription();
+
+    if (this.closeLanguageSelectDropdown) {
+      this.openCloseSelectSubscription();
+    }
   }
 
   ngOnDestroy(): void {
     this.localeSubscription.unsubscribe();
+    this.closeLanguageSelectDropdown?.unsubscribe();
   }
 
   useLanguage(language: string): void {
@@ -52,4 +62,11 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
       this.selectedLocale = lang;
     });
   }
+
+  private openCloseSelectSubscription(): void {
+    this.localeSubscription = this.closeLanguageSelectDropdown.subscribe(() => {
+      this.matSelect?.close();
+    });
+  }
 }
+

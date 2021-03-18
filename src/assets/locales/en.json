@@ -9,5 +9,9 @@
     "notifications": "Notifications",
     "cases": "Cases",
     "tasks": "Tasks"
+  },
+  "headerMenu": {
+    "language": "Language",
+    "user": "User"
   }
 }

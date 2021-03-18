@@ -18,7 +18,7 @@ import {Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {LanguageSelectorMode} from "../../interfaces";
 import {SidenavService} from "../../services";
 import {BreakpointObserver} from "@angular/cdk/layout";
-import {Subscription} from "rxjs";
+import {Subject, Subscription} from "rxjs";
 import {MatMenuTrigger} from "@angular/material/menu";
 
 @Component({
@@ -33,6 +33,7 @@ export class HeaderMenuComponent implements OnInit, OnDestroy {
 
   readonly dropdownMode = LanguageSelectorMode.dropdown;
   readonly toggleMode = LanguageSelectorMode.toggleButtons;
+  readonly closeLanguageSelectDropdown = new Subject();
 
   private breakPointSubscription!: Subscription;
 
@@ -54,6 +55,7 @@ export class HeaderMenuComponent implements OnInit, OnDestroy {
   private openBreakpointSubscription(): void {
     this.breakPointSubscription = this.observer.observe('(min-width: 600px)').subscribe(() => {
       this.menuTrigger?.closeMenu();
+      this.closeLanguageSelectDropdown.next();
     });
   }
 }

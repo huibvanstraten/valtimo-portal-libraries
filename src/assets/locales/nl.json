@@ -9,5 +9,9 @@
     "notifications": "Meldingen",
     "cases": "Aanvragen",
     "tasks": "Taken"
+  },
+  "headerMenu": {
+    "language": "Taal",
+    "user": "Gebruiker"
   }
 }

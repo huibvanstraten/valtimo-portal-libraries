@@ -63,7 +63,6 @@ export const HttpLoaderFactory = (http: HttpClient) => new MultiTranslateHttpLoa
     HeaderMenuModule,
     BreadcrumbsModule,
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {

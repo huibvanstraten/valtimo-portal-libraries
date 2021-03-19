@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {Environment} from "@app/interfaces";
+import {Environment} from '@app/interfaces';
 
 export const environment: Environment = {
   flags: {

@@ -19,6 +19,10 @@
       "@notifications/*": [
         "src/app/modules/notifications/*"
       ],
+      "@valtimo-portal/authentication": [
+        "dist/valtimo-portal/authentication/valtimo-portal-authentication",
+        "dist/valtimo-portal/authentication"
+      ],
       "@tasks/*": [
         "src/app/modules/tasks/*"
       ],

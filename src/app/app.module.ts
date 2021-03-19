@@ -30,6 +30,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {MultiTranslateHttpLoader} from 'ngx-translate-multi-http-loader';
 import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
+import {environment} from '../environments';
 
 export const HttpLoaderFactory = (http: HttpClient) => new MultiTranslateHttpLoader(http, [
   {prefix: './translate/', suffix: '.json'},
@@ -37,6 +38,9 @@ export const HttpLoaderFactory = (http: HttpClient) => new MultiTranslateHttpLoa
 ]);
 
 @NgModule({
+  providers: [
+    {provide: 'environment', useValue: environment}
+  ],
   declarations: [
     AppComponent
   ],

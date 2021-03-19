@@ -16,3 +16,4 @@
 
 export * from './routing';
 export * from './environment';
+export * from './authentication';

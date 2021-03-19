@@ -14,14 +14,15 @@
  * limitations under the License.
  */
 
-import {Authentication} from "@app/interfaces/authentication";
+import {KeycloakConfig} from 'keycloak-js';
 
-export interface Environment {
-  flags: {
-    production: boolean;
-  };
-  styling: {
-    logoImagePath: string;
-  };
-  authentication: Authentication;
+enum AuthenticationProvider {
+  keycloak
 }
+
+type Authentication = {
+  provider: AuthenticationProvider.keycloak,
+  config: KeycloakConfig
+};
+
+export {AuthenticationProvider, Authentication};

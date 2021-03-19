@@ -15,6 +15,10 @@
  */
 
 export interface Environment {
-  production: boolean;
-  logoImagePath: string;
+  flags: {
+    production: boolean;
+  };
+  styling: {
+    logoImagePath: string;
+  };
 }

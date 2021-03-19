@@ -21,8 +21,12 @@
 import {Environment} from "@app/interfaces";
 
 export const environment: Environment = {
-  production: false,
-  logoImagePath: 'assets/img/logo/dh.svg'
+  flags: {
+    production: false,
+  },
+  styling: {
+    logoImagePath: 'assets/img/logo/dh.svg'
+  }
 };
 
 /*

@@ -32,7 +32,7 @@ import {environment} from "../environments/environment";
 })
 export class AppComponent {
   readonly title = 'valtimo-portal';
-  readonly imgSrc = environment.logoImagePath;
+  readonly imgSrc = environment.styling.logoImagePath;
 
   readonly navigationMenuItems: Array<NavigationMenuItem> = routes
     .filter((route) => !route.data?.hideInNav)

@@ -179,46 +179,6 @@
           }
         }
       }
-    },
-    "@valtimo-portal/translate": {
-      "projectType": "library",
-      "root": "projects/valtimo-portal/translate",
-      "sourceRoot": "projects/valtimo-portal/translate/src",
-      "prefix": "lib",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:ng-packagr",
-          "options": {
-            "tsConfig": "projects/valtimo-portal/translate/tsconfig.lib.json",
-            "project": "projects/valtimo-portal/translate/ng-package.json"
-          },
-          "configurations": {
-            "production": {
-              "tsConfig": "projects/valtimo-portal/translate/tsconfig.lib.prod.json"
-            }
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "projects/valtimo-portal/translate/src/test.ts",
-            "tsConfig": "projects/valtimo-portal/translate/tsconfig.spec.json",
-            "karmaConfig": "projects/valtimo-portal/translate/karma.conf.js"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/valtimo-portal/translate/tsconfig.lib.json",
-              "projects/valtimo-portal/translate/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        }
-      }
     }
   },
   "defaultProject": "valtimo-portal"

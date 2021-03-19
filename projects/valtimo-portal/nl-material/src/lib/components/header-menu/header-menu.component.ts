@@ -15,11 +15,11 @@
  */
 
 import {Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {LanguageSelectorMode} from "../../interfaces";
-import {SidenavService} from "../../services";
-import {BreakpointObserver} from "@angular/cdk/layout";
-import {Subject, Subscription} from "rxjs";
-import {MatMenuTrigger} from "@angular/material/menu";
+import {LanguageSelectorMode} from '../../interfaces';
+import {SidenavService} from '../../services';
+import {BreakpointObserver} from '@angular/cdk/layout';
+import {Subject, Subscription} from 'rxjs';
+import {MatMenuTrigger} from '@angular/material/menu';
 
 @Component({
   selector: 'nl-material-header-menu',

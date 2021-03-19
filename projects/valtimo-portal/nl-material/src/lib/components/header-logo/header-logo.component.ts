@@ -15,8 +15,8 @@
  */
 
 import {Component, Input} from '@angular/core';
-import {SidenavService} from "../../services";
-import {Observable} from "rxjs";
+import {SidenavService} from '../../services';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'nl-material-header-logo',

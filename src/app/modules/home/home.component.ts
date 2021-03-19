@@ -15,7 +15,7 @@
  */
 
 import {Component, OnInit} from '@angular/core';
-import {CardType} from "@valtimo-portal/nl-material";
+import {CardType} from '@valtimo-portal/nl-material';
 
 @Component({
   selector: 'app-home',

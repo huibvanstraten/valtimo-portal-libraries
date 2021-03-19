@@ -22,7 +22,7 @@ import {SidenavServiceModule} from '../../services';
 import {MatListModule} from '@angular/material/list';
 import {RouterModule} from '@angular/router';
 import {MatIconModule} from '@angular/material/icon';
-import {TranslateModule} from "@ngx-translate/core";
+import {TranslateModule} from '@ngx-translate/core';
 
 @NgModule({
   declarations: [SidenavComponent],

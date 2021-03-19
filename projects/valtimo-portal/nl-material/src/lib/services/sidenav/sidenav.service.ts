@@ -17,9 +17,9 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, combineLatest, Observable} from 'rxjs';
 import {NavigationMenuItem} from '../../interfaces';
-import {LocalizeRouterService} from "@gilsdav/ngx-translate-router";
-import {TranslateService} from "@ngx-translate/core";
-import {map} from "rxjs/operators";
+import {LocalizeRouterService} from '@gilsdav/ngx-translate-router';
+import {TranslateService} from '@ngx-translate/core';
+import {map} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'

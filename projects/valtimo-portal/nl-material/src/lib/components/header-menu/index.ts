@@ -14,5 +14,5 @@
  * limitations under the License.
  */
 
-export * from './header-menu.module'
-export * from './header-menu.component'
+export * from './header-menu.module';
+export * from './header-menu.component';

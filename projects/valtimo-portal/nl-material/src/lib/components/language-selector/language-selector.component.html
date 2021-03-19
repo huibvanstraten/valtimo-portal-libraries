@@ -3,7 +3,7 @@
     <mat-select
       [(ngModel)]="selectedLocale"
       [disableOptionCentering]="true"
-      [disabled]="!!(open$ | async)"
+      [disabled]="open$ | async"
       #matSelect
     >
       <mat-option *ngFor="let locale of locales" [value]="locale" (click)="useLanguage(locale)">

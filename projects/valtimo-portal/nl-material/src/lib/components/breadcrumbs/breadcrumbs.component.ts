@@ -15,11 +15,11 @@
  */
 
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {NavigationEnd, Router, Routes} from "@angular/router";
-import {BehaviorSubject, combineLatest, Subscription} from "rxjs";
-import {Breadcrumb} from "../../interfaces";
-import {SidenavService} from "../../services";
-import {animate, style, transition, trigger} from "@angular/animations";
+import {NavigationEnd, Router, Routes} from '@angular/router';
+import {BehaviorSubject, combineLatest, Subscription} from 'rxjs';
+import {Breadcrumb} from '../../interfaces';
+import {SidenavService} from '../../services';
+import {animate, style, transition, trigger} from '@angular/animations';
 
 @Component({
   selector: 'nl-material-breadcrumbs',

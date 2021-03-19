@@ -23,7 +23,7 @@ import {
   LocalizeRouterModule,
   LocalizeRouterSettings,
   ManualParserLoader
-} from "@gilsdav/ngx-translate-router";
+} from '@gilsdav/ngx-translate-router';
 import {TranslateService} from '@ngx-translate/core';
 
 const locales: Array<string> = ['nl', 'en'];

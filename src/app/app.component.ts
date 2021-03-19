@@ -17,10 +17,10 @@
 import {Component} from '@angular/core';
 import {routes} from '@app/app-routing.module';
 import {NavigationMenuItem} from '@valtimo-portal/nl-material';
-import {RouterOutlet} from "@angular/router";
-import {slideInAnimation} from "@app/animations";
-import {locales} from './app-routing.module'
-import {environment} from "../environments/environment";
+import {RouterOutlet} from '@angular/router';
+import {slideInAnimation} from '@app/animations';
+import {locales} from './app-routing.module';
+import {environment} from '../environments/environment';
 
 @Component({
   selector: 'app-root',

@@ -20,7 +20,7 @@ import {Event, NavigationEnd, Router} from '@angular/router';
 import {BehaviorSubject, combineLatest, Observable, Subscription} from 'rxjs';
 import {BreakpointObserver} from '@angular/cdk/layout';
 import {SidenavService} from '../../services';
-import {delay} from "rxjs/operators";
+import {delay} from 'rxjs/operators';
 
 @Component({
   selector: 'nl-material-navigation-menu',

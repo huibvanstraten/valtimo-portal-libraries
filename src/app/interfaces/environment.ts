@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+import {KeycloakConfig} from 'keycloak-js';
+
 export interface Environment {
   flags: {
     production: boolean;
@@ -21,4 +23,5 @@ export interface Environment {
   styling: {
     logoImagePath: string;
   };
+  keycloak: KeycloakConfig;
 }

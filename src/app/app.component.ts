@@ -19,7 +19,6 @@ import {routes} from '@app/app-routing.module';
 import {NavigationMenuItem} from '@valtimo-portal/nl-material';
 import {RouterOutlet} from '@angular/router';
 import {slideInAnimation} from '@app/animations';
-import {locales} from './app-routing.module';
 import {environment} from '../environments/environment';
 
 @Component({
@@ -43,7 +42,7 @@ export class AppComponent {
       isHome: route.data?.isHome
     }));
 
-  readonly locales: Array<string> = locales;
+  readonly locales: Array<string> = environment.translation.supportedLocales;
 
   prepareRoute(outlet: RouterOutlet): any {
     return outlet && outlet.activatedRouteData && outlet.activatedRouteData.animation;

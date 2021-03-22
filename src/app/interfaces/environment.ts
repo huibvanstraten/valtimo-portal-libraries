@@ -20,6 +20,10 @@ export interface Environment {
   flags: {
     production: boolean;
   };
+  translation: {
+    supportedLocales: Array<string>;
+    defaultLocaleIndex?: number;
+  };
   styling: {
     logoImagePath: string;
   };

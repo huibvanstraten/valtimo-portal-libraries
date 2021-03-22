@@ -67,6 +67,8 @@ export const HttpLoaderFactory = (http: HttpClient) => new MultiTranslateHttpLoa
 })
 export class AppModule {
   constructor(private translateService: TranslateService) {
-    translateService.setDefaultLang('nl');
+    const translationEnv = environment.translation;
+    const defaultLocaleIndex = translationEnv.defaultLocaleIndex || 0;
+    translateService.setDefaultLang(translationEnv.supportedLocales[defaultLocaleIndex]);
   }
 }

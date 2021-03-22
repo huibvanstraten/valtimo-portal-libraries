@@ -23,6 +23,10 @@ export const environment: Environment = {
   styling: {
     logoImagePath: 'assets/img/logo/dh.svg'
   },
+  translation: {
+    supportedLocales: ['nl', 'en'],
+    defaultLocaleIndex: 0
+  },
   authentication: {
     provider: AuthenticationProvider.keycloak,
     config: {

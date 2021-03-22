@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {NgModule} from '@angular/core';
+import {APP_INITIALIZER, NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
@@ -31,6 +31,8 @@ import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {MultiTranslateHttpLoader} from 'ngx-translate-multi-http-loader';
 import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
 import {environment} from '../environments';
+import {KeycloakAngularModule, KeycloakService} from "keycloak-angular";
+import {initializeKeycloak} from "@valtimo-portal/authentication";
 
 export const HttpLoaderFactory = (http: HttpClient) => new MultiTranslateHttpLoader(http, [
   {prefix: './translate/', suffix: '.json'},
@@ -39,13 +41,20 @@ export const HttpLoaderFactory = (http: HttpClient) => new MultiTranslateHttpLoa
 
 @NgModule({
   providers: [
-    {provide: 'environment', useValue: environment}
+    {provide: 'environment', useValue: environment},
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initializeKeycloak,
+      multi: true,
+      deps: [KeycloakService, 'environment'],
+    },
   ],
   declarations: [
     AppComponent
   ],
   imports: [
     BrowserModule,
+    KeycloakAngularModule,
     HttpClientModule,
     TranslateModule.forRoot({
       loader: {

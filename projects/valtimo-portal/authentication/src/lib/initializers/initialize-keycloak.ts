@@ -14,18 +14,20 @@
  * limitations under the License.
  */
 
-import {Data, Route} from '@angular/router';
+import {KeycloakService} from "keycloak-angular";
+import {Environment} from "@valtimo-portal/shared";
 
-interface PortalRouteData extends Data {
-  hideInNav?: boolean;
-  title?: string;
-  icon?: string;
-  animation?: string;
-  isHome?: boolean;
-}
+export const initializeKeycloak = (keycloak: KeycloakService, environment: Environment) => {
+  const config = environment.authentication.config;
 
-interface PortalRoute extends Route {
-  data?: PortalRouteData;
-}
-
-export {PortalRoute};
+  return () =>
+    keycloak.init({
+      config,
+      initOptions: {
+        onLoad: 'login-required',
+        checkLoginIframe: false,
+        flow: 'standard',
+        redirectUri: 'http://localhost:4200/keycloak/callback'
+      },
+    });
+};

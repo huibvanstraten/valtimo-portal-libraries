@@ -61,6 +61,12 @@ const routes: Array<PortalRoute> = [
       icon: 'tasks',
       animation: 'TasksPage'
     }
+  },
+  {
+    path: '', redirectTo: '/', pathMatch: 'full', data: {hideInNav: true}
+  },
+  {
+    path: '**', redirectTo: '/', pathMatch: 'full', data: {hideInNav: true}
   }
 ];
 

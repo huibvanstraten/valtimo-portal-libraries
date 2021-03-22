@@ -21,7 +21,7 @@ import {BehaviorSubject, combineLatest, Observable, Subscription} from 'rxjs';
 import {BreakpointObserver} from '@angular/cdk/layout';
 import {SidenavService} from '../../services';
 import {delay} from 'rxjs/operators';
-import {NavLinkElements} from "../../types";
+import {NavLinkElements} from '../../types';
 
 @Component({
   selector: 'nl-material-navigation-menu',

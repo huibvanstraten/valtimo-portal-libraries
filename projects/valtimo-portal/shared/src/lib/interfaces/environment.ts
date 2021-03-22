@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {Authentication} from "../types";
+import {Authentication} from '../types';
 
 export interface Environment {
   flags: {

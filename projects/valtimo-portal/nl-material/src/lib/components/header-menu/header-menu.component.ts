@@ -19,7 +19,7 @@ import {SidenavService} from '../../services';
 import {BreakpointObserver} from '@angular/cdk/layout';
 import {Subject, Subscription} from 'rxjs';
 import {MatMenuTrigger} from '@angular/material/menu';
-import {LanguageSelectorMode} from "../../enums";
+import {LanguageSelectorMode} from '../../enums';
 
 @Component({
   selector: 'nl-material-header-menu',

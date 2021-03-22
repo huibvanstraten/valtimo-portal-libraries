@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-import {KeycloakConfig} from "keycloak-js";
-import {AuthenticationProvider} from "../enums";
+import {KeycloakConfig} from 'keycloak-js';
+import {AuthenticationProvider} from '../enums';
 
 export type Authentication = {
   provider: AuthenticationProvider.keycloak,

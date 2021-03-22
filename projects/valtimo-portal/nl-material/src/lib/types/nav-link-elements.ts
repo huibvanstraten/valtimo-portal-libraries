@@ -14,6 +14,6 @@
  * limitations under the License.
  */
 
-import {ElementRef, QueryList} from "@angular/core";
+import {ElementRef, QueryList} from '@angular/core';
 
 export type NavLinkElements = QueryList<ElementRef<HTMLLinkElement>>;

@@ -4,7 +4,7 @@ import {TranslateService} from '@ngx-translate/core';
 import {LocalizeRouterService} from '@gilsdav/ngx-translate-router';
 import {SidenavService} from '../../services';
 import {MatSelect} from '@angular/material/select';
-import {LanguageSelectorMode} from "../../enums";
+import {LanguageSelectorMode} from '../../enums';
 
 @Component({
   selector: 'nl-material-language-selector',

@@ -24,8 +24,8 @@ import {
   ManualParserLoader
 } from '@gilsdav/ngx-translate-router';
 import {TranslateService} from '@ngx-translate/core';
-import {environment} from "../environments";
-import {PortalRoute} from "@valtimo-portal/shared";
+import {environment} from '../environments';
+import {PortalRoute} from '@valtimo-portal/shared';
 
 const routes: Array<PortalRoute> = [
   {

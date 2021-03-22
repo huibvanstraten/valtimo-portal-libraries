@@ -64,3 +64,15 @@
   justify-content: center;
   margin-bottom: 16px;
 }
+
+.menu-section {
+  margin-bottom: 8px;
+
+  &:not(:first-child) {
+    margin-top: 8px;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}

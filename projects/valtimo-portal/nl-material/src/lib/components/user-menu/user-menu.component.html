@@ -1,1 +1,28 @@
-<p>user-menu works!</p>
+<ng-container *ngIf="mode === desktopMode && (welcomeText$ | async) as welcomeText">
+  <mat-form-field>
+    <mat-select
+      [disabled]="(open$ | async) === true"
+      [placeholder]="welcomeText"
+      floatlLabel="never"
+      #matSelect
+    >
+      <mat-select-trigger>
+        {{welcomeText}}
+      </mat-select-trigger>
+      <mat-option (click)="logout()">
+        {{'headerMenu.logout' | translate}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</ng-container>
+
+<ng-container *ngIf="mode === mobileMode">
+  <h3 matSubheader>
+    {{welcomeText$ | async}}
+  </h3>
+  <mat-list-item>
+    <button mat-menu-item (click)="logout()">
+      {{'headerMenu.logout' | translate}}
+    </button>
+  </mat-list-item>
+</ng-container>

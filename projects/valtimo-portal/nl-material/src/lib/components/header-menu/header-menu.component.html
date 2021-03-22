@@ -15,6 +15,7 @@
   -->
 
 <div class="header-menu" fxHide.lt-sm>
+  <nl-material-user-menu [mode]="desktopMode"></nl-material-user-menu>
   <nl-material-language-selector
     [closeLanguageSelectDropdown]="closeLanguageSelectDropdown"
     [locales]="locales"
@@ -28,19 +29,18 @@
   </button>
   <mat-menu #menu="matMenu" [hasBackdrop]="true" backdropClass="header-menu-backdrop">
     <mat-list class="header-menu-mat-list">
-      <h3 matSubheader>{{'headerMenu.language' | translate}}</h3>
-      <mat-list-item>
-        <div class="language-selector-container">
-          <nl-material-language-selector [locales]="locales" [mode]="toggleMode"></nl-material-language-selector>
-        </div>
-      </mat-list-item>
+      <div class="menu-section">
+        <nl-material-user-menu [mode]="mobileMode"></nl-material-user-menu>
+      </div>
       <mat-divider></mat-divider>
-      <h3 matSubheader>{{'headerMenu.user' | translate}}</h3>
-      <mat-list-item>
-        <button mat-menu-item (click)="logout()">
-          {{'headerMenu.logout' | translate}}
-        </button>
-      </mat-list-item>
+      <div class="menu-section">
+        <div mat-subheader>{{'headerMenu.language' | translate}}</div>
+        <mat-list-item>
+          <div class="language-selector-container">
+            <nl-material-language-selector [locales]="locales" [mode]="toggleMode"></nl-material-language-selector>
+          </div>
+        </mat-list-item>
+      </div>
     </mat-list>
   </mat-menu>
 </div>

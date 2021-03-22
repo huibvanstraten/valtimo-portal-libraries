@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
-export * from './card-type';
-export * from './language-selector-mode';
-export * from './user-menu-mode';
+export enum UserMenuMode {
+  desktop,
+  mobile
+}

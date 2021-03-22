@@ -13,6 +13,7 @@
   "headerMenu": {
     "language": "Language",
     "user": "User",
+    "welcome": "Welcome",
     "logout": "Sign out"
   }
 }

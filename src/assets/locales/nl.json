@@ -13,6 +13,7 @@
   "headerMenu": {
     "language": "Taal",
     "user": "Gebruiker",
+    "welcome": "Welkom",
     "logout": "Uitloggen"
   }
 }

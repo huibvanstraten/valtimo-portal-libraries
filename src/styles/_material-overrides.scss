@@ -32,6 +32,10 @@
   border-width: 1px;
 }
 
+.mat-list-base .mat-list-item {
+  height: auto !important;
+}
+
 .mat-option-text {
   font-size: 16px;
   font-weight: 700;

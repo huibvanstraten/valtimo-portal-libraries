@@ -10,14 +10,14 @@ export class KeycloakAppAuthGuard extends KeycloakAuthGuard {
 
   isAccessAllowed(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
     return new Promise(async (resolve, reject) => {
+      const requiredRoles = route.data.roles;
+      let granted = false;
+
       if (!this.authenticated) {
         this.keycloakAngular.login();
         return;
       }
-      console.log('role restriction given at app-routing.module for this route', route.data.roles);
-      console.log('User roles coming after login from keycloak :', this.roles);
-      const requiredRoles = route.data.roles;
-      let granted = false;
+
       if (!requiredRoles || requiredRoles.length === 0) {
         granted = true;
       } else {
@@ -32,8 +32,8 @@ export class KeycloakAppAuthGuard extends KeycloakAuthGuard {
       if (granted === false) {
         this.router.navigate(['/']);
       }
-      resolve(granted);
 
+      resolve(granted);
     });
   }
 }

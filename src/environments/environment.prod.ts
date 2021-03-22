@@ -32,7 +32,8 @@ export const environment: Environment = {
     config: {
       url: 'https://keycloak.test.valtimo.nl/auth',
       realm: 'valtimo',
-      clientId: 'valtimo-console'
+      clientId: 'valtimo-console',
+      redirectUri: '/keycloak/callback'
     }
   }
 };

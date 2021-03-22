@@ -17,7 +17,11 @@
 import {KeycloakConfig} from 'keycloak-js';
 import {AuthenticationProvider} from '../enums';
 
+interface ExtendedKeycloakConfig extends KeycloakConfig {
+  redirectUri: string;
+}
+
 export type Authentication = {
   provider: AuthenticationProvider.keycloak,
-  config: KeycloakConfig
+  config: ExtendedKeycloakConfig
 };

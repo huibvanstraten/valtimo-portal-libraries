@@ -37,8 +37,8 @@
       <mat-divider></mat-divider>
       <h3 matSubheader>{{'headerMenu.user' | translate}}</h3>
       <mat-list-item>
-        <button mat-menu-item>
-          test
+        <button mat-menu-item (click)="logout()">
+          {{'headerMenu.logout' | translate}}
         </button>
       </mat-list-item>
     </mat-list>

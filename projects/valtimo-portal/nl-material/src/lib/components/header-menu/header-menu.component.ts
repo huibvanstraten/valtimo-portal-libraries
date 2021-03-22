@@ -20,6 +20,7 @@ import {BreakpointObserver} from '@angular/cdk/layout';
 import {Subject, Subscription} from 'rxjs';
 import {MatMenuTrigger} from '@angular/material/menu';
 import {LanguageSelectorMode} from '../../enums';
+import {KeycloakService} from "keycloak-angular";
 
 @Component({
   selector: 'nl-material-header-menu',
@@ -37,7 +38,7 @@ export class HeaderMenuComponent implements OnInit, OnDestroy {
 
   private breakPointSubscription!: Subscription;
 
-  constructor(private sidenavService: SidenavService, private observer: BreakpointObserver) {
+  constructor(private sidenavService: SidenavService, private observer: BreakpointObserver, private keycloakService: KeycloakService) {
   }
 
   ngOnInit(): void {
@@ -50,6 +51,10 @@ export class HeaderMenuComponent implements OnInit, OnDestroy {
 
   handleClick(): void {
     this.sidenavService.open = false;
+  }
+
+  logout(): void {
+    this.keycloakService.logout();
   }
 
   private openBreakpointSubscription(): void {

@@ -15,7 +15,8 @@
   -->
 
 <ng-container *ngIf="breadCrumbs$ | async as breadcrumbs">
-  <div @breadcrumbsFade class="breadcrumbs-container" *ngIf="breadcrumbs.length > 1">
+  <div @breadcrumbsFade class="breadcrumbs-container"
+       *ngIf="breadcrumbs.length > 1 && !isKeycloakCallback(breadcrumbs)">
     <div class="breadcrumbs">
       <div class="breadcrumb" *ngFor="let breadcrumb of breadcrumbs; let i = index" @breadcrumbFade
            [@.disabled]="i === 0">

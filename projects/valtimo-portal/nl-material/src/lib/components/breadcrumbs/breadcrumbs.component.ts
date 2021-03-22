@@ -14,12 +14,13 @@
  * limitations under the License.
  */
 
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
 import {NavigationEnd, Router, Routes} from '@angular/router';
 import {BehaviorSubject, combineLatest, Subscription} from 'rxjs';
 import {Breadcrumb} from '../../interfaces';
 import {SidenavService} from '../../services';
 import {animate, style, transition, trigger} from '@angular/animations';
+import {Environment} from "@valtimo-portal/shared";
 
 @Component({
   selector: 'nl-material-breadcrumbs',
@@ -46,7 +47,10 @@ export class BreadcrumbsComponent implements OnInit, OnDestroy {
 
   private routerSubscription!: Subscription;
 
-  constructor(private router: Router, private sidenavService: SidenavService) {
+  private environment: Environment;
+
+  constructor(@Inject('environment') environment: Environment, private router: Router, private sidenavService: SidenavService) {
+    this.environment = environment;
   }
 
   ngOnInit(): void {
@@ -74,6 +78,10 @@ export class BreadcrumbsComponent implements OnInit, OnDestroy {
           );
         }
       });
+  }
+
+  isKeycloakCallback(breadcrumbs: Array<Breadcrumb>): boolean {
+    return breadcrumbs[breadcrumbs.length - 1].link.includes(this.environment.authentication.config.redirectUri);
   }
 
   ngOnDestroy(): void {

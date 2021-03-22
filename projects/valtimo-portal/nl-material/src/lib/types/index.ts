@@ -14,6 +14,4 @@
  * limitations under the License.
  */
 
-export * from './routing';
-export * from './environment';
-export * from './authentication';
+export * from './nav-link-elements';

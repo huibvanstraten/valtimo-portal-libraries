@@ -3,8 +3,8 @@ import {Observable, Subject, Subscription} from 'rxjs';
 import {TranslateService} from '@ngx-translate/core';
 import {LocalizeRouterService} from '@gilsdav/ngx-translate-router';
 import {SidenavService} from '../../services';
-import {LanguageSelectorMode} from '../../interfaces';
 import {MatSelect} from '@angular/material/select';
+import {LanguageSelectorMode} from "../../enums";
 
 @Component({
   selector: 'nl-material-language-selector',

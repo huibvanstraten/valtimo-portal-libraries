@@ -17,7 +17,6 @@
 import {Location} from '@angular/common';
 import {NgModule} from '@angular/core';
 import {RouterModule} from '@angular/router';
-import {PortalRoute} from '@app/interfaces';
 import {
   LocalizeParser,
   LocalizeRouterModule,
@@ -26,6 +25,7 @@ import {
 } from '@gilsdav/ngx-translate-router';
 import {TranslateService} from '@ngx-translate/core';
 import {environment} from "../environments";
+import {PortalRoute} from "@valtimo-portal/shared";
 
 const routes: Array<PortalRoute> = [
   {

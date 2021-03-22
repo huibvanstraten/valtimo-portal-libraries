@@ -14,15 +14,6 @@
  * limitations under the License.
  */
 
-import {KeycloakConfig} from 'keycloak-js';
+import {ElementRef, QueryList} from "@angular/core";
 
-enum AuthenticationProvider {
-  keycloak
-}
-
-type Authentication = {
-  provider: AuthenticationProvider.keycloak,
-  config: KeycloakConfig
-};
-
-export {AuthenticationProvider, Authentication};
+export type NavLinkElements = QueryList<ElementRef<HTMLLinkElement>>;

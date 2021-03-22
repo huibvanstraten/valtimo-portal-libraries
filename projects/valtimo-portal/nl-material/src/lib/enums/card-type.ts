@@ -15,7 +15,7 @@
  */
 
 export enum CardType {
-    default,
-    introduction,
-    reminder
+  default,
+  introduction,
+  reminder
 }

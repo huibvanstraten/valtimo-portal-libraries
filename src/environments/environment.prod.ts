@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {AuthenticationProvider, Environment} from '@app/interfaces';
+import {AuthenticationProvider, Environment} from "@valtimo-portal/shared";
 
 export const environment: Environment = {
   flags: {

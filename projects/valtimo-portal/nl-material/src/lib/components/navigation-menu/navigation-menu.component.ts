@@ -15,12 +15,13 @@
  */
 
 import {AfterViewInit, Component, OnDestroy, OnInit, ViewChildren} from '@angular/core';
-import {ActiveNavLinkIndicator, NavigationMenuItem, NavLinkElements} from '../../interfaces';
+import {ActiveNavLinkIndicator, NavigationMenuItem} from '../../interfaces';
 import {Event, NavigationEnd, Router} from '@angular/router';
 import {BehaviorSubject, combineLatest, Observable, Subscription} from 'rxjs';
 import {BreakpointObserver} from '@angular/cdk/layout';
 import {SidenavService} from '../../services';
 import {delay} from 'rxjs/operators';
+import {NavLinkElements} from "../../types";
 
 @Component({
   selector: 'nl-material-navigation-menu',

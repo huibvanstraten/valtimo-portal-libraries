@@ -18,7 +18,7 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
-import {AuthenticationProvider, Environment} from '@app/interfaces';
+import {AuthenticationProvider, Environment} from '@valtimo-portal/shared';
 
 export const environment: Environment = {
   flags: {

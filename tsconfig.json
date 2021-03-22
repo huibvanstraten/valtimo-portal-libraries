@@ -3,10 +3,6 @@
   "compileOnSave": false,
   "compilerOptions": {
     "paths": {
-      "@valtimo-portal/nl-material": [
-        "dist/valtimo-portal/nl-material/valtimo-portal-nl-material",
-        "dist/valtimo-portal/nl-material"
-      ],
       "@app/*": [
         "src/app/*"
       ],
@@ -19,10 +15,6 @@
       "@notifications/*": [
         "src/app/modules/notifications/*"
       ],
-      "@valtimo-portal/authentication": [
-        "dist/valtimo-portal/authentication/valtimo-portal-authentication",
-        "dist/valtimo-portal/authentication"
-      ],
       "@tasks/*": [
         "src/app/modules/tasks/*"
       ],
@@ -30,9 +22,13 @@
         "dist/valtimo-portal/shared/valtimo-portal-shared",
         "dist/valtimo-portal/shared"
       ],
-      "@valtimo-portal/translate": [
-        "dist/valtimo-portal/translate/valtimo-portal-translate",
-        "dist/valtimo-portal/translate"
+      "@valtimo-portal/authentication": [
+        "dist/valtimo-portal/authentication/valtimo-portal-authentication",
+        "dist/valtimo-portal/authentication"
+      ],
+      "@valtimo-portal/nl-material": [
+        "dist/valtimo-portal/nl-material/valtimo-portal-nl-material",
+        "dist/valtimo-portal/nl-material"
       ]
     },
     "baseUrl": "./",

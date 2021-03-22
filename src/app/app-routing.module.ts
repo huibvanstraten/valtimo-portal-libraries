@@ -26,7 +26,7 @@ import {
 import {TranslateService} from '@ngx-translate/core';
 import {environment} from '../environments';
 import {PortalRoute} from '@valtimo-portal/shared';
-import {KeycloakAppAuthGuard} from "@valtimo-portal/authentication";
+import {KeycloakAppAuthGuard} from '@valtimo-portal/authentication';
 
 const routes: Array<PortalRoute> = [
   {

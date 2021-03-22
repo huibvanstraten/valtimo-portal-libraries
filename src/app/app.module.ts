@@ -31,8 +31,8 @@ import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {MultiTranslateHttpLoader} from 'ngx-translate-multi-http-loader';
 import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
 import {environment} from '../environments';
-import {KeycloakAngularModule, KeycloakService} from "keycloak-angular";
-import {initializeKeycloak, KeycloakAppAuthGuard} from "@valtimo-portal/authentication";
+import {KeycloakAngularModule, KeycloakService} from 'keycloak-angular';
+import {initializeKeycloak, KeycloakAppAuthGuard} from '@valtimo-portal/authentication';
 
 export const HttpLoaderFactory = (http: HttpClient) => new MultiTranslateHttpLoader(http, [
   {prefix: './translate/', suffix: '.json'},

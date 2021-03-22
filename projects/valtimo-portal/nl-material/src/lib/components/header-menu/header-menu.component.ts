@@ -20,7 +20,7 @@ import {BreakpointObserver} from '@angular/cdk/layout';
 import {Subject, Subscription} from 'rxjs';
 import {MatMenuTrigger} from '@angular/material/menu';
 import {LanguageSelectorMode} from '../../enums';
-import {KeycloakService} from "keycloak-angular";
+import {KeycloakService} from 'keycloak-angular';
 
 @Component({
   selector: 'nl-material-header-menu',

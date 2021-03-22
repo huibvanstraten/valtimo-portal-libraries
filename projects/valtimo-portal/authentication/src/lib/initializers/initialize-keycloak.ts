@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-import {KeycloakService} from "keycloak-angular";
-import {Environment} from "@valtimo-portal/shared";
+import {KeycloakService} from 'keycloak-angular';
+import {Environment} from '@valtimo-portal/shared';
 
 export const initializeKeycloak = (keycloak: KeycloakService, environment: Environment) => {
   const config = environment.authentication.config;

@@ -14,7 +14,7 @@
   ~ limitations under the License.
   -->
 
-<div class="header-menu" fxHide.lt-sm>
+<div class="header-menu" fxHide.lt-md>
   <nl-material-user-menu [mode]="desktopMode"></nl-material-user-menu>
   <nl-material-language-selector
     [closeLanguageSelectDropdown]="closeLanguageSelectDropdown"
@@ -23,16 +23,12 @@
   </nl-material-language-selector>
 </div>
 
-<div fxHide.gt-xs>
+<div fxHide.gt-sm>
   <button mat-icon-button [matMenuTriggerFor]="menu" #menuTrigger="matMenuTrigger" (click)="handleClick()">
     <mat-icon fontSet="fa" fontIcon="fa-ellipsis-v" class="menu-toggle-button"></mat-icon>
   </button>
   <mat-menu #menu="matMenu" [hasBackdrop]="true" backdropClass="header-menu-backdrop">
     <mat-list class="header-menu-mat-list">
-      <div class="menu-section">
-        <nl-material-user-menu [mode]="mobileMode"></nl-material-user-menu>
-      </div>
-      <mat-divider></mat-divider>
       <div class="menu-section">
         <div mat-subheader>{{'headerMenu.language' | translate}}</div>
         <mat-list-item>
@@ -40,6 +36,10 @@
             <nl-material-language-selector [locales]="locales" [mode]="toggleMode"></nl-material-language-selector>
           </div>
         </mat-list-item>
+      </div>
+      <mat-divider></mat-divider>
+      <div class="menu-section menu-section-user">
+        <nl-material-user-menu [mode]="mobileMode"></nl-material-user-menu>
       </div>
     </mat-list>
   </mat-menu>

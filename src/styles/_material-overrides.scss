@@ -19,6 +19,10 @@
 
 /* Mat-select */
 
+.cdk-overlay-pane {
+  transform: translateX(-16px) !important;
+}
+
 .mat-menu-panel, .mat-select-panel {
   box-shadow: none !important;
   border-radius: 3px;
@@ -48,6 +52,14 @@
   height: auto !important;
 }
 
+.mat-nav-list .mat-list-item {
+  height: 48px !important;
+}
+
+.menu-section-user .mat-list-item-content {
+  padding: 0 !important;
+}
+
 /* Mat-drawer */
 
 .mat-drawer-backdrop.mat-drawer-shown, .header-menu-backdrop {
@@ -73,16 +85,38 @@
 
   .mat-form-field-flex {
     width: 100% !important;
-    font-weight: normal !important;
+    border-color: $nl-light-gray !important;
+    background-color: $nl-light-gray;
   }
 
   .mat-form-field-label {
     top: 16px;
+    display: flex !important;
+    align-items: center;
+    width: 100% !important;
+    color: $nl-dark-gray;
   }
 }
 
 .desktop-user-menu-option {
   width: $desktop-user-menu-width !important;
+}
+
+.desktop-user-menu-option span, .desktop-user-menu .mat-form-field-flex {
+  font-weight: normal !important;
+
+  .mat-option-text {
+    display: flex;
+  }
+}
+
+.desktop-user-menu .mat-form-field-label::before, .desktop-user-menu-option:first-child span::before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: bolder;
+  content: "\f007";
+  font-size: 12px;
+  margin-right: 8px;
+  color: $nl-dark-gray;
 }
 
 /* Mobile animations */

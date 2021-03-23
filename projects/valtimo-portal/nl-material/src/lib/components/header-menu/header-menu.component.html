@@ -16,9 +16,12 @@
 
 <div class="header-menu-container">
   <div class="header-menu" fxHide.lt-md>
-    <nl-material-user-menu [mode]="desktopMode"></nl-material-user-menu>
+    <nl-material-user-menu
+      [close$]="closeDropdowns$"
+      [mode]="desktopMode">
+    </nl-material-user-menu>
     <nl-material-language-selector
-      [closeLanguageSelectDropdown]="closeLanguageSelectDropdown"
+      [close$]="closeDropdowns$"
       [locales]="locales"
       [mode]="dropdownMode">
     </nl-material-language-selector>

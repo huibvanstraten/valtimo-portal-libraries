@@ -16,7 +16,7 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
 
   @Input() locales: Array<string> = [];
   @Input() mode: LanguageSelectorMode = LanguageSelectorMode.dropdown;
-  @Input() closeLanguageSelectDropdown!: Subject<any>;
+  @Input() close$!: Subject<any>;
 
   open$!: Observable<boolean>;
 
@@ -42,14 +42,14 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.openLocaleSubscription();
 
-    if (this.closeLanguageSelectDropdown) {
+    if (this.close$) {
       this.openCloseSelectSubscription();
     }
   }
 
   ngOnDestroy(): void {
     this.localeSubscription.unsubscribe();
-    this.closeLanguageSelectDropdown?.unsubscribe();
+    this.closeSelectSubscription?.unsubscribe();
   }
 
   useLanguage(language: string): void {
@@ -64,7 +64,7 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
   }
 
   private openCloseSelectSubscription(): void {
-    this.closeSelectSubscription = this.closeLanguageSelectDropdown.subscribe(() => {
+    this.closeSelectSubscription = this.close$.subscribe(() => {
       this.matSelect?.close();
     });
   }

@@ -5,6 +5,7 @@
       [disableOptionCentering]="true"
       [disabled]="(open$ | async) === true"
       [placeholder]="!obs.signingOut ? (obs.welcomeText || '') : 'headerMenu.loggingOut' | translate"
+      #matSelect
     >
       <mat-option [disabled]="true" value="welcomeText" class="desktop-user-menu-option">
         {{!obs.signingOut ? (userFirstName$ | async) : 'headerMenu.loggingOut' | translate}}

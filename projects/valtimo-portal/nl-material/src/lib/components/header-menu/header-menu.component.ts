@@ -37,7 +37,7 @@ export class HeaderMenuComponent implements OnInit, OnDestroy {
   readonly mobileMode = UserMenuMode.mobile;
   readonly desktopMode = UserMenuMode.desktop;
 
-  readonly closeLanguageSelectDropdown = new Subject();
+  readonly closeDropdowns$ = new Subject();
 
   private breakPointSubscription!: Subscription;
 
@@ -57,9 +57,9 @@ export class HeaderMenuComponent implements OnInit, OnDestroy {
   }
 
   private openBreakpointSubscription(): void {
-    this.breakPointSubscription = this.observer.observe('(min-width: 600px)').subscribe(() => {
+    this.breakPointSubscription = this.observer.observe('(min-width: 960px)').subscribe(() => {
       this.menuTrigger?.closeMenu();
-      this.closeLanguageSelectDropdown.next();
+      this.closeDropdowns$.next();
     });
   }
 }

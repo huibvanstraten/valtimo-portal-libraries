@@ -1,15 +1,15 @@
 <ng-container *ngIf="mode === desktopMode && (welcomeText$ | async) as welcomeText">
-  <mat-form-field>
+  <mat-form-field class="desktop-user-menu">
     <mat-select
+      [disableOptionCentering]="true"
       [disabled]="(open$ | async) === true"
+      [value]="welcomeText"
       [placeholder]="welcomeText"
-      floatlLabel="never"
-      #matSelect
     >
-      <mat-select-trigger>
-        {{welcomeText}}
-      </mat-select-trigger>
-      <mat-option (click)="logout()">
+      <mat-option [disabled]="true" value="welcomeText" class="desktop-user-menu-option">
+        {{welcomeText$ | async}}
+      </mat-option>
+      <mat-option (click)="logout()" class="desktop-user-menu-option">
         {{'headerMenu.logout' | translate}}
       </mat-option>
     </mat-select>

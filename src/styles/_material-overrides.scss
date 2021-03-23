@@ -17,6 +17,8 @@
 @import 'colors';
 @import 'variables';
 
+/* Mat-select */
+
 .mat-menu-panel, .mat-select-panel {
   box-shadow: none !important;
   border-radius: 3px;
@@ -24,16 +26,9 @@
 }
 
 .mat-select-panel {
-  margin-top: -12px;
-  margin-left: -4px;
-}
-
-.mat-menu-panel {
-  border-width: 1px;
-}
-
-.mat-list-base .mat-list-item {
-  height: auto !important;
+  margin-top: -16px;
+  margin-left: 2px;
+  min-width: 72px !important;
 }
 
 .mat-option-text {
@@ -42,15 +37,55 @@
   color: rgba(0, 0, 0, 0.87);
 }
 
+
+.mat-menu-panel {
+  border-width: 1px;
+}
+
+/* Mat-list */
+
+.mat-list-base .mat-list-item {
+  height: auto !important;
+}
+
+/* Mat-drawer */
+
 .mat-drawer-backdrop.mat-drawer-shown, .header-menu-backdrop {
   background-color: rgba(0, 0, 0, 0.15) !important;
 }
+
+/* Mat-button */
 
 .mat-flat-button {
   font-size: $font-smaller;
   line-height: $font-large !important;
   padding: 10px 16px !important;
 }
+
+/* User menu */
+
+.desktop-user-menu {
+  width: $desktop-user-menu-width !important;
+
+  .mat-select-arrow-wrapper {
+    display: none;
+  }
+
+  .mat-form-field-flex {
+    width: 100% !important;
+    font-weight: normal !important;
+  }
+
+  .mat-form-field-label {
+    top: 16px;
+  }
+}
+
+.desktop-user-menu-option {
+  width: $desktop-user-menu-width !important;
+}
+
+/* Mobile animations */
 
 @include layout-bp(xs) {
   .ng-animating {

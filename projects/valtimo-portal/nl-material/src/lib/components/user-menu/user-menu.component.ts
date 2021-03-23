@@ -1,11 +1,11 @@
 import {Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {UserMenuMode} from "../../enums";
-import {KeycloakService} from "keycloak-angular";
-import {BehaviorSubject, combineLatest, Observable, Subject, Subscription} from "rxjs";
-import {TranslateService} from "@ngx-translate/core";
-import {map} from "rxjs/operators";
-import {SidenavService} from "../../services";
-import {MatSelect} from "@angular/material/select";
+import {UserMenuMode} from '../../enums';
+import {KeycloakService} from 'keycloak-angular';
+import {BehaviorSubject, combineLatest, Observable, Subject, Subscription} from 'rxjs';
+import {TranslateService} from '@ngx-translate/core';
+import {map} from 'rxjs/operators';
+import {SidenavService} from '../../services';
+import {MatSelect} from '@angular/material/select';
 
 @Component({
   selector: 'nl-material-user-menu',

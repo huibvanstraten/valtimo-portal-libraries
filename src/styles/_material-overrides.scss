@@ -115,6 +115,12 @@
   }
 }
 
+.desktop-user-menu .mat-form-field-label span {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
 .desktop-user-menu .mat-form-field-label::before, .desktop-user-menu-option:first-child span::before {
   font-family: "Font Awesome 5 Free";
   font-weight: bolder;

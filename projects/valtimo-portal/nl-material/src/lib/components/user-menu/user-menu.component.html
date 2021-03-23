@@ -15,31 +15,33 @@
   -->
 
 <ng-container
-        *ngIf="mode === desktopMode && {welcomeText: welcomeText$ | async, signingOut: signingOut$ | async} as obs">
-    <mat-form-field class="desktop-user-menu">
-        <mat-select
-                [disableOptionCentering]="true"
-                [disabled]="(open$ | async) === true"
-                [placeholder]="!obs.signingOut ? (obs.welcomeText || '') : 'headerMenu.loggingOut' | translate"
-                #matSelect
-        >
-            <mat-option [disabled]="true" value="welcomeText" class="desktop-user-menu-option">
-                {{!obs.signingOut ? (userFirstName$ | async) : 'headerMenu.loggingOut' | translate}}
-            </mat-option>
-            <mat-option *ngIf="!obs.signingOut" (click)="logout()" class="desktop-user-menu-option">
-                {{'headerMenu.logout' | translate}}
-            </mat-option>
-        </mat-select>
-    </mat-form-field>
+  *ngIf="mode === desktopMode && {welcomeText: welcomeText$ | async, signingOut: signingOut$ | async} as obs">
+  <mat-form-field class="desktop-user-menu">
+    <mat-select
+      [disableOptionCentering]="true"
+      [disabled]="(open$ | async) === true"
+      [placeholder]="!obs.signingOut ? (obs.welcomeText || '') : 'headerMenu.loggingOut' | translate"
+      #matSelect
+    >
+      <mat-option [disabled]="true" value="welcomeText" class="desktop-user-menu-option">
+        {{!obs.signingOut ? (userFirstName$ | async) : 'headerMenu.loggingOut' | translate}}
+      </mat-option>
+      <mat-option *ngIf="!obs.signingOut" (click)="logout()" class="desktop-user-menu-option">
+        <mat-icon fontSet="fa" fontIcon="fa-sign-out-alt"></mat-icon>
+        {{'headerMenu.logout' | translate}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
 </ng-container>
 
 <ng-container *ngIf="mode === mobileMode">
-    <h3 matSubheader>
-        {{userFirstName$ | async}}
-    </h3>
-    <mat-list-item>
-        <button mat-menu-item (click)="logout()">
-            {{'headerMenu.logout' | translate}}
-        </button>
-    </mat-list-item>
+  <h3 matSubheader>
+    {{userFirstName$ | async}}
+  </h3>
+  <mat-list-item>
+    <button mat-menu-item (click)="logout()">
+      <mat-icon fontSet="fa" fontIcon="fa-sign-out-alt"></mat-icon>
+      {{'headerMenu.logout' | translate}}
+    </button>
+  </mat-list-item>
 </ng-container>

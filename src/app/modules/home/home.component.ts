@@ -16,6 +16,8 @@
 
 import {Component, OnInit} from '@angular/core';
 import {CardType} from '@valtimo-portal/nl-material';
+import {BehaviorSubject} from "rxjs";
+import {KeycloakService} from "keycloak-angular";
 
 @Component({
   selector: 'app-home',
@@ -24,13 +26,17 @@ import {CardType} from '@valtimo-portal/nl-material';
 })
 export class HomeComponent implements OnInit {
 
+  readonly userFirstName$ = new BehaviorSubject<string>('...');
+
   readonly introductionType = CardType.introduction;
   readonly reminderType = CardType.reminder;
 
-  constructor() {
+  constructor(private keycloakService: KeycloakService) {
   }
 
   ngOnInit(): void {
+    this.keycloakService.loadUserProfile().then((profile) => {
+      this.userFirstName$.next(`${profile.firstName}`);
+    });
   }
-
 }

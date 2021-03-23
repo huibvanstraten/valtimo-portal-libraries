@@ -26,7 +26,7 @@
     >
       <nl-material-card
         [type]="introductionType"
-        [title]="'home.introduction.title' | translate"
+        [title]="'home.introduction.title' | translate:{firstName: (userFirstName$ | async)}"
         [subtitle]="'home.introduction.subtitle' | translate"
         [content]="'home.introduction.content' | translate"
       >

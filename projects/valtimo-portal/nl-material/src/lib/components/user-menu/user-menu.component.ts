@@ -16,6 +16,8 @@ export class UserMenuComponent implements OnInit {
 
   open$!: Observable<boolean>;
 
+  readonly signingOut$ = new BehaviorSubject<boolean>(false);
+
   readonly userFirstName$ = new BehaviorSubject<string>('...');
 
   readonly welcomeText$ = combineLatest(
@@ -45,6 +47,10 @@ export class UserMenuComponent implements OnInit {
   }
 
   logout(): void {
-    this.keycloakService.logout();
+    this.signingOut$.next(true);
+
+    this.keycloakService.logout().then(() => {
+      this.signingOut$.next(false);
+    });
   }
 }

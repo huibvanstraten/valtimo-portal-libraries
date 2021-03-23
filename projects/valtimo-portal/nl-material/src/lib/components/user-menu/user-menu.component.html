@@ -1,15 +1,15 @@
-<ng-container *ngIf="mode === desktopMode && (welcomeText$ | async) as welcomeText">
+<ng-container
+  *ngIf="mode === desktopMode && {welcomeText: welcomeText$ | async, signingOut: signingOut$ | async} as obs">
   <mat-form-field class="desktop-user-menu">
     <mat-select
       [disableOptionCentering]="true"
       [disabled]="(open$ | async) === true"
-      [value]="welcomeText"
-      [placeholder]="welcomeText"
+      [placeholder]="!obs.signingOut ? (obs.welcomeText || '') : 'headerMenu.loggingOut' | translate"
     >
       <mat-option [disabled]="true" value="welcomeText" class="desktop-user-menu-option">
-        {{welcomeText$ | async}}
+        {{!obs.signingOut ? (userFirstName$ | async) : 'headerMenu.loggingOut' | translate}}
       </mat-option>
-      <mat-option (click)="logout()" class="desktop-user-menu-option">
+      <mat-option *ngIf="!obs.signingOut" (click)="logout()" class="desktop-user-menu-option">
         {{'headerMenu.logout' | translate}}
       </mat-option>
     </mat-select>
@@ -18,7 +18,7 @@
 
 <ng-container *ngIf="mode === mobileMode">
   <h3 matSubheader>
-    {{welcomeText$ | async}}
+    {{userFirstName$ | async}}
   </h3>
   <mat-list-item>
     <button mat-menu-item (click)="logout()">

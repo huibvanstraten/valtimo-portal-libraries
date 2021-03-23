@@ -14,6 +14,7 @@
     "language": "Taal",
     "user": "Gebruiker",
     "welcome": "welkom",
-    "logout": "Uitloggen"
+    "logout": "Uitloggen",
+    "loggingOut": "Uitloggen..."
   }
 }

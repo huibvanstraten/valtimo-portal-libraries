@@ -17,20 +17,21 @@
 import {Location} from '@angular/common';
 import {NgModule} from '@angular/core';
 import {RouterModule} from '@angular/router';
-import {PortalRoute} from '@app/interfaces';
 import {
   LocalizeParser,
   LocalizeRouterModule,
   LocalizeRouterSettings,
   ManualParserLoader
-} from "@gilsdav/ngx-translate-router";
+} from '@gilsdav/ngx-translate-router';
 import {TranslateService} from '@ngx-translate/core';
-
-const locales: Array<string> = ['nl', 'en'];
+import {environment} from '../environments';
+import {PortalRoute} from '@valtimo-portal/shared';
+import {KeycloakAppAuthGuard} from '@valtimo-portal/authentication';
 
 const routes: Array<PortalRoute> = [
   {
     path: '', loadChildren: () => import('./modules/home/home.module').then(m => m.HomeModule),
+    canActivate: [KeycloakAppAuthGuard],
     data: {
       title: 'TITLES.home',
       icon: 'home',
@@ -41,6 +42,7 @@ const routes: Array<PortalRoute> = [
   {
     path: 'notifications',
     loadChildren: () => import('./modules/notifications/notifications.module').then(m => m.NotificationsModule),
+    canActivate: [KeycloakAppAuthGuard],
     data: {
       title: 'TITLES.notifications',
       icon: 'bell',
@@ -49,6 +51,7 @@ const routes: Array<PortalRoute> = [
   },
   {
     path: 'cases', loadChildren: () => import('./modules/cases/cases.module').then(m => m.CasesModule),
+    canActivate: [KeycloakAppAuthGuard],
     data: {
       title: 'TITLES.cases',
       icon: 'briefcase',
@@ -57,11 +60,18 @@ const routes: Array<PortalRoute> = [
   },
   {
     path: 'tasks', loadChildren: () => import('./modules/tasks/tasks.module').then(m => m.TasksModule),
+    canActivate: [KeycloakAppAuthGuard],
     data: {
       title: 'TITLES.tasks',
       icon: 'tasks',
       animation: 'TasksPage'
     }
+  },
+  {
+    path: '', redirectTo: '/', pathMatch: 'full', data: {hideInNav: true}
+  },
+  {
+    path: '**', redirectTo: '/', pathMatch: 'full', data: {hideInNav: true}
   }
 ];
 
@@ -70,7 +80,7 @@ const routes: Array<PortalRoute> = [
     parser: {
       provide: LocalizeParser,
       useFactory: (translate: TranslateService, location: Location, settings: LocalizeRouterSettings) =>
-        new ManualParserLoader(translate, location, settings, locales, 'ROUTES.'),
+        new ManualParserLoader(translate, location, settings, environment.translation.supportedLocales, 'ROUTES.'),
       deps: [TranslateService, Location, LocalizeRouterSettings]
     }
   })],
@@ -79,4 +89,4 @@ const routes: Array<PortalRoute> = [
 class AppRoutingModule {
 }
 
-export {routes, locales, AppRoutingModule};
+export {routes, AppRoutingModule};

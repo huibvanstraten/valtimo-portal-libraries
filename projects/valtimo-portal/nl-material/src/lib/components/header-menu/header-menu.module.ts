@@ -17,16 +17,17 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {HeaderMenuComponent} from './header-menu.component';
-import {TranslateModule} from "@ngx-translate/core";
+import {TranslateModule} from '@ngx-translate/core';
 import {MatSelectModule} from '@angular/material/select';
-import {FormsModule} from "@angular/forms";
-import {SidenavServiceModule} from "../../services";
-import {MatMenuModule} from "@angular/material/menu";
-import {MatIconModule} from "@angular/material/icon";
-import {FlexLayoutModule} from "@angular/flex-layout";
-import {MatButtonModule} from "@angular/material/button";
-import {LanguageSelectorModule} from "../language-selector/language-selector.module";
-import {MatListModule} from "@angular/material/list";
+import {FormsModule} from '@angular/forms';
+import {SidenavServiceModule} from '../../services';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatIconModule} from '@angular/material/icon';
+import {FlexLayoutModule} from '@angular/flex-layout';
+import {MatButtonModule} from '@angular/material/button';
+import {LanguageSelectorModule} from '../language-selector/language-selector.module';
+import {MatListModule} from '@angular/material/list';
+import {UserMenuModule} from '../user-menu/user-menu.module';
 
 @NgModule({
   declarations: [HeaderMenuComponent],
@@ -41,7 +42,8 @@ import {MatListModule} from "@angular/material/list";
     FlexLayoutModule,
     MatButtonModule,
     LanguageSelectorModule,
-    MatListModule
+    MatListModule,
+    UserMenuModule
   ],
   exports: [HeaderMenuComponent]
 })

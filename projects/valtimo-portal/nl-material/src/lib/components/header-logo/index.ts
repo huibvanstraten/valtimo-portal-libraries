@@ -15,4 +15,4 @@
  */
 
 export * from './header-logo.module';
-export * from './header-logo.component'
+export * from './header-logo.component';

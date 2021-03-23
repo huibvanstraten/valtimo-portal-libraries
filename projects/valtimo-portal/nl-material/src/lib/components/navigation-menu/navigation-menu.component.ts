@@ -15,12 +15,13 @@
  */
 
 import {AfterViewInit, Component, OnDestroy, OnInit, ViewChildren} from '@angular/core';
-import {ActiveNavLinkIndicator, NavigationMenuItem, NavLinkElements} from '../../interfaces';
+import {ActiveNavLinkIndicator, NavigationMenuItem} from '../../interfaces';
 import {Event, NavigationEnd, Router} from '@angular/router';
 import {BehaviorSubject, combineLatest, Observable, Subscription} from 'rxjs';
 import {BreakpointObserver} from '@angular/cdk/layout';
 import {SidenavService} from '../../services';
-import {delay} from "rxjs/operators";
+import {delay} from 'rxjs/operators';
+import {NavLinkElements} from '../../types';
 
 @Component({
   selector: 'nl-material-navigation-menu',
@@ -111,7 +112,7 @@ export class NavigationMenuComponent implements OnInit, AfterViewInit, OnDestroy
 
     const firstElementAbsoluteOffset = nativeElements[0]?.offsetLeft;
 
-    const activeElement = nativeElements[currentElementIndex];
+    const activeElement = nativeElements[currentElementIndex] || nativeElements[0];
     const activeElementWidth = activeElement?.offsetWidth;
     const activeElementAbsolutetOffset = activeElement?.offsetLeft;
     const activeElementRelativeOffset = (activeElementAbsolutetOffset && firstElementAbsoluteOffset) ?

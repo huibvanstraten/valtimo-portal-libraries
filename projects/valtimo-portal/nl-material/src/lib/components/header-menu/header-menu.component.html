@@ -14,33 +14,41 @@
   ~ limitations under the License.
   -->
 
-<div class="header-menu" fxHide.lt-sm>
-  <nl-material-language-selector
-    [closeLanguageSelectDropdown]="closeLanguageSelectDropdown"
-    [locales]="locales"
-    [mode]="dropdownMode">
-  </nl-material-language-selector>
+<div class="header-menu-container">
+  <div class="header-menu" fxHide.lt-md>
+    <nl-material-user-menu
+      [close$]="closeDropdowns$"
+      [mode]="desktopMode">
+    </nl-material-user-menu>
+    <nl-material-language-selector
+      [close$]="closeDropdowns$"
+      [locales]="locales"
+      [mode]="dropdownMode">
+    </nl-material-language-selector>
+  </div>
+  <div fxHide.gt-sm>
+    <ng-container *ngTemplateOutlet="mobileMenu"></ng-container>
+  </div>
 </div>
 
-<div fxHide.gt-xs>
+<ng-template #mobileMenu>
   <button mat-icon-button [matMenuTriggerFor]="menu" #menuTrigger="matMenuTrigger" (click)="handleClick()">
     <mat-icon fontSet="fa" fontIcon="fa-ellipsis-v" class="menu-toggle-button"></mat-icon>
   </button>
   <mat-menu #menu="matMenu" [hasBackdrop]="true" backdropClass="header-menu-backdrop">
     <mat-list class="header-menu-mat-list">
-      <h3 matSubheader>{{'headerMenu.language' | translate}}</h3>
-      <mat-list-item>
-        <div class="language-selector-container">
-          <nl-material-language-selector [locales]="locales" [mode]="toggleMode"></nl-material-language-selector>
-        </div>
-      </mat-list-item>
+      <div class="menu-section">
+        <div mat-subheader>{{'headerMenu.language' | translate}}</div>
+        <mat-list-item>
+          <div class="language-selector-container">
+            <nl-material-language-selector [locales]="locales" [mode]="toggleMode"></nl-material-language-selector>
+          </div>
+        </mat-list-item>
+      </div>
       <mat-divider></mat-divider>
-      <h3 matSubheader>{{'headerMenu.user' | translate}}</h3>
-      <mat-list-item>
-        <button mat-menu-item>
-          test
-        </button>
-      </mat-list-item>
+      <div class="menu-section menu-section-user">
+        <nl-material-user-menu [mode]="mobileMode"></nl-material-user-menu>
+      </div>
     </mat-list>
   </mat-menu>
-</div>
+</ng-template>

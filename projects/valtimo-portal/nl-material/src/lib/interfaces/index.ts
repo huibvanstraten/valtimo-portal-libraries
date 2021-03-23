@@ -15,6 +15,4 @@
  */
 
 export * from './navigation-menu';
-export * from './card';
 export * from './breadcrumbs';
-export * from './language-selector';

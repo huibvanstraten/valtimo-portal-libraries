@@ -14,21 +14,17 @@
  * limitations under the License.
  */
 
-import {ElementRef, QueryList} from '@angular/core';
-
-type NavLinkElements = QueryList<ElementRef<HTMLLinkElement>>;
-
 interface NavigationMenuItem {
-    link: string;
-    title: string;
-    icon: string;
-    isHome?: boolean;
+  link: string;
+  title: string;
+  icon: string;
+  isHome?: boolean;
 }
 
 interface ActiveNavLinkIndicator {
-    width: number;
-    offset: number;
-    previousOffset: number;
+  width: number;
+  offset: number;
+  previousOffset: number;
 }
 
-export {NavigationMenuItem, NavLinkElements, ActiveNavLinkIndicator};
+export {NavigationMenuItem, ActiveNavLinkIndicator};

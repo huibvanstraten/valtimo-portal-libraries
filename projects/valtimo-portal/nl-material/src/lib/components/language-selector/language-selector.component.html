@@ -1,28 +1,45 @@
+<!--
+  ~ Copyright 2015-2021 Ritense BV, the Netherlands.
+  ~
+  ~ Licensed under EUPL, Version 1.2 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ https://joinup.ec.europa.eu/collection/eupl/eupl-text-eupl-12
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" basis,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
 <ng-container *ngIf="mode === dropdownMode">
-  <mat-form-field>
-    <mat-select
-      [(ngModel)]="selectedLocale"
-      [disableOptionCentering]="true"
-      [disabled]="!!(open$ | async)"
-      #matSelect
-    >
-      <mat-option *ngFor="let locale of locales" [value]="locale" (click)="useLanguage(locale)">
-        {{locale.toUpperCase()}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
+    <mat-form-field>
+        <mat-select
+                [(ngModel)]="selectedLocale"
+                [disableOptionCentering]="true"
+                [disabled]="(open$ | async) === true"
+                #matSelect
+        >
+            <mat-option *ngFor="let locale of locales" [value]="locale" (click)="useLanguage(locale)">
+                {{locale.toUpperCase()}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
 </ng-container>
 
 <ng-container *ngIf="mode === toggleMode">
-  <mat-button-toggle-group #group="matButtonToggleGroup" [(value)]="selectedLocale" (change)="useLanguage(group.value)">
-    <mat-button-toggle
-      *ngFor="let locale of locales"
-      [value]="locale"
-      (click)="$event.stopPropagation()"
-    >
-      <b>{{locale.toUpperCase()}}</b>
-    </mat-button-toggle>
-  </mat-button-toggle-group>
+    <mat-button-toggle-group #group="matButtonToggleGroup" [(value)]="selectedLocale"
+                             (change)="useLanguage(group.value)">
+        <mat-button-toggle
+                *ngFor="let locale of locales"
+                [value]="locale"
+                (click)="$event.stopPropagation()"
+        >
+            <b>{{locale.toUpperCase()}}</b>
+        </mat-button-toggle>
+    </mat-button-toggle-group>
 </ng-container>
 
 

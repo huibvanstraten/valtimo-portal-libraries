@@ -14,9 +14,26 @@
  * limitations under the License.
  */
 
-import {Environment} from "@app/interfaces";
+import {AuthenticationProvider, Environment} from "@valtimo-portal/shared";
 
 export const environment: Environment = {
-  production: true,
-  logoImagePath: 'assets/img/logo/dh.svg'
+  flags: {
+    production: true,
+  },
+  styling: {
+    logoImagePath: 'assets/img/logo/dh.svg'
+  },
+  translation: {
+    supportedLocales: ['nl', 'en'],
+    defaultLocaleIndex: 0
+  },
+  authentication: {
+    provider: AuthenticationProvider.keycloak,
+    config: {
+      url: 'https://keycloak.test.valtimo.nl/auth',
+      realm: 'valtimo',
+      clientId: 'valtimo-console',
+      redirectUri: '/keycloak/callback'
+    }
+  }
 };

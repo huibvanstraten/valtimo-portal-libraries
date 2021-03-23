@@ -17,6 +17,16 @@
 @import 'colors';
 @import 'variables';
 
+/* Mat-select */
+
+.cdk-overlay-pane {
+  transform: translateX(-16px) !important;
+
+  @include layout-bp(lt-md) {
+    transform: unset !important;
+  }
+}
+
 .mat-menu-panel, .mat-select-panel {
   box-shadow: none !important;
   border-radius: 3px;
@@ -24,29 +34,103 @@
 }
 
 .mat-select-panel {
-  margin-top: -12px;
-  margin-left: -4px;
-}
-
-.mat-menu-panel {
-  border-width: 1px;
+  margin-top: -16px;
+  margin-left: 2px;
+  min-width: 72px !important;
 }
 
 .mat-option-text {
   font-size: 16px;
   font-weight: 700;
   color: rgba(0, 0, 0, 0.87);
+  display: flex !important;
 }
 
-.mat-drawer-backdrop.mat-drawer-shown, .header-menu-backdrop {
-  background-color: rgba(0, 0, 0, 0.15) !important;
+
+.mat-menu-panel {
+  border-width: 1px;
 }
+
+/* Mat-list */
+
+.mat-list-base .mat-list-item {
+  height: auto !important;
+}
+
+.mat-nav-list .mat-list-item {
+  height: 48px !important;
+}
+
+.menu-section-user .mat-list-item-content {
+  padding: 0 !important;
+}
+
+/* Mat-drawer */
+
+.mat-drawer-backdrop.mat-drawer-shown, .header-menu-backdrop {
+  background-color: rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Mat-button */
 
 .mat-flat-button {
   font-size: $font-smaller;
   line-height: $font-large !important;
   padding: 10px 16px !important;
 }
+
+/* User menu */
+
+.desktop-user-menu {
+  width: $desktop-user-menu-width !important;
+
+  .mat-select-arrow-wrapper {
+    display: none;
+  }
+
+  .mat-form-field-flex {
+    width: 100% !important;
+    border-color: $nl-light-gray !important;
+    background-color: $nl-light-gray;
+  }
+
+  .mat-form-field-label {
+    top: 16px;
+    display: flex !important;
+    align-items: center;
+    width: 100% !important;
+    color: $nl-dark-gray;
+  }
+}
+
+.desktop-user-menu-option {
+  width: $desktop-user-menu-width !important;
+}
+
+.desktop-user-menu-option span, .desktop-user-menu .mat-form-field-flex {
+  font-weight: normal !important;
+
+  .mat-option-text {
+    display: flex;
+  }
+}
+
+.desktop-user-menu .mat-form-field-label span {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+.desktop-user-menu .mat-form-field-label::before, .desktop-user-menu-option:first-child span::before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: bolder;
+  content: "\f007";
+  font-size: 12px;
+  margin-right: 8px;
+  color: $nl-dark-gray;
+}
+
+/* Mobile animations */
 
 @include layout-bp(xs) {
   .ng-animating {

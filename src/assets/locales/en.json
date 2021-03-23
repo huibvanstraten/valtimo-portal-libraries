@@ -12,6 +12,9 @@
   },
   "headerMenu": {
     "language": "Language",
-    "user": "User"
+    "user": "User",
+    "welcome": "welcome",
+    "logout": "Sign out",
+    "loggingOut": "Signing out..."
   }
 }

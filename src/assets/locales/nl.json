@@ -12,6 +12,9 @@
   },
   "headerMenu": {
     "language": "Taal",
-    "user": "Gebruiker"
+    "user": "Gebruiker",
+    "welcome": "welkom",
+    "logout": "Uitloggen",
+    "loggingOut": "Uitloggen..."
   }
 }

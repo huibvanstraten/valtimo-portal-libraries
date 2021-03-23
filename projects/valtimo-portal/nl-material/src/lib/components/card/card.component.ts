@@ -15,7 +15,7 @@
  */
 
 import {Component, Input, OnInit} from '@angular/core';
-import {CardType} from '../../interfaces';
+import {CardType} from '../../enums';
 
 @Component({
   selector: 'nl-material-card',

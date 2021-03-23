@@ -14,7 +14,8 @@
  * limitations under the License.
  */
 
-export interface Environment {
-  production: boolean;
-  logoImagePath: string;
-}
+/*
+ * Public API Surface of shared
+ */
+
+export * from './lib';

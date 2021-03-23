@@ -18,11 +18,28 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
-import {Environment} from "@app/interfaces";
+import {AuthenticationProvider, Environment} from '@valtimo-portal/shared';
 
 export const environment: Environment = {
-  production: false,
-  logoImagePath: 'assets/img/logo/dh.svg'
+  flags: {
+    production: false,
+  },
+  styling: {
+    logoImagePath: 'assets/img/logo/dh.svg'
+  },
+  translation: {
+    supportedLocales: ['nl', 'en'],
+    defaultLocaleIndex: 0
+  },
+  authentication: {
+    provider: AuthenticationProvider.keycloak,
+    config: {
+      url: 'https://keycloak.test.valtimo.nl/auth',
+      realm: 'valtimo',
+      clientId: 'valtimo-console',
+      redirectUri: '/keycloak/callback'
+    }
+  }
 };
 
 /*

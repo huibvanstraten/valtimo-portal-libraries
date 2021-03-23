@@ -14,16 +14,21 @@
   ~ limitations under the License.
   -->
 
-<div class="header-menu" fxHide.lt-md>
-  <nl-material-user-menu [mode]="desktopMode"></nl-material-user-menu>
-  <nl-material-language-selector
-    [closeLanguageSelectDropdown]="closeLanguageSelectDropdown"
-    [locales]="locales"
-    [mode]="dropdownMode">
-  </nl-material-language-selector>
+<div class="header-menu-container">
+  <div class="header-menu" fxHide.lt-md>
+    <nl-material-user-menu [mode]="desktopMode"></nl-material-user-menu>
+    <nl-material-language-selector
+      [closeLanguageSelectDropdown]="closeLanguageSelectDropdown"
+      [locales]="locales"
+      [mode]="dropdownMode">
+    </nl-material-language-selector>
+  </div>
+  <div fxHide.gt-sm>
+    <ng-container *ngTemplateOutlet="mobileMenu"></ng-container>
+  </div>
 </div>
 
-<div fxHide.gt-sm>
+<ng-template #mobileMenu>
   <button mat-icon-button [matMenuTriggerFor]="menu" #menuTrigger="matMenuTrigger" (click)="handleClick()">
     <mat-icon fontSet="fa" fontIcon="fa-ellipsis-v" class="menu-toggle-button"></mat-icon>
   </button>
@@ -43,4 +48,4 @@
       </div>
     </mat-list>
   </mat-menu>
-</div>
+</ng-template>

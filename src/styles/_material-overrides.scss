@@ -21,6 +21,10 @@
 
 .cdk-overlay-pane {
   transform: translateX(-16px) !important;
+
+  @include layout-bp(lt-md) {
+    transform: unset !important;
+  }
 }
 
 .mat-menu-panel, .mat-select-panel {
@@ -64,7 +68,7 @@
 /* Mat-drawer */
 
 .mat-drawer-backdrop.mat-drawer-shown, .header-menu-backdrop {
-  background-color: rgba(0, 0, 0, 0.15) !important;
+  background-color: rgba(0, 0, 0, 0.2) !important;
 }
 
 /* Mat-button */

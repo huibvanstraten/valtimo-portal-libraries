@@ -16,6 +16,11 @@
 
 @import 'colors';
 
+.header-menu-container {
+  display: flex;
+  align-items: center;
+}
+
 ::ng-deep .header-menu {
   margin-top: -2px;
 
@@ -78,5 +83,5 @@
 }
 
 nl-material-user-menu {
-  margin-right: 30px;
+  margin-right: 20px;
 }

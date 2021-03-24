@@ -36,13 +36,7 @@ export class GraphQLModule {
       (client: GraphQLNamedClient) => {
         apollo.createNamed(client.name, {
           link: httpLink.create({uri: client.uri}),
-          cache: new InMemoryCache(),
-          defaultOptions: {
-            fetchOptions: {
-              mode: 'no-cors',
-
-            }
-          }
+          cache: new InMemoryCache()
         });
       });
   }

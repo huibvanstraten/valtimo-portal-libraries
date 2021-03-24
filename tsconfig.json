@@ -22,6 +22,10 @@
         "dist/valtimo-portal/shared/valtimo-portal-shared",
         "dist/valtimo-portal/shared"
       ],
+      "@valtimo-portal/form": [
+        "dist/valtimo-portal/form/valtimo-portal-form",
+        "dist/valtimo-portal/form"
+      ],
       "@valtimo-portal/graphql": [
         "dist/valtimo-portal/graphql/valtimo-portal-graphql",
         "dist/valtimo-portal/graphql"

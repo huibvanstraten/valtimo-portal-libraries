@@ -14,4 +14,5 @@
  * limitations under the License.
  */
 
-export * from './get-forms.graphql-gen';
+export * from './form.module';
+export * from './services';

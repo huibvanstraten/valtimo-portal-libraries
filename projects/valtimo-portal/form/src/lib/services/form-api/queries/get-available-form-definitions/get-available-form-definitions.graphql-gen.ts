@@ -1,4 +1,4 @@
-import * as Types from '../generated/types.graphql-gen';
+import * as Types from '../../../../../../../graphql/src/lib/generated/types.graphql-gen';
 
 import { gql } from 'apollo-angular';
 import { Injectable } from '@angular/core';

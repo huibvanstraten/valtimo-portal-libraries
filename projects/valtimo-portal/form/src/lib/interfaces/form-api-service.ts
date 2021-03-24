@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
-export * from './form.module';
-export * from './services';
-export * from './interfaces';
+export interface AvailableFormDefinition {
+  name: string;
+  definition: object;
+}

@@ -14,5 +14,5 @@
  * limitations under the License.
  */
 
-export * from './graphql.module';
-export * from './generated';
+export * from './new-case-menu.component';
+export * from './new-case-menu.module';

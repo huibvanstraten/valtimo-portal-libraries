@@ -14,5 +14,18 @@
  * limitations under the License.
  */
 
-export * from './graphql.module';
-export * from './generated';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {NewCaseMenuComponent} from './new-case-menu.component';
+import {FormApiServiceModule} from "@valtimo-portal/form";
+
+@NgModule({
+  declarations: [NewCaseMenuComponent],
+  imports: [
+    CommonModule,
+    FormApiServiceModule
+  ],
+  exports: [NewCaseMenuComponent]
+})
+export class NewCaseMenuModule {
+}

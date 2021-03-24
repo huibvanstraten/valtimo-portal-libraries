@@ -15,8 +15,8 @@
  */
 
 import {Injectable} from '@angular/core';
-import {GetAvailableFormDefinitionsGQL} from "./queries/get-available-form-definitions";
-import {tap} from "rxjs/operators";
+import {GetAvailableFormDefinitionsGQL} from './queries/get-available-form-definitions';
+import {tap} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -28,9 +28,9 @@ export class FormApiService {
   ) {
   }
 
-  getAvailableFormDefinitions(): void {
-    return this.getAvailableFormDefinitions.fetch().pipe(
+  getAvailableFormDefinitions(): any {
+    return this.getAvailableFormDefinitionsGQL.fetch().pipe(
       tap((res) => console.log(res))
-    )
+    );
   }
 }

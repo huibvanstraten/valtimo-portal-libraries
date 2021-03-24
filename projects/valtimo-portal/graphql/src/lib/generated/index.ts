@@ -14,5 +14,4 @@
  * limitations under the License.
  */
 
-export * from './graphql.module';
-export * from './generated';
+export * from './types.graphql-gen';

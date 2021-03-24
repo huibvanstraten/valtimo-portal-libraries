@@ -16,5 +16,8 @@
     "welcome": "welcome",
     "logout": "Sign out",
     "loggingOut": "Signing out..."
+  },
+  "newCaseMenu": {
+    "title": "Open new case"
   }
 }

@@ -16,5 +16,8 @@
     "welcome": "welkom",
     "logout": "Uitloggen",
     "loggingOut": "Uitloggen..."
+  },
+  "newCaseMenu": {
+    "title": "Nieuwe aanvraag"
   }
 }

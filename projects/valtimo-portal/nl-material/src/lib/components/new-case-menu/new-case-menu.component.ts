@@ -8,7 +8,7 @@ import {FormApiService} from "@valtimo-portal/form";
 })
 export class NewCaseMenuComponent implements OnInit {
 
-  data$ = this.formApiService.getAvailableFormDefinitions();
+  availableFormDefinitions$ = this.formApiService.getAvailableFormDefinitions();
 
   constructor(private formApiService: FormApiService) {
   }

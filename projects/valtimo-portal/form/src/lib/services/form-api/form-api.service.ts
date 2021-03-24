@@ -18,6 +18,7 @@ import {Injectable} from '@angular/core';
 import {GetAvailableFormDefinitionsGQL} from './queries/get-available-form-definitions';
 import {map} from 'rxjs/operators';
 import {AvailableFormDefinition} from "../../interfaces";
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +31,6 @@ export class FormApiService {
   }
 
   getAvailableFormDefinitions(): Observable<Array<AvailableFormDefinition>> {
-    // @ts-ignore
     return this.getAvailableFormDefinitionsGQL.fetch().pipe(
       map((res) => (
           res.data.availableFormDefinitions.map((definition) => ({

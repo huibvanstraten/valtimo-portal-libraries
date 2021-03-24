@@ -16,8 +16,8 @@
 
 import {Component, OnInit} from '@angular/core';
 import {CardType} from '@valtimo-portal/nl-material';
-import {BehaviorSubject} from "rxjs";
-import {KeycloakService} from "keycloak-angular";
+import {BehaviorSubject} from 'rxjs';
+import {KeycloakService} from 'keycloak-angular';
 
 @Component({
   selector: 'app-home',

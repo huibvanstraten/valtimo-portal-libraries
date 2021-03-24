@@ -15,7 +15,7 @@
  */
 
 import {Authentication} from '../types';
-import {GraphQLNamedClient} from "./graphql";
+import {GraphQLNamedClient} from './graphql';
 
 export interface Environment {
   flags: {

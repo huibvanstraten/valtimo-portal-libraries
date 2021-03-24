@@ -3,7 +3,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {Apollo} from 'apollo-angular';
 import {HttpLink} from 'apollo-angular/http';
 import {InMemoryCache} from '@apollo/client/core';
-import {Environment, GraphQLNamedClient} from "@valtimo-portal/shared";
+import {Environment, GraphQLNamedClient} from '@valtimo-portal/shared';
 
 @NgModule({
   exports: [

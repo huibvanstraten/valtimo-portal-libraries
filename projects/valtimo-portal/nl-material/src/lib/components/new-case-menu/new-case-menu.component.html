@@ -1,5 +1,5 @@
-<ng-container *ngIf="availableFormDefinitions$ | async as definitions">
-  <button mat-icon-button [matMenuTriggerFor]="menu" #menuTrigger="matMenuTrigger">
+<ng-container *ngIf="availableFormDefinitions$ | async as definitions; else placeHolder">
+  <button @fadeIn mat-icon-button [matMenuTriggerFor]="menu" #menuTrigger="matMenuTrigger">
     <mat-icon fontSet="fa" fontIcon="fa-plus" class="menu-toggle-button"></mat-icon>
   </button>
   <mat-menu #menu="matMenu" [hasBackdrop]="true" backdropClass="header-menu-backdrop">
@@ -15,3 +15,7 @@
     </mat-list>
   </mat-menu>
 </ng-container>
+
+<ng-template #placeHolder>
+  <div class="placeholder"></div>
+</ng-template>

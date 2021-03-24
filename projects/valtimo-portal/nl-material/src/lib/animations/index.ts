@@ -14,4 +14,5 @@
  * limitations under the License.
  */
 
-export * from './breadcrumbs-animations';
+export * from './breadcrumbs';
+export * from './fade-in';

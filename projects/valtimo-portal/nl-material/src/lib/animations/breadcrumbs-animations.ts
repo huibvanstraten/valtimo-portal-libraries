@@ -14,9 +14,20 @@
  * limitations under the License.
  */
 
-export * from './components';
-export * from './interfaces';
-export * from './services';
-export * from './enums';
-export * from './types';
-export * from './animations';
+import {animate, style, transition, trigger} from '@angular/animations';
+
+export const breadcrumbsAnimations =
+  [
+    trigger('breadcrumbsFade', [
+      transition('void => *', [
+        style({opacity: 0, marginBottom: '-58px'}),
+        animate('200ms 300ms ease-in-out', style({opacity: 1, marginBottom: 0}))
+      ])
+    ]),
+    trigger('breadcrumbFade', [
+      transition('void => *', [
+        style({opacity: 0, marginLeft: '-16px'}),
+        animate('200ms ease-in-out', style({opacity: 1, marginLeft: '0'}))
+      ])
+    ])
+  ];

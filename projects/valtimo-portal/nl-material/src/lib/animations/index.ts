@@ -14,9 +14,4 @@
  * limitations under the License.
  */
 
-export * from './components';
-export * from './interfaces';
-export * from './services';
-export * from './enums';
-export * from './types';
-export * from './animations';
+export * from './breadcrumbs-animations';

@@ -3,7 +3,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {Apollo} from 'apollo-angular';
 import {HttpLink} from 'apollo-angular/http';
 import {InMemoryCache} from '@apollo/client/core';
-import {Environment} from "@valtimo-portal/shared";
+import {Environment, GraphQLNamedClient} from "@valtimo-portal/shared";
 
 @NgModule({
   exports: [
@@ -16,10 +16,12 @@ export class GraphQLModule {
     apollo: Apollo,
     httpLink: HttpLink
   ) {
-    console.log(environment);
-    apollo.create({
-      link: httpLink.create({uri: 'https://graphql-voter-app.herokuapp.com/'}),
-      cache: new InMemoryCache()
-    });
+    environment?.api?.graphql?.clients?.forEach(
+      (client: GraphQLNamedClient) => {
+        apollo.createNamed(client.name, {
+          link: httpLink.create({uri: client.uri}),
+          cache: new InMemoryCache()
+        });
+      });
   }
 }

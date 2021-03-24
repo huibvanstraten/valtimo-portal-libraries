@@ -33,6 +33,7 @@ import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate
 import {environment} from '../environments';
 import {KeycloakAngularModule, KeycloakService} from 'keycloak-angular';
 import {initializeKeycloak, KeycloakAppAuthGuard} from '@valtimo-portal/authentication';
+import {GraphQLModule} from '@valtimo-portal/graphql';
 
 export const HttpLoaderFactory = (http: HttpClient) => new MultiTranslateHttpLoader(http, [
   {prefix: './translate/', suffix: '.json'},
@@ -72,6 +73,7 @@ export const HttpLoaderFactory = (http: HttpClient) => new MultiTranslateHttpLoa
     SidenavModule,
     HeaderMenuModule,
     BreadcrumbsModule,
+    GraphQLModule
   ],
   bootstrap: [AppComponent]
 })

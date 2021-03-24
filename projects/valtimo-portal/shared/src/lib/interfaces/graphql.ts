@@ -14,24 +14,7 @@
  * limitations under the License.
  */
 
-import {Authentication} from '../types';
-import {GraphQLNamedClient} from "./graphql";
-
-export interface Environment {
-  flags: {
-    production: boolean;
-  };
-  translation: {
-    supportedLocales: Array<string>;
-    defaultLocaleIndex?: number;
-  };
-  styling: {
-    logoImagePath: string;
-  };
-  authentication: Authentication;
-  api: {
-    graphql: {
-      clients: Array<GraphQLNamedClient>
-    }
-  };
+export interface GraphQLNamedClient {
+  name: string;
+  uri: string;
 }

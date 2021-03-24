@@ -16,3 +16,4 @@
 
 export * from './environment';
 export * from './routing';
+export * from './graphql';

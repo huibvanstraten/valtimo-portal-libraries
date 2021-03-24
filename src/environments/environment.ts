@@ -39,6 +39,13 @@ export const environment: Environment = {
       clientId: 'valtimo-console',
       redirectUri: '/keycloak/callback'
     }
+  },
+  api: {
+    graphql: {
+      clients: [
+        {name: 'portal-api', uri: 'http://localhost:8080/graphql'}
+      ]
+    }
   }
 };
 

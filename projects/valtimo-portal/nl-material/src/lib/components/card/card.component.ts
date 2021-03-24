@@ -16,6 +16,7 @@
 
 import {Component, Input, OnInit} from '@angular/core';
 import {CardType} from '../../enums';
+import {GetAvailableFormDefinitionsGQL} from "@valtimo-portal/graphql";
 
 @Component({
   selector: 'nl-material-card',
@@ -33,10 +34,11 @@ export class CardComponent implements OnInit {
   readonly introductionType = CardType.introduction;
   readonly reminderType = CardType.reminder;
 
-  constructor() {
+  constructor(private getDefinitions: GetAvailableFormDefinitionsGQL) {
   }
 
   ngOnInit(): void {
+    this.getDefinitions.fetch().subscribe((res) => console.log(res));
   }
 
 }

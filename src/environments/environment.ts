@@ -43,7 +43,7 @@ export const environment: Environment = {
   api: {
     graphql: {
       clients: [
-        {name: 'portal-api', uri: 'http://localhost:8080/graphql'}
+        {name: 'portal-api', uri: 'http://localhost:4200/graphql'}
       ]
     }
   }

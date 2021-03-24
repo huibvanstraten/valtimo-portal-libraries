@@ -14,8 +14,10 @@
  * limitations under the License.
  */
 
-/*
- * Public API Surface of graphql
- */
-
-export * from './lib';
+module.exports = {
+  client: {
+    service: {
+      url: 'http://localhost:8080/graphql'
+    }
+  }
+};

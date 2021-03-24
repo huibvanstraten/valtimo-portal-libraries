@@ -14,8 +14,4 @@
  * limitations under the License.
  */
 
-/*
- * Public API Surface of graphql
- */
-
-export * from './lib';
+export * from './get-forms.graphql-gen';

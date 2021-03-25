@@ -23,3 +23,4 @@ export * from './header-menu';
 export * from './breadcrumbs';
 export * from './header-logo';
 export * from './language-selector';
+export * from './new-case-menu';

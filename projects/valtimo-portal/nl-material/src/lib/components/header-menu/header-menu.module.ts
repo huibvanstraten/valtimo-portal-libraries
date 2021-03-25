@@ -28,7 +28,6 @@ import {MatButtonModule} from '@angular/material/button';
 import {LanguageSelectorModule} from '../language-selector/language-selector.module';
 import {MatListModule} from '@angular/material/list';
 import {UserMenuModule} from '../user-menu/user-menu.module';
-import {NewCaseMenuModule} from '../new-case-menu';
 
 @NgModule({
   declarations: [HeaderMenuComponent],
@@ -45,7 +44,6 @@ import {NewCaseMenuModule} from '../new-case-menu';
     LanguageSelectorModule,
     MatListModule,
     UserMenuModule,
-    NewCaseMenuModule
   ],
   exports: [HeaderMenuComponent]
 })

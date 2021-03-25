@@ -19,7 +19,7 @@ import {CommonModule} from '@angular/common';
 
 import {HomeRoutingModule} from './home-routing.module';
 import {HomeComponent} from './home.component';
-import {CardModule} from '@valtimo-portal/nl-material';
+import {CardModule, NewCaseMenuModule} from '@valtimo-portal/nl-material';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {TranslateModule} from '@ngx-translate/core';
 
@@ -31,7 +31,8 @@ import {TranslateModule} from '@ngx-translate/core';
     HomeRoutingModule,
     CardModule,
     FlexLayoutModule,
-    TranslateModule
+    TranslateModule,
+    NewCaseMenuModule
   ]
 })
 export class HomeModule {

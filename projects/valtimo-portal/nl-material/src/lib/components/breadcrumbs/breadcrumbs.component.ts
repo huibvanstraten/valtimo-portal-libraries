@@ -20,7 +20,7 @@ import {BehaviorSubject, combineLatest, Subscription} from 'rxjs';
 import {Breadcrumb} from '../../interfaces';
 import {SidenavService} from '../../services';
 import {Environment} from '@valtimo-portal/shared';
-import {breadcrumbsAnimations} from "../../animations";
+import {breadcrumbsAnimations} from '../../animations';
 
 @Component({
   selector: 'nl-material-breadcrumbs',

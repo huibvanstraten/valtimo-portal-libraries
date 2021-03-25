@@ -17,7 +17,7 @@
 import {Injectable} from '@angular/core';
 import {GetAvailableFormDefinitionsGQL} from './queries/get-available-form-definitions';
 import {map} from 'rxjs/operators';
-import {AvailableFormDefinition} from "../../interfaces";
+import {AvailableFormDefinition} from '../../interfaces';
 import {Observable} from 'rxjs';
 
 @Injectable({

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {FormApiService} from "@valtimo-portal/form";
-import {fadeInAnimations} from "../../animations";
+import {FormApiService} from '@valtimo-portal/form';
+import {fadeInAnimations} from '../../animations';
 
 @Component({
   selector: 'nl-material-new-case-menu',

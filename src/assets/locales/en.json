@@ -19,5 +19,10 @@
   },
   "newCaseMenu": {
     "title": "I would like to"
+  },
+  "caseStrings": {
+    "form-example": {
+      "wouldLikeTo": "open an example case"
+    }
   }
 }

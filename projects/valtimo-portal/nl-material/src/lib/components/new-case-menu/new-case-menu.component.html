@@ -5,7 +5,7 @@
       <mat-list-item *ngFor="let definition of definitions">
         <button mat-menu-item>
           <mat-icon fontSet="fa" fontIcon="fa-chevron-right"></mat-icon>
-          {{definition.name}}
+          {{'caseStrings.' + definition.name + '.wouldLikeTo' | translate }}
         </button>
       </mat-list-item>
     </mat-list>

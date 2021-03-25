@@ -19,5 +19,10 @@
   },
   "newCaseMenu": {
     "title": "Ik wil graag"
+  },
+  "caseStrings": {
+    "form-example": {
+      "wouldLikeTo": "een voorbeeldaanvraag doen"
+    }
   }
 }

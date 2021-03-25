@@ -16,42 +16,54 @@
 
 <div fxFlex fxLayout="column" fxLayoutGap="16px" class="module-container">
   <div fxLayout="row wrap">
-    <div
-      fxFlex="60"
-      fxFlex.sm="70"
-      fxFlex.xs="100"
-      fxLayout="column"
-      style="padding: 16px;"
-    >
-      <nl-material-card
-        [type]="introductionType"
-        [title]="'home.introduction.title' | translate:{firstName: (userFirstName$ | async)}"
-        [subtitle]="'home.introduction.subtitle' | translate"
-        [content]="'home.introduction.content' | translate"
-      >
-      </nl-material-card>
-    </div>
-    <div
-      fxFlex="100"
-      fxLayout="column"
-      style="padding: 16px;"
-    >
-      <nl-material-card
-        [type]="reminderType"
-        [title]="'home.reminder.title' | translate"
-        [content]="'home.reminder.content' | translate"
-        [buttonText]="'home.reminder.buttonText' | translate"
-        icon="exclamation-triangle"
-      >
-      </nl-material-card>
-    </div>
-    <div
-      fxFlex="50"
-      fxFlex.xs="100"
-      fxLayout="column"
-      style="padding: 16px;"
-    >
-      <nl-material-new-case-menu></nl-material-new-case-menu>
-    </div>
+    <ng-container *ngTemplateOutlet="introduction"></ng-container>
+    <ng-container *ngTemplateOutlet="reminder"></ng-container>
+    <ng-container *ngTemplateOutlet="newCase"></ng-container>
   </div>
 </div>
+
+<ng-template #introduction>
+  <div
+    fxFlex="60"
+    fxFlex.sm="70"
+    fxFlex.xs="100"
+    fxLayout="column"
+    style="padding: 16px;"
+  >
+    <nl-material-card
+      [type]="introductionType"
+      [title]="'home.introduction.title' | translate:{firstName: (userFirstName$ | async)}"
+      [subtitle]="'home.introduction.subtitle' | translate"
+      [content]="'home.introduction.content' | translate"
+    >
+    </nl-material-card>
+  </div>
+</ng-template>
+
+<ng-template #reminder>
+  <div
+    fxFlex="100"
+    fxLayout="column"
+    style="padding: 16px;"
+  >
+    <nl-material-card
+      [type]="reminderType"
+      [title]="'home.reminder.title' | translate"
+      [content]="'home.reminder.content' | translate"
+      [buttonText]="'home.reminder.buttonText' | translate"
+      icon="exclamation-triangle"
+    >
+    </nl-material-card>
+  </div>
+</ng-template>
+
+<ng-template #newCase>
+  <div
+    fxFlex="50"
+    fxFlex.xs="100"
+    fxLayout="column"
+    style="padding: 16px;"
+  >
+    <nl-material-new-case-menu></nl-material-new-case-menu>
+  </div>
+</ng-template>

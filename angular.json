@@ -259,6 +259,86 @@
           }
         }
       }
+    },
+    "@valtimo-portal/graphql": {
+      "projectType": "library",
+      "root": "projects/valtimo-portal/graphql",
+      "sourceRoot": "projects/valtimo-portal/graphql/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "tsConfig": "projects/valtimo-portal/graphql/tsconfig.lib.json",
+            "project": "projects/valtimo-portal/graphql/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/valtimo-portal/graphql/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/valtimo-portal/graphql/src/test.ts",
+            "tsConfig": "projects/valtimo-portal/graphql/tsconfig.spec.json",
+            "karmaConfig": "projects/valtimo-portal/graphql/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/valtimo-portal/graphql/tsconfig.lib.json",
+              "projects/valtimo-portal/graphql/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "@valtimo-portal/form": {
+      "projectType": "library",
+      "root": "projects/valtimo-portal/form",
+      "sourceRoot": "projects/valtimo-portal/form/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "tsConfig": "projects/valtimo-portal/form/tsconfig.lib.json",
+            "project": "projects/valtimo-portal/form/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/valtimo-portal/form/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/valtimo-portal/form/src/test.ts",
+            "tsConfig": "projects/valtimo-portal/form/tsconfig.spec.json",
+            "karmaConfig": "projects/valtimo-portal/form/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/valtimo-portal/form/tsconfig.lib.json",
+              "projects/valtimo-portal/form/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "valtimo-portal"

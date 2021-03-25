@@ -25,6 +25,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
 import {FormsModule} from '@angular/forms';
 import {SidenavServiceModule} from '../../services';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   declarations: [UserMenuComponent],
@@ -37,7 +38,8 @@ import {SidenavServiceModule} from '../../services';
     MatFormFieldModule,
     MatSelectModule,
     FormsModule,
-    SidenavServiceModule
+    SidenavServiceModule,
+    MatIconModule
   ],
   exports: [UserMenuComponent]
 })

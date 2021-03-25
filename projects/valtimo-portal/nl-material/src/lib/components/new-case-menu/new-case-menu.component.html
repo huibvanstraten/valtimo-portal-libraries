@@ -1,0 +1,21 @@
+<ng-container *ngIf="availableFormDefinitions$ | async as definitions; else placeHolder">
+  <button @fadeIn mat-icon-button [matMenuTriggerFor]="menu" #menuTrigger="matMenuTrigger">
+    <mat-icon fontSet="fa" fontIcon="fa-plus" class="menu-toggle-button"></mat-icon>
+  </button>
+  <mat-menu #menu="matMenu" [hasBackdrop]="true" backdropClass="header-menu-backdrop">
+    <mat-list class="header-menu-mat-list">
+      <div class="menu-section">
+        <div mat-subheader>{{'newCaseMenu.title' | translate}}</div>
+        <mat-list-item *ngFor="let definition of definitions">
+          <button mat-menu-item>
+            {{definition.name}}
+          </button>
+        </mat-list-item>
+      </div>
+    </mat-list>
+  </mat-menu>
+</ng-container>
+
+<ng-template #placeHolder>
+  <div class="placeholder"></div>
+</ng-template>

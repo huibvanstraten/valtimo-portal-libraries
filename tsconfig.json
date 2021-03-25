@@ -22,6 +22,14 @@
         "dist/valtimo-portal/shared/valtimo-portal-shared",
         "dist/valtimo-portal/shared"
       ],
+      "@valtimo-portal/form": [
+        "dist/valtimo-portal/form/valtimo-portal-form",
+        "dist/valtimo-portal/form"
+      ],
+      "@valtimo-portal/graphql": [
+        "dist/valtimo-portal/graphql/valtimo-portal-graphql",
+        "dist/valtimo-portal/graphql"
+      ],
       "@valtimo-portal/authentication": [
         "dist/valtimo-portal/authentication/valtimo-portal-authentication",
         "dist/valtimo-portal/authentication"
@@ -48,7 +56,8 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "allowSyntheticDefaultImports": true
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

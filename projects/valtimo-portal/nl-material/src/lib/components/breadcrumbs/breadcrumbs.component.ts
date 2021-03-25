@@ -19,27 +19,14 @@ import {NavigationEnd, Router, Routes} from '@angular/router';
 import {BehaviorSubject, combineLatest, Subscription} from 'rxjs';
 import {Breadcrumb} from '../../interfaces';
 import {SidenavService} from '../../services';
-import {animate, style, transition, trigger} from '@angular/animations';
 import {Environment} from '@valtimo-portal/shared';
+import {breadcrumbsAnimations} from '../../animations';
 
 @Component({
   selector: 'nl-material-breadcrumbs',
   templateUrl: './breadcrumbs.component.html',
   styleUrls: ['./breadcrumbs.component.scss'],
-  animations: [
-    trigger('breadcrumbsFade', [
-      transition('void => *', [
-        style({opacity: 0, marginBottom: '-58px'}),
-        animate('200ms 300ms ease-in-out', style({opacity: 1, marginBottom: 0}))
-      ])
-    ]),
-    trigger('breadcrumbFade', [
-      transition('void => *', [
-        style({opacity: 0, marginLeft: '-16px'}),
-        animate('200ms ease-in-out', style({opacity: 1, marginLeft: '0'}))
-      ])
-    ])
-  ]
+  animations: breadcrumbsAnimations
 })
 export class BreadcrumbsComponent implements OnInit, OnDestroy {
 
@@ -49,7 +36,11 @@ export class BreadcrumbsComponent implements OnInit, OnDestroy {
 
   private environment: Environment;
 
-  constructor(@Inject('environment') environment: Environment, private router: Router, private sidenavService: SidenavService) {
+  constructor(
+    @Inject('environment') environment: Environment,
+    private router: Router,
+    private sidenavService: SidenavService
+  ) {
     this.environment = environment;
   }
 

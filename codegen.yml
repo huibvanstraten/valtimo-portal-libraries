@@ -1,0 +1,18 @@
+overwrite: true
+schema: "./projects/valtimo-portal/graphql/src/lib/schemas/portal-api-schema.json"
+documents: "projects/**/*.graphql"
+config:
+  declarationKind: "interface"
+generates:
+  projects/valtimo-portal/graphql/src/lib/generated/types.graphql-gen.ts:
+    plugins:
+      - "typescript"
+  projects/valtimo-portal/graphql/src/lib/generated:
+    preset: near-operation-file
+    presetConfig:
+      extension: .graphql-gen.ts
+      baseTypesPath: types.graphql-gen.ts
+    plugins:
+      - "typescript"
+      - "typescript-operations"
+      - "typescript-apollo-angular"

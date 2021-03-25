@@ -14,28 +14,19 @@
  * limitations under the License.
  */
 
-import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import {AuthenticationComponent} from './authentication.component';
+import {FormApiService} from './sidenav.service';
 
-describe('AuthenticationComponent', () => {
-  let component: AuthenticationComponent;
-  let fixture: ComponentFixture<AuthenticationComponent>;
-
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [AuthenticationComponent]
-    })
-      .compileComponents();
-  });
+describe('FormApiService', () => {
+  let service: FormApiService;
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AuthenticationComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    TestBed.configureTestingModule({});
+    service = TestBed.inject(FormApiService);
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('should be created', () => {
+    expect(service).toBeTruthy();
   });
 });

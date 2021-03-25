@@ -15,6 +15,7 @@
  */
 
 import {Authentication} from '../types';
+import {GraphQLNamedClient} from './graphql';
 
 export interface Environment {
   flags: {
@@ -28,4 +29,9 @@ export interface Environment {
     logoImagePath: string;
   };
   authentication: Authentication;
+  api: {
+    graphql: {
+      clients: Array<GraphQLNamedClient>
+    }
+  };
 }

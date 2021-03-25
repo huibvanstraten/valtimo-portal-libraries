@@ -25,6 +25,7 @@
       [locales]="locales"
       [mode]="dropdownMode">
     </nl-material-language-selector>
+    <nl-material-new-case-menu></nl-material-new-case-menu>
   </div>
   <div fxHide.gt-sm>
     <ng-container *ngTemplateOutlet="mobileMenu"></ng-container>
@@ -32,6 +33,7 @@
 </div>
 
 <ng-template #mobileMenu>
+  <nl-material-new-case-menu></nl-material-new-case-menu>
   <button mat-icon-button [matMenuTriggerFor]="menu" #menuTrigger="matMenuTrigger" (click)="handleClick()">
     <mat-icon fontSet="fa" fontIcon="fa-ellipsis-v" class="menu-toggle-button"></mat-icon>
   </button>

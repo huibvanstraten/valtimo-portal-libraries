@@ -26,6 +26,10 @@
 
 .mat-menu-item {
   font-size: $font-medium;
+
+  @include layout-bp(lt-sm) {
+    font-size: $font-smaller;
+  }
 }
 
 .new-case-menu-container {

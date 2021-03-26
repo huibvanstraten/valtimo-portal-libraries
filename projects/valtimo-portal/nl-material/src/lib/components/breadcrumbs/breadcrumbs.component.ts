@@ -15,7 +15,7 @@
  */
 
 import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
-import {NavigationEnd, Router, Routes} from '@angular/router';
+import {ActivatedRoute, NavigationEnd, Router, Routes} from '@angular/router';
 import {BehaviorSubject, combineLatest, Subscription} from 'rxjs';
 import {Breadcrumb} from '../../interfaces';
 import {SidenavService} from '../../services';
@@ -39,7 +39,8 @@ export class BreadcrumbsComponent implements OnInit, OnDestroy {
   constructor(
     @Inject('environment') environment: Environment,
     private router: Router,
-    private sidenavService: SidenavService
+    private sidenavService: SidenavService,
+    private route: ActivatedRoute
   ) {
     this.environment = environment;
   }
@@ -48,6 +49,7 @@ export class BreadcrumbsComponent implements OnInit, OnDestroy {
     this.routerSubscription = combineLatest([this.router.events, this.sidenavService.currentLang$])
       .subscribe(([event]) => {
         const routes = this.router.config[0].children as Routes;
+        console.log(this.route.snapshot);
         if (event instanceof NavigationEnd) {
           this.breadCrumbs$.next(
             event.url

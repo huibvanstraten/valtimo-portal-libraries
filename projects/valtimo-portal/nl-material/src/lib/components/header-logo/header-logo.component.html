@@ -14,10 +14,10 @@
   ~ limitations under the License.
   -->
 
-<div class="logo-container">
+<div class="logo-container" *ngIf="currentLang$ | async as currentLang">
   <div class="logo-container-inner">
     <div fxHide.lt-md class="border-blocker"></div>
-    <a [routerLink]="'/' + (currentLang$ | async)">
+    <a [routerLink]="'/' + currentLang">
       <img [src]="logoImagePath"/>
     </a>
   </div>

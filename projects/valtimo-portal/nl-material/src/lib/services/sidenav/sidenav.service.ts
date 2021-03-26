@@ -33,6 +33,7 @@ export class SidenavService {
   private _currentLang$ = new BehaviorSubject<string>('');
 
   constructor(private localizeRouterService: LocalizeRouterService, private translateService: TranslateService) {
+    this.currentLang = this.translateService.currentLang;
   }
 
   get open$(): Observable<boolean> {

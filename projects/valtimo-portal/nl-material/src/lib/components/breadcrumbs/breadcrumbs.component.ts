@@ -15,7 +15,7 @@
  */
 
 import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
-import {ActivatedRoute, NavigationEnd, Router, Routes} from '@angular/router';
+import {ActivatedRoute, ActivatedRouteSnapshot, NavigationEnd, Router} from '@angular/router';
 import {BehaviorSubject, combineLatest, Subscription} from 'rxjs';
 import {Breadcrumb} from '../../interfaces';
 import {SidenavService} from '../../services';
@@ -48,26 +48,34 @@ export class BreadcrumbsComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.routerSubscription = combineLatest([this.router.events, this.sidenavService.currentLang$])
       .subscribe(([event]) => {
-        const routes = this.router.config[0].children as Routes;
-        console.log(this.route.snapshot);
         if (event instanceof NavigationEnd) {
+          const snapshot = this.route.snapshot;
+          const snapshotRoutes: Array<ActivatedRouteSnapshot> = [];
+
+          const pushChildrenToArray = (routeSnapshot: ActivatedRouteSnapshot) => {
+            const children = routeSnapshot.children;
+            if (children.length > 0) {
+              children.forEach((child) => {
+                snapshotRoutes.push(child);
+                pushChildrenToArray(child);
+              });
+            }
+          };
+
+          pushChildrenToArray(snapshot);
+
+          const snapshotsWithPath = snapshotRoutes.filter((route) => route.routeConfig?.path);
+
           this.breadCrumbs$.next(
-            event.url
-              .split('/')
-              .reduce((acc: Array<Breadcrumb>, curr) => {
-                if (curr) {
-                  const findRoute = routes.find((route) => route.path === curr);
-                  const previousLinks = acc.reduce((link, linkPart) => `${link}/${linkPart.link}`, '');
-                  return [
-                    ...acc,
-                    {
-                      link: `${previousLinks}/${curr}`.replace(/\/\//g, '/'),
-                      title: findRoute ? findRoute.data?.title : routes[0] ? routes[0].data?.title : ''
-                    }
-                  ];
+            snapshotsWithPath.reduce((acc: Array<Breadcrumb>, curr, index) => {
+              return [
+                ...acc,
+                {
+                  link: `${index !== 0 ? acc[index - 1].link : ''}/${curr.routeConfig?.path}`,
+                  title: curr.data?.title
                 }
-                return acc;
-              }, [])
+              ] as Array<Breadcrumb>;
+            }, [])
           );
         }
       });

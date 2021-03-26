@@ -17,8 +17,8 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {CasesComponent} from './cases.component';
-import {LocalizeRouterModule} from "@gilsdav/ngx-translate-router";
-import {KeycloakAppAuthGuard} from "@valtimo-portal/authentication";
+import {LocalizeRouterModule} from '@gilsdav/ngx-translate-router';
+import {KeycloakAppAuthGuard} from '@valtimo-portal/authentication';
 
 const routes: Routes = [
   {

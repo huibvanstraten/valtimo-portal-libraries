@@ -18,7 +18,7 @@ import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, ActivatedRouteSnapshot, NavigationEnd, Router} from '@angular/router';
 import {BehaviorSubject, combineLatest, Subscription} from 'rxjs';
 import {Breadcrumb} from '../../interfaces';
-import {SidenavService} from '../../services';
+import {BreadcrumbsService, SidenavService} from '../../services';
 import {Environment} from '@valtimo-portal/shared';
 import {breadcrumbsAnimations} from '../../animations';
 
@@ -40,41 +40,31 @@ export class BreadcrumbsComponent implements OnInit, OnDestroy {
     @Inject('environment') environment: Environment,
     private router: Router,
     private sidenavService: SidenavService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private breadcrumbsService: BreadcrumbsService
   ) {
     this.environment = environment;
   }
 
   ngOnInit(): void {
-    this.routerSubscription = combineLatest([this.router.events, this.sidenavService.currentLang$])
-      .subscribe(([event]) => {
+    this.routerSubscription = combineLatest([
+      this.router.events,
+      this.breadcrumbsService.lastBreadcrumbTitle$,
+      this.sidenavService.currentLang$
+    ])
+      .subscribe(([event, lastBreadcrumbTitle]) => {
         if (event instanceof NavigationEnd) {
-          const snapshot = this.route.snapshot;
-          const snapshotRoutes: Array<ActivatedRouteSnapshot> = [];
-
-          const pushChildrenToArray = (routeSnapshot: ActivatedRouteSnapshot) => {
-            const children = routeSnapshot.children;
-            if (children.length > 0) {
-              children.forEach((child) => {
-                snapshotRoutes.push(child);
-                pushChildrenToArray(child);
-              });
-            }
-          };
-
-          pushChildrenToArray(snapshot);
-
-          const snapshotsWithPath = snapshotRoutes.filter((route) => route.routeConfig?.path);
-
-          console.log(snapshotsWithPath)
+          const snapshotRoutes: Array<ActivatedRouteSnapshot> = this.getSnapshotRoutes(this.route.snapshot);
 
           this.breadCrumbs$.next(
-            snapshotsWithPath.reduce((acc: Array<Breadcrumb>, curr, index) => {
+            snapshotRoutes.reduce((acc: Array<Breadcrumb>, curr, index) => {
               return [
                 ...acc,
                 {
                   link: `${index !== 0 ? acc[index - 1].link : ''}/${curr.routeConfig?.path}`,
-                  title: curr.data?.title
+                  title: index === snapshotRoutes.length - 1 && lastBreadcrumbTitle ?
+                    lastBreadcrumbTitle :
+                    curr.data?.title
                 }
               ] as Array<Breadcrumb>;
             }, [])
@@ -83,11 +73,29 @@ export class BreadcrumbsComponent implements OnInit, OnDestroy {
       });
   }
 
+  ngOnDestroy(): void {
+    this.routerSubscription.unsubscribe();
+  }
+
   isKeycloakCallback(breadcrumbs: Array<Breadcrumb>): boolean {
     return breadcrumbs[breadcrumbs.length - 1].link.includes(this.environment.authentication.config.redirectUri);
   }
 
-  ngOnDestroy(): void {
-    this.routerSubscription.unsubscribe();
+  private getSnapshotRoutes(snapshot: ActivatedRouteSnapshot): Array<ActivatedRouteSnapshot> {
+    const snapshotRoutes: Array<ActivatedRouteSnapshot> = [];
+
+    const pushChildrenToArray = (routeSnapshot: ActivatedRouteSnapshot) => {
+      const children = routeSnapshot.children;
+      if (children.length > 0) {
+        children.forEach((child) => {
+          snapshotRoutes.push(child);
+          pushChildrenToArray(child);
+        });
+      }
+    };
+
+    pushChildrenToArray(snapshot);
+
+    return snapshotRoutes.filter((route) => route.routeConfig?.path);
   }
 }

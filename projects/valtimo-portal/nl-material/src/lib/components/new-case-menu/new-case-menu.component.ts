@@ -1,9 +1,10 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormApiService} from '@valtimo-portal/form';
-import {BehaviorSubject, Subscription} from 'rxjs';
+import {BehaviorSubject, combineLatest, Subscription} from 'rxjs';
 import {fadeInAnimations} from '../../animations';
 import {SidenavService} from '../../services';
 import {LocalizeRouterService} from '@gilsdav/ngx-translate-router';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'nl-material-new-case-menu',
@@ -15,29 +16,37 @@ export class NewCaseMenuComponent implements OnInit, OnDestroy {
 
   availableFormDefinitions$ = this.formApiService.getAvailableFormDefinitions();
 
-  currentLangSubscription!: Subscription;
+  routeLangSubscription!: Subscription;
 
-  readonly newCaseRoute$ = new BehaviorSubject<string>('');
+  readonly newCaseRoute$ = new BehaviorSubject<string>(this.getNewCaseRoute());
 
   constructor(
     private formApiService: FormApiService,
     private sidenavService: SidenavService,
-    private localizeRouterService: LocalizeRouterService
+    private localizeRouterService: LocalizeRouterService,
+    private router: Router
   ) {
   }
 
   ngOnInit(): void {
-    this.currentLangSubscription = this.sidenavService.currentLang$.subscribe((currentLang) => {
-      console.log('current', currentLang);
-      this.newCaseRoute$.next(
-        `${this.localizeRouterService.translateRoute('/cases/new-case')}`
-      );
-
-      console.log(this.newCaseRoute$.getValue());
-    });
+    this.routeLangSubscription =
+      combineLatest([this.sidenavService.currentLang$, this.router.events])
+        .subscribe(() => {
+          this.setNewCaseRoute();
+        });
   }
 
   ngOnDestroy(): void {
-    this.currentLangSubscription.unsubscribe();
+    this.routeLangSubscription.unsubscribe();
+  }
+
+  private setNewCaseRoute(): void {
+    this.newCaseRoute$.next(
+      this.getNewCaseRoute()
+    );
+  }
+
+  private getNewCaseRoute(): string {
+    return `${this.localizeRouterService.translateRoute('/cases/newCase')}`;
   }
 }

@@ -1,4 +1,4 @@
-/*!
+/*
  * Copyright 2015-2021 Ritense BV, the Netherlands.
  *
  * Licensed under EUPL, Version 1.2 (the "License");
@@ -14,14 +14,19 @@
  * limitations under the License.
  */
 
-body, html {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  touch-action: manipulation;
-}
+import {Component, OnInit} from '@angular/core';
 
-.module-container {
-  margin-bottom: 30px;
-  max-width: 100vw;
+@Component({
+  selector: 'app-new-case',
+  templateUrl: './new-case.component.html',
+  styleUrls: ['./new-case.component.scss']
+})
+export class NewCaseComponent implements OnInit {
+
+  constructor() {
+  }
+
+  ngOnInit(): void {
+  }
+
 }

@@ -20,7 +20,7 @@
 }
 
 .mat-list {
-  margin-left: -16px;
+  margin: 0 -16px;
   color: $nl-dark-gray;
 }
 
@@ -29,5 +29,7 @@
 }
 
 .new-case-menu-container {
-  padding: 16px;
+  @include layout-bp(gt-xs) {
+    padding: 16px;
+  }
 }

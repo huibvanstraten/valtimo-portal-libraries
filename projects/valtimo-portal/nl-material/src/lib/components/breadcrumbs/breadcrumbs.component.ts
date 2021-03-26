@@ -66,6 +66,8 @@ export class BreadcrumbsComponent implements OnInit, OnDestroy {
 
           const snapshotsWithPath = snapshotRoutes.filter((route) => route.routeConfig?.path);
 
+          console.log(snapshotsWithPath)
+
           this.breadCrumbs$.next(
             snapshotsWithPath.reduce((acc: Array<Breadcrumb>, curr, index) => {
               return [

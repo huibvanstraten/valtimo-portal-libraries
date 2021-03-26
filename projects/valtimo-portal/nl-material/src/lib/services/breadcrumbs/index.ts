@@ -14,5 +14,5 @@
  * limitations under the License.
  */
 
-export * from './sidenav';
-export * from './breadcrumbs';
+export * from './breadcrumbs.service.module';
+export * from './breadcrumbs.service';

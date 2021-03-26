@@ -14,5 +14,17 @@
  * limitations under the License.
  */
 
-export * from './sidenav';
-export * from './breadcrumbs';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {BreadcrumbsService} from './breadcrumbs.service';
+
+@NgModule({
+  declarations: [],
+  imports: [
+    CommonModule
+  ],
+  exports: [],
+  providers: [BreadcrumbsService]
+})
+export class BreadcrumbsServiceModule {
+}

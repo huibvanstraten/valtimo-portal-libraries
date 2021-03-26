@@ -24,7 +24,8 @@
   },
   "caseStrings": {
     "form-example": {
-      "wouldLikeTo": "een voorbeeldaanvraag doen"
+      "wouldLikeTo": "een voorbeeldaanvraag doen",
+      "new": "nieuwe voorbeeldaanvraag"
     }
   }
 }

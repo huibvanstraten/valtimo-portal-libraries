@@ -3,7 +3,7 @@
     <h1 class="mat-h1">{{'newCaseMenu.title' | translate}}</h1>
     <mat-list class="header-menu-mat-list">
       <mat-list-item *ngFor="let definition of definitions">
-        <button mat-menu-item [routerLink]="newCaseRoute$ | async">
+        <button mat-menu-item [routerLink]="newCaseRoute$ | async" [queryParams]="{id:definition.name}">
           <mat-icon fontSet="fa" fontIcon="fa-chevron-right"></mat-icon>
           {{'caseStrings.' + definition.name + '.wouldLikeTo' | translate }}
         </button>

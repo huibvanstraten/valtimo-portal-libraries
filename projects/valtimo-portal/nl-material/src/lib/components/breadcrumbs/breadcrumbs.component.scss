@@ -38,14 +38,12 @@
     line-height: $font-smaller;
     color: $nl-dark-gray;
     text-decoration: none;
-
-    &.home {
-      font-weight: bold;
-    }
+    font-weight: bold;
 
     &.last {
       cursor: default;
       pointer-events: none;
+      font-weight: normal;
     }
 
     @include layout-bp(lt-sm) {

@@ -24,7 +24,8 @@
   },
   "caseStrings": {
     "form-example": {
-      "wouldLikeTo": "open an example case"
+      "wouldLikeTo": "open an example case",
+      "new": "new example case"
     }
   }
 }

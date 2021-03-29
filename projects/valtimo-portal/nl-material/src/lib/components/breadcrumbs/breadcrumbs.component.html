@@ -15,7 +15,8 @@
   -->
 
 <ng-container *ngIf="breadCrumbs$ | async as breadcrumbs">
-  <div @breadcrumbsFade class="breadcrumbs-container"
+  <div @breadcrumbsFade
+       class="breadcrumbs-container"
        *ngIf="breadcrumbs.length > 1 && !isKeycloakCallback(breadcrumbs)">
     <div class="breadcrumbs">
       <div
@@ -26,7 +27,6 @@
       >
         <a
           mat-button
-          [disableRipple]="true"
           [routerLink]="breadcrumb.link"
           [ngClass]="{'home': i === 0, 'last': i === (breadcrumbs.length - 1)}"
         >
@@ -35,8 +35,13 @@
           </ng-container>
           <ng-container *ngIf="i !== 0">{{breadcrumb.title | translate}}</ng-container>
         </a>
-        <mat-icon *ngIf="i !== (breadcrumbs.length - 1)" fontSet="fa" fontIcon="fa-chevron-right"
-                  class="chevron"></mat-icon>
+        <mat-icon
+          *ngIf="i !== (breadcrumbs.length - 1)"
+          fontSet="fa"
+          fontIcon="fa-chevron-right"
+          class="chevron"
+        >
+        </mat-icon>
       </div>
     </div>
   </div>

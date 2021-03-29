@@ -19,7 +19,7 @@ import {CommonModule} from '@angular/common';
 import {BreadcrumbsComponent} from './breadcrumbs.component';
 import {MatCardModule} from '@angular/material/card';
 import {RouterModule} from '@angular/router';
-import {BreadcrumbsServiceModule, SidenavServiceModule} from '../../services';
+import {SidenavServiceModule} from '../../services';
 import {TranslateModule} from '@ngx-translate/core';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from "@angular/material/button";
@@ -34,7 +34,6 @@ import {MatButtonModule} from "@angular/material/button";
     TranslateModule,
     MatIconModule,
     MatButtonModule,
-    BreadcrumbsServiceModule
   ],
   exports: [BreadcrumbsComponent]
 })

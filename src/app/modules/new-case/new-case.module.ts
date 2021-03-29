@@ -24,7 +24,7 @@ import {NewCaseComponent} from './new-case.component';
   declarations: [NewCaseComponent],
   imports: [
     CommonModule,
-    NewCaseRoutingModule,
+    NewCaseRoutingModule
   ]
 })
 export class NewCaseModule {

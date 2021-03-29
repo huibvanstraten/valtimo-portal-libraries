@@ -53,7 +53,7 @@ export class BreadcrumbsComponent implements OnInit, OnDestroy {
       this.sidenavService.currentLang$
     ])
       .subscribe(([event, lastBreadcrumbTitle]) => {
-        if (event instanceof NavigationEnd) {
+        if (event instanceof NavigationEnd || lastBreadcrumbTitle) {
           const snapshotRoutes: Array<ActivatedRouteSnapshot> = this.getSnapshotRoutes(this.route.snapshot);
 
           this.breadCrumbs$.next(

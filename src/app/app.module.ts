@@ -34,6 +34,7 @@ import {environment} from '../environments';
 import {KeycloakAngularModule, KeycloakService} from 'keycloak-angular';
 import {initializeKeycloak, KeycloakAppAuthGuard} from '@valtimo-portal/authentication';
 import {GraphQLModule} from '@valtimo-portal/graphql';
+import {BreadcrumbsServiceModule} from "../../projects/valtimo-portal/nl-material/src/lib";
 
 export const HttpLoaderFactory = (http: HttpClient) => new MultiTranslateHttpLoader(http, [
   {prefix: './translate/', suffix: '.json'},
@@ -72,8 +73,9 @@ export const HttpLoaderFactory = (http: HttpClient) => new MultiTranslateHttpLoa
     NavigationMenuModule,
     SidenavModule,
     HeaderMenuModule,
+    BreadcrumbsServiceModule,
     BreadcrumbsModule,
-    GraphQLModule
+    GraphQLModule,
   ],
   bootstrap: [AppComponent]
 })

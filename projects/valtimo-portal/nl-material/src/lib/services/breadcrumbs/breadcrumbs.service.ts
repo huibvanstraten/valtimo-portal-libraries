@@ -34,4 +34,8 @@ export class BreadcrumbsService {
   set lastBreadcrumbTitle(title: string) {
     this._lastBreadcrumbTitle$.next(title);
   }
+
+  clearLastBreadcrumbTitle(): void {
+    this._lastBreadcrumbTitle$.next('');
+  }
 }

@@ -14,19 +14,55 @@
  * limitations under the License.
  */
 
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {BreadcrumbsService} from "@valtimo-portal/nl-material";
+import {Subscription} from "rxjs";
+import {ActivatedRoute} from "@angular/router";
+import {TranslateService} from "@ngx-translate/core";
+import {take} from "rxjs/operators";
 
 @Component({
   selector: 'app-new-case',
   templateUrl: './new-case.component.html',
   styleUrls: ['./new-case.component.scss']
 })
-export class NewCaseComponent implements OnInit {
+export class NewCaseComponent implements OnInit, OnDestroy {
 
-  constructor() {
+  private langChangeSubscription!: Subscription;
+
+  constructor(
+    private breadcrumbsService: BreadcrumbsService,
+    private translateService: TranslateService,
+    private route: ActivatedRoute
+  ) {
   }
 
   ngOnInit(): void {
+    this.setBreadcrumbTitle();
+    this.openLangChangeSubscription();
   }
 
+  ngOnDestroy(): void {
+    this.langChangeSubscription?.unsubscribe();
+  }
+
+  openLangChangeSubscription(): void {
+    this.langChangeSubscription =
+      this.translateService.onLangChange
+        .subscribe(() => {
+          this.setBreadcrumbTitle();
+        });
+  }
+
+  private setBreadcrumbTitle(): void {
+    this.route.queryParams.pipe(
+      take(1)
+    ).subscribe((params) => {
+        this.breadcrumbsService.lastBreadcrumbTitle =
+          this.translateService.instant(
+            `caseStrings.${params.id}.new`
+          );
+      }
+    );
+  }
 }

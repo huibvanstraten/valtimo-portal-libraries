@@ -27,7 +27,7 @@
       [routerLink]="item.link"
       [attr.data-link]="item.link"
     >
-      <ng-container *ngIf="{active: currentUrl === ('/' + item.link)} as vars">
+      <ng-container *ngIf="{active: removeSlashes(getCoreUrl(currentUrl)) === removeSlashes(item.link)} as vars">
         <span [ngClass]="{'hide':vars.active}">{{item.title | translate}}</span>
         <span class="active" [ngClass]="{'hide': !vars.active}">{{item.title | translate}}</span>
       </ng-container>

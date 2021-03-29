@@ -14,14 +14,16 @@
  * limitations under the License.
  */
 
-export * from './toolbar';
-export * from './navigation-menu';
-export * from './menu-icon';
-export * from './sidenav';
-export * from './card';
-export * from './header-menu';
-export * from './breadcrumbs';
-export * from './header-logo';
-export * from './language-selector';
-export * from './new-case-menu';
-export * from './animated-dots';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {AnimatedDotsComponent} from './animated-dots.component';
+
+@NgModule({
+  declarations: [AnimatedDotsComponent],
+  imports: [
+    CommonModule,
+  ],
+  exports: [AnimatedDotsComponent]
+})
+export class AnimatedDotsModule {
+}

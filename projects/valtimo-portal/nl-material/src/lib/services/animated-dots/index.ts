@@ -14,5 +14,5 @@
  * limitations under the License.
  */
 
-export * from './animated-dots.module';
-export * from './animated-dots.component';
+export * from './animated-dots.service.module';
+export * from './animated-dots.service';

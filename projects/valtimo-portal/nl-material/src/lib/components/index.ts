@@ -24,4 +24,3 @@ export * from './breadcrumbs';
 export * from './header-logo';
 export * from './language-selector';
 export * from './new-case-menu';
-export * from './animated-dots';

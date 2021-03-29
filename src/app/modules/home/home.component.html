@@ -30,13 +30,16 @@
     fxLayout="column"
     style="padding: 16px;"
   >
-    <nl-material-card
-      [type]="introductionType"
-      [title]="'home.introduction.title' | translate:{firstName: (userFirstName$ | async)}"
-      [subtitle]="'home.introduction.subtitle' | translate"
-      [content]="'home.introduction.content' | translate"
-    >
-    </nl-material-card>
+    <ng-container *ngIf="{firstName: userFirstName$ | async, dots: dots$ | async} as obs">
+      <nl-material-card
+        [type]="introductionType"
+        [title]="'home.introduction.title' | translate:{firstName: (obs.firstName || obs.dots)}"
+        [subtitle]="'home.introduction.subtitle' | translate"
+        [content]="'home.introduction.content' | translate"
+      >
+      </nl-material-card>
+    </ng-container>
+
   </div>
 </ng-template>
 

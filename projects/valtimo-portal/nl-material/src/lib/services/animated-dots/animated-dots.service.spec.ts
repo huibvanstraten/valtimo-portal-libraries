@@ -14,16 +14,19 @@
  * limitations under the License.
  */
 
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {AnimatedDotsComponent} from './animated-dots.component';
+import {TestBed} from '@angular/core/testing';
 
-@NgModule({
-  declarations: [AnimatedDotsComponent],
-  imports: [
-    CommonModule,
-  ],
-  exports: [AnimatedDotsComponent]
-})
-export class AnimatedDotsModule {
-}
+import {AnimatedDotsService} from './animated-dots.service'
+
+describe('AnimatedDotsService', () => {
+  let service: AnimatedDotsService;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({});
+    service = TestBed.inject(AnimatedDotsService);
+  });
+
+  it('should be created', () => {
+    expect(service).toBeTruthy();
+  });
+});

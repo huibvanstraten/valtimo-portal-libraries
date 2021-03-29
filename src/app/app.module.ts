@@ -19,12 +19,14 @@ import {BrowserModule} from '@angular/platform-browser';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {
+  AnimatedDotsServiceModule,
   BreadcrumbsModule,
+  BreadcrumbsServiceModule,
   HeaderLogoModule,
   HeaderMenuModule,
   NavigationMenuModule,
   SidenavModule,
-  ToolbarModule
+  ToolbarModule,
 } from '@valtimo-portal/nl-material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
@@ -34,7 +36,6 @@ import {environment} from '../environments';
 import {KeycloakAngularModule, KeycloakService} from 'keycloak-angular';
 import {initializeKeycloak, KeycloakAppAuthGuard} from '@valtimo-portal/authentication';
 import {GraphQLModule} from '@valtimo-portal/graphql';
-import {BreadcrumbsServiceModule} from "../../projects/valtimo-portal/nl-material/src/lib";
 
 export const HttpLoaderFactory = (http: HttpClient) => new MultiTranslateHttpLoader(http, [
   {prefix: './translate/', suffix: '.json'},
@@ -76,6 +77,7 @@ export const HttpLoaderFactory = (http: HttpClient) => new MultiTranslateHttpLoa
     BreadcrumbsServiceModule,
     BreadcrumbsModule,
     GraphQLModule,
+    AnimatedDotsServiceModule
   ],
   bootstrap: [AppComponent]
 })

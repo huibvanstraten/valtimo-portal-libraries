@@ -20,7 +20,7 @@ import {KeycloakService} from 'keycloak-angular';
 import {BehaviorSubject, combineLatest, Observable, Subject, Subscription} from 'rxjs';
 import {TranslateService} from '@ngx-translate/core';
 import {map} from 'rxjs/operators';
-import {SidenavService} from '../../services';
+import {AnimatedDotsService, SidenavService} from '../../services';
 import {MatSelect} from '@angular/material/select';
 
 @Component({
@@ -38,15 +38,16 @@ export class UserMenuComponent implements OnInit, OnDestroy {
 
   readonly signingOut$ = new BehaviorSubject<boolean>(false);
 
-  readonly userFirstName$ = new BehaviorSubject<string>('...');
+  readonly userFirstName$ = new BehaviorSubject<string>('');
 
   readonly welcomeText$ = combineLatest(
     [
+      this.animatedDotsService.dots$,
       this.translateService.stream('headerMenu.welcome'),
-      this.userFirstName$
+      this.userFirstName$,
     ]
   ).pipe(
-    map(([welcomeText, firstName]) => `${welcomeText} ${firstName}`)
+    map(([dots, welcomeText, firstName]) => `${welcomeText} ${firstName || dots}`)
   );
 
   readonly mobileMode = UserMenuMode.mobile;
@@ -58,6 +59,7 @@ export class UserMenuComponent implements OnInit, OnDestroy {
     private keycloakService: KeycloakService,
     private translateService: TranslateService,
     private sidenavService: SidenavService,
+    private animatedDotsService: AnimatedDotsService
   ) {
     this.open$ = this.sidenavService.open$;
   }

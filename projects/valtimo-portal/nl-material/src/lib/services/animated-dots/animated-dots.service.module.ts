@@ -16,23 +16,15 @@
 
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-
-import {HomeRoutingModule} from './home-routing.module';
-import {HomeComponent} from './home.component';
-import {CardModule, NewCaseMenuModule} from '@valtimo-portal/nl-material';
-import {FlexLayoutModule} from '@angular/flex-layout';
-import {TranslateModule} from '@ngx-translate/core';
+import {AnimatedDotsService} from './animated-dots.service';
 
 @NgModule({
-  declarations: [HomeComponent],
+  declarations: [],
   imports: [
-    CommonModule,
-    HomeRoutingModule,
-    CardModule,
-    FlexLayoutModule,
-    TranslateModule,
-    NewCaseMenuModule
-  ]
+    CommonModule
+  ],
+  exports: [],
+  providers: [AnimatedDotsService]
 })
-export class HomeModule {
+export class AnimatedDotsServiceModule {
 }

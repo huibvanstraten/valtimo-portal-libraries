@@ -44,6 +44,7 @@ export class NewCaseComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.langChangeSubscription?.unsubscribe();
+    this.breadcrumbsService.clearLastBreadcrumbTitle();
   }
 
   openLangChangeSubscription(): void {

@@ -15,8 +15,8 @@
  */
 
 import {Injectable, OnDestroy} from '@angular/core';
-import {BehaviorSubject, interval, Observable, Subscription} from "rxjs";
-import {take} from "rxjs/operators";
+import {BehaviorSubject, interval, Observable, Subscription} from 'rxjs';
+import {take} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'

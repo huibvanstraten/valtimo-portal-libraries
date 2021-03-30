@@ -15,13 +15,13 @@
  */
 
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {BreadcrumbsService} from "@valtimo-portal/nl-material";
-import {FormApiService} from "@valtimo-portal/form";
-import {combineLatest, Subscription} from "rxjs";
-import {ActivatedRoute} from "@angular/router";
-import {TranslateService} from "@ngx-translate/core";
-import {map, take} from "rxjs/operators";
-import {FormioForm} from "@formio/angular";
+import {BreadcrumbsService} from '@valtimo-portal/nl-material';
+import {FormApiService} from '@valtimo-portal/form';
+import {combineLatest, Subscription} from 'rxjs';
+import {ActivatedRoute} from '@angular/router';
+import {TranslateService} from '@ngx-translate/core';
+import {map, take} from 'rxjs/operators';
+import {FormioForm} from '@formio/angular';
 
 @Component({
   selector: 'app-new-case',

@@ -16,7 +16,7 @@
 
 import {TestBed} from '@angular/core/testing';
 
-import {AnimatedDotsService} from './animated-dots.service'
+import {AnimatedDotsService} from './animated-dots.service';
 
 describe('AnimatedDotsService', () => {
   let service: AnimatedDotsService;

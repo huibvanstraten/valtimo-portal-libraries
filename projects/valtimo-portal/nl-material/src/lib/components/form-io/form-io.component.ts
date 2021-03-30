@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {FormioForm} from "@formio/angular";
+import {FormioForm} from '@formio/angular';
 
 @Component({
   selector: 'nl-material-form-io',

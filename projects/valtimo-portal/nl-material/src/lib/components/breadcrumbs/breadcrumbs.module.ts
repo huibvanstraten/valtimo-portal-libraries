@@ -22,7 +22,7 @@ import {RouterModule} from '@angular/router';
 import {SidenavServiceModule} from '../../services';
 import {TranslateModule} from '@ngx-translate/core';
 import {MatIconModule} from '@angular/material/icon';
-import {MatButtonModule} from "@angular/material/button";
+import {MatButtonModule} from '@angular/material/button';
 
 @NgModule({
   declarations: [BreadcrumbsComponent],

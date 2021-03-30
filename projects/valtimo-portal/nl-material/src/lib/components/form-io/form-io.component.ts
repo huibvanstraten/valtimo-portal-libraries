@@ -1,4 +1,5 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {FormioForm} from "@formio/angular";
 
 @Component({
   selector: 'nl-material-form-io',
@@ -6,6 +7,7 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./form-io.component.scss']
 })
 export class FormIoComponent implements OnInit {
+  @Input() definition!: FormioForm;
 
   constructor() {
   }

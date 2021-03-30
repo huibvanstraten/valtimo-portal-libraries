@@ -24,7 +24,9 @@
       fxLayout="column"
       style="padding: 16px;"
     >
-      <nl-material-form-io></nl-material-form-io>
+      <ng-container *ngIf="formDefinition$ | async as definition">
+        <nl-material-form-io [definition]="definition"></nl-material-form-io>
+      </ng-container>
     </div>
   </div>
 </div>

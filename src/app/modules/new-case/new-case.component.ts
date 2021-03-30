@@ -16,10 +16,12 @@
 
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {BreadcrumbsService} from "@valtimo-portal/nl-material";
-import {Subscription} from "rxjs";
+import {FormApiService} from "@valtimo-portal/form";
+import {combineLatest, Subscription} from "rxjs";
 import {ActivatedRoute} from "@angular/router";
 import {TranslateService} from "@ngx-translate/core";
-import {take} from "rxjs/operators";
+import {map, take} from "rxjs/operators";
+import {FormioForm} from "@formio/angular";
 
 @Component({
   selector: 'app-new-case',
@@ -30,10 +32,18 @@ export class NewCaseComponent implements OnInit, OnDestroy {
 
   private langChangeSubscription!: Subscription;
 
+  formDefinition$ = combineLatest([this.route.queryParams, this.formApiService.getAvailableFormDefinitions()])
+    .pipe(
+      map(
+        ([params, definitions]) =>
+          definitions.find((definition) => definition.name === params.id)?.definition as FormioForm
+      ));
+
   constructor(
     private breadcrumbsService: BreadcrumbsService,
     private translateService: TranslateService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private formApiService: FormApiService,
   ) {
   }
 

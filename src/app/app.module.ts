@@ -36,6 +36,7 @@ import {environment} from '../environments';
 import {KeycloakAngularModule, KeycloakService} from 'keycloak-angular';
 import {initializeKeycloak, KeycloakAppAuthGuard} from '@valtimo-portal/authentication';
 import {GraphQLModule} from '@valtimo-portal/graphql';
+import {MatFormioModule} from "@formio/angular-material";
 
 export const HttpLoaderFactory = (http: HttpClient) => new MultiTranslateHttpLoader(http, [
   {prefix: './translate/', suffix: '.json'},
@@ -69,6 +70,7 @@ export const HttpLoaderFactory = (http: HttpClient) => new MultiTranslateHttpLoa
     }),
     AppRoutingModule,
     BrowserAnimationsModule,
+    MatFormioModule,
     ToolbarModule,
     HeaderLogoModule,
     NavigationMenuModule,

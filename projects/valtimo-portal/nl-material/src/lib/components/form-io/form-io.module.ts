@@ -17,13 +17,13 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormIoComponent} from './form-io.component';
-import {MatFormioModule} from '@formio/angular-material';
+import {FormioModule} from "@formio/angular";
 
 @NgModule({
   declarations: [FormIoComponent],
   imports: [
     CommonModule,
-    MatFormioModule
+    FormioModule
   ],
   exports: [FormIoComponent]
 })

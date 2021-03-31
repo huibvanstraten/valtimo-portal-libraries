@@ -14,6 +14,12 @@
  * limitations under the License.
  */
 
-export * from './navigation-menu';
-export * from './breadcrumbs';
-export * from './case-preview';
+export interface CasePreview {
+  id: string;
+  title: string;
+  tasks: Array<{
+    title: string;
+    date: Date;
+    completed: boolean
+  }>;
+}

@@ -1,4 +1,4 @@
-/*!
+/*
  * Copyright 2015-2021 Ritense BV, the Netherlands.
  *
  * Licensed under EUPL, Version 1.2 (the "License");
@@ -14,14 +14,16 @@
  * limitations under the License.
  */
 
-body, html {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  touch-action: manipulation;
-}
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
+import {NewCaseComponent} from './new-case.component';
+import {LocalizeRouterModule} from '@gilsdav/ngx-translate-router';
 
-.module-container {
-  margin-bottom: 30px;
-  max-width: 100vw;
+const routes: Routes = [{path: '', component: NewCaseComponent}];
+
+@NgModule({
+  imports: [RouterModule.forChild(routes), LocalizeRouterModule.forChild(routes)],
+  exports: [RouterModule]
+})
+export class NewCaseRoutingModule {
 }

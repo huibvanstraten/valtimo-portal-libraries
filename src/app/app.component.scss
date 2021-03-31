@@ -51,6 +51,10 @@ nl-material-navigation-menu {
     max-width: $max-width;
     margin: 0 auto;
     margin-top: 30px;
+
+    @include layout-bp(lt-sm) {
+      margin-top: 16px;
+    }
   }
 }
 

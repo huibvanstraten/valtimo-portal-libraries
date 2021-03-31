@@ -14,7 +14,9 @@
  * limitations under the License.
  */
 
+import {FormioForm as FormDefinition} from '@formio/angular';
+
 export interface AvailableFormDefinition {
   name: string;
-  definition: object;
+  definition: FormDefinition;
 }

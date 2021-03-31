@@ -49,9 +49,6 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
     private localizeService: LocalizeRouterService,
     private sidenavService: SidenavService,
   ) {
-    const currentLang = this.translateService.currentLang;
-    this.selectedLocale = currentLang;
-    this.sidenavService.currentLang = currentLang;
     this.open$ = this.sidenavService.open$;
   }
 

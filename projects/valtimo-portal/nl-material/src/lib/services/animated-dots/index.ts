@@ -1,4 +1,4 @@
-/*!
+/*
  * Copyright 2015-2021 Ritense BV, the Netherlands.
  *
  * Licensed under EUPL, Version 1.2 (the "License");
@@ -14,14 +14,5 @@
  * limitations under the License.
  */
 
-body, html {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  touch-action: manipulation;
-}
-
-.module-container {
-  margin-bottom: 30px;
-  max-width: 100vw;
-}
+export * from './animated-dots.service.module';
+export * from './animated-dots.service';

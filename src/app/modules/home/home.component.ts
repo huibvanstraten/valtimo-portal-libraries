@@ -15,8 +15,8 @@
  */
 
 import {Component, OnInit} from '@angular/core';
-import {CardType} from '@valtimo-portal/nl-material';
-import {BehaviorSubject} from 'rxjs';
+import {AnimatedDotsService, CardType} from '@valtimo-portal/nl-material';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {KeycloakService} from 'keycloak-angular';
 
 @Component({
@@ -26,12 +26,15 @@ import {KeycloakService} from 'keycloak-angular';
 })
 export class HomeComponent implements OnInit {
 
+  dots$!: Observable<string>;
+
   readonly userFirstName$ = new BehaviorSubject<string>('...');
 
   readonly introductionType = CardType.introduction;
   readonly reminderType = CardType.reminder;
 
-  constructor(private keycloakService: KeycloakService) {
+  constructor(private keycloakService: KeycloakService, private animatedDotsService: AnimatedDotsService) {
+    this.dots$ = this.animatedDotsService.dots$;
   }
 
   ngOnInit(): void {

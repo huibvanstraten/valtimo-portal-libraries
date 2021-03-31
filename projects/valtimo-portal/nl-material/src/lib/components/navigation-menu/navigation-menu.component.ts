@@ -103,12 +103,12 @@ export class NavigationMenuComponent implements OnInit, AfterViewInit, OnDestroy
   }
 
   private setActiveNavLink(navLinks: NavLinkElements, currentUrl: string): void {
-    const removeSlashes = (text: string) => text.replace(/\\|\//g, '');
-
     const nativeElements = navLinks.toArray().map((link) => link.nativeElement);
     const elementLinks = nativeElements.map((element) => element.getAttribute('data-link'));
 
-    const currentElementIndex = elementLinks.findIndex((link) => removeSlashes(link || '') === removeSlashes(currentUrl));
+    const currentElementIndex = elementLinks.findIndex((link) => (
+      this.removeSlashes(link || '') === this.removeSlashes(this.getCoreUrl(currentUrl)))
+    );
 
     const firstElementAbsoluteOffset = nativeElements[0]?.offsetLeft;
 
@@ -125,5 +125,19 @@ export class NavigationMenuComponent implements OnInit, AfterViewInit, OnDestroy
         previousOffset: this.activeNavLinkIndicator$.getValue().offset
       });
     }
+  }
+
+  getCoreUrl(url: string): string {
+    const splitString = url.split('/');
+    const urlPartLimit = 3;
+    if (splitString.length <= urlPartLimit) {
+      return url;
+    } else {
+      return `/${splitString.slice(0, urlPartLimit).reduce((acc, curr) => `${acc}/${curr}`, '')}/`;
+    }
+  }
+
+  removeSlashes(text: string): string {
+    return text.replace(/\\|\//g, '');
   }
 }

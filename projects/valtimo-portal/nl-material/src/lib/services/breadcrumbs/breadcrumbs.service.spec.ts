@@ -1,4 +1,4 @@
-/*!
+/*
  * Copyright 2015-2021 Ritense BV, the Netherlands.
  *
  * Licensed under EUPL, Version 1.2 (the "License");
@@ -14,14 +14,19 @@
  * limitations under the License.
  */
 
-body, html {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  touch-action: manipulation;
-}
+import {TestBed} from '@angular/core/testing';
 
-.module-container {
-  margin-bottom: 30px;
-  max-width: 100vw;
-}
+import {BreadcrumbsService} from './breadcrumbs.service';
+
+describe('BreadcrumbsService', () => {
+  let service: BreadcrumbsService;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({});
+    service = TestBed.inject(BreadcrumbsService);
+  });
+
+  it('should be created', () => {
+    expect(service).toBeTruthy();
+  });
+});

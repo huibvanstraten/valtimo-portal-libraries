@@ -2,13 +2,15 @@
   "ROUTES": {
     "notifications": "notifications",
     "cases": "cases",
-    "tasks": "tasks"
+    "tasks": "tasks",
+    "newCase": "new-case"
   },
   "TITLES": {
     "home": "Home",
     "notifications": "Notifications",
     "cases": "Cases",
-    "tasks": "Tasks"
+    "tasks": "Tasks",
+    "newCase": "New case"
   },
   "headerMenu": {
     "language": "Language",
@@ -19,5 +21,11 @@
   },
   "newCaseMenu": {
     "title": "I would like to"
+  },
+  "caseStrings": {
+    "form-example": {
+      "wouldLikeTo": "open an example case",
+      "new": "New example case"
+    }
   }
 }

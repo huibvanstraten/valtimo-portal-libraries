@@ -22,6 +22,7 @@ import {RouterModule} from '@angular/router';
 import {SidenavServiceModule} from '../../services';
 import {TranslateModule} from '@ngx-translate/core';
 import {MatIconModule} from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
 
 @NgModule({
   declarations: [BreadcrumbsComponent],
@@ -31,7 +32,8 @@ import {MatIconModule} from '@angular/material/icon';
     RouterModule,
     SidenavServiceModule,
     TranslateModule,
-    MatIconModule
+    MatIconModule,
+    MatButtonModule,
   ],
   exports: [BreadcrumbsComponent]
 })

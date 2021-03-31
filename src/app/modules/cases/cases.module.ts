@@ -19,10 +19,9 @@ import {CommonModule} from '@angular/common';
 
 import {CasesRoutingModule} from './cases-routing.module';
 import {CasesComponent} from './cases.component';
-import { NewCaseComponent } from './pages/new-case/new-case.component';
 
 @NgModule({
-  declarations: [CasesComponent, NewCaseComponent],
+  declarations: [CasesComponent],
   imports: [
     CommonModule,
     CasesRoutingModule,

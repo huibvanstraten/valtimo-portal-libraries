@@ -24,6 +24,8 @@ import {TranslateModule} from '@ngx-translate/core';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {RouterModule} from '@angular/router';
+import {SidenavServiceModule} from '../../services';
 
 @NgModule({
   declarations: [NewCaseMenuComponent],
@@ -35,7 +37,9 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     TranslateModule,
     MatIconModule,
     MatButtonModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    RouterModule,
+    SidenavServiceModule
   ],
   exports: [NewCaseMenuComponent]
 })

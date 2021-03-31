@@ -20,11 +20,20 @@
 }
 
 .mat-list {
-  margin-left: -16px;
+  margin: 0 -16px;
   color: $nl-dark-gray;
+}
+
+.mat-menu-item {
   font-size: $font-medium;
+
+  @include layout-bp(lt-sm) {
+    font-size: $font-smaller;
+  }
 }
 
 .new-case-menu-container {
-  padding: 16px;
+  @include layout-bp(gt-xs) {
+    padding: 16px;
+  }
 }

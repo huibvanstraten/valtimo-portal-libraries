@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NewCaseComponent } from './new-case.component';
+import { FormIoComponent } from './form-io.component';
 
-describe('NewCaseComponent', () => {
-  let component: NewCaseComponent;
-  let fixture: ComponentFixture<NewCaseComponent>;
+describe('FormIoComponent', () => {
+  let component: FormIoComponent;
+  let fixture: ComponentFixture<FormIoComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ NewCaseComponent ]
+      declarations: [ FormIoComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(NewCaseComponent);
+    fixture = TestBed.createComponent(FormIoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

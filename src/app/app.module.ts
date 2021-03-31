@@ -19,12 +19,14 @@ import {BrowserModule} from '@angular/platform-browser';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {
+  AnimatedDotsServiceModule,
   BreadcrumbsModule,
+  BreadcrumbsServiceModule,
   HeaderLogoModule,
   HeaderMenuModule,
   NavigationMenuModule,
   SidenavModule,
-  ToolbarModule
+  ToolbarModule,
 } from '@valtimo-portal/nl-material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
@@ -72,8 +74,10 @@ export const HttpLoaderFactory = (http: HttpClient) => new MultiTranslateHttpLoa
     NavigationMenuModule,
     SidenavModule,
     HeaderMenuModule,
+    BreadcrumbsServiceModule,
     BreadcrumbsModule,
-    GraphQLModule
+    GraphQLModule,
+    AnimatedDotsServiceModule,
   ],
   bootstrap: [AppComponent]
 })

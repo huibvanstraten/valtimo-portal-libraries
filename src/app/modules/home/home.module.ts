@@ -23,7 +23,6 @@ import {CardModule, NewCaseMenuModule} from '@valtimo-portal/nl-material';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {TranslateModule} from '@ngx-translate/core';
 
-
 @NgModule({
   declarations: [HomeComponent],
   imports: [

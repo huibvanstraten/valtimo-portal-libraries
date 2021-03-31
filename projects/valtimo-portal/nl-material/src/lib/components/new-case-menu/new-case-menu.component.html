@@ -1,17 +1,17 @@
-<ng-container *ngIf="availableFormDefinitions$ | async as definitions; else loading">
+<ng-container *ngIf="availableFormDefinitions$ | async as formDefinitions; else loading">
   <div class="new-case-menu-container">
     <h1 class="mat-h1">{{'newCaseMenu.title' | translate}}</h1>
     <mat-list class="header-menu-mat-list">
-      <mat-list-item *ngFor="let definition of definitions">
-        <button mat-menu-item>
+      <mat-list-item *ngFor="let formDefinition of formDefinitions">
+        <button mat-menu-item [routerLink]="newCaseRoute$ | async" [queryParams]="{id:formDefinition.name}">
           <mat-icon fontSet="fa" fontIcon="fa-chevron-right"></mat-icon>
-          {{definition.name}}
+          {{'caseStrings.' + formDefinition.name + '.wouldLikeTo' | translate }}
         </button>
       </mat-list-item>
     </mat-list>
   </div>
 </ng-container>
 
-<ng-template #loading>ma
+<ng-template #loading>
   <mat-progress-spinner></mat-progress-spinner>
 </ng-template>

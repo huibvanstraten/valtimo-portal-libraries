@@ -2,13 +2,15 @@
   "ROUTES": {
     "notifications": "meldingen",
     "cases": "aanvragen",
-    "tasks": "taken"
+    "tasks": "taken",
+    "newCase": "nieuwe-aanvraag"
   },
   "TITLES": {
     "home": "Home",
     "notifications": "Meldingen",
     "cases": "Aanvragen",
-    "tasks": "Taken"
+    "tasks": "Taken",
+    "newCase": "Nieuwe aanvraag"
   },
   "headerMenu": {
     "language": "Taal",
@@ -19,5 +21,11 @@
   },
   "newCaseMenu": {
     "title": "Ik wil graag"
+  },
+  "caseStrings": {
+    "form-example": {
+      "wouldLikeTo": "een voorbeeldaanvraag doen",
+      "new": "Nieuwe voorbeeldaanvraag"
+    }
   }
 }

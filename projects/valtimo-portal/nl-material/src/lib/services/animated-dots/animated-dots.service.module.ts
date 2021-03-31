@@ -1,4 +1,4 @@
-/*!
+/*
  * Copyright 2015-2021 Ritense BV, the Netherlands.
  *
  * Licensed under EUPL, Version 1.2 (the "License");
@@ -14,14 +14,17 @@
  * limitations under the License.
  */
 
-body, html {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  touch-action: manipulation;
-}
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {AnimatedDotsService} from './animated-dots.service';
 
-.module-container {
-  margin-bottom: 30px;
-  max-width: 100vw;
+@NgModule({
+  declarations: [],
+  imports: [
+    CommonModule
+  ],
+  exports: [],
+  providers: [AnimatedDotsService]
+})
+export class AnimatedDotsServiceModule {
 }

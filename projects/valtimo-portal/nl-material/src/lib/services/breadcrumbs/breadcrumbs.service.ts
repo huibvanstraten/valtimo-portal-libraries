@@ -1,4 +1,4 @@
-/*!
+/*
  * Copyright 2015-2021 Ritense BV, the Netherlands.
  *
  * Licensed under EUPL, Version 1.2 (the "License");
@@ -14,14 +14,28 @@
  * limitations under the License.
  */
 
-body, html {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  touch-action: manipulation;
-}
+import {Injectable} from '@angular/core';
+import {BehaviorSubject, Observable} from 'rxjs';
 
-.module-container {
-  margin-bottom: 30px;
-  max-width: 100vw;
+@Injectable({
+  providedIn: 'root'
+})
+export class BreadcrumbsService {
+
+  private _lastBreadcrumbTitle$ = new BehaviorSubject<string>('');
+
+  constructor() {
+  }
+
+  get lastBreadcrumbTitle$(): Observable<string> {
+    return this._lastBreadcrumbTitle$.asObservable();
+  }
+
+  set lastBreadcrumbTitle(title: string) {
+    this._lastBreadcrumbTitle$.next(title);
+  }
+
+  clearLastBreadcrumbTitle(): void {
+    this._lastBreadcrumbTitle$.next('');
+  }
 }

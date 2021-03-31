@@ -14,11 +14,19 @@
   ~ limitations under the License.
   -->
 
-<div class="logo-container" *ngIf="currentLang$ | async as currentLang">
-  <div class="logo-container-inner">
-    <div fxHide.lt-md class="border-blocker"></div>
-    <a [routerLink]="'/' + currentLang">
-      <img [src]="logoImagePath"/>
-    </a>
+<div fxFlex fxLayout="column" fxLayoutGap="16px" class="module-container">
+  <div fxLayout="row wrap">
+    <div
+      fxFlex="60"
+      fxFlex.md="60"
+      fxFlex.sm="70"
+      fxFlex.xs="100"
+      fxLayout="column"
+      style="padding: 16px;"
+    >
+      <ng-container *ngIf="formDefinition$ | async as definition">
+        <nl-material-form-io [definition]="definition"></nl-material-form-io>
+      </ng-container>
+    </div>
   </div>
 </div>

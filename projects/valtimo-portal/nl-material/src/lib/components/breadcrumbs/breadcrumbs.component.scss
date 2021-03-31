@@ -17,6 +17,11 @@
 @import 'colors';
 @import 'variables';
 
+.mat-button {
+  padding: 0;
+  min-width: unset;
+}
+
 .breadcrumbs-container {
   display: flex;
   justify-content: center;
@@ -24,42 +29,43 @@
 
 .breadcrumbs {
   display: flex;
-  width: 100%;
-  max-width: calc(#{$max-width} - 32px);
   padding: 16px;
+  width: calc(50% - 130px);
+
+  @include layout-bp(lt-md) {
+    width: auto;
+  }
+}
+
+.breadcrumbs-inner {
+  width: 100%;
+  max-width: $max-width;
 }
 
 .breadcrumb {
   display: flex;
   align-items: center;
+  min-width: 54px;
 
   a {
     font-size: $font-small;
     line-height: $font-smaller;
     color: $nl-dark-gray;
     text-decoration: none;
-
-    &.home {
-      font-weight: bold;
-    }
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 
     &.last {
       cursor: default;
       pointer-events: none;
-    }
-
-    @include layout-bp(lt-sm) {
-      font-size: $font-smaller;
-      line-height: $font-medium;
+      font-weight: normal;
     }
   }
 
   .chevron {
     font-size: $font-extra-small;
     margin: 0 16px;
-
-    @include layout-bp(lt-sm) {
-      font-size: $font-small;
-    }
   }
 }

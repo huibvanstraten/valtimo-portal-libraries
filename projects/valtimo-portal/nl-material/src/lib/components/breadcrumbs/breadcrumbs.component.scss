@@ -30,7 +30,7 @@
 .breadcrumbs {
   display: flex;
   padding: 16px;
-  width: calc(50% - 144px);
+  width: calc(50% - 130px);
 
   @include layout-bp(lt-md) {
     width: auto;

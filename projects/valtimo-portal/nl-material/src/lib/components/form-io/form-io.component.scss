@@ -1,0 +1,11 @@
+@import 'colors';
+
+.mat-form-io-container {
+  mat-formio-button:last-child {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 24px;
+    border-top: 1px solid $nl-medium-gray;
+    margin-top: 24px;
+  }
+}

@@ -29,9 +29,17 @@
 
 .breadcrumbs {
   display: flex;
-  width: calc(100% - 32px);
-  max-width: calc(#{$max-width} - 32px);
   padding: 16px;
+  width: calc(50% - 144px);
+
+  @include layout-bp(lt-md) {
+    width: auto;
+  }
+}
+
+.breadcrumbs-inner {
+  width: 100%;
+  max-width: $max-width;
 }
 
 .breadcrumb {

@@ -18,30 +18,32 @@
   <div @breadcrumbsFade
        class="breadcrumbs-container"
        *ngIf="breadcrumbs.length > 1 && !isKeycloakCallback(breadcrumbs)">
-    <div class="breadcrumbs">
-      <div
-        class="breadcrumb"
-        *ngFor="let breadcrumb of breadcrumbs; let i = index"
-        @breadcrumbFade
-        [@.disabled]="i === 0"
-      >
-        <a
-          mat-button
-          [routerLink]="breadcrumb.link"
-          [ngClass]="{'home': i === 0, 'last': i === (breadcrumbs.length - 1)}"
+    <div class="breadcrumbs-inner">
+      <div class="breadcrumbs">
+        <div
+          class="breadcrumb"
+          *ngFor="let breadcrumb of breadcrumbs; let i = index"
+          @breadcrumbFade
+          [@.disabled]="i === 0"
         >
-          <ng-container *ngIf="i === 0">
-            <mat-icon fontSet="fa" fontIcon="fa-home"></mat-icon>
-          </ng-container>
-          <ng-container *ngIf="i !== 0">{{breadcrumb.title | translate}}</ng-container>
-        </a>
-        <mat-icon
-          *ngIf="i !== (breadcrumbs.length - 1)"
-          fontSet="fa"
-          fontIcon="fa-chevron-right"
-          class="chevron"
-        >
-        </mat-icon>
+          <a
+            mat-button
+            [routerLink]="breadcrumb.link"
+            [ngClass]="{'home': i === 0, 'last': i === (breadcrumbs.length - 1)}"
+          >
+            <ng-container *ngIf="i === 0">
+              <mat-icon fontSet="fa" fontIcon="fa-home"></mat-icon>
+            </ng-container>
+            <ng-container *ngIf="i !== 0">{{breadcrumb.title | translate}}</ng-container>
+          </a>
+          <mat-icon
+            *ngIf="i !== (breadcrumbs.length - 1)"
+            fontSet="fa"
+            fontIcon="fa-chevron-right"
+            class="chevron"
+          >
+          </mat-icon>
+        </div>
       </div>
     </div>
   </div>

@@ -47,6 +47,12 @@
             "scripts": [
               "./node_modules/hammerjs/hammer.min.js",
               "node_modules/@fortawesome/fontawesome-free/js/all.js"
+            ],
+            "allowedCommonJsDependencies": [
+              "keycloak-js",
+              "formiojs",
+              "lodash",
+              "zen-observable"
             ]
           },
           "configurations": {

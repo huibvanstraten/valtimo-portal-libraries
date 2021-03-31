@@ -77,7 +77,7 @@ export const HttpLoaderFactory = (http: HttpClient) => new MultiTranslateHttpLoa
     BreadcrumbsServiceModule,
     BreadcrumbsModule,
     GraphQLModule,
-    AnimatedDotsServiceModule
+    AnimatedDotsServiceModule,
   ],
   bootstrap: [AppComponent]
 })

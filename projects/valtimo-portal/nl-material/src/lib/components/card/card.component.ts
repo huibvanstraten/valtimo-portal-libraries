@@ -31,6 +31,7 @@ export class CardComponent implements OnInit {
 
   readonly introductionType = CardType.introduction;
   readonly reminderType = CardType.reminder;
+  readonly casePreviewType = CardType.casePreview;
 
   constructor() {
   }

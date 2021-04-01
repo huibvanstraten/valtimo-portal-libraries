@@ -54,7 +54,7 @@ mat-card {
   }
 
   mat-card-title {
-    font-size: $font-xl;
+    font-size: $font-xxl;
     font-weight: bold;
   }
 
@@ -68,10 +68,18 @@ mat-card {
   }
 }
 
-.reminder {
+.reminder, .case-preview {
   box-shadow: none;
-  background-color: $nl-material-warn-background;
   padding: 26px;
+
+  mat-card-content {
+    font-size: $font-smaller;
+    line-height: $font-larger;
+  }
+}
+
+.reminder {
+  background-color: $nl-material-warn-background;
 
   mat-card-title {
     font-size: $font-medium;
@@ -79,12 +87,18 @@ mat-card {
     font-weight: bold;
   }
 
-  mat-card-content {
-    font-size: $font-smaller;
-    line-height: $font-larger;
-  }
-
   .mat-icon {
     color: $nl-material-warn;
   }
+}
+
+.case-preview {
+  mat-card-title {
+    font-size: $font-large;
+    line-height: $font-xl;
+    font-weight: bold;
+    color: $nl-material-primary;
+  }
+
+  background-color: $nl-lightest-gray;
 }

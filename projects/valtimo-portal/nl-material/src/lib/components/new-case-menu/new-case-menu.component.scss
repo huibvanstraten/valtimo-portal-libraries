@@ -33,7 +33,9 @@
 }
 
 .new-case-menu-container {
-  @include layout-bp(gt-xs) {
-    padding: 16px;
+  padding-left: 26px;
+
+  @include layout-bp(gt-sm) {
+    padding: 26px;
   }
 }

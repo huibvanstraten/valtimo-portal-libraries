@@ -14,7 +14,14 @@
   ~ limitations under the License.
   -->
 
-<mat-card [ngClass]="{'has-icon': icon,'introduction': type === introductionType, 'reminder': type === reminderType}">
+<mat-card
+  [ngClass]="{
+  'has-icon': icon,
+  'introduction': type === introductionType,
+  'reminder': type === reminderType,
+  'case-preview': type === casePreviewType
+  }"
+>
   <mat-icon *ngIf="icon" fontSet="fa" [fontIcon]="'fa-' + icon"></mat-icon>
   <div class="mat-card-content-container">
     <mat-card-title>{{title}}</mat-card-title>

@@ -49,6 +49,6 @@
 
 .mat-drawer-content {
   @include layout-bp(gt-sm) {
-    overflow: hidden;
+    overflow: visible;
   }
 }

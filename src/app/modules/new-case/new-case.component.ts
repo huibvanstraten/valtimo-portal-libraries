@@ -71,7 +71,7 @@ export class NewCaseComponent implements OnInit, OnDestroy {
     ).subscribe((params) => {
         this.breadcrumbsService.lastBreadcrumbTitle =
           this.translateService.instant(
-            `caseStrings.${params.id}.new`
+            `${params.id}.new`
           );
       }
     );

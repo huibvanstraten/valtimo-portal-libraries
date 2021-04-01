@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {CasePreview} from '../../interfaces';
+import {CardType} from '../../enums';
 
 const mockCasePreview: CasePreview = {
   id: 'XXX',
@@ -30,6 +31,8 @@ const mockCasePreview: CasePreview = {
 })
 export class CasePreviewComponent implements OnInit {
   @Input() preview: CasePreview = mockCasePreview;
+
+  readonly casePreviewType = CardType.casePreview;
 
   constructor() {
   }

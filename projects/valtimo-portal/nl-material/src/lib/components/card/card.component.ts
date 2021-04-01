@@ -26,7 +26,6 @@ export class CardComponent implements OnInit {
   @Input() type: CardType = CardType.default;
   @Input() title!: string;
   @Input() subtitle!: string;
-  @Input() content!: string;
   @Input() buttonText!: string;
   @Input() icon!: string;
 

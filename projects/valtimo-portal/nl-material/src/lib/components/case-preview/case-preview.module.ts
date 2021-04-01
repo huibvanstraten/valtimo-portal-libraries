@@ -17,11 +17,15 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {CasePreviewComponent} from './case-preview.component';
+import {CardModule} from '../card';
+import {TranslateModule} from '@ngx-translate/core';
 
 @NgModule({
   declarations: [CasePreviewComponent],
   imports: [
-    CommonModule
+    CommonModule,
+    CardModule,
+    TranslateModule
   ],
   exports: [CasePreviewComponent]
 })

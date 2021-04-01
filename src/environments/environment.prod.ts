@@ -25,7 +25,12 @@ export const environment: Environment = {
   },
   translation: {
     supportedLocales: ['nl', 'en'],
-    defaultLocaleIndex: 0
+    defaultLocaleIndex: 0,
+    resources: [
+      {prefix: './translate/', suffix: '.json'},
+      {prefix: './translate/home/', suffix: '.json'},
+      {prefix: './translate/definitions/form-example/', suffix: '.json'}
+    ]
   },
   authentication: {
     provider: AuthenticationProvider.keycloak,

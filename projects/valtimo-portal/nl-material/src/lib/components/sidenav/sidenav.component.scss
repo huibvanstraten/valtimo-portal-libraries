@@ -46,3 +46,9 @@
   box-shadow: none;
   border-right: solid 1px $nl-medium-gray;
 }
+
+.mat-drawer-content {
+  @include layout-bp(gt-sm) {
+    overflow: hidden;
+  }
+}

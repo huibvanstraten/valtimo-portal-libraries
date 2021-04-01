@@ -20,6 +20,10 @@
 mat-card {
   display: flex;
 
+  button:not(:last-child) {
+    margin-right: 26px;
+  }
+
   .mat-icon {
     margin-right: 20px;
     margin-bottom: 20px;
@@ -42,6 +46,7 @@ mat-card {
       }
     }
   }
+
 }
 
 .introduction {
@@ -106,6 +111,22 @@ mat-card {
     margin: 0 -26px;
     padding: 0 26px;
     padding-bottom: 26px;
+  }
+
+  .mat-card-content {
+    margin-bottom: 26px
+  }
+
+  .mat-button {
+    color: $nl-dark-gray;
+
+    .mat-icon {
+      width: 11px;
+      margin: 0;
+      margin-right: 10px;
+      height: auto;
+      margin-bottom: 3px;
+    }
   }
 
   background-color: $nl-lightest-gray;

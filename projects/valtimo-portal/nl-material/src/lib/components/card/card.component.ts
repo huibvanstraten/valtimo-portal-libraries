@@ -27,6 +27,7 @@ export class CardComponent implements OnInit {
   @Input() title!: string;
   @Input() subtitle!: string;
   @Input() buttonText!: string;
+  @Input() secondaryButtonText!: string;
   @Input() icon!: string;
 
   readonly introductionType = CardType.introduction;

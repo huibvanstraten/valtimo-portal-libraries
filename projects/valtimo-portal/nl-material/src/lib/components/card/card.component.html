@@ -30,8 +30,15 @@
     <mat-card-content>
       <ng-content></ng-content>
     </mat-card-content>
-    <ng-container *ngIf="buttonText && type === reminderType">
-      <button mat-flat-button color="warn">{{buttonText}}</button>
-    </ng-container>
+    <button *ngIf="buttonText && type === reminderType" mat-flat-button color="warn">{{buttonText}}</button>
+    <button *ngIf="buttonText && type === casePreviewType" mat-flat-button color="accent">{{buttonText}}</button>
+    <button
+      *ngIf="secondaryButtonText && type === casePreviewType"
+      mat-button
+      color="primary"
+    >
+      <mat-icon fontSet="fa" fontIcon="fa-arrow-right"></mat-icon>
+      {{secondaryButtonText}}
+    </button>
   </div>
 </mat-card>

@@ -22,6 +22,7 @@ nl-material-navigation-menu, .page-container {
 
 nl-material-sidenav {
   height: 100%;
+  padding-bottom: 50px;
 
   @include layout-bp(sm) {
     height: calc(100% - 79px);

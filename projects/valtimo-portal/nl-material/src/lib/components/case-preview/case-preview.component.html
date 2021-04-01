@@ -2,10 +2,18 @@
   [type]="casePreviewType"
   [title]="preview.title"
 >
-  <ul>
-    <li *ngFor="let task of preview.tasks">
-      <span>{{task.title}}</span>
-      <span>{{task.date | date}}</span>
+  <ul class="tasks">
+    <li class="task" *ngFor="let task of preview.tasks">
+      <div class="circle-icon" [ngClass]="{'empty': !task.completed}">
+        <mat-icon *ngIf="task.completed" fontSet="fa" fontIcon="fa-check"></mat-icon>
+        <mat-icon *ngIf="getOpenTasks(preview.tasks)[0] === task" fontSet="fa" fontIcon="fa-arrow-right"></mat-icon>
+      </div>
+      <div class="description">
+        <span>{{task.title}}</span>
+        <span *ngIf="currentLang$ | async as currentLang">
+          {{task.date | date: 'shortDate' : '' : currentLang}}
+        </span>
+      </div>
     </li>
   </ul>
 </nl-material-card>

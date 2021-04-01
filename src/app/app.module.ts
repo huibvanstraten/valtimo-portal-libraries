@@ -37,6 +37,9 @@ import {KeycloakAngularModule, KeycloakService} from 'keycloak-angular';
 import {initializeKeycloak, KeycloakAppAuthGuard} from '@valtimo-portal/authentication';
 import {GraphQLModule} from '@valtimo-portal/graphql';
 import {Environment} from "@valtimo-portal/shared";
+import {registerLocaleData} from "@angular/common";
+import localeEn from '@angular/common/locales/en';
+import localeNl from '@angular/common/locales/nl';
 
 export const HttpLoaderFactory = (http: HttpClient, env: Environment) =>
   new MultiTranslateHttpLoader(http, env.translation.resources);
@@ -85,5 +88,16 @@ export class AppModule {
     const translationEnv = environment.translation;
     const defaultLocaleIndex = translationEnv.defaultLocaleIndex || 0;
     translateService.setDefaultLang(translationEnv.supportedLocales[defaultLocaleIndex]);
+
+    environment.translation.supportedLocales.forEach((locale) => {
+      switch (locale) {
+        case 'nl':
+          registerLocaleData(localeNl, 'nl');
+          break;
+        case 'en':
+          registerLocaleData(localeEn, 'en');
+          break;
+      }
+    });
   }
 }

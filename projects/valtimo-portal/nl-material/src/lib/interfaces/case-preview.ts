@@ -14,12 +14,16 @@
  * limitations under the License.
  */
 
-export interface CasePreview {
+interface TaskPreview {
+  title: string;
+  date: Date;
+  completed: boolean;
+}
+
+interface CasePreview {
   id: string;
   title: string;
-  tasks: Array<{
-    title: string;
-    date: Date;
-    completed: boolean
-  }>;
+  tasks: Array<TaskPreview>;
 }
+
+export {TaskPreview, CasePreview};

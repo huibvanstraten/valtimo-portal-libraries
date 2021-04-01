@@ -1,6 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {CasePreview} from '../../interfaces';
+import {Component, Input} from '@angular/core';
+import {CasePreview, TaskPreview} from '../../interfaces';
 import {CardType} from '../../enums';
+import {SidenavService} from "../../services";
+import {Observable} from "rxjs";
 
 const mockCasePreview: CasePreview = {
   id: 'XXX',
@@ -29,15 +31,20 @@ const mockCasePreview: CasePreview = {
   templateUrl: './case-preview.component.html',
   styleUrls: ['./case-preview.component.scss']
 })
-export class CasePreviewComponent implements OnInit {
+export class CasePreviewComponent {
   @Input() preview: CasePreview = mockCasePreview;
+
+  currentLang$!: Observable<string>;
+
 
   readonly casePreviewType = CardType.casePreview;
 
-  constructor() {
+
+  constructor(private sidenavService: SidenavService) {
+    this.currentLang$ = this.sidenavService.currentLang$;
   }
 
-  ngOnInit(): void {
+  getOpenTasks(tasks: Array<TaskPreview>): Array<TaskPreview> {
+    return tasks.filter((task) => !task.completed);
   }
-
 }

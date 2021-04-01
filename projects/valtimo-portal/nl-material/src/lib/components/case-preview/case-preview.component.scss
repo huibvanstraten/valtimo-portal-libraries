@@ -1,0 +1,44 @@
+@import "colors";
+@import "variables";
+
+.tasks {
+  padding-left: 0;
+}
+
+.task {
+  border-left: 1px solid $nl-light-gray;
+  margin-left: 17px;
+  display: flex;
+  flex-direction: row;
+}
+
+.circle-icon {
+  margin-left: -17px;
+  background-color: #1261a3;
+  border: solid 1px #1261a3;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  margin-right: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .mat-icon {
+    color: white;
+    font-size: 12px;
+  }
+
+  &.empty {
+    background-color: #FAFAFA;
+
+    .mat-icon {
+      color: #1261a3;
+    }
+  }
+}
+
+.description {
+  display: flex;
+  flex-direction: column;
+}

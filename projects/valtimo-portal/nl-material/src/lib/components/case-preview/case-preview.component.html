@@ -2,6 +2,10 @@
   [type]="casePreviewType"
   [title]="preview.id + '.my' | translate"
 >
+  <div extra class="clip">
+    <img src="assets/img/clip/clip_top.svg"/>
+    <img src="assets/img/clip/clip_bottom.svg"/>
+  </div>
   <ul class="tasks">
     <li class="task" *ngFor="let task of preview.tasks">
       <div class="circle-icon" [ngClass]="{'empty': !task.completed}">

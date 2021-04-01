@@ -22,6 +22,7 @@
   'case-preview': type === casePreviewType
   }"
 >
+  <ng-content select="[extra]"></ng-content>
   <mat-icon *ngIf="icon" fontSet="fa" [fontIcon]="'fa-' + icon"></mat-icon>
   <div class="mat-card-content-container">
     <mat-card-title>{{title}}</mat-card-title>

@@ -1,0 +1,12 @@
+{
+  "grant-application": {
+    "wouldLikeTo": "subsidie aanvragen",
+    "new": "Nieuwe subsidie-aanvraag",
+    "my": "Mijn subsidie-aanvraag",
+    "tasks": {
+      "submitted": "Aanvraag ingediend",
+      "processed": "Aanvraag bekeken",
+      "plan": "Projectidee ingediend"
+    }
+  }
+}

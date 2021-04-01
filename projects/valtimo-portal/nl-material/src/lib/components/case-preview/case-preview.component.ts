@@ -5,21 +5,20 @@ import {SidenavService} from "../../services";
 import {Observable} from "rxjs";
 
 const mockCasePreview: CasePreview = {
-  id: 'XXX',
-  title: 'Aanvraag subsidie',
+  id: 'grant-application',
   tasks: [
     {
-      title: 'Aanvraag ingediend',
+      id: 'submitted',
       date: new Date(2021, 2, 20),
       completed: true
     },
     {
-      title: 'Aanvraag bekeken',
+      id: 'processed',
       date: new Date(2020, 2, 21),
       completed: false
     },
     {
-      title: 'Projectidee ingediend',
+      id: 'plan',
       date: new Date(2020, 4, 31),
       completed: false
     }

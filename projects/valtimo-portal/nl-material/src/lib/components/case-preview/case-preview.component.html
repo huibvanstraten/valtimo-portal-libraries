@@ -1,6 +1,6 @@
 <nl-material-card
   [type]="casePreviewType"
-  [title]="preview.title"
+  [title]="preview.id + '.my' | translate"
 >
   <ul class="tasks">
     <li class="task" *ngFor="let task of preview.tasks">
@@ -9,7 +9,7 @@
         <mat-icon *ngIf="getOpenTasks(preview.tasks)[0] === task" fontSet="fa" fontIcon="fa-arrow-right"></mat-icon>
       </div>
       <div class="description">
-        <span>{{task.title}}</span>
+        <span>{{preview.id + '.tasks.' + task.id | translate}}</span>
         <span *ngIf="currentLang$ | async as currentLang">
           {{task.date | date: 'shortDate' : '' : currentLang}}
         </span>

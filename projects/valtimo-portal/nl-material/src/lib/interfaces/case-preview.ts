@@ -15,14 +15,14 @@
  */
 
 interface TaskPreview {
-  title: string;
+  id: string;
   date: Date;
   completed: boolean;
 }
 
 interface CasePreview {
   id: string;
-  title: string;
+  code?: string;
   tasks: Array<TaskPreview>;
 }
 

@@ -93,11 +93,19 @@ mat-card {
 }
 
 .case-preview {
+  .mat-card-content-container {
+    width: 100%;
+  }
+
   mat-card-title {
     font-size: $font-large;
     line-height: $font-xl;
     font-weight: bold;
     color: $nl-material-primary;
+    border-bottom: solid 1px $nl-lighter-gray;
+    margin: 0 -26px;
+    padding: 0 26px;
+    padding-bottom: 26px;
   }
 
   background-color: $nl-lightest-gray;

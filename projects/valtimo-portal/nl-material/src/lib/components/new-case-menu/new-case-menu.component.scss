@@ -33,8 +33,6 @@
 }
 
 .new-case-menu-container {
-  padding-left: 26px;
-
   @include layout-bp(gt-sm) {
     padding: 26px;
   }

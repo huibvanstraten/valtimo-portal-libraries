@@ -19,6 +19,7 @@
 /* Material */
 
 $nl-material-primary: map-get($nl-material-primary-palette, 500);
+$nl-material-primary-light: map-get($nl-material-primary-palette, 100);
 
 $nl-material-accent: map-get($nl-material-accent-palette, 500);
 

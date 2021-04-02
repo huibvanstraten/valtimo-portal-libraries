@@ -19,9 +19,9 @@ import {CommonModule} from '@angular/common';
 
 import {CasesRoutingModule} from './cases-routing.module';
 import {CasesComponent} from './cases.component';
-import {CasePreviewModule} from "@valtimo-portal/nl-material";
-import {FlexLayoutModule} from "@angular/flex-layout";
-import {TranslateModule} from "@ngx-translate/core";
+import {CasePreviewModule} from '@valtimo-portal/nl-material';
+import {FlexLayoutModule} from '@angular/flex-layout';
+import {TranslateModule} from '@ngx-translate/core';
 
 @NgModule({
   declarations: [CasesComponent],

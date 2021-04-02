@@ -16,7 +16,7 @@
 
 import {Authentication} from '../types';
 import {GraphQLNamedClient} from './graphql';
-import {ITranslationResource} from "ngx-translate-multi-http-loader";
+import {ITranslationResource} from 'ngx-translate-multi-http-loader';
 
 export interface Environment {
   flags: {

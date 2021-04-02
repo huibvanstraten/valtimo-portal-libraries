@@ -19,8 +19,8 @@ import {CommonModule} from '@angular/common';
 import {CasePreviewComponent} from './case-preview.component';
 import {CardModule} from '../card';
 import {TranslateModule} from '@ngx-translate/core';
-import {MatIconModule} from "@angular/material/icon";
-import {SidenavServiceModule} from "../../services";
+import {MatIconModule} from '@angular/material/icon';
+import {SidenavServiceModule} from '../../services';
 
 @NgModule({
   declarations: [CasePreviewComponent],

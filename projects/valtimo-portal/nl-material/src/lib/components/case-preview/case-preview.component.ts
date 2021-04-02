@@ -1,8 +1,8 @@
 import {Component, Input} from '@angular/core';
 import {CasePreview, TaskPreview} from '../../interfaces';
 import {CardType, CasePreviewMode} from '../../enums';
-import {SidenavService} from "../../services";
-import {Observable} from "rxjs";
+import {SidenavService} from '../../services';
+import {Observable} from 'rxjs';
 
 const mockCasePreview: CasePreview = {
   id: 'grant-application',
@@ -36,9 +36,10 @@ export class CasePreviewComponent {
 
   currentLang$!: Observable<string>;
 
-
-  readonly casePreviewType = CardType.casePreview;
-
+  readonly casePreviewClippingType = CardType.casePreviewClipping;
+  readonly casePreviewCurrentType = CardType.casePreviewCurrent;
+  readonly clippingPreviewMode = CasePreviewMode.clipping;
+  readonly currentPreviewMode = CasePreviewMode.current;
 
   constructor(private sidenavService: SidenavService) {
     this.currentLang$ = this.sidenavService.currentLang$;

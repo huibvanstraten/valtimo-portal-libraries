@@ -36,8 +36,8 @@ import {environment} from '../environments';
 import {KeycloakAngularModule, KeycloakService} from 'keycloak-angular';
 import {initializeKeycloak, KeycloakAppAuthGuard} from '@valtimo-portal/authentication';
 import {GraphQLModule} from '@valtimo-portal/graphql';
-import {Environment} from "@valtimo-portal/shared";
-import {registerLocaleData} from "@angular/common";
+import {Environment} from '@valtimo-portal/shared';
+import {registerLocaleData} from '@angular/common';
 import localeEn from '@angular/common/locales/en';
 import localeNl from '@angular/common/locales/nl';
 

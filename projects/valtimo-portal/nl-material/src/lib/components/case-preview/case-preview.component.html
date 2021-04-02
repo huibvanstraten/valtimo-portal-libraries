@@ -1,10 +1,10 @@
 <nl-material-card
-  [type]="casePreviewType"
+  [type]="mode === clippingPreviewMode ? casePreviewClippingType : casePreviewCurrentType"
   [title]="preview.id + '.my' | translate"
   [buttonText]="'Stel een vraag'"
   [secondaryButtonText]="'Bekijk aanvraag'"
 >
-  <div extra class="clip">
+  <div extra class="clip" *ngIf="mode === clippingPreviewMode">
     <img src="assets/img/clip/clip_top.svg"/>
     <img src="assets/img/clip/clip_bottom.svg"/>
   </div>

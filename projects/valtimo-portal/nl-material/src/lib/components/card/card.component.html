@@ -19,7 +19,8 @@
   'has-icon': icon,
   'introduction': type === introductionType,
   'reminder': type === reminderType,
-  'case-preview': type === casePreviewType
+  'case-preview-clipping': type === casePreviewClippingType,
+    'case-preview-current': type === casePreviewCurrentType
   }"
 >
   <ng-content select="[extra]"></ng-content>
@@ -31,9 +32,10 @@
       <ng-content></ng-content>
     </mat-card-content>
     <button *ngIf="buttonText && type === reminderType" mat-flat-button color="warn">{{buttonText}}</button>
-    <button *ngIf="buttonText && type === casePreviewType" mat-flat-button color="accent">{{buttonText}}</button>
+    <button *ngIf="buttonText && type === casePreviewClippingType" mat-flat-button
+            color="accent">{{buttonText}}</button>
     <button
-      *ngIf="secondaryButtonText && type === casePreviewType"
+      *ngIf="secondaryButtonText && type === casePreviewClippingType"
       mat-button
       color="primary"
     >

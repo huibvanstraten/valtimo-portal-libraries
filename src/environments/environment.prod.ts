@@ -29,6 +29,7 @@ export const environment: Environment = {
     resources: [
       {prefix: './translate/', suffix: '.json'},
       {prefix: './translate/home/', suffix: '.json'},
+      {prefix: './translate/cases/', suffix: '.json'},
       {prefix: './translate/definitions/form-example/', suffix: '.json'},
       {prefix: './translate/definitions/grant-application/', suffix: '.json'}
     ]

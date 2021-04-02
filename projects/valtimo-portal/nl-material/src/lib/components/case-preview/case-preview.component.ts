@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {CasePreview, TaskPreview} from '../../interfaces';
-import {CardType} from '../../enums';
+import {CardType, CasePreviewMode} from '../../enums';
 import {SidenavService} from "../../services";
 import {Observable} from "rxjs";
 
@@ -32,6 +32,7 @@ const mockCasePreview: CasePreview = {
 })
 export class CasePreviewComponent {
   @Input() preview: CasePreview = mockCasePreview;
+  @Input() mode: CasePreviewMode = CasePreviewMode.clipping;
 
   currentLang$!: Observable<string>;
 

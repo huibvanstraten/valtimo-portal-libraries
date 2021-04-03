@@ -12,15 +12,15 @@
   <ul class="tasks">
     <li
       class="task"
-      *ngFor="let task of ((mode === clippingPreviewMode) ? preview.tasks :getCurrentCaseTasks(preview.tasks))"
+      *ngFor="let task of ((mode === clippingPreviewMode) ? preview.tasks : getCurrentCaseTasks(preview.tasks)); let i = index"
     >
       <div class="circle-icon" [ngClass]="{'empty': !task.completed}">
         <mat-icon *ngIf="task.completed" fontSet="fa" fontIcon="fa-check"></mat-icon>
         <mat-icon *ngIf="getOpenTasks(preview.tasks)[0] === task" fontSet="fa" fontIcon="fa-arrow-right"></mat-icon>
       </div>
-      <div class="description">
+      <div class="description" *ngIf="mode === clippingPreviewMode || i !== 0">
         <span>{{preview.id + '.tasks.' + task.id | translate}}</span>
-        <span *ngIf="currentLang$ | async as currentLang">
+        <span *ngIf="(mode === clippingPreviewMode) && (currentLang$ | async) as currentLang">
           {{task.date | date: 'shortDate' : '' : currentLang}}
         </span>
       </div>

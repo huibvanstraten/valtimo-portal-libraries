@@ -9,11 +9,13 @@
     <img src="assets/img/clip/clip_top.svg"/>
     <img src="assets/img/clip/clip_bottom.svg"/>
   </div>
-  <ul class="tasks">
+  <ul class="tasks" [ngClass]="mode === currentPreviewMode ? 'current' : ''">
     <li
       class="task"
       *ngFor="let task of ((mode === clippingPreviewMode) ? preview.tasks : getCurrentCaseTasks(preview.tasks)); let i = index"
+      [ngClass]="mode === currentPreviewMode && i === 0 ? 'first' : ''"
     >
+      <div class="line" *ngIf="mode === currentPreviewMode && i === 0"></div>
       <div class="circle-icon" [ngClass]="{'empty': !task.completed}">
         <mat-icon *ngIf="task.completed" fontSet="fa" fontIcon="fa-check"></mat-icon>
         <mat-icon *ngIf="getOpenTasks(preview.tasks)[0] === task" fontSet="fa" fontIcon="fa-arrow-right"></mat-icon>

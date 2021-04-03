@@ -6,6 +6,7 @@ import {Observable} from 'rxjs';
 
 const mockCasePreview: CasePreview = {
   id: 'grant-application',
+  code: 'xxx',
   tasks: [
     {
       id: 'submitted',
@@ -47,5 +48,17 @@ export class CasePreviewComponent {
 
   getOpenTasks(tasks: Array<TaskPreview>): Array<TaskPreview> {
     return tasks.filter((task) => !task.completed);
+  }
+
+  getCurrentCaseTasks(tasks: Array<TaskPreview>): Array<TaskPreview> {
+    if (tasks.length === 1) {
+      return tasks;
+    } else {
+      const completedTasks = tasks.filter((task) => task.completed);
+      const lastCompletedTaskIndex = completedTasks.length - 1;
+      const lastCompletedTask = completedTasks[lastCompletedTaskIndex];
+      const nextTask = tasks[lastCompletedTaskIndex + 1];
+      return [lastCompletedTask, nextTask].filter((value) => value);
+    }
   }
 }

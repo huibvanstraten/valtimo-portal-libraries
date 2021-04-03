@@ -73,7 +73,7 @@ mat-card {
   }
 }
 
-.reminder, .case-preview-clipping {
+.reminder, .case-preview-clipping, .case-preview-current {
   box-shadow: none;
   padding: 26px;
 
@@ -130,4 +130,19 @@ mat-card {
   }
 
   background-color: $nl-lightest-gray;
+}
+
+.case-preview-current {
+  mat-card-title {
+    font-size: $font-larger;
+    line-height: $font-largest;
+    color: $nl-dark-gray;
+  }
+
+  mat-card-subtitle {
+    font-size: $font-medium;
+    line-height: $font-largest;
+    font-weight: lighter;
+    text-transform: uppercase;
+  }
 }

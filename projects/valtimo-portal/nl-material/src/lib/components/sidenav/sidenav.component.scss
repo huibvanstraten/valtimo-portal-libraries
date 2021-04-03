@@ -23,6 +23,10 @@
 
 .mat-sidenav-container {
   min-height: 100% !important;
+
+  @include layout-bp(lt-md) {
+    height: 100% !important;
+  }
 }
 
 .nav-caption {

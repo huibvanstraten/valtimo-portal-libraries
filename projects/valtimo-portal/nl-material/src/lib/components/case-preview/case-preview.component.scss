@@ -27,8 +27,8 @@
 
 .circle-icon {
   margin-left: -17px;
-  background-color: #1261a3;
-  border: solid 1px #1261a3;
+  background-color: $nl-material-primary;
+  border: solid 1px $nl-material-primary;
   width: 32px;
   height: 32px;
   border-radius: 50%;
@@ -83,13 +83,14 @@
     border-bottom: none;
     display: flex;
     align-items: center;
+    margin-top: 16px;
 
     .task {
       border-left: 0;
       display: flex;
       height: 26px;
       align-items: center;
-      padding-left: 15px;
+      padding-left: 16px;
 
       .description {
         span {
@@ -132,6 +133,23 @@
           font-size: 8px;
         }
       }
+    }
+  }
+}
+
+.current-task-actions {
+  display: flex;
+  width: 100%;
+  margin-top: 24px;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: -24px !important;
+
+  button {
+    margin-right: -8px;
+
+    .mat-icon {
+      color: $nl-dark-gray;
     }
   }
 }

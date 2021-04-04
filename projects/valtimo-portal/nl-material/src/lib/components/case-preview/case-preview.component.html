@@ -1,31 +1,44 @@
 <nl-material-card
-  [type]="mode === clippingPreviewMode ? casePreviewClippingType : casePreviewCurrentType"
-  [title]="preview.id + '.my' | translate"
-  [subtitle]="(mode === currentPreviewMode) ? preview.code || '' : ''"
+  *ngIf="(currentLang$ | async) as currentLang"
   [buttonText]="'Stel een vraag'"
   [secondaryButtonText]="'Bekijk aanvraag'"
+  [subtitle]="(mode === currentPreviewMode) ? preview.code || '' : ''"
+  [title]="preview.id + '.my' | translate"
+  [type]="mode === clippingPreviewMode ? casePreviewClippingType : casePreviewCurrentType"
 >
-  <div extra class="clip" *ngIf="mode === clippingPreviewMode">
+  <div *ngIf="mode === clippingPreviewMode" class="clip" extra>
     <img src="assets/img/clip/clip_top.svg"/>
     <img src="assets/img/clip/clip_bottom.svg"/>
   </div>
-  <ul class="tasks" [ngClass]="mode === currentPreviewMode ? 'current' : ''">
+  <ul [ngClass]="mode === currentPreviewMode ? 'current' : ''" class="tasks">
     <li
-      class="task"
       *ngFor="let task of ((mode === clippingPreviewMode) ? preview.tasks : getCurrentCaseTasks(preview.tasks)); let i = index"
       [ngClass]="mode === currentPreviewMode && i === 0 ? 'first' : ''"
+      class="task"
     >
-      <div class="line" *ngIf="mode === currentPreviewMode && i === 0"></div>
-      <div class="circle-icon" [ngClass]="{'empty': !task.completed}">
-        <mat-icon *ngIf="task.completed" fontSet="fa" fontIcon="fa-check"></mat-icon>
-        <mat-icon *ngIf="getOpenTasks(preview.tasks)[0] === task" fontSet="fa" fontIcon="fa-arrow-right"></mat-icon>
+      <div *ngIf="mode === currentPreviewMode && i === 0" class="line"></div>
+      <div [ngClass]="{'empty': !task.completed}" class="circle-icon">
+        <mat-icon *ngIf="task.completed" fontIcon="fa-check" fontSet="fa"></mat-icon>
+        <mat-icon *ngIf="getOpenTasks(preview.tasks)[0] === task" fontIcon="fa-arrow-right" fontSet="fa"></mat-icon>
       </div>
-      <div class="description" *ngIf="mode === clippingPreviewMode || i !== 0">
-        <span>{{preview.id + '.tasks.' + task.id | translate}}</span>
-        <span *ngIf="(mode === clippingPreviewMode) && (currentLang$ | async) as currentLang">
+      <ng-container>
+        <div *ngIf="mode === clippingPreviewMode || i !== 0" class="description">
+          <span>{{preview.id + '.tasks.' + task.id | translate}}</span>
+          <span *ngIf="(mode === clippingPreviewMode)">
           {{task.date | date: 'shortDate' : '' : currentLang}}
         </span>
-      </div>
+        </div>
+      </ng-container>
+
     </li>
   </ul>
+  <div *ngIf="mode === currentPreviewMode && getCurrentCaseTasks(preview.tasks)[1] as task"
+       class="current-task-actions">
+    <span>
+      {{task.date | date: 'shortDate' : '' : currentLang}}
+    </span>
+    <button mat-button>
+      <mat-icon fontIcon="fa-arrow-right" fontSet="fa"></mat-icon>
+    </button>
+  </div>
 </nl-material-card>

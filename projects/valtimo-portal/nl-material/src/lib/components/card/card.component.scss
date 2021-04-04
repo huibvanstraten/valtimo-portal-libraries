@@ -133,6 +133,9 @@ mat-card {
 }
 
 .case-preview-current {
+  background-color: $nl-case-preview-gray;
+  border-radius: 5px;
+
   mat-card-title {
     font-size: $font-larger;
     line-height: $font-largest;
@@ -144,5 +147,9 @@ mat-card {
     line-height: $font-largest;
     font-weight: lighter;
     text-transform: uppercase;
+  }
+
+  .mat-card-content-container {
+    width: 100%;
   }
 }

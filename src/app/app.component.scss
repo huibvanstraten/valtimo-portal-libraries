@@ -26,10 +26,12 @@ nl-material-sidenav {
 
   @include layout-bp(sm) {
     height: calc(100% - 79px);
+    padding-bottom: 0;
   }
 
   @include layout-bp(xs) {
     height: calc(100% - 57px);
+    padding-bottom: 0;
   }
 }
 

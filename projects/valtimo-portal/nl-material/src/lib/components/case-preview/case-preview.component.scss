@@ -153,3 +153,34 @@
     }
   }
 }
+
+.top-right-folder-design {
+  background-color: $nl-lighter-gray;
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 23px;
+  width: 130px;
+  overflow: hidden;
+
+  .inner {
+    background-color: white;
+    border-radius: 5px;
+    width: 115px;
+    height: 21px;
+    margin-top: 10px;
+    margin-left: -5px;
+  }
+
+  .diagonal {
+    background-color: $nl-case-preview-gray;
+    height: 40px;
+    position: absolute;
+    width: 20px;
+    transform: rotate(
+        -30deg
+    );
+    margin-top: -8px;
+    margin-left: -5px;
+  }
+}

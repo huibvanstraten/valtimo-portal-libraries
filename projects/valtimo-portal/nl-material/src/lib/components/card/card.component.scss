@@ -135,6 +135,8 @@ mat-card {
 .case-preview-current {
   background-color: $nl-case-preview-gray;
   border-radius: 5px;
+  overflow: hidden;
+  padding-top: 32px;
 
   mat-card-title {
     font-size: $font-larger;

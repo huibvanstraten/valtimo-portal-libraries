@@ -10,6 +10,10 @@
     <img src="assets/img/clip/clip_top.svg"/>
     <img src="assets/img/clip/clip_bottom.svg"/>
   </div>
+  <div *ngIf="mode === currentPreviewMode" class="top-right-folder-design" extra>
+    <div class="diagonal"></div>
+    <div class="inner"></div>
+  </div>
   <ul [ngClass]="mode === currentPreviewMode ? 'current' : ''" class="tasks">
     <li
       *ngFor="let task of ((mode === clippingPreviewMode) ? preview.tasks : getCurrentCaseTasks(preview.tasks)); let i = index"

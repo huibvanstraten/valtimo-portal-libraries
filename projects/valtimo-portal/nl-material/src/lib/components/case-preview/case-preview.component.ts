@@ -61,4 +61,12 @@ export class CasePreviewComponent {
       return [lastCompletedTask, nextTask].filter((value) => value);
     }
   }
+
+  isClippingPreview(): boolean {
+    return this.mode === this.clippingPreviewMode;
+  }
+
+  isCurrentCasePreview(): boolean {
+    return this.mode === this.currentPreviewMode;
+  }
 }

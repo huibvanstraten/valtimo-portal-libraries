@@ -1,7 +1,14 @@
+import * as Types from '@valtimo-portal/graphql';
+
+import * as Apollo from 'apollo-angular';
+import {gql} from 'apollo-angular';
+import {Injectable} from '@angular/core';
+
 export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
+
 /** All built-in and custom scalars, mapped to their actual values */
 export interface Scalars {
   ID: string;
@@ -12,8 +19,6 @@ export interface Scalars {
   /** A type representing a formatted JSON */
   JSON: any;
 }
-
-
 
 
 export interface CaseCreated {
@@ -59,4 +64,38 @@ export interface Query {
 
 export interface QueryGetFormDefinitionArgs {
   name: Scalars['String'];
+}
+
+export type GetAllFormDefinitionsQueryVariables = Types.Exact<{ [key: string]: never; }>;
+
+
+export type GetAllFormDefinitionsQuery = (
+  { __typename?: 'Query' }
+  & {
+  allFormDefinitions: Array<(
+    { __typename?: 'FormDefinition' }
+    & Pick<Types.FormDefinition, 'formDefinition' | 'name'>
+    )>
+}
+  );
+
+export const GetAllFormDefinitionsDocument = gql`
+  query GetAllFormDefinitions {
+    allFormDefinitions {
+      formDefinition
+      name
+    }
+  }
+`;
+
+@Injectable({
+  providedIn: 'root'
+})
+export class GetAllFormDefinitionsGQL extends Apollo.Query<GetAllFormDefinitionsQuery, GetAllFormDefinitionsQueryVariables> {
+  document = GetAllFormDefinitionsDocument;
+  client = 'portal-api';
+
+  constructor(apollo: Apollo.Apollo) {
+    super(apollo);
+  }
 }

@@ -1,6 +1,0 @@
-query GetAvailableFormDefinitions {
-  availableFormDefinitions @namedClient(name: "portal-api") {
-    formDefinition
-    name
-  }
-}

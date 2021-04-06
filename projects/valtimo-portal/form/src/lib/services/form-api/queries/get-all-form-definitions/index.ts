@@ -14,4 +14,4 @@
  * limitations under the License.
  */
 
-export * from './get-available-form-definitions.graphql-gen';
+export * from './get-all-form-definitions.graphql-gen';

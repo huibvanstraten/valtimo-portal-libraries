@@ -35,7 +35,9 @@ export const environment: Environment = {
       {prefix: './translate/home/', suffix: '.json'},
       {prefix: './translate/cases/', suffix: '.json'},
       {prefix: './translate/definitions/form-example/', suffix: '.json'},
-      {prefix: './translate/definitions/grant-application/', suffix: '.json'}
+      {prefix: './translate/definitions/grant-application/', suffix: '.json'},
+      {prefix: './translate/definitions/person/', suffix: '.json'},
+      {prefix: './translate/definitions/test/', suffix: '.json'}
     ]
   },
   authentication: {

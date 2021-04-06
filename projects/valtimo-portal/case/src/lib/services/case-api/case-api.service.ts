@@ -15,30 +15,24 @@
  */
 
 import {Injectable} from '@angular/core';
-import {GetAllFormDefinitionsGQL} from './queries/get-all-form-definitions';
+import {GetAllCaseDefinitionsGQL} from './queries';
 import {map} from 'rxjs/operators';
-import {AvailableFormDefinition} from '../../interfaces';
-import {Observable} from 'rxjs';
+import {CaseDefinitionDto} from '@valtimo-portal/graphql';
 
 @Injectable({
   providedIn: 'root'
 })
-export class FormApiService {
+export class CaseApiService {
 
   constructor(
-    private getAllFormDefinitionsGQL: GetAllFormDefinitionsGQL
+    private getAllCaseDefinitionsGQL: GetAllCaseDefinitionsGQL
   ) {
   }
 
-  getAllFormDefinitions(): Observable<Array<AvailableFormDefinition>> {
-    return this.getAllFormDefinitionsGQL.fetch().pipe(
-      map((res) => (
-          res.data.allFormDefinitions.map((definition) => ({
-            name: definition.name,
-            definition: definition.formDefinition
-          })) as Array<AvailableFormDefinition>
-        )
-      )
-    );
+  getAllCaseDefinitions(): any {
+    return this.getAllCaseDefinitionsGQL.fetch()
+      .pipe(
+        map((res) => res.data.allCaseDefinitions as Array<CaseDefinitionDto>)
+      );
   }
 }

@@ -14,7 +14,7 @@ import {Router} from '@angular/router';
 })
 export class NewCaseMenuComponent implements OnInit, OnDestroy {
 
-  availableFormDefinitions$ = this.formApiService.getAvailableFormDefinitions();
+  availableFormDefinitions$ = this.formApiService.getAllFormDefinitions();
 
   routeLangSubscription!: Subscription;
 

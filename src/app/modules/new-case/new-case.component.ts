@@ -32,7 +32,7 @@ export class NewCaseComponent implements OnInit, OnDestroy {
 
   private langChangeSubscription!: Subscription;
 
-  formDefinition$ = combineLatest([this.route.queryParams, this.formApiService.getAvailableFormDefinitions()])
+  formDefinition$ = combineLatest([this.route.queryParams, this.formApiService.getAllFormDefinitions()])
     .pipe(
       map(
         ([params, definitions]) =>

@@ -15,10 +15,11 @@
  */
 
 import {Injectable} from '@angular/core';
-import {GetAllFormDefinitionsGQL} from './queries/get-all-form-definitions';
+import {GetAllFormDefinitionsGQL, GetFormDefinitionByNameGQL} from './queries';
 import {map} from 'rxjs/operators';
 import {AvailableFormDefinition} from '../../interfaces';
 import {Observable} from 'rxjs';
+import {FormioForm as FormDefinition} from '@formio/angular';
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +27,8 @@ import {Observable} from 'rxjs';
 export class FormApiService {
 
   constructor(
-    private getAllFormDefinitionsGQL: GetAllFormDefinitionsGQL
+    private getAllFormDefinitionsGQL: GetAllFormDefinitionsGQL,
+    private getFormDefinitionByNameGQL: GetFormDefinitionByNameGQL
   ) {
   }
 
@@ -35,10 +37,28 @@ export class FormApiService {
       map((res) => (
           res.data.allFormDefinitions.map((definition) => ({
             name: definition.name,
-            definition: definition.formDefinition
+            definition: this.convertFormDefinition(definition.formDefinition)
           })) as Array<AvailableFormDefinition>
         )
       )
     );
+  }
+
+  getFormDefinitionByName(name: string): Observable<FormDefinition> {
+    return this.getFormDefinitionByNameGQL.fetch({name}).pipe(
+      map((res) => this.convertFormDefinition(res.data.getFormDefinition?.formDefinition))
+    );
+  }
+
+  private convertFormDefinition(definition: FormDefinition): FormDefinition {
+    if (definition) {
+      return {
+        ...definition, components: definition?.components?.map((component) =>
+          ({...component, type: component.type === 'integer' ? 'number' : component.type})
+        )
+      };
+    } else {
+      return {};
+    }
   }
 }

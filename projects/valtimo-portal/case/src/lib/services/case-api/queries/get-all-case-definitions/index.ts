@@ -14,4 +14,4 @@
  * limitations under the License.
  */
 
-export * from './get-all-case-definitions.graphql-gen';
+export {GetAllCaseDefinitionsGQL} from './get-all-case-definitions.graphql-gen';

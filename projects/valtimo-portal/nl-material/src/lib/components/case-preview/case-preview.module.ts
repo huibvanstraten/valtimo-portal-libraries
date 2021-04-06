@@ -16,22 +16,24 @@
 
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-
-import {CasesRoutingModule} from './cases-routing.module';
-import {CasesComponent} from './cases.component';
-import {CasePreviewModule} from '@valtimo-portal/nl-material';
-import {FlexLayoutModule} from '@angular/flex-layout';
+import {CasePreviewComponent} from './case-preview.component';
+import {CardModule} from '../card';
 import {TranslateModule} from '@ngx-translate/core';
+import {MatIconModule} from '@angular/material/icon';
+import {SidenavServiceModule} from '../../services';
+import {MatButtonModule} from '@angular/material/button';
 
 @NgModule({
-  declarations: [CasesComponent],
+  declarations: [CasePreviewComponent],
   imports: [
     CommonModule,
-    FlexLayoutModule,
-    CasesRoutingModule,
-    CasePreviewModule,
+    CardModule,
     TranslateModule,
-  ]
+    MatIconModule,
+    SidenavServiceModule,
+    MatButtonModule
+  ],
+  exports: [CasePreviewComponent],
 })
-export class CasesModule {
+export class CasePreviewModule {
 }

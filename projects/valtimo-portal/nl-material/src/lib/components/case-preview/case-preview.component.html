@@ -1,0 +1,57 @@
+<nl-material-card
+  *ngIf="(currentLang$ | async) as currentLang"
+  [buttonText]="'Stel een vraag'"
+  [secondaryButtonText]="'Bekijk aanvraag'"
+  [subtitle]="(mode === currentPreviewMode) ? preview.code || '' : ''"
+  [title]="preview.id + '.my' | translate"
+  [type]="isClippingPreview() ? casePreviewClippingType : casePreviewCurrentType"
+>
+  <ng-container *ngTemplateOutlet="extras"></ng-container>
+  <ng-container *ngTemplateOutlet="tasks;context:{currentLang: currentLang}"></ng-container>
+  <ng-container *ngTemplateOutlet="currentCaseActions;context:{currentLang: currentLang}"></ng-container>
+</nl-material-card>
+
+<ng-template #extras>
+  <div *ngIf="isClippingPreview()" class="clip" extra>
+    <img src="assets/img/clip/clip_top.svg"/>
+    <img src="assets/img/clip/clip_bottom.svg"/>
+  </div>
+  <div *ngIf="isCurrentCasePreview()" class="top-right-folder-design" extra>
+    <div class="diagonal"></div>
+    <div class="inner"></div>
+  </div>
+</ng-template>
+
+<ng-template #tasks let-currentLang="currentLang">
+  <ul [ngClass]="mode === currentPreviewMode ? 'current' : ''" class="tasks">
+    <li
+      *ngFor="let task of (isClippingPreview() ? preview.tasks : getCurrentCaseTasks(preview.tasks)); let i = index"
+      [ngClass]="isCurrentCasePreview() && i === 0 ? 'first' : ''"
+      class="task"
+    >
+      <div *ngIf="isCurrentCasePreview() && i === 0" class="line"></div>
+      <div [ngClass]="{'empty': !task.completed}" class="circle-icon">
+        <mat-icon *ngIf="task.completed" fontIcon="fa-check" fontSet="fa"></mat-icon>
+        <mat-icon *ngIf="getOpenTasks(preview.tasks)[0] === task" fontIcon="fa-arrow-right" fontSet="fa"></mat-icon>
+      </div>
+      <div *ngIf="isClippingPreview() || i !== 0" class="description">
+        <span>{{preview.id + '.tasks.' + task.id | translate}}</span>
+        <span *ngIf="isClippingPreview()">
+          {{task.date | date: 'shortDate' : '' : currentLang}}
+        </span>
+      </div>
+    </li>
+  </ul>
+</ng-template>
+
+<ng-template #currentCaseActions let-currentLang="currentLang">
+  <div *ngIf="mode === currentPreviewMode && getCurrentCaseTasks(preview.tasks)[1] as task"
+       class="current-case-actions">
+    <span>
+      {{task.date | date: 'shortDate' : '' : currentLang}}
+    </span>
+    <button mat-button>
+      <mat-icon fontIcon="fa-arrow-right" fontSet="fa"></mat-icon>
+    </button>
+  </div>
+</ng-template>

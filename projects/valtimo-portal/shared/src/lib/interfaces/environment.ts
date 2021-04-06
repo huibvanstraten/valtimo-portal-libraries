@@ -16,6 +16,7 @@
 
 import {Authentication} from '../types';
 import {GraphQLNamedClient} from './graphql';
+import {ITranslationResource} from 'ngx-translate-multi-http-loader';
 
 export interface Environment {
   flags: {
@@ -24,6 +25,7 @@ export interface Environment {
   translation: {
     supportedLocales: Array<string>;
     defaultLocaleIndex?: number;
+    resources: Array<ITranslationResource>
   };
   styling: {
     logoImagePath: string;

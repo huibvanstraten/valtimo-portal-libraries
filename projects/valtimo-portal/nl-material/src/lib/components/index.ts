@@ -25,3 +25,4 @@ export * from './header-logo';
 export * from './language-selector';
 export * from './new-case-menu';
 export * from './form-io';
+export * from './case-preview';

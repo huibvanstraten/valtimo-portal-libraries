@@ -18,6 +18,7 @@
   <div fxLayout="row wrap">
     <ng-container *ngTemplateOutlet="introduction"></ng-container>
     <ng-container *ngTemplateOutlet="reminder"></ng-container>
+    <ng-container *ngTemplateOutlet="casePreview"></ng-container>
     <ng-container *ngTemplateOutlet="newCase"></ng-container>
   </div>
 </div>
@@ -35,8 +36,8 @@
         [type]="introductionType"
         [title]="'home.introduction.title' | translate:{firstName: (obs.firstName || obs.dots)}"
         [subtitle]="'home.introduction.subtitle' | translate"
-        [content]="'home.introduction.content' | translate"
       >
+        {{'home.introduction.content' | translate}}
       </nl-material-card>
     </ng-container>
 
@@ -52,11 +53,23 @@
     <nl-material-card
       [type]="reminderType"
       [title]="'home.reminder.title' | translate"
-      [content]="'home.reminder.content' | translate"
       [buttonText]="'home.reminder.buttonText' | translate"
       icon="exclamation-triangle"
     >
+      {{'home.reminder.content' | translate}}
     </nl-material-card>
+  </div>
+</ng-template>
+
+<ng-template #casePreview>
+  <div
+    fxFlex="50"
+    fxFlex.sm="100"
+    fxFlex.xs="100"
+    fxLayout="column"
+    style="padding: 16px;"
+  >
+    <nl-material-case-preview></nl-material-case-preview>
   </div>
 </ng-template>
 

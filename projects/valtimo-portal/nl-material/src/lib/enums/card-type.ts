@@ -17,5 +17,7 @@
 export enum CardType {
   default,
   introduction,
-  reminder
+  reminder,
+  casePreviewClipping,
+  casePreviewCurrent
 }

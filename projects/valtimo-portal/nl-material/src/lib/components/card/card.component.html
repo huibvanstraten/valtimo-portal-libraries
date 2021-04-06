@@ -14,14 +14,45 @@
   ~ limitations under the License.
   -->
 
-<mat-card [ngClass]="{'has-icon': icon,'introduction': type === introductionType, 'reminder': type === reminderType}">
+<mat-card
+  [ngClass]="{
+  'has-icon': icon,
+  'introduction': type === introductionType,
+  'reminder': type === reminderType,
+  'case-preview-clipping': type === casePreviewClippingType,
+  'case-preview-current': type === casePreviewCurrentType
+  }"
+>
+  <ng-content select="[extra]"></ng-content>
   <mat-icon *ngIf="icon" fontSet="fa" [fontIcon]="'fa-' + icon"></mat-icon>
-  <div class="mat-card-content-container">
-    <mat-card-title>{{title}}</mat-card-title>
-    <mat-card-subtitle>{{subtitle}}</mat-card-subtitle>
-    <mat-card-content>{{content}}</mat-card-content>
-    <ng-container *ngIf="buttonText && type === reminderType">
-      <button mat-flat-button color="warn">{{buttonText}}</button>
-    </ng-container>
-  </div>
+  <ng-container *ngTemplateOutlet="content"></ng-container>
 </mat-card>
+
+<ng-template #content>
+  <div class="mat-card-content-container">
+    <ng-container *ngTemplateOutlet="titles"></ng-container>
+    <mat-card-content>
+      <ng-content></ng-content>
+    </mat-card-content>
+    <ng-container *ngTemplateOutlet="buttons"></ng-container>
+  </div>
+</ng-template>
+
+<ng-template #titles>
+  <mat-card-title>{{title}}</mat-card-title>
+  <mat-card-subtitle *ngIf="subtitle">{{subtitle}}</mat-card-subtitle>
+</ng-template>
+
+<ng-template #buttons>
+  <button *ngIf="buttonText && type === reminderType" mat-flat-button color="warn">{{buttonText}}</button>
+  <button *ngIf="buttonText && type === casePreviewClippingType" mat-flat-button
+          color="accent">{{buttonText}}</button>
+  <button
+    *ngIf="secondaryButtonText && type === casePreviewClippingType"
+    mat-button
+    color="primary"
+  >
+    <mat-icon fontSet="fa" fontIcon="fa-arrow-right"></mat-icon>
+    {{secondaryButtonText}}
+  </button>
+</ng-template>

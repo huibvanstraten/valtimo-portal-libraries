@@ -14,24 +14,16 @@
  * limitations under the License.
  */
 
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-
-import {CasesRoutingModule} from './cases-routing.module';
-import {CasesComponent} from './cases.component';
-import {CasePreviewModule} from '@valtimo-portal/nl-material';
-import {FlexLayoutModule} from '@angular/flex-layout';
-import {TranslateModule} from '@ngx-translate/core';
-
-@NgModule({
-  declarations: [CasesComponent],
-  imports: [
-    CommonModule,
-    FlexLayoutModule,
-    CasesRoutingModule,
-    CasePreviewModule,
-    TranslateModule,
-  ]
-})
-export class CasesModule {
+interface TaskPreview {
+  id: string;
+  date: Date;
+  completed: boolean;
 }
+
+interface CasePreview {
+  id: string;
+  code?: string;
+  tasks: Array<TaskPreview>;
+}
+
+export {TaskPreview, CasePreview};

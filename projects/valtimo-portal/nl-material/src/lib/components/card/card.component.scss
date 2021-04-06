@@ -20,6 +20,10 @@
 mat-card {
   display: flex;
 
+  button:not(:last-child) {
+    margin-right: 26px;
+  }
+
   .mat-icon {
     margin-right: 20px;
     margin-bottom: 20px;
@@ -42,6 +46,7 @@ mat-card {
       }
     }
   }
+
 }
 
 .introduction {
@@ -54,7 +59,7 @@ mat-card {
   }
 
   mat-card-title {
-    font-size: $font-xl;
+    font-size: $font-xxl;
     font-weight: bold;
   }
 
@@ -68,10 +73,18 @@ mat-card {
   }
 }
 
-.reminder {
+.reminder, .case-preview-clipping, .case-preview-current {
   box-shadow: none;
-  background-color: $nl-material-warn-background;
   padding: 26px;
+
+  mat-card-content {
+    font-size: $font-smaller;
+    line-height: $font-larger;
+  }
+}
+
+.reminder {
+  background-color: $nl-material-warn-background;
 
   mat-card-title {
     font-size: $font-medium;
@@ -79,12 +92,66 @@ mat-card {
     font-weight: bold;
   }
 
-  mat-card-content {
-    font-size: $font-smaller;
-    line-height: $font-larger;
-  }
-
   .mat-icon {
     color: $nl-material-warn;
+  }
+}
+
+.case-preview-clipping {
+  .mat-card-content-container {
+    width: 100%;
+  }
+
+  mat-card-title {
+    font-size: $font-large;
+    line-height: $font-xl;
+    font-weight: bold;
+    color: $nl-material-primary;
+    border-bottom: solid 1px $nl-lighter-gray;
+    margin: 0 -26px;
+    padding: 0 26px;
+    padding-bottom: 26px;
+  }
+
+  .mat-card-content {
+    margin-bottom: 26px
+  }
+
+  .mat-button {
+    color: $nl-dark-gray;
+
+    .mat-icon {
+      width: 11px;
+      margin: 0;
+      margin-right: 10px;
+      height: auto;
+      margin-bottom: 3px;
+    }
+  }
+
+  background-color: $nl-lightest-gray;
+}
+
+.case-preview-current {
+  background-color: $nl-case-preview-gray;
+  border-radius: 5px;
+  overflow: hidden;
+  padding-top: 32px;
+
+  mat-card-title {
+    font-size: $font-larger;
+    line-height: $font-largest;
+    color: $nl-dark-gray;
+  }
+
+  mat-card-subtitle {
+    font-size: $font-medium;
+    line-height: $font-largest;
+    font-weight: lighter;
+    text-transform: uppercase;
+  }
+
+  .mat-card-content-container {
+    width: 100%;
   }
 }

@@ -14,7 +14,8 @@
  * limitations under the License.
  */
 
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {CasePreviewMode} from '@valtimo-portal/nl-material';
 
 @Component({
   selector: 'app-cases',
@@ -23,7 +24,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CasesComponent implements OnInit {
 
-  constructor() { }
+  currentPreviewMode = CasePreviewMode.current;
+
+  constructor() {
+  }
 
   ngOnInit(): void {
   }

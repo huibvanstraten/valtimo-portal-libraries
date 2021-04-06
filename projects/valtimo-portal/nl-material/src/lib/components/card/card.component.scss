@@ -45,6 +45,19 @@ mat-card {
         margin-bottom: 16px;
       }
     }
+
+    .buttons-container {
+      display: flex;
+      flex-direction: column;
+
+      button {
+        margin: 0;
+
+        &:not(:last-child) {
+          margin-bottom: 16px;
+        }
+      }
+    }
   }
 
 }

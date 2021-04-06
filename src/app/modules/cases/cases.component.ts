@@ -15,7 +15,7 @@
  */
 
 import {Component, OnInit} from '@angular/core';
-import {CasePreviewMode} from "@valtimo-portal/nl-material";
+import {CasePreviewMode} from '@valtimo-portal/nl-material';
 
 @Component({
   selector: 'app-cases',

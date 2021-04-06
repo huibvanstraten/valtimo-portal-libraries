@@ -17,7 +17,6 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {NewCaseMenuComponent} from './new-case-menu.component';
-import {FormApiServiceModule} from '@valtimo-portal/form';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatListModule} from '@angular/material/list';
 import {TranslateModule} from '@ngx-translate/core';
@@ -26,12 +25,13 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {RouterModule} from '@angular/router';
 import {SidenavServiceModule} from '../../services';
+import {CaseApiServiceModule} from '@valtimo-portal/case';
 
 @NgModule({
   declarations: [NewCaseMenuComponent],
   imports: [
     CommonModule,
-    FormApiServiceModule,
+    CaseApiServiceModule,
     MatMenuModule,
     MatListModule,
     TranslateModule,

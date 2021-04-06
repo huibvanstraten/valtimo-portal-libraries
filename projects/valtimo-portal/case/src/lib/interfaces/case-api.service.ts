@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
-export * from './case.module';
-export * from './services';
-export * from './interfaces';
+export interface AvailableCaseDefinition {
+  name: string;
+  schema: any;
+};

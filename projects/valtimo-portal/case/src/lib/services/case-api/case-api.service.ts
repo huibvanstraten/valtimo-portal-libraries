@@ -17,7 +17,8 @@
 import {Injectable} from '@angular/core';
 import {GetAllCaseDefinitionsGQL} from './queries';
 import {map} from 'rxjs/operators';
-import {CaseDefinitionDto} from '@valtimo-portal/graphql';
+import {AvailableCaseDefinition} from '../../interfaces';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -29,10 +30,13 @@ export class CaseApiService {
   ) {
   }
 
-  getAllCaseDefinitions(): any {
+  getAllCaseDefinitions(): Observable<Array<AvailableCaseDefinition>> {
     return this.getAllCaseDefinitionsGQL.fetch()
       .pipe(
-        map((res) => res.data.allCaseDefinitions as Array<CaseDefinitionDto>)
+        map((res) => res.data.allCaseDefinitions.map((definition) => ({
+          name: definition.id,
+          schema: definition.schema
+        })))
       );
   }
 }

@@ -37,7 +37,7 @@ export class FormApiService {
       map((res) => (
           res.data.allFormDefinitions.map((definition) => ({
             name: definition.name,
-            definition: this.convertFormDefinition(definition.formDefinition)
+            definition: definition.formDefinition
           })) as Array<AvailableFormDefinition>
         )
       )
@@ -46,19 +46,7 @@ export class FormApiService {
 
   getFormDefinitionByName(name: string): Observable<FormDefinition> {
     return this.getFormDefinitionByNameGQL.fetch({name}).pipe(
-      map((res) => this.convertFormDefinition(res.data.getFormDefinition?.formDefinition))
+      map((res) => res.data.getFormDefinition?.formDefinition)
     );
-  }
-
-  private convertFormDefinition(definition: FormDefinition): FormDefinition {
-    if (definition) {
-      return {
-        ...definition, components: definition?.components?.map((component) =>
-          ({...component, type: component.type === 'integer' ? 'number' : component.type})
-        )
-      };
-    } else {
-      return {};
-    }
   }
 }

@@ -50,7 +50,7 @@
 
     @include layout-bp(lt-md) {
       margin-top: 0;
-      height: 56px;
+      height: $header-height-small;
     }
 
     @include layout-bp(lt-sm) {

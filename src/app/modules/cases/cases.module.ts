@@ -19,7 +19,7 @@ import {CommonModule} from '@angular/common';
 
 import {CasesRoutingModule} from './cases-routing.module';
 import {CasesComponent} from './cases.component';
-import {CasePreviewModule} from '@valtimo-portal/nl-material';
+import {CasePreviewModule, SpinnerModule} from '@valtimo-portal/nl-material';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {TranslateModule} from '@ngx-translate/core';
 import {CaseApiServiceModule} from '@valtimo-portal/case';
@@ -32,7 +32,8 @@ import {CaseApiServiceModule} from '@valtimo-portal/case';
     CasesRoutingModule,
     CasePreviewModule,
     TranslateModule,
-    CaseApiServiceModule
+    CaseApiServiceModule,
+    SpinnerModule
   ]
 })
 export class CasesModule {

@@ -1,4 +1,5 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {ProgressSpinnerMode} from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'nl-material-spinner',
@@ -6,6 +7,10 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./spinner.component.scss']
 })
 export class SpinnerComponent implements OnInit {
+
+  @Input() mode: ProgressSpinnerMode = 'indeterminate';
+  @Input() diameter = 48;
+  @Input() strokeWidth = 6;
 
   constructor() {
   }

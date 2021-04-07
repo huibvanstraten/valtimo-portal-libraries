@@ -17,7 +17,7 @@
 import {Component, OnInit} from '@angular/core';
 import {CasePreview, CasePreviewMode} from '@valtimo-portal/nl-material';
 import {CaseApiService} from '@valtimo-portal/case';
-import {map} from 'rxjs/operators';
+import {delay, map} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 
 @Component({
@@ -31,6 +31,7 @@ export class CasesComponent implements OnInit {
 
   cases$: Observable<Array<CasePreview>> = this.caseApiService.getAllCaseInstances()
     .pipe(
+      delay(500),
       map((instances) => instances.map((instance) => (
           {
             id: instance.submision.firstName,

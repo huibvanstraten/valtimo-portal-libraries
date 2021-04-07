@@ -18,12 +18,14 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormIoComponent} from './form-io.component';
 import {MatFormioModule} from '@formio/angular-material';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   declarations: [FormIoComponent],
   imports: [
     CommonModule,
-    MatFormioModule
+    MatFormioModule,
+    MatIconModule
   ],
   exports: [FormIoComponent]
 })

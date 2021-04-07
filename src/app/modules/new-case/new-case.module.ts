@@ -19,7 +19,7 @@ import {CommonModule} from '@angular/common';
 
 import {NewCaseRoutingModule} from './new-case-routing.module';
 import {NewCaseComponent} from './new-case.component';
-import {FormIoModule} from '@valtimo-portal/nl-material';
+import {FormIoModule, SpinnerModule} from '@valtimo-portal/nl-material';
 import {FormApiServiceModule} from '@valtimo-portal/form';
 
 @NgModule({
@@ -28,7 +28,8 @@ import {FormApiServiceModule} from '@valtimo-portal/form';
     CommonModule,
     NewCaseRoutingModule,
     FormIoModule,
-    FormApiServiceModule
+    FormApiServiceModule,
+    SpinnerModule
   ]
 })
 export class NewCaseModule {

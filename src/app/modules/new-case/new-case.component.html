@@ -24,9 +24,19 @@
       fxLayout="column"
       style="padding: 16px;"
     >
-      <ng-container *ngIf="formDefinition$ | async as definition">
+      <ng-container *ngIf="formDefinition$ | async as definition; else loading">
         <nl-material-form-io [definition]="definition"></nl-material-form-io>
       </ng-container>
     </div>
   </div>
 </div>
+
+<ng-template #loading>
+  <div
+    fxFlex="100"
+    fxLayout="column"
+    style="padding: 16px;"
+  >
+    <nl-material-spinner></nl-material-spinner>
+  </div>
+</ng-template>

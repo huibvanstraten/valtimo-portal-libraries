@@ -2,8 +2,9 @@ import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
 import {FormioForm} from '@formio/angular';
 import {BehaviorSubject} from "rxjs";
 import {CaseApiService} from "@valtimo-portal/case";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {take} from "rxjs/operators";
+import {LocalizeRouterService} from "@gilsdav/ngx-translate-router";
 
 @Component({
   selector: 'nl-material-form-io',
@@ -16,7 +17,12 @@ export class FormIoComponent implements OnInit {
 
   submitting$ = new BehaviorSubject<boolean>(false);
 
-  constructor(private readonly caseApiService: CaseApiService, private route: ActivatedRoute) {
+  constructor(
+    private readonly caseApiService: CaseApiService,
+    private route: ActivatedRoute,
+    private localizeRouterService: LocalizeRouterService,
+    private router: Router
+  ) {
   }
 
   ngOnInit(): void {
@@ -30,6 +36,9 @@ export class FormIoComponent implements OnInit {
       .subscribe((params) => {
           this.caseApiService.submitCase(submission.data, params.id).subscribe(() => {
             this.submitting$.next(false);
+            this.router.navigateByUrl(
+              `${this.localizeRouterService.translateRoute('/cases')}`
+            );
           });
         }
       );

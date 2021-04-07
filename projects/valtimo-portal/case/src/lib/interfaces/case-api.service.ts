@@ -17,4 +17,4 @@
 export interface AvailableCaseDefinition {
   name: string;
   schema: any;
-};
+}

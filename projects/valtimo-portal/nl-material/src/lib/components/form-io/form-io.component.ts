@@ -1,10 +1,10 @@
 import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
 import {FormioForm} from '@formio/angular';
-import {BehaviorSubject} from "rxjs";
-import {CaseApiService} from "@valtimo-portal/case";
-import {ActivatedRoute, Router} from "@angular/router";
-import {take} from "rxjs/operators";
-import {LocalizeRouterService} from "@gilsdav/ngx-translate-router";
+import {BehaviorSubject} from 'rxjs';
+import {CaseApiService} from '@valtimo-portal/case';
+import {ActivatedRoute, Router} from '@angular/router';
+import {take} from 'rxjs/operators';
+import {LocalizeRouterService} from '@gilsdav/ngx-translate-router';
 
 @Component({
   selector: 'nl-material-form-io',

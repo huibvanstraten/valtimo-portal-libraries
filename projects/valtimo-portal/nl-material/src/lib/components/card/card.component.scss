@@ -31,6 +31,19 @@ mat-card {
     width: 30px;
   }
 
+  .buttons-container {
+    display: flex;
+    flex-direction: column;
+
+    button {
+      margin: 0;
+
+      &:not(:last-child) {
+        margin-bottom: 16px;
+      }
+    }
+  }
+
   @include layout-bp(lt-sm) {
     flex-direction: column;
 
@@ -44,19 +57,6 @@ mat-card {
         margin-top: -48px;
         padding-right: 50px;
         margin-bottom: 16px;
-      }
-    }
-
-    .buttons-container {
-      display: flex;
-      flex-direction: column;
-
-      button {
-        margin: 0;
-
-        &:not(:last-child) {
-          margin-bottom: 16px;
-        }
       }
     }
   }

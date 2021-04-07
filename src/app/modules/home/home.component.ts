@@ -33,7 +33,10 @@ export class HomeComponent implements OnInit {
   readonly introductionType = CardType.introduction;
   readonly reminderType = CardType.reminder;
 
-  constructor(private keycloakService: KeycloakService, private animatedDotsService: AnimatedDotsService) {
+  constructor(
+    private readonly keycloakService: KeycloakService,
+    private readonly animatedDotsService: AnimatedDotsService
+  ) {
     this.dots$ = this.animatedDotsService.dots$;
   }
 

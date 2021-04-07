@@ -14,12 +14,10 @@
  * limitations under the License.
  */
 
-import {AfterViewInit, Component, ElementRef, HostListener, OnInit, ViewChild} from '@angular/core';
-import {BehaviorSubject, Observable} from 'rxjs';
-import {Router} from '@angular/router';
-import {BreakpointObserver} from '@angular/cdk/layout';
+import {Component, ElementRef, ViewChild} from '@angular/core';
+import {Observable} from 'rxjs';
 import {SidenavService} from '../../services';
-import {debounceTime, map, take} from 'rxjs/operators';
+import {take} from 'rxjs/operators';
 
 @Component({
   selector: 'nl-material-menu-icon',
@@ -31,7 +29,7 @@ export class MenuIconComponent {
 
   open$!: Observable<boolean>;
 
-  constructor(private sidenavService: SidenavService) {
+  constructor(private readonly sidenavService: SidenavService) {
     this.open$ = this.sidenavService.open$;
   }
 

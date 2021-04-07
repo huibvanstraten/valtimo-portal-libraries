@@ -19,9 +19,9 @@ export class FormIoComponent implements OnInit {
 
   constructor(
     private readonly caseApiService: CaseApiService,
-    private route: ActivatedRoute,
-    private localizeRouterService: LocalizeRouterService,
-    private router: Router
+    private readonly route: ActivatedRoute,
+    private readonly localizeRouterService: LocalizeRouterService,
+    private readonly router: Router
   ) {
   }
 

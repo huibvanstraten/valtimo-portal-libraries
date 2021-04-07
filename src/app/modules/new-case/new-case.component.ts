@@ -36,10 +36,10 @@ export class NewCaseComponent implements OnInit, OnDestroy {
   );
 
   constructor(
-    private breadcrumbsService: BreadcrumbsService,
-    private translateService: TranslateService,
-    private route: ActivatedRoute,
-    private formApiService: FormApiService,
+    private readonly breadcrumbsService: BreadcrumbsService,
+    private readonly translateService: TranslateService,
+    private readonly route: ActivatedRoute,
+    private readonly formApiService: FormApiService,
   ) {
   }
 

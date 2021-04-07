@@ -41,7 +41,7 @@ export class HeaderMenuComponent implements OnInit, OnDestroy {
 
   private breakPointSubscription!: Subscription;
 
-  constructor(private sidenavService: SidenavService, private observer: BreakpointObserver) {
+  constructor(private readonly sidenavService: SidenavService, private readonly observer: BreakpointObserver) {
   }
 
   ngOnInit(): void {

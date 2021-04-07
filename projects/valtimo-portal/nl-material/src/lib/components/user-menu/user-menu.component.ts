@@ -56,10 +56,10 @@ export class UserMenuComponent implements OnInit, OnDestroy {
   private closeMenuSubscription!: Subscription;
 
   constructor(
-    private keycloakService: KeycloakService,
-    private translateService: TranslateService,
-    private sidenavService: SidenavService,
-    private animatedDotsService: AnimatedDotsService
+    private readonly keycloakService: KeycloakService,
+    private readonly translateService: TranslateService,
+    private readonly sidenavService: SidenavService,
+    private readonly animatedDotsService: AnimatedDotsService
   ) {
     this.open$ = this.sidenavService.open$;
   }

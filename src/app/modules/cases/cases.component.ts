@@ -40,7 +40,7 @@ export class CasesComponent implements OnInit {
         ))
       ));
 
-  constructor(private caseApiService: CaseApiService) {
+  constructor(private readonly caseApiService: CaseApiService) {
   }
 
   ngOnInit(): void {

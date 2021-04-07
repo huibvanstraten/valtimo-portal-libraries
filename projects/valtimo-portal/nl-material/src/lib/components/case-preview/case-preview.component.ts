@@ -42,7 +42,7 @@ export class CasePreviewComponent {
   readonly clippingPreviewMode = CasePreviewMode.clipping;
   readonly currentPreviewMode = CasePreviewMode.current;
 
-  constructor(private sidenavService: SidenavService) {
+  constructor(private readonly sidenavService: SidenavService) {
     this.currentLang$ = this.sidenavService.currentLang$;
   }
 

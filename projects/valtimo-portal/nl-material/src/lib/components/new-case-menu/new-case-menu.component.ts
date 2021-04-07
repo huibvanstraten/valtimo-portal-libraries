@@ -21,10 +21,10 @@ export class NewCaseMenuComponent implements OnInit, OnDestroy {
   readonly newCaseRoute$ = new BehaviorSubject<string>(this.getNewCaseRoute());
 
   constructor(
-    private caseApiService: CaseApiService,
-    private sidenavService: SidenavService,
-    private localizeRouterService: LocalizeRouterService,
-    private router: Router
+    private readonly caseApiService: CaseApiService,
+    private readonly sidenavService: SidenavService,
+    private readonly localizeRouterService: LocalizeRouterService,
+    private readonly router: Router
   ) {
   }
 

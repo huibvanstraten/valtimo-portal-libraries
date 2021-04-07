@@ -47,7 +47,11 @@ export class NavigationMenuComponent implements OnInit, AfterViewInit, OnDestroy
 
   private breakPointSubscription!: Subscription;
 
-  constructor(private router: Router, private observer: BreakpointObserver, private sidenavService: SidenavService) {
+  constructor(
+    private readonly router: Router,
+    private readonly observer: BreakpointObserver,
+    private readonly sidenavService: SidenavService
+  ) {
     this.items$ = this.sidenavService.items$;
   }
 

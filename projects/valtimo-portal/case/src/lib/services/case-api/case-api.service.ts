@@ -29,9 +29,9 @@ import {CaseInstance} from '@valtimo-portal/graphql';
 export class CaseApiService {
 
   constructor(
-    private getAllCaseDefinitionsGQL: GetAllCaseDefinitionsGQL,
-    private getAllCaseInstancesGQL: GetAllCaseInstancesGQL,
-    private submitCaseGQL: SubmitCaseGQL
+    private readonly getAllCaseDefinitionsGQL: GetAllCaseDefinitionsGQL,
+    private readonly getAllCaseInstancesGQL: GetAllCaseInstancesGQL,
+    private readonly submitCaseGQL: SubmitCaseGQL
   ) {
   }
 

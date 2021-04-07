@@ -45,9 +45,9 @@ export class LanguageSelectorComponent implements OnInit, OnDestroy {
   private closeSelectSubscription!: Subscription;
 
   constructor(
-    private translateService: TranslateService,
-    private localizeService: LocalizeRouterService,
-    private sidenavService: SidenavService,
+    private readonly translateService: TranslateService,
+    private readonly localizeService: LocalizeRouterService,
+    private readonly sidenavService: SidenavService,
   ) {
     this.open$ = this.sidenavService.open$;
   }

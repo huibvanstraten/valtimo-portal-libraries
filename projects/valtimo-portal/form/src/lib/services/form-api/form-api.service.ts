@@ -27,8 +27,8 @@ import {FormioForm as FormDefinition} from '@formio/angular';
 export class FormApiService {
 
   constructor(
-    private getAllFormDefinitionsGQL: GetAllFormDefinitionsGQL,
-    private getFormDefinitionByNameGQL: GetFormDefinitionByNameGQL
+    private readonly getAllFormDefinitionsGQL: GetAllFormDefinitionsGQL,
+    private readonly getFormDefinitionByNameGQL: GetFormDefinitionByNameGQL
   ) {
   }
 

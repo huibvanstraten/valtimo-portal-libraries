@@ -22,3 +22,9 @@
   -ms-user-select: none;
   user-select: none;
 }
+
+@mixin no-wrap-ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

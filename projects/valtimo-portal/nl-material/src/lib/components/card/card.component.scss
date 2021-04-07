@@ -16,6 +16,7 @@
 
 @import 'colors';
 @import 'variables';
+@import 'mixins';
 
 mat-card {
   display: flex;
@@ -149,7 +150,7 @@ mat-card {
   background-color: $nl-case-preview-gray;
   border-radius: 5px;
   overflow: hidden;
-  padding-top: 32px;
+  padding-top: 36px;
 
   mat-card-title {
     font-size: $font-larger;
@@ -162,6 +163,7 @@ mat-card {
     line-height: $font-largest;
     font-weight: lighter;
     text-transform: uppercase;
+    @include no-wrap-ellipsis;
   }
 
   .mat-card-content-container {

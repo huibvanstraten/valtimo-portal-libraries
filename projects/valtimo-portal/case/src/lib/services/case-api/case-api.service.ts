@@ -22,11 +22,15 @@ import {Observable} from 'rxjs';
 import {SubmitCaseGQL, SubmitCaseMutation} from './mutations';
 import {FetchResult} from '@apollo/client/core';
 import {CaseInstance} from '@valtimo-portal/graphql';
+import {GetAllCaseInstancesQuery} from "./queries/get-all-case-instances/get-all-case-instances.graphql-gen";
+import {QueryRef} from "apollo-angular";
 
 @Injectable({
   providedIn: 'root'
 })
 export class CaseApiService {
+
+  caseInstancesQueryRef!: QueryRef<GetAllCaseInstancesQuery>;
 
   constructor(
     private readonly getAllCaseDefinitionsGQL: GetAllCaseDefinitionsGQL,
@@ -46,7 +50,13 @@ export class CaseApiService {
   }
 
   getAllCaseInstances(): Observable<Array<CaseInstance>> {
-    return this.getAllCaseInstancesGQL.fetch()
+    if (!this.caseInstancesQueryRef) {
+      // @ts-ignore
+      this.caseInstancesQueryRef = this.getAllCaseInstancesGQL.watch();
+    } else {
+      this.caseInstancesQueryRef.refetch();
+    }
+    return this.caseInstancesQueryRef.valueChanges
       .pipe(
         map((res) => res.data.allCaseInstances)
       );

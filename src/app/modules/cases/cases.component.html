@@ -23,12 +23,13 @@
       <h1 class="mat-h1">{{'cases.title' | translate}}</h1>
     </div>
     <div
+      *ngFor="let case of cases$ | async"
       fxFlex="50"
       fxFlex.lt-md="100"
       fxLayout="column"
       style="padding: 16px;"
     >
-      <nl-material-case-preview [mode]="currentPreviewMode"></nl-material-case-preview>
+      <nl-material-case-preview [mode]="currentPreviewMode" [preview]="case"></nl-material-case-preview>
     </div>
     <div
       fxFlex="50"

@@ -5,12 +5,14 @@ import {CaseApiService} from '@valtimo-portal/case';
 import {ActivatedRoute, Router} from '@angular/router';
 import {take} from 'rxjs/operators';
 import {LocalizeRouterService} from '@gilsdav/ngx-translate-router';
+import {fadeInAnimations} from '../../animations';
 
 @Component({
   selector: 'nl-material-form-io',
   templateUrl: './form-io.component.html',
   styleUrls: ['./form-io.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  animations: fadeInAnimations
 })
 export class FormIoComponent implements OnInit {
   @Input() definition!: FormioForm;

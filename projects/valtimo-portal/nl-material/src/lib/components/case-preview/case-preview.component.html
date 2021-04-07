@@ -1,15 +1,17 @@
-<nl-material-card
-  *ngIf="(currentLang$ | async) as currentLang"
-  [buttonText]="'Stel een vraag'"
-  [secondaryButtonText]="'Bekijk aanvraag'"
-  [subtitle]="(mode === currentPreviewMode) ? preview.code || '' : ''"
-  [title]="preview.id + '.my' | translate"
-  [type]="isClippingPreview() ? casePreviewClippingType : casePreviewCurrentType"
->
-  <ng-container *ngTemplateOutlet="extras"></ng-container>
-  <ng-container *ngTemplateOutlet="tasks;context:{currentLang: currentLang}"></ng-container>
-  <ng-container *ngTemplateOutlet="currentCaseActions;context:{currentLang: currentLang}"></ng-container>
-</nl-material-card>
+<div @fadeIn>
+  <nl-material-card
+    *ngIf="(currentLang$ | async) as currentLang"
+    [buttonText]="'Stel een vraag'"
+    [secondaryButtonText]="'Bekijk aanvraag'"
+    [subtitle]="(mode === currentPreviewMode) ? preview.code || '' : ''"
+    [title]="preview.id + '.my' | translate"
+    [type]="isClippingPreview() ? casePreviewClippingType : casePreviewCurrentType"
+  >
+    <ng-container *ngTemplateOutlet="extras"></ng-container>
+    <ng-container *ngTemplateOutlet="tasks;context:{currentLang: currentLang}"></ng-container>
+    <ng-container *ngTemplateOutlet="currentCaseActions;context:{currentLang: currentLang}"></ng-container>
+  </nl-material-card>
+</div>
 
 <ng-template #extras>
   <div *ngIf="isClippingPreview()" class="clip" extra>

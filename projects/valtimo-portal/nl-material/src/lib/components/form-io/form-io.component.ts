@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, Input, ViewEncapsulation} from '@angular/core';
 import {FormioForm} from '@formio/angular';
 import {BehaviorSubject} from 'rxjs';
 import {CaseApiService} from '@valtimo-portal/case';
@@ -14,8 +14,9 @@ import {fadeInAnimations} from '../../animations';
   encapsulation: ViewEncapsulation.None,
   animations: fadeInAnimations
 })
-export class FormIoComponent implements OnInit {
+export class FormIoComponent {
   @Input() definition!: FormioForm;
+  @Input() title!: string;
 
   submitting$ = new BehaviorSubject<boolean>(false);
 
@@ -25,9 +26,6 @@ export class FormIoComponent implements OnInit {
     private readonly localizeRouterService: LocalizeRouterService,
     private readonly router: Router
   ) {
-  }
-
-  ngOnInit(): void {
   }
 
   onSubmit(submission: any): void {

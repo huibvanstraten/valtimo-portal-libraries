@@ -1,6 +1,15 @@
 @import 'colors';
+@import 'variables';
 
 .mat-form-io-container {
+  @include layout-bp(gt-xs) {
+    padding: 26px;
+    border-radius: 5px;
+    border: solid 1px $nl-medium-gray;
+    margin: 0 auto;
+    max-width: $formio-max-width;
+  }
+
   mat-formio-button:last-child {
     display: flex;
     justify-content: flex-end;
@@ -11,5 +20,11 @@
 
   .alert {
     display: none;
+  }
+
+  .mat-h1 {
+    color: $nl-material-primary;
+    font-weight: bold;
+    margin-bottom: 26px;
   }
 }

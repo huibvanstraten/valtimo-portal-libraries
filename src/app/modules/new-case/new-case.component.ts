@@ -17,7 +17,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {BreadcrumbsService} from '@valtimo-portal/nl-material';
 import {FormApiService} from '@valtimo-portal/form';
-import {Subscription} from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
 import {ActivatedRoute} from '@angular/router';
 import {TranslateService} from '@ngx-translate/core';
 import {switchMap, take} from 'rxjs/operators';
@@ -35,12 +35,15 @@ export class NewCaseComponent implements OnInit, OnDestroy {
     switchMap((params) => this.formApiService.getFormDefinitionByName(params.id))
   );
 
+  title$!: Observable<string>;
+
   constructor(
     private readonly breadcrumbsService: BreadcrumbsService,
     private readonly translateService: TranslateService,
     private readonly route: ActivatedRoute,
     private readonly formApiService: FormApiService,
   ) {
+    this.title$ = this.breadcrumbsService.lastBreadcrumbTitle$;
   }
 
   ngOnInit(): void {

@@ -18,6 +18,8 @@ export interface Scalars {
   Float: number;
   /** A type representing a formatted JSON */
   JSON: any;
+  /** A type representing a formatted java.util.UUID */
+  UUID: any;
 }
 
 
@@ -26,10 +28,16 @@ export interface CaseCreated {
   caseId: Scalars['String'];
 }
 
-export interface CaseDefinitionDto {
-  __typename?: 'CaseDefinitionDto';
+export interface CaseDefinition {
+  __typename?: 'CaseDefinition';
   id: Scalars['String'];
   schema: Scalars['JSON'];
+}
+
+export interface CaseInstance {
+  __typename?: 'CaseInstance';
+  id: Scalars['UUID'];
+  submision: Scalars['JSON'];
 }
 
 export interface FormDefinition {
@@ -54,7 +62,11 @@ export interface MutationProcessSubmissionArgs {
 export interface Query {
   __typename?: 'Query';
   /** retrieves all available case definitions */
-  allCaseDefinitions: Array<CaseDefinitionDto>;
+  allCaseDefinitions: Array<CaseDefinition>;
+  /** retrieves all available case instances */
+  allCaseInstances: Array<CaseInstance>;
+  /** retrieves single case instance from repository */
+  getCaseInstance?: Maybe<CaseInstance>;
   /** retrieves all form definitions from repository */
   allFormDefinitions: Array<FormDefinition>;
   /** retrieves single form definition from repository */
@@ -62,9 +74,15 @@ export interface Query {
 }
 
 
+export interface QueryGetCaseInstanceArgs {
+  id: Scalars['UUID'];
+}
+
+
 export interface QueryGetFormDefinitionArgs {
   name: Scalars['String'];
 }
+
 
 export type GetFormDefinitionByNameQueryVariables = Types.Exact<{
   name: Types.Scalars['String'];

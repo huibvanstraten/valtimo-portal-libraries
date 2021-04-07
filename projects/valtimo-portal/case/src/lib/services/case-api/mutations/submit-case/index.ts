@@ -14,22 +14,4 @@
  * limitations under the License.
  */
 
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {FormIoComponent} from './form-io.component';
-import {MatFormioModule} from '@formio/angular-material';
-import {MatIconModule} from '@angular/material/icon';
-import {CaseApiServiceModule} from '@valtimo-portal/case';
-
-@NgModule({
-  declarations: [FormIoComponent],
-  imports: [
-    CommonModule,
-    MatFormioModule,
-    MatIconModule,
-    CaseApiServiceModule
-  ],
-  exports: [FormIoComponent]
-})
-export class FormIoModule {
-}
+export {SubmitCaseGQL, SubmitCaseMutation} from './submit-case.graphql-gen';

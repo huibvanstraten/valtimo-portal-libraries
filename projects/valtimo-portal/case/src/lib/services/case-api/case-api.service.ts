@@ -19,6 +19,8 @@ import {GetAllCaseDefinitionsGQL} from './queries';
 import {map} from 'rxjs/operators';
 import {AvailableCaseDefinition} from '../../interfaces';
 import {Observable} from 'rxjs';
+import {SubmitCaseGQL, SubmitCaseMutation} from './mutations';
+import {FetchResult} from '@apollo/client/core';
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +28,8 @@ import {Observable} from 'rxjs';
 export class CaseApiService {
 
   constructor(
-    private getAllCaseDefinitionsGQL: GetAllCaseDefinitionsGQL
+    private getAllCaseDefinitionsGQL: GetAllCaseDefinitionsGQL,
+    private submitCaseGQL: SubmitCaseGQL
   ) {
   }
 
@@ -38,5 +41,9 @@ export class CaseApiService {
           schema: definition.schema
         })))
       );
+  }
+
+  submitCase(submission: any, caseDefinitionId: string): Observable<FetchResult<SubmitCaseMutation>> {
+    return this.submitCaseGQL.mutate({submission, caseDefinitionId});
   }
 }

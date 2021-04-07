@@ -1,7 +1,14 @@
+import * as Types from '@valtimo-portal/graphql';
+
+import * as Apollo from 'apollo-angular';
+import {gql} from 'apollo-angular';
+import {Injectable} from '@angular/core';
+
 export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
+
 /** All built-in and custom scalars, mapped to their actual values */
 export interface Scalars {
   ID: string;
@@ -14,8 +21,6 @@ export interface Scalars {
   /** A type representing a formatted java.util.UUID */
   UUID: any;
 }
-
-
 
 
 export interface CaseCreated {
@@ -78,3 +83,39 @@ export interface QueryGetFormDefinitionArgs {
   name: Scalars['String'];
 }
 
+
+export type SubmitCaseMutationVariables = Types.Exact<{
+  submission: Types.Scalars['JSON'];
+  caseDefinitionId: Types.Scalars['String'];
+}>;
+
+
+export type SubmitCaseMutation = (
+  { __typename?: 'Mutation' }
+  & {
+  processSubmission: (
+    { __typename?: 'CaseCreated' }
+    & Pick<Types.CaseCreated, 'caseId'>
+    )
+}
+  );
+
+export const SubmitCaseDocument = gql`
+  mutation SubmitCase($submission: JSON!, $caseDefinitionId: String!) {
+    processSubmission(submission: $submission, caseDefinitionId: $caseDefinitionId) {
+      caseId
+    }
+  }
+`;
+
+@Injectable({
+  providedIn: 'root'
+})
+export class SubmitCaseGQL extends Apollo.Mutation<SubmitCaseMutation, SubmitCaseMutationVariables> {
+  document = SubmitCaseDocument;
+  client = 'portal-api';
+
+  constructor(apollo: Apollo.Apollo) {
+    super(apollo);
+  }
+}

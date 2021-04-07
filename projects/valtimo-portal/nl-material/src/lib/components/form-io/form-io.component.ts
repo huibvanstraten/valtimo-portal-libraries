@@ -1,5 +1,9 @@
 import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
 import {FormioForm} from '@formio/angular';
+import {BehaviorSubject} from "rxjs";
+import {CaseApiService} from "@valtimo-portal/case";
+import {ActivatedRoute} from "@angular/router";
+import {take} from "rxjs/operators";
 
 @Component({
   selector: 'nl-material-form-io',
@@ -10,14 +14,25 @@ import {FormioForm} from '@formio/angular';
 export class FormIoComponent implements OnInit {
   @Input() definition!: FormioForm;
 
-  constructor() {
+  submitting$ = new BehaviorSubject<boolean>(false);
+
+  constructor(private readonly caseApiService: CaseApiService, private route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
   }
 
-  onSubmit(data: any) {
-    console.log(data)
+  onSubmit(submission: any): void {
+    this.submitting$.next(true);
+
+    this.route.queryParams
+      .pipe(take(1))
+      .subscribe((params) => {
+          this.caseApiService.submitCase(submission.data, params.id).subscribe(() => {
+            this.submitting$.next(false);
+          });
+        }
+      );
   }
 
 }

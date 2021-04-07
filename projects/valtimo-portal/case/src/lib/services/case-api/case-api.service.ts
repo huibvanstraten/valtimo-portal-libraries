@@ -15,12 +15,13 @@
  */
 
 import {Injectable} from '@angular/core';
-import {GetAllCaseDefinitionsGQL} from './queries';
+import {GetAllCaseDefinitionsGQL, GetAllCaseInstancesGQL} from './queries';
 import {map} from 'rxjs/operators';
 import {AvailableCaseDefinition} from '../../interfaces';
 import {Observable} from 'rxjs';
 import {SubmitCaseGQL, SubmitCaseMutation} from './mutations';
 import {FetchResult} from '@apollo/client/core';
+import {CaseInstance} from '@valtimo-portal/graphql';
 
 @Injectable({
   providedIn: 'root'
@@ -29,6 +30,7 @@ export class CaseApiService {
 
   constructor(
     private getAllCaseDefinitionsGQL: GetAllCaseDefinitionsGQL,
+    private getAllCaseInstancesGQL: GetAllCaseInstancesGQL,
     private submitCaseGQL: SubmitCaseGQL
   ) {
   }
@@ -40,6 +42,13 @@ export class CaseApiService {
           name: definition.id,
           schema: definition.schema
         })))
+      );
+  }
+
+  getAllCaseInstances(): Observable<Array<CaseInstance>> {
+    return this.getAllCaseInstancesGQL.fetch()
+      .pipe(
+        map((res) => res.data.allCaseInstances)
       );
   }
 

@@ -1,0 +1,6 @@
+query GetAllCaseInstances {
+  allCaseInstances @namedClient(name: "portal-api") {
+    id
+    submision
+  }
+}

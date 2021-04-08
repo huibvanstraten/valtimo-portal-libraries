@@ -25,7 +25,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {RouterModule} from '@angular/router';
 import {SidenavServiceModule} from '../../services';
 import {CaseApiServiceModule} from '@valtimo-portal/case';
-import {SpinnerModule} from "../spinner";
+import {SpinnerModule} from '../spinner';
 
 @NgModule({
   declarations: [NewCaseMenuComponent],

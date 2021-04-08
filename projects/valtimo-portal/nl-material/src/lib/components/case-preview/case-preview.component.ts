@@ -3,7 +3,7 @@ import {CasePreview, TaskPreview} from '../../interfaces';
 import {CardType, CasePreviewMode} from '../../enums';
 import {SidenavService} from '../../services';
 import {Observable} from 'rxjs';
-import {fadeInAnimations} from "../../animations";
+import {fadeInAnimations} from '../../animations';
 
 const mockCasePreview: CasePreview = {
   id: 'grant-application',

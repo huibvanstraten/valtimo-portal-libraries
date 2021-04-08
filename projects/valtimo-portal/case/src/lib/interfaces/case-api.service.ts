@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-export interface AvailableCaseDefinition {
+export interface CaseDefinition {
   name: string;
   schema: any;
 }

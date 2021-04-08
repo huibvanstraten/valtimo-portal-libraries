@@ -17,7 +17,7 @@
 import {Injectable} from '@angular/core';
 import {GetAllCaseDefinitionsGQL, GetAllCaseInstancesGQL} from './queries';
 import {map} from 'rxjs/operators';
-import {AvailableCaseDefinition} from '../../interfaces';
+import {CaseDefinition} from '../../interfaces';
 import {Observable} from 'rxjs';
 import {SubmitCaseGQL, SubmitCaseMutation} from './mutations';
 import {FetchResult} from '@apollo/client/core';
@@ -39,7 +39,7 @@ export class CaseApiService {
   ) {
   }
 
-  getAllCaseDefinitions(): Observable<Array<AvailableCaseDefinition>> {
+  getAllCaseDefinitions(): Observable<Array<CaseDefinition>> {
     return this.getAllCaseDefinitionsGQL.fetch()
       .pipe(
         map((res) => res.data.allCaseDefinitions.map((definition) => ({

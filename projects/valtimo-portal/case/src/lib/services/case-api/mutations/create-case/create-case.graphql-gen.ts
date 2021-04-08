@@ -84,13 +84,13 @@ export interface QueryGetFormDefinitionArgs {
 }
 
 
-export type SubmitCaseMutationVariables = Types.Exact<{
+export type CreateCaseMutationVariables = Types.Exact<{
   submission: Types.Scalars['JSON'];
   caseDefinitionId: Types.Scalars['String'];
 }>;
 
 
-export type SubmitCaseMutation = (
+export type CreateCaseMutation = (
   { __typename?: 'Mutation' }
   & {
   processSubmission: (
@@ -100,8 +100,8 @@ export type SubmitCaseMutation = (
 }
   );
 
-export const SubmitCaseDocument = gql`
-  mutation SubmitCase($submission: JSON!, $caseDefinitionId: String!) {
+export const CreateCaseDocument = gql`
+  mutation CreateCase($submission: JSON!, $caseDefinitionId: String!) {
     processSubmission(submission: $submission, caseDefinitionId: $caseDefinitionId) {
       caseId
     }
@@ -111,8 +111,8 @@ export const SubmitCaseDocument = gql`
 @Injectable({
   providedIn: 'root'
 })
-export class SubmitCaseGQL extends Apollo.Mutation<SubmitCaseMutation, SubmitCaseMutationVariables> {
-  document = SubmitCaseDocument;
+export class CreateCaseGQL extends Apollo.Mutation<CreateCaseMutation, CreateCaseMutationVariables> {
+  document = CreateCaseDocument;
   client = 'portal-api';
 
   constructor(apollo: Apollo.Apollo) {

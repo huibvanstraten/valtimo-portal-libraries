@@ -14,4 +14,4 @@
  * limitations under the License.
  */
 
-export {SubmitCaseGQL, SubmitCaseMutation} from './submit-case.graphql-gen';
+export {CreateCaseGQL, CreateCaseMutation} from './create-case.graphql-gen';

@@ -1,4 +1,4 @@
-mutation SubmitCase($submission: JSON!, $caseDefinitionId: String!) {
+mutation CreateCase($submission: JSON!, $caseDefinitionId: String!) {
   processSubmission(submission: $submission, caseDefinitionId:  $caseDefinitionId) @namedClient(name: "portal-api") {
     caseId
   }

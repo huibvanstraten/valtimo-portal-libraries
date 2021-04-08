@@ -14,4 +14,4 @@
  * limitations under the License.
  */
 
-export * from './submit-case';
+export * from './create-case';

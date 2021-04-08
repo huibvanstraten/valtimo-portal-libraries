@@ -19,7 +19,7 @@ import {GetAllCaseDefinitionsGQL, GetAllCaseInstancesGQL} from './queries';
 import {map} from 'rxjs/operators';
 import {CaseDefinition} from '../../interfaces';
 import {Observable} from 'rxjs';
-import {SubmitCaseGQL, SubmitCaseMutation} from './mutations';
+import {CreateCaseGQL, CreateCaseMutation} from './mutations';
 import {FetchResult} from '@apollo/client/core';
 import {CaseInstance, Exact} from '@valtimo-portal/graphql';
 import {GetAllCaseInstancesQuery} from './queries/get-all-case-instances/get-all-case-instances.graphql-gen';
@@ -35,7 +35,7 @@ export class CaseApiService {
   constructor(
     private readonly getAllCaseDefinitionsGQL: GetAllCaseDefinitionsGQL,
     private readonly getAllCaseInstancesGQL: GetAllCaseInstancesGQL,
-    private readonly submitCaseGQL: SubmitCaseGQL
+    private readonly createCaseGQL: CreateCaseGQL
   ) {
   }
 
@@ -61,7 +61,7 @@ export class CaseApiService {
       );
   }
 
-  submitCase(submission: any, caseDefinitionId: string): Observable<FetchResult<SubmitCaseMutation>> {
-    return this.submitCaseGQL.mutate({submission, caseDefinitionId});
+  submitCase(submission: any, caseDefinitionId: string): Observable<FetchResult<CreateCaseMutation>> {
+    return this.createCaseGQL.mutate({submission, caseDefinitionId});
   }
 }

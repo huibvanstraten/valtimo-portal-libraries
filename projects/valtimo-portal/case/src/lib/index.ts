@@ -16,4 +16,3 @@
 
 export * from './case.module';
 export * from './services';
-export * from './interfaces';

@@ -2,9 +2,9 @@
   <h1 class="mat-h1">{{'newCaseMenu.title' | translate}}</h1>
   <mat-list class="header-menu-mat-list" *ngIf="allCaseDefinitions$ | async as caseDefinitions; else loading">
     <mat-list-item *ngFor="let caseDefinition of caseDefinitions">
-      <button mat-menu-item [routerLink]="newCaseRoute$ | async" [queryParams]="{id:caseDefinition.name}">
+      <button mat-menu-item [routerLink]="newCaseRoute$ | async" [queryParams]="{id:caseDefinition.id}">
         <mat-icon fontSet="fa" fontIcon="fa-chevron-right"></mat-icon>
-        {{ caseDefinition.name + '.wouldLikeTo' | translate }}
+        {{ caseDefinition.id + '.wouldLikeTo' | translate }}
       </button>
     </mat-list-item>
   </mat-list>

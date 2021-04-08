@@ -36,6 +36,7 @@ export interface CaseDefinition {
 
 export interface CaseInstance {
   __typename?: 'CaseInstance';
+  caseDefinitionId: Scalars['String'];
   id: Scalars['UUID'];
   submision: Scalars['JSON'];
 }
@@ -92,7 +93,7 @@ export type GetAllCaseInstancesQuery = (
   & {
   allCaseInstances: Array<(
     { __typename?: 'CaseInstance' }
-    & Pick<Types.CaseInstance, 'id' | 'submision'>
+    & Pick<Types.CaseInstance, 'caseDefinitionId' | 'id' | 'submision'>
     )>
 }
   );
@@ -100,6 +101,7 @@ export type GetAllCaseInstancesQuery = (
 export const GetAllCaseInstancesDocument = gql`
   query GetAllCaseInstances {
     allCaseInstances {
+      caseDefinitionId
       id
       submision
     }

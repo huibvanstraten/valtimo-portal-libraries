@@ -33,7 +33,7 @@ export class CasesComponent implements OnInit {
     .pipe(
       map((instances) => instances.map((instance) => (
           {
-            id: instance.submision.firstName,
+            id: instance.caseDefinitionId,
             code: instance.id,
             tasks: []
           }

@@ -17,11 +17,10 @@
 import {Injectable} from '@angular/core';
 import {GetAllCaseDefinitionsGQL, GetAllCaseInstancesGQL} from './queries';
 import {map} from 'rxjs/operators';
-import {CaseDefinition} from '../../interfaces';
 import {Observable} from 'rxjs';
 import {CreateCaseGQL, CreateCaseMutation} from './mutations';
 import {FetchResult} from '@apollo/client/core';
-import {CaseInstance, Exact} from '@valtimo-portal/graphql';
+import {CaseDefinition, CaseInstance, Exact} from '@valtimo-portal/graphql';
 import {GetAllCaseInstancesQuery} from './queries/get-all-case-instances/get-all-case-instances.graphql-gen';
 import {QueryRef} from 'apollo-angular';
 
@@ -42,10 +41,7 @@ export class CaseApiService {
   getAllCaseDefinitions(): Observable<Array<CaseDefinition>> {
     return this.getAllCaseDefinitionsGQL.fetch()
       .pipe(
-        map((res) => res.data.allCaseDefinitions.map((definition) => ({
-          name: definition.id,
-          schema: definition.schema
-        })))
+        map((res) => res.data.allCaseDefinitions)
       );
   }
 

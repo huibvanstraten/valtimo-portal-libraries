@@ -14,18 +14,61 @@
  * limitations under the License.
  */
 
-import { TestBed } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
-import { AppComponent } from './app.component';
+import {TestBed} from '@angular/core/testing';
+import {RouterTestingModule} from '@angular/router/testing';
+import {AppComponent} from './app.component';
+import {
+  AnimatedDotsServiceModule,
+  BreadcrumbsModule,
+  BreadcrumbsServiceModule,
+  HeaderLogoModule,
+  HeaderMenuModule,
+  NavigationMenuModule,
+  SidenavModule,
+  ToolbarModule
+} from "@valtimo-portal/nl-material";
+import {KeycloakAngularModule} from "keycloak-angular";
+import {HttpClient, HttpClientModule} from "@angular/common/http";
+import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {GraphQLModule} from "@valtimo-portal/graphql";
+import {HttpLoaderFactory} from "@app/app.module";
+import {environment} from "../environments";
+import {LocalizeParser, LocalizeRouterService, LocalizeRouterSettings} from "@gilsdav/ngx-translate-router";
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      providers: [
+        {provide: 'environment', useValue: environment},
+        LocalizeRouterService,
+        LocalizeParser,
+        LocalizeRouterSettings
+      ],
       imports: [
-        RouterTestingModule
+        RouterTestingModule,
+        KeycloakAngularModule,
+        HttpClientModule,
+        TranslateModule.forRoot({
+          loader: {
+            provide: TranslateLoader,
+            useFactory: HttpLoaderFactory,
+            deps: [HttpClient, 'environment']
+          }
+        }),
+        BrowserAnimationsModule,
+        ToolbarModule,
+        HeaderLogoModule,
+        NavigationMenuModule,
+        SidenavModule,
+        HeaderMenuModule,
+        BreadcrumbsServiceModule,
+        BreadcrumbsModule,
+        GraphQLModule,
+        AnimatedDotsServiceModule,
       ],
       declarations: [
-        AppComponent
+        AppComponent,
       ],
     }).compileComponents();
   });

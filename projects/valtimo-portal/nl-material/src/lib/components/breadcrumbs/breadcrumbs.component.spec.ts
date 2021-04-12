@@ -25,7 +25,7 @@ import {MatButtonModule} from "@angular/material/button";
 import {RouterTestingModule} from "@angular/router/testing";
 import {environment} from '@src/environments';
 import {LocalizeRouterService} from "@gilsdav/ngx-translate-router";
-import {FakeLocalizeRouterService} from "@src/testing";
+import {FakeLocalizeRouterService} from '@valtimo-portal/shared';
 
 describe('BreadcrumbsComponent', () => {
   let component: BreadcrumbsComponent;

@@ -3,9 +3,6 @@
   "compileOnSave": false,
   "compilerOptions": {
     "paths": {
-      "@src/*": [
-        "src/*"
-      ],
       "@app/*": [
         "src/app/*"
       ],

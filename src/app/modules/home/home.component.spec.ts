@@ -21,10 +21,10 @@ import {CardModule, CasePreviewModule, NewCaseMenuModule} from '@valtimo-portal/
 import {TranslateModule} from '@ngx-translate/core';
 import {KeycloakAngularModule} from 'keycloak-angular';
 import {LocalizeRouterService} from '@gilsdav/ngx-translate-router';
-import {FakeLocalizeRouterService} from '../../../testing';
 import {RouterTestingModule} from '@angular/router/testing';
 import {ApolloTestingController, ApolloTestingModule} from 'apollo-angular/testing';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
+import {FakeLocalizeRouterService} from '@valtimo-portal/shared';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;

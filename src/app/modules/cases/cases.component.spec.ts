@@ -25,6 +25,7 @@ import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {KeycloakAngularModule} from 'keycloak-angular';
 import {RouterTestingModule} from '@angular/router/testing';
 import {ApolloTestingModule} from 'apollo-angular/testing';
+import {environment} from '@src/environments';
 
 describe('CasesComponent', () => {
   let component: CasesComponent;
@@ -43,7 +44,7 @@ describe('CasesComponent', () => {
         SpinnerModule,
         KeycloakAngularModule,
         RouterTestingModule,
-        ApolloTestingModule.withClients(['portal-api'])]
+        ApolloTestingModule.withClients(environment.api.graphql.clients.map((client) => client.name))]
     })
       .compileComponents();
   });

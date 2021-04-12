@@ -1,7 +1,8 @@
 module.exports = {
-  modulePathIgnorePatterns: ['<rootDir>/projects'],
+  modulePathIgnorePatterns: ['<rootDir>/dist'],
   moduleNameMapper: {
     '@core/(.*)': '<rootDir>/src/app/core/$1',
+    '@src/(.*)': '<rootDir>/src/$1',
     '@app/(.*)': '<rootDir>/src/app/$1',
     '@cases/(.*)': '<rootDir>/src/app/modules/cases/$1',
     '@home/(.*)': '<rootDir>/src/app/modules/home/$1',

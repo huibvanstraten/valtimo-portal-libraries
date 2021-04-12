@@ -26,24 +26,40 @@ import {
   NavigationMenuModule,
   SidenavModule,
   ToolbarModule
-} from "@valtimo-portal/nl-material";
-import {KeycloakAngularModule} from "keycloak-angular";
-import {HttpClient, HttpClientModule} from "@angular/common/http";
-import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {GraphQLModule} from "@valtimo-portal/graphql";
-import {HttpLoaderFactory} from "@app/app.module";
-import {environment} from "../environments";
-import {LocalizeParser, LocalizeRouterService, LocalizeRouterSettings} from "@gilsdav/ngx-translate-router";
+} from '@valtimo-portal/nl-material';
+import {KeycloakAngularModule} from 'keycloak-angular';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {GraphQLModule} from '@valtimo-portal/graphql';
+import {HttpLoaderFactory} from '@app/app.module';
+import {environment} from '../environments';
+import {LocalizeRouterService} from '@gilsdav/ngx-translate-router';
+import {Subject} from 'rxjs';
+
+class DummyLocalizeParser {
+  currentLang!: string;
+}
+
+class FakeLocalizeRouterService {
+  routerEvents: Subject<string> = new Subject<string>();
+  parser: DummyLocalizeParser;
+
+  constructor() {
+    this.parser = new DummyLocalizeParser();
+  }
+
+  translateRoute(route: string): string {
+    return route;
+  }
+}
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       providers: [
         {provide: 'environment', useValue: environment},
-        LocalizeRouterService,
-        LocalizeParser,
-        LocalizeRouterSettings
+        {provide: LocalizeRouterService, useClass: FakeLocalizeRouterService}
       ],
       imports: [
         RouterTestingModule,
@@ -77,18 +93,5 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
     expect(app).toBeTruthy();
-  });
-
-  it(`should have as title 'valtimo-portal'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('valtimo-portal');
-  });
-
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('valtimo-portal app is running!');
   });
 });

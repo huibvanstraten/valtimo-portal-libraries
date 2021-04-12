@@ -35,24 +35,7 @@ import {GraphQLModule} from '@valtimo-portal/graphql';
 import {HttpLoaderFactory} from '@app/app.module';
 import {environment} from '../environments';
 import {LocalizeRouterService} from '@gilsdav/ngx-translate-router';
-import {Subject} from 'rxjs';
-
-class DummyLocalizeParser {
-  currentLang!: string;
-}
-
-class FakeLocalizeRouterService {
-  routerEvents: Subject<string> = new Subject<string>();
-  parser: DummyLocalizeParser;
-
-  constructor() {
-    this.parser = new DummyLocalizeParser();
-  }
-
-  translateRoute(route: string): string {
-    return route;
-  }
-}
+import {FakeLocalizeRouterService} from '../testing';
 
 describe('AppComponent', () => {
   beforeEach(async () => {

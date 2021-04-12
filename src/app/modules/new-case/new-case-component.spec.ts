@@ -16,40 +16,32 @@
 
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {CasesComponent} from './cases.component';
-import {CasesRoutingModule} from '@cases/cases-routing.module';
-import {CasePreviewModule, SpinnerModule} from '@valtimo-portal/nl-material';
+import {NewCaseComponent} from './new-case.component';
+import {FormIoModule, SpinnerModule} from '@valtimo-portal/nl-material';
+import {FormApiServiceModule} from '@valtimo-portal/form';
 import {TranslateModule} from '@ngx-translate/core';
-import {CaseApiServiceModule} from '@valtimo-portal/case';
-import {NoopAnimationsModule} from '@angular/platform-browser/animations';
-import {KeycloakAngularModule} from 'keycloak-angular';
 import {RouterTestingModule} from '@angular/router/testing';
-import {ApolloTestingModule} from 'apollo-angular/testing';
 
-describe('CasesComponent', () => {
-  let component: CasesComponent;
-  let fixture: ComponentFixture<CasesComponent>;
+describe('NewCaseComponent', () => {
+  let component: NewCaseComponent;
+  let fixture: ComponentFixture<NewCaseComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [CasesComponent],
+      declarations: [NewCaseComponent],
       imports: [
-        NoopAnimationsModule,
-        TranslateModule.forRoot(),
-        CasesRoutingModule,
-        CasePreviewModule,
-        TranslateModule,
-        CaseApiServiceModule,
+        FormIoModule,
+        FormApiServiceModule,
         SpinnerModule,
-        KeycloakAngularModule,
-        RouterTestingModule,
-        ApolloTestingModule.withClients(['portal-api'])]
+        TranslateModule.forRoot(),
+        RouterTestingModule
+      ]
     })
       .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CasesComponent);
+    fixture = TestBed.createComponent(NewCaseComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -14,9 +14,14 @@
  * limitations under the License.
  */
 
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { MenuIconComponent } from './menu-icon.component';
+import {MenuIconComponent} from './menu-icon.component';
+import {SidenavServiceModule} from '../../services';
+import {environment} from '@src/environments';
+import {LocalizeRouterService} from '@gilsdav/ngx-translate-router';
+import {FakeLocalizeRouterService} from '@valtimo-portal/shared';
+import {TranslateModule} from '@ngx-translate/core';
 
 describe('MenuIconComponent', () => {
   let component: MenuIconComponent;
@@ -24,9 +29,18 @@ describe('MenuIconComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MenuIconComponent ]
+      providers: [
+        {provide: 'environment', useValue: environment},
+        {provide: LocalizeRouterService, useClass: FakeLocalizeRouterService}
+      ],
+      declarations: [MenuIconComponent],
+      imports:
+        [
+          TranslateModule.forRoot(),
+          SidenavServiceModule
+        ]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

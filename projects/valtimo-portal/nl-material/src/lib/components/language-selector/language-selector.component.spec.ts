@@ -17,25 +17,46 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {LanguageSelectorComponent} from './language-selector.component';
+import {MatSelectModule} from '@angular/material/select';
+import {TranslateModule} from '@ngx-translate/core';
+import {FormsModule} from '@angular/forms';
+import {SidenavServiceModule} from '../../services';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import {environment} from '@src/environments';
+import {LocalizeRouterService} from '@gilsdav/ngx-translate-router';
+import {FakeLocalizeRouterService} from '@valtimo-portal/shared';
+import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 
 describe('LanguageSelectorComponent', () => {
-    let component: LanguageSelectorComponent;
-    let fixture: ComponentFixture<LanguageSelectorComponent>;
+  let component: LanguageSelectorComponent;
+  let fixture: ComponentFixture<LanguageSelectorComponent>;
 
-    beforeEach(async () => {
-        await TestBed.configureTestingModule({
-            declarations: [LanguageSelectorComponent]
-        })
-            .compileComponents();
-    });
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      providers: [
+        {provide: 'environment', useValue: environment},
+        {provide: LocalizeRouterService, useClass: FakeLocalizeRouterService}
+      ],
+      declarations: [LanguageSelectorComponent],
+      imports: [
+        NoopAnimationsModule,
+        MatSelectModule,
+        TranslateModule.forRoot(),
+        FormsModule,
+        SidenavServiceModule,
+        MatButtonToggleModule
+      ]
+    })
+      .compileComponents();
+  });
 
-    beforeEach(() => {
-        fixture = TestBed.createComponent(LanguageSelectorComponent);
-        component = fixture.componentInstance;
-        fixture.detectChanges();
-    });
+  beforeEach(() => {
+    fixture = TestBed.createComponent(LanguageSelectorComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
 
-    it('should create', () => {
-        expect(component).toBeTruthy();
-    });
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 });

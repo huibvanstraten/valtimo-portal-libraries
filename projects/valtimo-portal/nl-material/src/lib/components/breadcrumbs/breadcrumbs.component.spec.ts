@@ -17,14 +17,14 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {BreadcrumbsComponent} from './breadcrumbs.component';
-import {MatCardModule} from "@angular/material/card";
-import {SidenavServiceModule} from "../../services";
-import {TranslateModule} from "@ngx-translate/core";
-import {MatIconModule} from "@angular/material/icon";
-import {MatButtonModule} from "@angular/material/button";
-import {RouterTestingModule} from "@angular/router/testing";
+import {MatCardModule} from '@angular/material/card';
+import {SidenavServiceModule} from '../../services';
+import {TranslateModule} from '@ngx-translate/core';
+import {MatIconModule} from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
+import {RouterTestingModule} from '@angular/router/testing';
 import {environment} from '@src/environments';
-import {LocalizeRouterService} from "@gilsdav/ngx-translate-router";
+import {LocalizeRouterService} from '@gilsdav/ngx-translate-router';
 import {FakeLocalizeRouterService} from '@valtimo-portal/shared';
 
 describe('BreadcrumbsComponent', () => {

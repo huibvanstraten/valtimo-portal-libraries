@@ -17,9 +17,9 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {CardComponent} from './card.component';
-import {MatCardModule} from "@angular/material/card";
-import {MatIconModule} from "@angular/material/icon";
-import {MatButtonModule} from "@angular/material/button";
+import {MatCardModule} from '@angular/material/card';
+import {MatIconModule} from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
 
 describe('CardComponent', () => {
   let component: CardComponent;

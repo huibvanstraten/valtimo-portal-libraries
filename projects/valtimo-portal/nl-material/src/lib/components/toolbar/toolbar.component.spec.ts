@@ -14,9 +14,10 @@
  * limitations under the License.
  */
 
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ToolbarComponent } from './toolbar.component';
+import {ToolbarComponent} from './toolbar.component';
+import {MatToolbarModule} from '@angular/material/toolbar';
 
 describe('ToolbarComponent', () => {
   let component: ToolbarComponent;
@@ -24,9 +25,12 @@ describe('ToolbarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ToolbarComponent ]
+      declarations: [ToolbarComponent],
+      imports: [
+        MatToolbarModule
+      ]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

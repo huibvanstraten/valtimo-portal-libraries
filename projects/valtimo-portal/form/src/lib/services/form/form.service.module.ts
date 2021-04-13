@@ -16,7 +16,7 @@
 
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {FormApiService} from './form-api.service';
+import {FormService} from './form.service';
 
 @NgModule({
   declarations: [],
@@ -24,7 +24,7 @@ import {FormApiService} from './form-api.service';
     CommonModule
   ],
   exports: [],
-  providers: [FormApiService]
+  providers: [FormService]
 })
-export class FormApiServiceModule {
+export class FormServiceModule {
 }

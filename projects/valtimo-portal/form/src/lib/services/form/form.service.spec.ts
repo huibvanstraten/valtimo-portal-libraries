@@ -16,14 +16,14 @@
 
 import {TestBed} from '@angular/core/testing';
 
-import {FormApiService} from './form-api.service';
+import {FormService} from './form.service';
 
-describe('FormApiService', () => {
-  let service: FormApiService;
+describe('FormService', () => {
+  let service: FormService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(FormApiService);
+    service = TestBed.inject(FormService);
   });
 
   it('should be created', () => {

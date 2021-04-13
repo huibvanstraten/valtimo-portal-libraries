@@ -24,7 +24,7 @@ import {FormioForm as FormDefinition} from '@formio/angular';
 @Injectable({
   providedIn: 'root'
 })
-export class FormApiService {
+export class FormService {
 
   constructor(
     private readonly getAllFormDefinitionsGQL: GetAllFormDefinitionsGQL,

@@ -14,6 +14,6 @@
  * limitations under the License.
  */
 
-export * from './form-api.service.module';
-export * from './form-api.service';
+export * from './form.service.module';
+export * from './form.service';
 export * from './queries';

@@ -18,7 +18,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {NewCaseComponent} from './new-case.component';
 import {FormIoModule, SpinnerModule} from '@valtimo-portal/nl-material';
-import {FormApiServiceModule} from '@valtimo-portal/form';
+import {FormServiceModule} from '@valtimo-portal/form';
 import {TranslateModule} from '@ngx-translate/core';
 import {RouterTestingModule} from '@angular/router/testing';
 
@@ -31,7 +31,7 @@ describe('NewCaseComponent', () => {
       declarations: [NewCaseComponent],
       imports: [
         FormIoModule,
-        FormApiServiceModule,
+        FormServiceModule,
         SpinnerModule,
         TranslateModule.forRoot(),
         RouterTestingModule

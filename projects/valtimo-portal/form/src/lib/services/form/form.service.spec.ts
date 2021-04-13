@@ -15,18 +15,44 @@
  */
 
 import {TestBed} from '@angular/core/testing';
-
+import {ApolloTestingController, ApolloTestingModule} from 'apollo-angular/testing';
+import {environment} from '@src/environments';
+import {mockFormDefinitionsResult} from './mock-data';
 import {FormService} from './form.service';
+import {GetAllFormDefinitionsDocument} from './queries/get-all-form-definitions/get-all-form-definitions.graphql-gen';
 
 describe('FormService', () => {
   let service: FormService;
+  let controller: ApolloTestingController;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      imports: [
+        ApolloTestingModule.withClients(
+          environment.api.graphql.clients.map((client) => client.name)
+        )
+      ],
+    });
     service = TestBed.inject(FormService);
+    controller = TestBed.inject(ApolloTestingController);
+  });
+
+  afterEach(() => {
+    controller.verify();
   });
 
   it('should be created', () => {
     expect(service).toBeTruthy();
+  });
+
+  it('should return form definitions', (done) => {
+    service.getAllFormDefinitions().subscribe((definitions) => {
+      expect(definitions[2].name).toEqual('test');
+      done();
+    });
+
+    const op = controller.expectOne(GetAllFormDefinitionsDocument);
+
+    op.flush(mockFormDefinitionsResult);
   });
 });

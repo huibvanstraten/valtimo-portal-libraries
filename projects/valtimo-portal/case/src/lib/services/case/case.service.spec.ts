@@ -37,6 +37,10 @@ describe('CaseService', () => {
     controller = TestBed.inject(ApolloTestingController);
   });
 
+  afterEach(() => {
+    controller.verify();
+  });
+
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
@@ -50,7 +54,5 @@ describe('CaseService', () => {
     const op = controller.expectOne(GetAllCaseDefinitionsDocument);
 
     op.flush(mockCaseDefinitionsResult);
-
-    controller.verify();
   });
 });

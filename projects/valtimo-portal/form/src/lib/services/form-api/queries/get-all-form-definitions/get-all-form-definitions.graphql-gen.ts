@@ -1,14 +1,12 @@
 import * as Types from '@valtimo-portal/graphql';
 
+import { gql } from 'apollo-angular';
+import { Injectable } from '@angular/core';
 import * as Apollo from 'apollo-angular';
-import {gql} from 'apollo-angular';
-import {Injectable} from '@angular/core';
-
 export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
-
 /** All built-in and custom scalars, mapped to their actual values */
 export interface Scalars {
   ID: string;
@@ -21,6 +19,10 @@ export interface Scalars {
   /** A type representing a formatted java.util.UUID */
   UUID: any;
 }
+
+
+
+
 
 
 export interface CaseCreated {
@@ -36,6 +38,7 @@ export interface CaseDefinition {
 
 export interface CaseInstance {
   __typename?: 'CaseInstance';
+  caseDefinitionId: Scalars['String'];
   id: Scalars['UUID'];
   submision: Scalars['JSON'];
 }
@@ -89,31 +92,28 @@ export type GetAllFormDefinitionsQueryVariables = Types.Exact<{ [key: string]: n
 
 export type GetAllFormDefinitionsQuery = (
   { __typename?: 'Query' }
-  & {
-  allFormDefinitions: Array<(
+  & { allFormDefinitions: Array<(
     { __typename?: 'FormDefinition' }
     & Pick<Types.FormDefinition, 'formDefinition' | 'name'>
-    )>
-}
-  );
+  )> }
+);
 
 export const GetAllFormDefinitionsDocument = gql`
-  query GetAllFormDefinitions {
-    allFormDefinitions {
-      formDefinition
-      name
-    }
-  }
-`;
-
-@Injectable({
-  providedIn: 'root'
-})
-export class GetAllFormDefinitionsGQL extends Apollo.Query<GetAllFormDefinitionsQuery, GetAllFormDefinitionsQueryVariables> {
-  document = GetAllFormDefinitionsDocument;
-  client = 'portal-api';
-
-  constructor(apollo: Apollo.Apollo) {
-    super(apollo);
+    query GetAllFormDefinitions {
+  allFormDefinitions {
+    formDefinition
+    name
   }
 }
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class GetAllFormDefinitionsGQL extends Apollo.Query<GetAllFormDefinitionsQuery, GetAllFormDefinitionsQueryVariables> {
+    document = GetAllFormDefinitionsDocument;
+    client = 'portal-api';
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }

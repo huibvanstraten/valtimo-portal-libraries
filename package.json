@@ -30,7 +30,9 @@
     "lint": "ng lint --fix",
     "e2e": "ng e2e",
     "graphql:schema": "apollo client:download-schema ./projects/valtimo-portal/graphql/src/lib/schemas/portal-api-schema.json",
-    "graphql:generate": "graphql-codegen"
+    "graphql:generate": "run-s graphql:generate:*",
+    "graphql:generate:codegen": "graphql-codegen",
+    "graphql:generate:fix-imports": "node ./scripts/fix-graphql-types-imports.js"
   },
   "private": true,
   "dependencies": {
@@ -86,6 +88,7 @@
     "ng-packagr": "^11.0.0",
     "npm-run-all": "^4.1.5",
     "protractor": "~7.0.0",
+    "replace-in-files": "^3.0.0",
     "ts-node": "~8.3.0",
     "tslint": "~6.1.0",
     "typescript": "~4.1.2"

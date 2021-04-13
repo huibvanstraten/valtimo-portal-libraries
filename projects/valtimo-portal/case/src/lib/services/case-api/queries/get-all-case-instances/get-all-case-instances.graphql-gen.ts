@@ -1,14 +1,12 @@
 import * as Types from '@valtimo-portal/graphql';
 
+import { gql } from 'apollo-angular';
+import { Injectable } from '@angular/core';
 import * as Apollo from 'apollo-angular';
-import {gql} from 'apollo-angular';
-import {Injectable} from '@angular/core';
-
 export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
-
 /** All built-in and custom scalars, mapped to their actual values */
 export interface Scalars {
   ID: string;
@@ -21,6 +19,10 @@ export interface Scalars {
   /** A type representing a formatted java.util.UUID */
   UUID: any;
 }
+
+
+
+
 
 
 export interface CaseCreated {
@@ -90,32 +92,29 @@ export type GetAllCaseInstancesQueryVariables = Types.Exact<{ [key: string]: nev
 
 export type GetAllCaseInstancesQuery = (
   { __typename?: 'Query' }
-  & {
-  allCaseInstances: Array<(
+  & { allCaseInstances: Array<(
     { __typename?: 'CaseInstance' }
     & Pick<Types.CaseInstance, 'caseDefinitionId' | 'id' | 'submision'>
-    )>
-}
-  );
+  )> }
+);
 
 export const GetAllCaseInstancesDocument = gql`
-  query GetAllCaseInstances {
-    allCaseInstances {
-      caseDefinitionId
-      id
-      submision
-    }
-  }
-`;
-
-@Injectable({
-  providedIn: 'root'
-})
-export class GetAllCaseInstancesGQL extends Apollo.Query<GetAllCaseInstancesQuery, GetAllCaseInstancesQueryVariables> {
-  document = GetAllCaseInstancesDocument;
-  client = 'portal-api';
-
-  constructor(apollo: Apollo.Apollo) {
-    super(apollo);
+    query GetAllCaseInstances {
+  allCaseInstances {
+    caseDefinitionId
+    id
+    submision
   }
 }
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class GetAllCaseInstancesGQL extends Apollo.Query<GetAllCaseInstancesQuery, GetAllCaseInstancesQueryVariables> {
+    document = GetAllCaseInstancesDocument;
+    client = 'portal-api';
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }

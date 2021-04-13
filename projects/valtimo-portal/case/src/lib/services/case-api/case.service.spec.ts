@@ -15,14 +15,14 @@
  */
 
 import {TestBed} from '@angular/core/testing';
-import {CaseApiService} from './case-api.service';
+import {CaseService} from './case.service';
 
-describe('CaseApiService', () => {
-  let service: CaseApiService;
+describe('CaseService', () => {
+  let service: CaseService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(CaseApiService);
+    service = TestBed.inject(CaseService);
   });
 
   it('should be created', () => {

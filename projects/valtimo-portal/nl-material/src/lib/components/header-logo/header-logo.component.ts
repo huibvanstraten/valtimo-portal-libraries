@@ -28,7 +28,7 @@ export class HeaderLogoComponent {
 
   currentLang$!: Observable<string>;
 
-  constructor(private sidenavService: SidenavService) {
+  constructor(private readonly sidenavService: SidenavService) {
     this.currentLang$ = this.sidenavService.currentLang$;
   }
 }

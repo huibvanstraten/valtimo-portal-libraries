@@ -17,6 +17,8 @@
 <div fxFlex fxLayout="column" fxLayoutGap="16px" class="module-container">
   <div fxLayout="row wrap">
     <ng-container *ngTemplateOutlet="introduction"></ng-container>
+  </div>
+  <div fxLayout="row wrap">
     <ng-container *ngTemplateOutlet="reminder"></ng-container>
     <ng-container *ngTemplateOutlet="casePreview"></ng-container>
     <ng-container *ngTemplateOutlet="newCase"></ng-container>
@@ -46,7 +48,8 @@
 
 <ng-template #reminder>
   <div
-    fxFlex="100"
+    fxFlex.gt-sm="33.3"
+    fxFlex.xs="100"
     fxLayout="column"
     style="padding: 16px;"
   >
@@ -63,8 +66,8 @@
 
 <ng-template #casePreview>
   <div
-    fxFlex="50"
-    fxFlex.sm="100"
+    fxFlex.gt-sm="33.3"
+    fxFlex.sm="50"
     fxFlex.xs="100"
     fxLayout="column"
     style="padding: 16px;"
@@ -75,8 +78,8 @@
 
 <ng-template #newCase>
   <div
-    fxFlex="50"
-    fxFlex.sm="100"
+    fxFlex.gt-sm="33.3"
+    fxFlex.sm="50"
     fxFlex.xs="100"
     fxLayout="column"
     style="padding: 16px;"

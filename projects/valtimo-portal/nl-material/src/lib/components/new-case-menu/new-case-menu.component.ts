@@ -1,10 +1,10 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {FormApiService} from '@valtimo-portal/form';
 import {BehaviorSubject, combineLatest, Subscription} from 'rxjs';
 import {fadeInAnimations} from '../../animations';
 import {SidenavService} from '../../services';
 import {LocalizeRouterService} from '@gilsdav/ngx-translate-router';
 import {Router} from '@angular/router';
+import {CaseService} from '@valtimo-portal/case';
 
 @Component({
   selector: 'nl-material-new-case-menu',
@@ -14,17 +14,17 @@ import {Router} from '@angular/router';
 })
 export class NewCaseMenuComponent implements OnInit, OnDestroy {
 
-  availableFormDefinitions$ = this.formApiService.getAvailableFormDefinitions();
+  allCaseDefinitions$ = this.caseService.getAllCaseDefinitions();
 
   routeLangSubscription!: Subscription;
 
   readonly newCaseRoute$ = new BehaviorSubject<string>(this.getNewCaseRoute());
 
   constructor(
-    private formApiService: FormApiService,
-    private sidenavService: SidenavService,
-    private localizeRouterService: LocalizeRouterService,
-    private router: Router
+    private readonly caseService: CaseService,
+    private readonly sidenavService: SidenavService,
+    private readonly localizeRouterService: LocalizeRouterService,
+    private readonly router: Router
   ) {
   }
 

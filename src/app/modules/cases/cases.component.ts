@@ -15,7 +15,10 @@
  */
 
 import {Component, OnInit} from '@angular/core';
-import {CasePreviewMode} from '@valtimo-portal/nl-material';
+import {CasePreview, CasePreviewMode} from '@valtimo-portal/nl-material';
+import {CaseService} from '@valtimo-portal/case';
+import {map} from 'rxjs/operators';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-cases',
@@ -26,7 +29,18 @@ export class CasesComponent implements OnInit {
 
   currentPreviewMode = CasePreviewMode.current;
 
-  constructor() {
+  cases$: Observable<Array<CasePreview>> = this.caseService.getAllCaseInstances()
+    .pipe(
+      map((instances) => instances.map((instance) => (
+          {
+            id: instance.caseDefinitionId,
+            code: instance.id,
+            tasks: []
+          }
+        ))
+      ));
+
+  constructor(private readonly caseService: CaseService) {
   }
 
   ngOnInit(): void {

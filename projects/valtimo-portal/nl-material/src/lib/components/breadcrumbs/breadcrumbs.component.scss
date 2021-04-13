@@ -16,6 +16,7 @@
 
 @import 'colors';
 @import 'variables';
+@import 'mixins';
 
 .mat-button {
   padding: 0;
@@ -53,10 +54,8 @@
     color: $nl-dark-gray;
     text-decoration: none;
     font-weight: bold;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
     padding: 0 !important;
+    @include no-wrap-ellipsis;
 
     &.last {
       cursor: default;

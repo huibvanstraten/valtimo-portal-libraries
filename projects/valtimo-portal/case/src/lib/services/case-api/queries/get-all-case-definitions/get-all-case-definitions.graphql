@@ -1,0 +1,6 @@
+query GetAllCaseDefinitions {
+  allCaseDefinitions @namedClient(name: "portal-api") {
+    id
+    schema
+  }
+}

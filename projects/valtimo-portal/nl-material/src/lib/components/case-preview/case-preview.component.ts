@@ -3,6 +3,7 @@ import {CasePreview, TaskPreview} from '../../interfaces';
 import {CardType, CasePreviewMode} from '../../enums';
 import {SidenavService} from '../../services';
 import {Observable} from 'rxjs';
+import {fadeInAnimations} from '../../animations';
 
 const mockCasePreview: CasePreview = {
   id: 'grant-application',
@@ -29,7 +30,8 @@ const mockCasePreview: CasePreview = {
 @Component({
   selector: 'nl-material-case-preview',
   templateUrl: './case-preview.component.html',
-  styleUrls: ['./case-preview.component.scss']
+  styleUrls: ['./case-preview.component.scss'],
+  animations: fadeInAnimations
 })
 export class CasePreviewComponent {
   @Input() preview: CasePreview = mockCasePreview;
@@ -42,7 +44,7 @@ export class CasePreviewComponent {
   readonly clippingPreviewMode = CasePreviewMode.clipping;
   readonly currentPreviewMode = CasePreviewMode.current;
 
-  constructor(private sidenavService: SidenavService) {
+  constructor(private readonly sidenavService: SidenavService) {
     this.currentLang$ = this.sidenavService.currentLang$;
   }
 

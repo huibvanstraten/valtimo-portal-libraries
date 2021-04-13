@@ -31,6 +31,7 @@ const routes: Routes = [
     canActivate: [KeycloakAppAuthGuard],
     data: {
       title: 'TITLES.newCase',
+      animation: 'DetailPage',
     }
   }
 ];

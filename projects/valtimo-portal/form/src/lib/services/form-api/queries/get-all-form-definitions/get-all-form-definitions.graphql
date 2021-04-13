@@ -1,0 +1,6 @@
+query GetAllFormDefinitions {
+  allFormDefinitions @namedClient(name: "portal-api") {
+    formDefinition
+    name
+  }
+}

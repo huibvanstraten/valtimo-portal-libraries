@@ -15,10 +15,11 @@
  */
 
 import {Injectable} from '@angular/core';
-import {GetAvailableFormDefinitionsGQL} from './queries/get-available-form-definitions';
+import {GetAllFormDefinitionsGQL, GetFormDefinitionByNameGQL} from './queries';
 import {map} from 'rxjs/operators';
 import {AvailableFormDefinition} from '../../interfaces';
 import {Observable} from 'rxjs';
+import {FormioForm as FormDefinition} from '@formio/angular';
 
 @Injectable({
   providedIn: 'root'
@@ -26,19 +27,26 @@ import {Observable} from 'rxjs';
 export class FormApiService {
 
   constructor(
-    private getAvailableFormDefinitionsGQL: GetAvailableFormDefinitionsGQL
+    private readonly getAllFormDefinitionsGQL: GetAllFormDefinitionsGQL,
+    private readonly getFormDefinitionByNameGQL: GetFormDefinitionByNameGQL
   ) {
   }
 
-  getAvailableFormDefinitions(): Observable<Array<AvailableFormDefinition>> {
-    return this.getAvailableFormDefinitionsGQL.fetch().pipe(
+  getAllFormDefinitions(): Observable<Array<AvailableFormDefinition>> {
+    return this.getAllFormDefinitionsGQL.fetch().pipe(
       map((res) => (
-          res.data.availableFormDefinitions.map((definition) => ({
+          res.data.allFormDefinitions.map((definition) => ({
             name: definition.name,
-            definition: JSON.parse(definition.formDefinition)
+            definition: definition.formDefinition
           })) as Array<AvailableFormDefinition>
         )
       )
+    );
+  }
+
+  getFormDefinitionByName(name: string): Observable<FormDefinition> {
+    return this.getFormDefinitionByNameGQL.fetch({name}).pipe(
+      map((res) => res.data.getFormDefinition?.formDefinition)
     );
   }
 }

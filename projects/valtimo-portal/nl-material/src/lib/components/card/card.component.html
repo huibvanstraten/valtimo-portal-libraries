@@ -44,15 +44,17 @@
 </ng-template>
 
 <ng-template #buttons>
-  <button *ngIf="buttonText && type === reminderType" mat-flat-button color="warn">{{buttonText}}</button>
-  <button *ngIf="buttonText && type === casePreviewClippingType" mat-flat-button
-          color="accent">{{buttonText}}</button>
-  <button
-    *ngIf="secondaryButtonText && type === casePreviewClippingType"
-    mat-button
-    color="primary"
-  >
-    <mat-icon fontSet="fa" fontIcon="fa-arrow-right"></mat-icon>
-    {{secondaryButtonText}}
-  </button>
+  <div class="buttons-container">
+    <button *ngIf="buttonText && type === reminderType" mat-flat-button color="warn">{{buttonText}}</button>
+    <button *ngIf="buttonText && type === casePreviewClippingType" mat-flat-button
+            color="accent">{{buttonText}}</button>
+    <button
+      *ngIf="secondaryButtonText && type === casePreviewClippingType"
+      mat-button
+      color="primary"
+    >
+      <mat-icon fontSet="fa" fontIcon="fa-arrow-right"></mat-icon>
+      {{secondaryButtonText}}
+    </button>
+  </div>
 </ng-template>

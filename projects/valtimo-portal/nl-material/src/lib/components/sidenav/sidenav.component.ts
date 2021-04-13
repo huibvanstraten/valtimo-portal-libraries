@@ -32,7 +32,7 @@ export class SidenavComponent implements OnInit {
 
   open$!: Observable<boolean>;
 
-  constructor(private sidenavService: SidenavService) {
+  constructor(private readonly sidenavService: SidenavService) {
     this.open$ = this.sidenavService.open$;
   }
 

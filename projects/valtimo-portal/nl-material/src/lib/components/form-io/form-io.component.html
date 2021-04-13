@@ -1,3 +1,4 @@
-<div class="mat-form-io-container">
-  <mat-formio [form]="definition"></mat-formio>
+<div class="mat-form-io-container" *ngIf="{submitting: submitting$ | async} as obs" @fadeInSlow>
+  <h1 class="mat-h1">{{title}}</h1>
+  <mat-formio [form]="definition" (submit)="onSubmit($event)" [readOnly]="!!obs.submitting"></mat-formio>
 </div>

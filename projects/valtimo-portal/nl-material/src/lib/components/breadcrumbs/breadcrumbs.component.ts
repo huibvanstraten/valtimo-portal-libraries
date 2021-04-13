@@ -38,10 +38,10 @@ export class BreadcrumbsComponent implements OnInit, OnDestroy {
 
   constructor(
     @Inject('environment') environment: Environment,
-    private router: Router,
-    private sidenavService: SidenavService,
-    private route: ActivatedRoute,
-    private breadcrumbsService: BreadcrumbsService
+    private readonly router: Router,
+    private readonly sidenavService: SidenavService,
+    private readonly route: ActivatedRoute,
+    private readonly breadcrumbsService: BreadcrumbsService
   ) {
     this.environment = environment;
   }

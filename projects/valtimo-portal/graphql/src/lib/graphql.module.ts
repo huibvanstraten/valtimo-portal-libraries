@@ -28,9 +28,9 @@ import {Environment, GraphQLNamedClient} from '@valtimo-portal/shared';
 })
 export class GraphQLModule {
   constructor(
-    @Inject('environment') environment: Environment,
-    apollo: Apollo,
-    httpLink: HttpLink
+    @Inject('environment') private readonly environment: Environment,
+    private readonly apollo: Apollo,
+    private readonly httpLink: HttpLink
   ) {
     environment?.api?.graphql?.clients?.forEach(
       (client: GraphQLNamedClient) => {

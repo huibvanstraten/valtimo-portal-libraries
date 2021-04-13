@@ -17,11 +17,10 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {BreadcrumbsService} from '@valtimo-portal/nl-material';
 import {FormApiService} from '@valtimo-portal/form';
-import {combineLatest, Subscription} from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
 import {ActivatedRoute} from '@angular/router';
 import {TranslateService} from '@ngx-translate/core';
-import {map, take} from 'rxjs/operators';
-import {FormioForm} from '@formio/angular';
+import {switchMap, take} from 'rxjs/operators';
 
 @Component({
   selector: 'app-new-case',
@@ -32,19 +31,19 @@ export class NewCaseComponent implements OnInit, OnDestroy {
 
   private langChangeSubscription!: Subscription;
 
-  formDefinition$ = combineLatest([this.route.queryParams, this.formApiService.getAvailableFormDefinitions()])
-    .pipe(
-      map(
-        ([params, definitions]) =>
-          definitions.find((definition) => definition.name === params.id)?.definition as FormioForm
-      ));
+  formDefinition$ = this.route.queryParams.pipe(
+    switchMap((params) => this.formApiService.getFormDefinitionByName(params.id))
+  );
+
+  title$!: Observable<string>;
 
   constructor(
-    private breadcrumbsService: BreadcrumbsService,
-    private translateService: TranslateService,
-    private route: ActivatedRoute,
-    private formApiService: FormApiService,
+    private readonly breadcrumbsService: BreadcrumbsService,
+    private readonly translateService: TranslateService,
+    private readonly route: ActivatedRoute,
+    private readonly formApiService: FormApiService,
   ) {
+    this.title$ = this.breadcrumbsService.lastBreadcrumbTitle$;
   }
 
   ngOnInit(): void {

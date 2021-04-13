@@ -32,7 +32,10 @@ export class SidenavService {
 
   private _currentLang$ = new BehaviorSubject<string>('');
 
-  constructor(private localizeRouterService: LocalizeRouterService, private translateService: TranslateService) {
+  constructor(
+    private readonly localizeRouterService: LocalizeRouterService,
+    private readonly translateService: TranslateService
+  ) {
     this.currentLang = this.translateService.currentLang;
   }
 

@@ -1,0 +1,5 @@
+query GetFormDefinitionByName($name: String!) {
+  getFormDefinition(name: $name) @namedClient(name: "portal-api") {
+    formDefinition
+  }
+}

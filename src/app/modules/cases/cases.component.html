@@ -22,21 +22,36 @@
     >
       <h1 class="mat-h1">{{'cases.title' | translate}}</h1>
     </div>
-    <div
-      fxFlex="50"
-      fxFlex.lt-md="100"
-      fxLayout="column"
-      style="padding: 16px;"
-    >
-      <nl-material-case-preview [mode]="currentPreviewMode"></nl-material-case-preview>
-    </div>
-    <div
-      fxFlex="50"
-      fxFlex.lt-md="100"
-      fxLayout="column"
-      style="padding: 16px;"
-    >
-      <nl-material-case-preview [mode]="currentPreviewMode"></nl-material-case-preview>
-    </div>
+    <ng-container *ngIf="cases$ | async as cases; else loading">
+      <div
+        *ngFor="let case of cases"
+        fxFlex.gt-sm="33.3"
+        fxFlex.sm="50"
+        fxFlex="100"
+        fxLayout="column"
+        style="padding: 16px;"
+      >
+        <nl-material-case-preview [mode]="currentPreviewMode" [preview]="case"></nl-material-case-preview>
+      </div>
+      <div
+        fxFlex.gt-sm="33.3"
+        fxFlex.sm="50"
+        fxFlex="100"
+        fxLayout="column"
+        style="padding: 16px;"
+      >
+        <nl-material-case-preview [mode]="currentPreviewMode"></nl-material-case-preview>
+      </div>
+    </ng-container>
   </div>
 </div>
+
+<ng-template #loading>
+  <div
+    fxFlex="100"
+    fxLayout="column"
+    style="padding: 16px;"
+  >
+    <nl-material-spinner></nl-material-spinner>
+  </div>
+</ng-template>

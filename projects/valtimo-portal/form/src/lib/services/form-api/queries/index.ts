@@ -14,4 +14,5 @@
  * limitations under the License.
  */
 
-export * from './get-available-form-definitions';
+export * from './get-all-form-definitions';
+export * from './get-form-definition-by-name';

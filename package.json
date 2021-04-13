@@ -19,7 +19,7 @@
     "watch:form": "ng build @valtimo-portal/form --watch",
     "watch:case": "ng build @valtimo-portal/case --watch",
     "watch:nl-material": "ng build @valtimo-portal/nl-material --watch",
-    "test": "ng test",
+    "test": "jest --pass-with-no-tests",
     "lint": "ng lint --fix",
     "e2e": "ng e2e",
     "graphql:schema": "apollo client:download-schema ./projects/valtimo-portal/graphql/src/lib/schemas/portal-api-schema.json",

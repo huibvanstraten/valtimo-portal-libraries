@@ -1,4 +1,13 @@
 module.exports = {
+  roots: [
+    "<rootDir>/src",
+    "<rootDir>/projects/valtimo-portal/authentication/src",
+    "<rootDir>/projects/valtimo-portal/case/src",
+    "<rootDir>/projects/valtimo-portal/form/src",
+    "<rootDir>/projects/valtimo-portal/graphql/src",
+    "<rootDir>/projects/valtimo-portal/nl-material/src",
+    "<rootDir>/projects/valtimo-portal/shared/src"
+  ],
   modulePathIgnorePatterns: ['<rootDir>/dist'],
   moduleNameMapper: {
     '@src/(.*)': '<rootDir>/src/$1',

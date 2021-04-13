@@ -15,27 +15,14 @@
  */
 
 import {TestBed} from '@angular/core/testing';
+import {CaseApiService} from './case-api.service';
 
-import {SidenavService} from './sidenav.service';
-import {environment} from '@src/environments';
-import {LocalizeRouterService} from '@gilsdav/ngx-translate-router';
-import {FakeLocalizeRouterService} from '@valtimo-portal/shared';
-import {TranslateModule} from '@ngx-translate/core';
-
-describe('SidenavService', () => {
-  let service: SidenavService;
+describe('CaseApiService', () => {
+  let service: CaseApiService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({
-      providers: [
-        {provide: 'environment', useValue: environment},
-        {provide: LocalizeRouterService, useClass: FakeLocalizeRouterService}
-      ],
-      imports: [
-        TranslateModule.forRoot()
-      ]
-    });
-    service = TestBed.inject(SidenavService);
+    TestBed.configureTestingModule({});
+    service = TestBed.inject(CaseApiService);
   });
 
   it('should be created', () => {

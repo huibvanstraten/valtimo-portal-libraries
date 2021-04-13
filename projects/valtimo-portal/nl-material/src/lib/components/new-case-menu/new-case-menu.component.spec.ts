@@ -1,7 +1,7 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {NewCaseMenuComponent} from './new-case-menu.component';
-import {CaseApiServiceModule} from '@valtimo-portal/case';
+import {CaseServiceModule} from '@valtimo-portal/case';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatListModule} from '@angular/material/list';
 import {TranslateModule} from '@ngx-translate/core';
@@ -27,7 +27,7 @@ describe('NewCaseMenuComponent', () => {
       ],
       declarations: [NewCaseMenuComponent],
       imports: [
-        CaseApiServiceModule,
+        CaseServiceModule,
         MatMenuModule,
         MatListModule,
         TranslateModule.forRoot(),

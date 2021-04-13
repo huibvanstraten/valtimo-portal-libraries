@@ -20,7 +20,7 @@ import {CasesComponent} from './cases.component';
 import {CasesRoutingModule} from '@cases/cases-routing.module';
 import {CasePreviewModule, SpinnerModule} from '@valtimo-portal/nl-material';
 import {TranslateModule} from '@ngx-translate/core';
-import {CaseApiServiceModule} from '@valtimo-portal/case';
+import {CaseServiceModule} from '@valtimo-portal/case';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {KeycloakAngularModule} from 'keycloak-angular';
 import {RouterTestingModule} from '@angular/router/testing';
@@ -40,7 +40,7 @@ describe('CasesComponent', () => {
         CasesRoutingModule,
         CasePreviewModule,
         TranslateModule,
-        CaseApiServiceModule,
+        CaseServiceModule,
         SpinnerModule,
         KeycloakAngularModule,
         RouterTestingModule,

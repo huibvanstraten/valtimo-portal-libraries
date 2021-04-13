@@ -3,7 +3,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {FormIoComponent} from './form-io.component';
 import {MatFormioModule} from '@formio/angular-material';
 import {MatIconModule} from '@angular/material/icon';
-import {CaseApiServiceModule} from '@valtimo-portal/case';
+import {CaseServiceModule} from '@valtimo-portal/case';
 import {RouterTestingModule} from '@angular/router/testing';
 import {LocalizeRouterService} from '@gilsdav/ngx-translate-router';
 import {FakeLocalizeRouterService} from '@valtimo-portal/shared';
@@ -25,7 +25,7 @@ describe('FormIoComponent', () => {
         NoopAnimationsModule,
         MatFormioModule,
         MatIconModule,
-        CaseApiServiceModule,
+        CaseServiceModule,
         RouterTestingModule
       ]
     })

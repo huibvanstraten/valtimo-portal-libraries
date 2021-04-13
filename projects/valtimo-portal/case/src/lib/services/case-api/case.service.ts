@@ -27,7 +27,7 @@ import {QueryRef} from 'apollo-angular';
 @Injectable({
   providedIn: 'root'
 })
-export class CaseApiService {
+export class CaseService {
 
   private caseInstancesQueryRef!: QueryRef<GetAllCaseInstancesQuery, Exact<{ [key: string]: never; }>>;
 

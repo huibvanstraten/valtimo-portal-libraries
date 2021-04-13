@@ -16,7 +16,7 @@
 
 import {Component, OnInit} from '@angular/core';
 import {CasePreview, CasePreviewMode} from '@valtimo-portal/nl-material';
-import {CaseApiService} from '@valtimo-portal/case';
+import {CaseService} from '@valtimo-portal/case';
 import {map} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 
@@ -29,7 +29,7 @@ export class CasesComponent implements OnInit {
 
   currentPreviewMode = CasePreviewMode.current;
 
-  cases$: Observable<Array<CasePreview>> = this.caseApiService.getAllCaseInstances()
+  cases$: Observable<Array<CasePreview>> = this.caseService.getAllCaseInstances()
     .pipe(
       map((instances) => instances.map((instance) => (
           {
@@ -40,7 +40,7 @@ export class CasesComponent implements OnInit {
         ))
       ));
 
-  constructor(private readonly caseApiService: CaseApiService) {
+  constructor(private readonly caseService: CaseService) {
   }
 
   ngOnInit(): void {

@@ -14,6 +14,6 @@
  * limitations under the License.
  */
 
-export * from './case-api.service.module';
-export * from './case-api.service';
+export * from './case.service.module';
+export * from './case.service';
 export * from './queries';

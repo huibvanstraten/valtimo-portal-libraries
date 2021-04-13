@@ -1,7 +1,7 @@
 import {Component, Input, ViewEncapsulation} from '@angular/core';
 import {FormioForm} from '@formio/angular';
 import {BehaviorSubject} from 'rxjs';
-import {CaseApiService} from '@valtimo-portal/case';
+import {CaseService} from '@valtimo-portal/case';
 import {ActivatedRoute, Router} from '@angular/router';
 import {take} from 'rxjs/operators';
 import {LocalizeRouterService} from '@gilsdav/ngx-translate-router';
@@ -21,7 +21,7 @@ export class FormIoComponent {
   submitting$ = new BehaviorSubject<boolean>(false);
 
   constructor(
-    private readonly caseApiService: CaseApiService,
+    private readonly caseService: CaseService,
     private readonly route: ActivatedRoute,
     private readonly localizeRouterService: LocalizeRouterService,
     private readonly router: Router
@@ -34,7 +34,7 @@ export class FormIoComponent {
     this.route.queryParams
       .pipe(take(1))
       .subscribe((params) => {
-          this.caseApiService.submitCase(submission.data, params.id).subscribe(() => {
+          this.caseService.submitCase(submission.data, params.id).subscribe(() => {
             this.submitting$.next(false);
             this.router.navigateByUrl(
               `${this.localizeRouterService.translateRoute('/cases')}`

@@ -16,7 +16,7 @@
 
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {CaseApiService} from './case-api.service';
+import {CaseService} from './case.service';
 
 @NgModule({
   declarations: [],
@@ -24,7 +24,7 @@ import {CaseApiService} from './case-api.service';
     CommonModule
   ],
   exports: [],
-  providers: [CaseApiService]
+  providers: [CaseService]
 })
-export class CaseApiServiceModule {
+export class CaseServiceModule {
 }

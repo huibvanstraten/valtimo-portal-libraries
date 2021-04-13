@@ -4,7 +4,7 @@ import {fadeInAnimations} from '../../animations';
 import {SidenavService} from '../../services';
 import {LocalizeRouterService} from '@gilsdav/ngx-translate-router';
 import {Router} from '@angular/router';
-import {CaseApiService} from '@valtimo-portal/case';
+import {CaseService} from '@valtimo-portal/case';
 
 @Component({
   selector: 'nl-material-new-case-menu',
@@ -14,14 +14,14 @@ import {CaseApiService} from '@valtimo-portal/case';
 })
 export class NewCaseMenuComponent implements OnInit, OnDestroy {
 
-  allCaseDefinitions$ = this.caseApiService.getAllCaseDefinitions();
+  allCaseDefinitions$ = this.caseService.getAllCaseDefinitions();
 
   routeLangSubscription!: Subscription;
 
   readonly newCaseRoute$ = new BehaviorSubject<string>(this.getNewCaseRoute());
 
   constructor(
-    private readonly caseApiService: CaseApiService,
+    private readonly caseService: CaseService,
     private readonly sidenavService: SidenavService,
     private readonly localizeRouterService: LocalizeRouterService,
     private readonly router: Router

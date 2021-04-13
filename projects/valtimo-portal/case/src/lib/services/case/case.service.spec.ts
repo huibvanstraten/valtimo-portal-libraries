@@ -16,16 +16,41 @@
 
 import {TestBed} from '@angular/core/testing';
 import {CaseService} from './case.service';
+import {ApolloTestingController, ApolloTestingModule} from 'apollo-angular/testing';
+import {GetAllCaseDefinitionsDocument} from './queries/get-all-case-definitions/get-all-case-definitions.graphql-gen';
+import {environment} from '@src/environments';
+import {mockCaseDefinitionsResult} from './mock-data';
 
 describe('CaseService', () => {
   let service: CaseService;
+  let controller: ApolloTestingController;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      imports: [
+        ApolloTestingModule.withClients(
+          environment.api.graphql.clients.map((client) => client.name)
+        )
+      ],
+    });
     service = TestBed.inject(CaseService);
+    controller = TestBed.inject(ApolloTestingController);
   });
 
   it('should be created', () => {
     expect(service).toBeTruthy();
+  });
+
+  it('should return case definitions', (done) => {
+    service.getAllCaseDefinitions().subscribe((definitions) => {
+      expect(definitions[1].id).toEqual('test');
+      done();
+    });
+
+    const op = controller.expectOne(GetAllCaseDefinitionsDocument);
+
+    op.flush(mockCaseDefinitionsResult);
+
+    controller.verify();
   });
 });

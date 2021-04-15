@@ -14,9 +14,18 @@
  * limitations under the License.
  */
 
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { BreadcrumbsComponent } from './breadcrumbs.component';
+import {BreadcrumbsComponent} from './breadcrumbs.component';
+import {MatCardModule} from '@angular/material/card';
+import {SidenavServiceModule} from '../../services';
+import {TranslateModule} from '@ngx-translate/core';
+import {MatIconModule} from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
+import {RouterTestingModule} from '@angular/router/testing';
+import {environment} from '@src/environments';
+import {LocalizeRouterService} from '@gilsdav/ngx-translate-router';
+import {FakeLocalizeRouterService} from '@valtimo-portal/shared';
 
 describe('BreadcrumbsComponent', () => {
   let component: BreadcrumbsComponent;
@@ -24,9 +33,21 @@ describe('BreadcrumbsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ BreadcrumbsComponent ]
+      providers: [
+        {provide: 'environment', useValue: environment},
+        {provide: LocalizeRouterService, useClass: FakeLocalizeRouterService}
+      ],
+      declarations: [BreadcrumbsComponent],
+      imports: [
+        MatCardModule,
+        RouterTestingModule,
+        SidenavServiceModule,
+        TranslateModule.forRoot(),
+        MatIconModule,
+        MatButtonModule,
+      ]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

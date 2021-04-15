@@ -105,12 +105,10 @@
           }
         },
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "@angular-builders/jest:run",
           "options": {
-            "main": "src/test.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.spec.json",
-            "karmaConfig": "karma.conf.js",
             "assets": [
               "src/favicon.ico",
               "src/assets"
@@ -167,11 +165,9 @@
           }
         },
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "@angular-builders/jest:run",
           "options": {
-            "main": "projects/valtimo-portal/nl-material/src/test.ts",
-            "tsConfig": "projects/valtimo-portal/nl-material/tsconfig.spec.json",
-            "karmaConfig": "projects/valtimo-portal/nl-material/karma.conf.js"
+            "tsConfig": "projects/valtimo-portal/nl-material/tsconfig.spec.json"
           }
         },
         "lint": {
@@ -207,11 +203,9 @@
           }
         },
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "@angular-builders/jest:run",
           "options": {
-            "main": "projects/valtimo-portal/authentication/src/test.ts",
-            "tsConfig": "projects/valtimo-portal/authentication/tsconfig.spec.json",
-            "karmaConfig": "projects/valtimo-portal/authentication/karma.conf.js"
+            "tsConfig": "projects/valtimo-portal/authentication/tsconfig.spec.json"
           }
         },
         "lint": {
@@ -247,11 +241,9 @@
           }
         },
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "@angular-builders/jest:run",
           "options": {
-            "main": "projects/valtimo-portal/shared/src/test.ts",
-            "tsConfig": "projects/valtimo-portal/shared/tsconfig.spec.json",
-            "karmaConfig": "projects/valtimo-portal/shared/karma.conf.js"
+            "tsConfig": "projects/valtimo-portal/shared/tsconfig.spec.json"
           }
         },
         "lint": {
@@ -287,11 +279,9 @@
           }
         },
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "@angular-builders/jest:run",
           "options": {
-            "main": "projects/valtimo-portal/graphql/src/test.ts",
-            "tsConfig": "projects/valtimo-portal/graphql/tsconfig.spec.json",
-            "karmaConfig": "projects/valtimo-portal/graphql/karma.conf.js"
+            "tsConfig": "projects/valtimo-portal/graphql/tsconfig.spec.json"
           }
         },
         "lint": {
@@ -327,11 +317,9 @@
           }
         },
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "@angular-builders/jest:run",
           "options": {
-            "main": "projects/valtimo-portal/form/src/test.ts",
-            "tsConfig": "projects/valtimo-portal/form/tsconfig.spec.json",
-            "karmaConfig": "projects/valtimo-portal/form/karma.conf.js"
+            "tsConfig": "projects/valtimo-portal/form/tsconfig.spec.json"
           }
         },
         "lint": {
@@ -367,11 +355,9 @@
           }
         },
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "@angular-builders/jest:run",
           "options": {
-            "main": "projects/valtimo-portal/case/src/test.ts",
-            "tsConfig": "projects/valtimo-portal/case/tsconfig.spec.json",
-            "karmaConfig": "projects/valtimo-portal/case/karma.conf.js"
+            "tsConfig": "projects/valtimo-portal/case/tsconfig.spec.json"
           }
         },
         "lint": {

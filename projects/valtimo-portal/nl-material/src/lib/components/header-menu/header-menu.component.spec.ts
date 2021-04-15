@@ -14,9 +14,24 @@
  * limitations under the License.
  */
 
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { HeaderMenuComponent } from './header-menu.component';
+import {HeaderMenuComponent} from './header-menu.component';
+import {MatSelectModule} from '@angular/material/select';
+import {TranslateModule} from '@ngx-translate/core';
+import {FormsModule} from '@angular/forms';
+import {SidenavServiceModule} from '../../services';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatIconModule} from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
+import {LanguageSelectorModule} from '../language-selector';
+import {MatListModule} from '@angular/material/list';
+import {UserMenuModule} from '../user-menu/user-menu.module';
+import {environment} from '@src/environments';
+import {LocalizeRouterService} from '@gilsdav/ngx-translate-router';
+import {FakeLocalizeRouterService} from '@valtimo-portal/shared';
+import {KeycloakAngularModule} from 'keycloak-angular';
+import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 
 describe('HeaderMenuComponent', () => {
   let component: HeaderMenuComponent;
@@ -24,9 +39,27 @@ describe('HeaderMenuComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ HeaderMenuComponent ]
+      providers: [
+        {provide: 'environment', useValue: environment},
+        {provide: LocalizeRouterService, useClass: FakeLocalizeRouterService}
+      ],
+      declarations: [HeaderMenuComponent],
+      imports: [
+        NoopAnimationsModule,
+        MatSelectModule,
+        TranslateModule.forRoot(),
+        FormsModule,
+        SidenavServiceModule,
+        MatMenuModule,
+        MatIconModule,
+        MatButtonModule,
+        LanguageSelectorModule,
+        MatListModule,
+        UserMenuModule,
+        KeycloakAngularModule
+      ]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

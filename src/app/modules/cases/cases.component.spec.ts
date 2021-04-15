@@ -14,9 +14,18 @@
  * limitations under the License.
  */
 
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { CasesComponent } from './cases.component';
+import {CasesComponent} from './cases.component';
+import {CasesRoutingModule} from '@cases/cases-routing.module';
+import {CasePreviewModule, SpinnerModule} from '@valtimo-portal/nl-material';
+import {TranslateModule} from '@ngx-translate/core';
+import {CaseServiceModule} from '@valtimo-portal/case';
+import {NoopAnimationsModule} from '@angular/platform-browser/animations';
+import {KeycloakAngularModule} from 'keycloak-angular';
+import {RouterTestingModule} from '@angular/router/testing';
+import {ApolloTestingModule} from 'apollo-angular/testing';
+import {environment} from '@src/environments';
 
 describe('CasesComponent', () => {
   let component: CasesComponent;
@@ -24,9 +33,20 @@ describe('CasesComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CasesComponent ]
+      declarations: [CasesComponent],
+      imports: [
+        NoopAnimationsModule,
+        TranslateModule.forRoot(),
+        CasesRoutingModule,
+        CasePreviewModule,
+        TranslateModule,
+        CaseServiceModule,
+        SpinnerModule,
+        KeycloakAngularModule,
+        RouterTestingModule,
+        ApolloTestingModule.withClients(environment.api.graphql.clients.map((client) => client.name))]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

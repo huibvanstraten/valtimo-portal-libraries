@@ -1,6 +1,14 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { FormIoComponent } from './form-io.component';
+import {FormIoComponent} from './form-io.component';
+import {MatFormioModule} from '@formio/angular-material';
+import {MatIconModule} from '@angular/material/icon';
+import {CaseServiceModule} from '@valtimo-portal/case';
+import {RouterTestingModule} from '@angular/router/testing';
+import {LocalizeRouterService} from '@gilsdav/ngx-translate-router';
+import {FakeLocalizeRouterService} from '@valtimo-portal/shared';
+import {environment} from '@src/environments';
+import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 
 describe('FormIoComponent', () => {
   let component: FormIoComponent;
@@ -8,9 +16,20 @@ describe('FormIoComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ FormIoComponent ]
+      providers: [
+        {provide: 'environment', useValue: environment},
+        {provide: LocalizeRouterService, useClass: FakeLocalizeRouterService}
+      ],
+      declarations: [FormIoComponent],
+      imports: [
+        NoopAnimationsModule,
+        MatFormioModule,
+        MatIconModule,
+        CaseServiceModule,
+        RouterTestingModule
+      ]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

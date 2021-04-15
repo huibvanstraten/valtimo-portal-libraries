@@ -14,22 +14,44 @@
  * limitations under the License.
  */
 
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { HomeComponent } from './home.component';
+import {HomeComponent} from './home.component';
+import {CardModule, CasePreviewModule, NewCaseMenuModule} from '@valtimo-portal/nl-material';
+import {TranslateModule} from '@ngx-translate/core';
+import {KeycloakAngularModule} from 'keycloak-angular';
+import {LocalizeRouterService} from '@gilsdav/ngx-translate-router';
+import {RouterTestingModule} from '@angular/router/testing';
+import {ApolloTestingController, ApolloTestingModule} from 'apollo-angular/testing';
+import {NoopAnimationsModule} from '@angular/platform-browser/animations';
+import {FakeLocalizeRouterService} from '@valtimo-portal/shared';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
   let fixture: ComponentFixture<HomeComponent>;
+  let controller: ApolloTestingController;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ HomeComponent ]
+      providers: [
+        {provide: LocalizeRouterService, useClass: FakeLocalizeRouterService}
+      ],
+      declarations: [HomeComponent],
+      imports: [
+        NoopAnimationsModule,
+        CardModule,
+        TranslateModule.forRoot(),
+        NewCaseMenuModule,
+        CasePreviewModule,
+        KeycloakAngularModule,
+        RouterTestingModule,
+        ApolloTestingModule.withClients(['portal-api'])]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
+    controller = TestBed.inject(ApolloTestingController);
     fixture = TestBed.createComponent(HomeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

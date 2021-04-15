@@ -14,9 +14,19 @@
  * limitations under the License.
  */
 
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { SidenavComponent } from './sidenav.component';
+import {SidenavComponent} from './sidenav.component';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatListModule} from '@angular/material/list';
+import {SidenavServiceModule} from '../../services';
+import {RouterModule} from '@angular/router';
+import {MatIconModule} from '@angular/material/icon';
+import {TranslateModule} from '@ngx-translate/core';
+import {environment} from '@src/environments';
+import {LocalizeRouterService} from '@gilsdav/ngx-translate-router';
+import {FakeLocalizeRouterService} from '@valtimo-portal/shared';
+import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 
 describe('SidenavComponent', () => {
   let component: SidenavComponent;
@@ -24,9 +34,22 @@ describe('SidenavComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SidenavComponent ]
+      providers: [
+        {provide: 'environment', useValue: environment},
+        {provide: LocalizeRouterService, useClass: FakeLocalizeRouterService}
+      ],
+      declarations: [SidenavComponent],
+      imports: [
+        NoopAnimationsModule,
+        MatSidenavModule,
+        MatListModule,
+        SidenavServiceModule,
+        RouterModule,
+        MatIconModule,
+        TranslateModule.forRoot()
+      ]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

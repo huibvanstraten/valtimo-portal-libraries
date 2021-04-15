@@ -17,25 +17,44 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {NavigationMenuComponent} from './navigation-menu.component';
+import {MenuIconModule} from '../menu-icon';
+import {LayoutModule} from '@angular/cdk/layout';
+import {SidenavServiceModule} from '../../services';
+import {TranslateModule} from '@ngx-translate/core';
+import {RouterTestingModule} from '@angular/router/testing';
+import {environment} from '@src/environments';
+import {LocalizeRouterService} from '@gilsdav/ngx-translate-router';
+import {FakeLocalizeRouterService} from '@valtimo-portal/shared';
 
 describe('NavigationMenuComponent', () => {
-    let component: NavigationMenuComponent;
-    let fixture: ComponentFixture<NavigationMenuComponent>;
+  let component: NavigationMenuComponent;
+  let fixture: ComponentFixture<NavigationMenuComponent>;
 
-    beforeEach(async () => {
-        await TestBed.configureTestingModule({
-            declarations: [NavigationMenuComponent]
-        })
-            .compileComponents();
-    });
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      providers: [
+        {provide: 'environment', useValue: environment},
+        {provide: LocalizeRouterService, useClass: FakeLocalizeRouterService}
+      ],
+      declarations: [NavigationMenuComponent],
+      imports: [
+        RouterTestingModule,
+        MenuIconModule,
+        LayoutModule,
+        SidenavServiceModule,
+        TranslateModule.forRoot()
+      ]
+    })
+      .compileComponents();
+  });
 
-    beforeEach(() => {
-        fixture = TestBed.createComponent(NavigationMenuComponent);
-        component = fixture.componentInstance;
-        fixture.detectChanges();
-    });
+  beforeEach(() => {
+    fixture = TestBed.createComponent(NavigationMenuComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
 
-    it('should create', () => {
-        expect(component).toBeTruthy();
-    });
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 });

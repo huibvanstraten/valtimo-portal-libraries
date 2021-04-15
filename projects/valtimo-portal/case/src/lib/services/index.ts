@@ -14,4 +14,4 @@
  * limitations under the License.
  */
 
-export * from './case-api';
+export * from './case';

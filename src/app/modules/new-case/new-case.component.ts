@@ -16,7 +16,7 @@
 
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {BreadcrumbsService} from '@valtimo-portal/nl-material';
-import {FormApiService} from '@valtimo-portal/form';
+import {FormService} from '@valtimo-portal/form';
 import {Observable, Subscription} from 'rxjs';
 import {ActivatedRoute} from '@angular/router';
 import {TranslateService} from '@ngx-translate/core';
@@ -32,7 +32,7 @@ export class NewCaseComponent implements OnInit, OnDestroy {
   private langChangeSubscription!: Subscription;
 
   formDefinition$ = this.route.queryParams.pipe(
-    switchMap((params) => this.formApiService.getFormDefinitionByName(params.id))
+    switchMap((params) => this.formService.getFormDefinitionByName(params.id))
   );
 
   title$!: Observable<string>;
@@ -41,7 +41,7 @@ export class NewCaseComponent implements OnInit, OnDestroy {
     private readonly breadcrumbsService: BreadcrumbsService,
     private readonly translateService: TranslateService,
     private readonly route: ActivatedRoute,
-    private readonly formApiService: FormApiService,
+    private readonly formService: FormService,
   ) {
     this.title$ = this.breadcrumbsService.lastBreadcrumbTitle$;
   }

@@ -40,6 +40,7 @@ export interface CaseInstance {
   __typename?: 'CaseInstance';
   caseDefinitionId: Scalars['String'];
   id: Scalars['UUID'];
+  status: Scalars['String'];
   submision: Scalars['JSON'];
 }
 
@@ -107,7 +108,7 @@ export const GetAllCaseDefinitionsDocument = gql`
 }
     `;
 
-@Injectable({
+  @Injectable({
     providedIn: 'root'
   })
   export class GetAllCaseDefinitionsGQL extends Apollo.Query<GetAllCaseDefinitionsQuery, GetAllCaseDefinitionsQueryVariables> {

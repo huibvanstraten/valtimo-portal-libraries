@@ -3,5 +3,6 @@ query GetAllCaseInstances {
     caseDefinitionId
     id
     submision
+    status
   }
 }

@@ -35,6 +35,7 @@ export class CasesComponent implements OnInit {
           {
             id: instance.caseDefinitionId,
             code: instance.id,
+            status: instance.status,
             tasks: []
           }
         ))

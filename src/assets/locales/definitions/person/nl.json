@@ -3,7 +3,8 @@
     "wouldLikeTo": "een persoonsdossier openen",
     "new": "Nieuw persoonsdossier",
     "my": "Mijn persoonsdossier",
-    "tasks": {
+    "statuses": {
+      "portal-case-created": "Aanvraag geopend"
     }
   }
 }

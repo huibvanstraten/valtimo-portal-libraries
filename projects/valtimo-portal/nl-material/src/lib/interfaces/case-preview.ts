@@ -23,6 +23,7 @@ interface TaskPreview {
 interface CasePreview {
   id: string;
   code?: string;
+  status?: string;
   tasks: Array<TaskPreview>;
 }
 

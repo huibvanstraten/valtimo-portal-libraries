@@ -15,18 +15,18 @@
  */
 
 import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
-import {NewCaseComponent} from './new-case.component';
-import {LocalizeRouterModule} from '@gilsdav/ngx-translate-router';
-import {KeycloakAppAuthGuard} from '@valtimo-portal/authentication';
-
-const routes: Routes = [{
-  path: '', component: NewCaseComponent, canActivate: [KeycloakAppAuthGuard],
-}];
+import {CommonModule} from '@angular/common';
+import {CaseRoutingModule} from './case-routing.module';
+import {CaseComponent} from './case.component';
+import {FlexLayoutModule} from '@angular/flex-layout';
 
 @NgModule({
-  imports: [RouterModule.forChild(routes), LocalizeRouterModule.forChild(routes)],
-  exports: [RouterModule]
+  declarations: [CaseComponent],
+  imports: [
+    CommonModule,
+    FlexLayoutModule,
+    CaseRoutingModule
+  ]
 })
-export class NewCaseRoutingModule {
+export class CaseModule {
 }

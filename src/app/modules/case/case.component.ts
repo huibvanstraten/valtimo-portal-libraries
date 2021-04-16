@@ -14,19 +14,20 @@
  * limitations under the License.
  */
 
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
-import {NewCaseComponent} from './new-case.component';
-import {LocalizeRouterModule} from '@gilsdav/ngx-translate-router';
-import {KeycloakAppAuthGuard} from '@valtimo-portal/authentication';
+import {Component, OnInit} from '@angular/core';
+import {CaseService} from '@valtimo-portal/case';
 
-const routes: Routes = [{
-  path: '', component: NewCaseComponent, canActivate: [KeycloakAppAuthGuard],
-}];
-
-@NgModule({
-  imports: [RouterModule.forChild(routes), LocalizeRouterModule.forChild(routes)],
-  exports: [RouterModule]
+@Component({
+  selector: 'app-case',
+  templateUrl: './case.component.html',
+  styleUrls: ['./case.component.scss']
 })
-export class NewCaseRoutingModule {
+export class CaseComponent implements OnInit {
+
+  constructor(private readonly caseService: CaseService) {
+  }
+
+  ngOnInit(): void {
+  }
+
 }

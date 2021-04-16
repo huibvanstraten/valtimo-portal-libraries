@@ -14,19 +14,5 @@
  * limitations under the License.
  */
 
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
-import {NewCaseComponent} from './new-case.component';
-import {LocalizeRouterModule} from '@gilsdav/ngx-translate-router';
-import {KeycloakAppAuthGuard} from '@valtimo-portal/authentication';
-
-const routes: Routes = [{
-  path: '', component: NewCaseComponent, canActivate: [KeycloakAppAuthGuard],
-}];
-
-@NgModule({
-  imports: [RouterModule.forChild(routes), LocalizeRouterModule.forChild(routes)],
-  exports: [RouterModule]
-})
-export class NewCaseRoutingModule {
-}
+export * from './case.component';
+export * from './case.module';

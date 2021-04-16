@@ -19,3 +19,4 @@ export * from './cases';
 export * from './home';
 export * from './notifications';
 export * from './tasks';
+export * from './case';

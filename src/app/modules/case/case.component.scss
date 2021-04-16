@@ -1,4 +1,4 @@
-/*
+/*!
  * Copyright 2015-2021 Ritense BV, the Netherlands.
  *
  * Licensed under EUPL, Version 1.2 (the "License");
@@ -14,19 +14,12 @@
  * limitations under the License.
  */
 
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
-import {NewCaseComponent} from './new-case.component';
-import {LocalizeRouterModule} from '@gilsdav/ngx-translate-router';
-import {KeycloakAppAuthGuard} from '@valtimo-portal/authentication';
+@import "colors";
+@import "variables";
 
-const routes: Routes = [{
-  path: '', component: NewCaseComponent, canActivate: [KeycloakAppAuthGuard],
-}];
-
-@NgModule({
-  imports: [RouterModule.forChild(routes), LocalizeRouterModule.forChild(routes)],
-  exports: [RouterModule]
-})
-export class NewCaseRoutingModule {
+.mat-h1 {
+  margin: 0;
+  color: $nl-material-primary;
+  font-size: $font-xl;
+  font-weight: bold;
 }

@@ -1,8 +1,8 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {CasePreview, TaskPreview} from '../../interfaces';
 import {CardType, CasePreviewMode} from '../../enums';
 import {SidenavService} from '../../services';
-import {Observable} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {fadeInAnimations} from '../../animations';
 
 const mockCasePreview: CasePreview = {
@@ -33,7 +33,7 @@ const mockCasePreview: CasePreview = {
   styleUrls: ['./case-preview.component.scss'],
   animations: fadeInAnimations
 })
-export class CasePreviewComponent {
+export class CasePreviewComponent implements OnInit {
   @Input() preview: CasePreview = mockCasePreview;
   @Input() mode: CasePreviewMode = CasePreviewMode.clipping;
 
@@ -44,12 +44,32 @@ export class CasePreviewComponent {
   readonly clippingPreviewMode = CasePreviewMode.clipping;
   readonly currentPreviewMode = CasePreviewMode.current;
 
+  readonly previewTasks$ = new BehaviorSubject<Array<TaskPreview>>([]);
+
   constructor(private readonly sidenavService: SidenavService) {
     this.currentLang$ = this.sidenavService.currentLang$;
   }
 
+  ngOnInit(): void {
+    this.setTasksForPreview();
+  }
+
   getOpenTasks(tasks: Array<TaskPreview>): Array<TaskPreview> {
     return tasks.filter((task) => !task.completed);
+  }
+
+  setTasksForPreview(): void {
+    const preview = this.preview;
+
+    if (preview.tasks.length > 0) {
+      if (this.isClippingPreview()) {
+        this.setPreviewTasks(preview.tasks);
+      } else {
+        this.setPreviewTasks(this.getCurrentCaseTasks(preview.tasks));
+      }
+    } else if (preview.status) {
+      this.setStatusPreview();
+    }
   }
 
   getCurrentCaseTasks(tasks: Array<TaskPreview>): Array<TaskPreview> {
@@ -70,5 +90,24 @@ export class CasePreviewComponent {
 
   isCurrentCasePreview(): boolean {
     return this.mode === this.currentPreviewMode;
+  }
+
+  private setPreviewTasks(tasks: Array<TaskPreview>): void {
+    this.previewTasks$.next(tasks);
+  }
+
+  private setStatusPreview(): void {
+    this.setPreviewTasks(
+      [
+        {
+          id: '',
+          completed: true
+        },
+        {
+          id: this.preview.status || '',
+          completed: false
+        }
+      ]
+    );
   }
 }

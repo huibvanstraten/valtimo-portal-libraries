@@ -40,6 +40,7 @@ export interface CaseInstance {
   __typename?: 'CaseInstance';
   caseDefinitionId: Scalars['String'];
   id: Scalars['UUID'];
+  status: Scalars['String'];
   submision: Scalars['JSON'];
 }
 

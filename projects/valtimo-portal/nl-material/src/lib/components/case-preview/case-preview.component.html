@@ -8,13 +8,17 @@
     [type]="isClippingPreview() ? casePreviewClippingType : casePreviewCurrentType"
   >
     <ng-container *ngTemplateOutlet="extras"></ng-container>
-    <ng-container *ngTemplateOutlet="tasks;context:{currentLang: currentLang}"></ng-container>
-    <ng-container *ngTemplateOutlet="currentCaseActions;context:{currentLang: currentLang}"></ng-container>
+    <ng-container *ngIf="previewTasks$ | async as previewTasks">
+      <ng-container
+        *ngTemplateOutlet="tasks;context:{currentLang: currentLang, previewTasks: previewTasks}"></ng-container>
+      <ng-container
+        *ngTemplateOutlet="currentCaseActions;context:{currentLang: currentLang, previewTasks: previewTasks}"></ng-container>
+    </ng-container>
   </nl-material-card>
 </div>
 
 <ng-template #extras>
-  <div *ngIf="isClippingPreview()" class="clip" extra>
+  <div @fadeIn *ngIf="isClippingPreview()" class="clip" extra>
     <img src="assets/img/clip/clip_top.svg"/>
     <img src="assets/img/clip/clip_bottom.svg"/>
   </div>
@@ -24,20 +28,20 @@
   </div>
 </ng-template>
 
-<ng-template #tasks let-currentLang="currentLang">
-  <ul *ngIf="preview.tasks.length > 0" [ngClass]="mode === currentPreviewMode ? 'current' : ''" class="tasks">
+<ng-template #tasks let-currentLang="currentLang" let-previewTasks="previewTasks">
+  <ul *ngIf="previewTasks.length > 0" [ngClass]="mode === currentPreviewMode ? 'current' : ''" class="tasks">
     <li
-      *ngFor="let task of (isClippingPreview() ? preview.tasks : getCurrentCaseTasks(preview.tasks)); let i = index"
+      *ngFor="let task of previewTasks; let i = index"
       [ngClass]="isCurrentCasePreview() && i === 0 ? 'first' : ''"
       class="task"
     >
       <div *ngIf="isCurrentCasePreview() && i === 0" class="line"></div>
       <div [ngClass]="{'empty': !task.completed}" class="circle-icon">
         <mat-icon *ngIf="task.completed" fontIcon="fa-check" fontSet="fa"></mat-icon>
-        <mat-icon *ngIf="getOpenTasks(preview.tasks)[0] === task" fontIcon="fa-arrow-right" fontSet="fa"></mat-icon>
+        <mat-icon *ngIf="getOpenTasks(previewTasks)[0] === task" fontIcon="fa-arrow-right" fontSet="fa"></mat-icon>
       </div>
       <div *ngIf="isClippingPreview() || i !== 0" class="description">
-        <span>{{preview.id + '.tasks.' + task.id | translate}}</span>
+        <span>{{preview.id + '.statuses.' + task.id | translate}}</span>
         <span *ngIf="isClippingPreview()">
           {{task.date | date: 'shortDate' : '' : currentLang}}
         </span>
@@ -46,15 +50,15 @@
   </ul>
 </ng-template>
 
-<ng-template #currentCaseActions let-currentLang="currentLang">
+<ng-template #currentCaseActions let-currentLang="currentLang" let-previewTasks="previewTasks">
   <div
     *ngIf="mode === currentPreviewMode"
     class="current-case-actions"
   >
-    <ng-container *ngIf="getCurrentCaseTasks(preview.tasks)[1] as task">
-       <span>
-      {{task.date | date: 'shortDate' : '' : currentLang}}
-    </span>
+    <ng-container *ngIf="previewTasks[1]?.date as date">
+      <span>
+        {{date | date: 'shortDate' : '' : currentLang}}
+      </span>
     </ng-container>
     <button mat-button>
       <mat-icon fontIcon="fa-arrow-right" fontSet="fa"></mat-icon>

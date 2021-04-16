@@ -3,7 +3,8 @@
     "wouldLikeTo": "open a personal file",
     "new": "New personal file",
     "my": "My personal file",
-    "tasks": {
+    "statuses": {
+      "portal-case-created": "Case opened"
     }
   }
 }

@@ -97,17 +97,13 @@ export class CasePreviewComponent implements OnInit {
   }
 
   private setStatusPreview(): void {
-    const date = new Date();
-
     this.setPreviewTasks(
       [
         {
-          date,
           id: '',
           completed: true
         },
         {
-          date,
           id: this.preview.status || '',
           completed: false
         }

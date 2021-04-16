@@ -16,7 +16,7 @@
 
 interface TaskPreview {
   id: string;
-  date: Date;
+  date?: Date;
   completed: boolean;
 }
 

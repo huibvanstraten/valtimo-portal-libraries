@@ -94,7 +94,7 @@ export class NavigationMenuComponent implements OnInit, AfterViewInit, OnDestroy
 
   private openNavLinksSubscription(): void {
     this.navLinksSubscription = combineLatest([this.navLinks.changes, this.currentUrl$])
-      .pipe(delay(100))
+      .pipe(delay(150))
       .subscribe(([navLinks, currentUrl]) => {
         this.setActiveNavLink(navLinks, currentUrl);
       });

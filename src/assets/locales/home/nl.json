@@ -9,6 +9,10 @@
       "title": "Vergeet niet het projectidee in te dienen vóór 31 april",
       "content": "Jouw subsidieaanvraag mist nog een projectidee. Zorg ervoor dat je deze uiterlijk 31 april inlevert. Dan kunnen wij jouw aanvraag behandelen.",
       "buttonText": "Projectidee indienen"
+    },
+    "preview": {
+      "secondaryButtonText": "Stel een vraag",
+      "primaryButtonText": "Bekijk aanvraag"
     }
   }
 }

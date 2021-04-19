@@ -1,9 +1,11 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {CasePreview, TaskPreview} from '../../interfaces';
 import {CardType, CasePreviewMode} from '../../enums';
 import {SidenavService} from '../../services';
-import {BehaviorSubject, Observable} from 'rxjs';
+import {BehaviorSubject, combineLatest, Observable, Subscription} from 'rxjs';
 import {fadeInAnimations} from '../../animations';
+import {LocalizeRouterService} from '@gilsdav/ngx-translate-router';
+import {Router} from '@angular/router';
 
 const mockCasePreview: CasePreview = {
   id: 'grant-application',
@@ -33,11 +35,13 @@ const mockCasePreview: CasePreview = {
   styleUrls: ['./case-preview.component.scss'],
   animations: fadeInAnimations
 })
-export class CasePreviewComponent implements OnInit {
+export class CasePreviewComponent implements OnInit, OnDestroy {
   @Input() preview: CasePreview = mockCasePreview;
   @Input() mode: CasePreviewMode = CasePreviewMode.clipping;
 
   currentLang$!: Observable<string>;
+
+  routeLangSubscription!: Subscription;
 
   readonly casePreviewClippingType = CardType.casePreviewClipping;
   readonly casePreviewCurrentType = CardType.casePreviewCurrent;
@@ -46,12 +50,28 @@ export class CasePreviewComponent implements OnInit {
 
   readonly previewTasks$ = new BehaviorSubject<Array<TaskPreview>>([]);
 
-  constructor(private readonly sidenavService: SidenavService) {
+  readonly caseRoute$ = new BehaviorSubject<string>(this.getCaseRoute());
+
+  constructor(
+    private readonly sidenavService: SidenavService,
+    private readonly localizeRouterService: LocalizeRouterService,
+    private readonly router: Router
+  ) {
     this.currentLang$ = this.sidenavService.currentLang$;
   }
 
   ngOnInit(): void {
     this.setTasksForPreview();
+
+    this.routeLangSubscription =
+      combineLatest([this.sidenavService.currentLang$, this.router.events])
+        .subscribe(() => {
+          this.setCaseRoute();
+        });
+  }
+
+  ngOnDestroy(): void {
+    this.routeLangSubscription.unsubscribe();
   }
 
   getOpenTasks(tasks: Array<TaskPreview>): Array<TaskPreview> {
@@ -92,6 +112,16 @@ export class CasePreviewComponent implements OnInit {
     return this.mode === this.currentPreviewMode;
   }
 
+  getCaseRoute(): string {
+    return `${this.localizeRouterService.translateRoute('/cases/case')}`;
+  }
+
+  navigateToCase(): void {
+    this.router.navigateByUrl(
+      `${this.localizeRouterService.translateRoute('/cases/case')}?id=${this.preview.code}`,
+    );
+  }
+
   private setPreviewTasks(tasks: Array<TaskPreview>): void {
     this.previewTasks$.next(tasks);
   }
@@ -108,6 +138,12 @@ export class CasePreviewComponent implements OnInit {
           completed: false
         }
       ]
+    );
+  }
+
+  private setCaseRoute(): void {
+    this.caseRoute$.next(
+      this.getCaseRoute()
     );
   }
 }

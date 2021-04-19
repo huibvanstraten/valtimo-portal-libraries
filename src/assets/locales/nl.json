@@ -3,14 +3,16 @@
     "notifications": "meldingen",
     "cases": "aanvragen",
     "tasks": "taken",
-    "newCase": "nieuwe-aanvraag"
+    "newCase": "nieuwe-aanvraag",
+    "case": "aanvraag"
   },
   "TITLES": {
     "home": "Home",
     "notifications": "Meldingen",
     "cases": "Aanvragen",
     "tasks": "Taken",
-    "newCase": "Nieuwe aanvraag"
+    "newCase": "Nieuwe aanvraag",
+    "case": "Nieuwe aanvraag"
   },
   "headerMenu": {
     "language": "Taal",

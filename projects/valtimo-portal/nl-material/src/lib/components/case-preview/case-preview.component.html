@@ -1,11 +1,12 @@
 <div @fadeIn>
   <nl-material-card
     *ngIf="(currentLang$ | async) as currentLang"
-    [buttonText]="'Stel een vraag'"
-    [secondaryButtonText]="'Bekijk aanvraag'"
+    [buttonText]="'home.preview.primaryButtonText' | translate"
+    [secondaryButtonText]="'home.preview.secondaryButtonText' | translate"
     [subtitle]="(mode === currentPreviewMode) ? preview.code || '' : ''"
     [title]="preview.id + '.my' | translate"
     [type]="isClippingPreview() ? casePreviewClippingType : casePreviewCurrentType"
+    (primaryButtonClick)="navigateToCase()"
   >
     <ng-container *ngTemplateOutlet="extras"></ng-container>
     <ng-container *ngIf="previewTasks$ | async as previewTasks">
@@ -60,7 +61,7 @@
         {{date | date: 'shortDate' : '' : currentLang}}
       </span>
     </ng-container>
-    <button mat-button>
+    <button mat-button [routerLink]="caseRoute$ | async" [queryParams]="{id:preview.code}">
       <mat-icon fontIcon="fa-arrow-right" fontSet="fa"></mat-icon>
     </button>
   </div>

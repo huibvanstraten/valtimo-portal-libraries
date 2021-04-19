@@ -22,6 +22,7 @@ import {TranslateModule} from '@ngx-translate/core';
 import {MatIconModule} from '@angular/material/icon';
 import {SidenavServiceModule} from '../../services';
 import {MatButtonModule} from '@angular/material/button';
+import {RouterModule} from '@angular/router';
 
 @NgModule({
   declarations: [CasePreviewComponent],
@@ -31,7 +32,8 @@ import {MatButtonModule} from '@angular/material/button';
     TranslateModule,
     MatIconModule,
     SidenavServiceModule,
-    MatButtonModule
+    MatButtonModule,
+    RouterModule
   ],
   exports: [CasePreviewComponent],
 })

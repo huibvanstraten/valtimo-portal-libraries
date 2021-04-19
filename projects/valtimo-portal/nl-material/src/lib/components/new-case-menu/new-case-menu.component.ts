@@ -46,7 +46,7 @@ export class NewCaseMenuComponent implements OnInit, OnDestroy {
     );
   }
 
-  private getNewCaseRoute(): string {
+  getNewCaseRoute(): string {
     return `${this.localizeRouterService.translateRoute('/cases/newCase')}`;
   }
 }

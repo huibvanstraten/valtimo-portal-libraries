@@ -28,11 +28,11 @@ export class NotificationService {
   catchError(err: any, returnValue: any): Observable<any> {
     if (err.graphQLErrors) {
       err.graphQLErrors.forEach(e => {
-        this.show(`${e}`);
+        this.show(`${e?.message}`);
       });
     }
     if (err.networkError) {
-      this.show(`${err.networkError}`);
+      this.show(`${err?.networkError?.message}`);
     }
     return of(returnValue);
   }

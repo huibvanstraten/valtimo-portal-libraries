@@ -88,12 +88,12 @@ export interface QueryGetFormDefinitionArgs {
 }
 
 
-export type GetCaseInstanceByQueryVariables = Types.Exact<{
+export type GetCaseInstanceQueryVariables = Types.Exact<{
   id: Types.Scalars['UUID'];
 }>;
 
 
-export type GetCaseInstanceByQuery = (
+export type GetCaseInstanceQuery = (
   { __typename?: 'Query' }
   & { getCaseInstance?: Types.Maybe<(
     { __typename?: 'CaseInstance' }
@@ -101,8 +101,8 @@ export type GetCaseInstanceByQuery = (
   )> }
 );
 
-export const GetCaseInstanceByDocument = gql`
-    query GetCaseInstanceBy($id: UUID!) {
+export const GetCaseInstanceDocument = gql`
+    query GetCaseInstance($id: UUID!) {
   getCaseInstance(id: $id) {
     caseDefinitionId
     id
@@ -112,12 +112,12 @@ export const GetCaseInstanceByDocument = gql`
 }
     `;
 
-  @Injectable({
+@Injectable({
     providedIn: 'root'
   })
-  export class GetCaseInstanceByGQL extends Apollo.Query<GetCaseInstanceByQuery, GetCaseInstanceByQueryVariables> {
-    document = GetCaseInstanceByDocument;
-    
+  export class GetCaseInstanceGQL extends Apollo.Query<GetCaseInstanceQuery, GetCaseInstanceQueryVariables> {
+    document = GetCaseInstanceDocument;
+
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
     }

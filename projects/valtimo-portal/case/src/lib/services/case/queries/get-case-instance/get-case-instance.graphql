@@ -1,4 +1,4 @@
-query GetCaseInstanceBy($id: UUID!) {
+query GetCaseInstance($id: UUID!) {
   getCaseInstance(id: $id) {
     caseDefinitionId
     id

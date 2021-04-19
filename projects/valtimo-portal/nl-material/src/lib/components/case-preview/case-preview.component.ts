@@ -118,7 +118,7 @@ export class CasePreviewComponent implements OnInit, OnDestroy {
 
   navigateToCase(): void {
     this.router.navigateByUrl(
-      `${this.localizeRouterService.translateRoute('/cases/case')}?id=${this.preview.code}`,
+      `${this.getCaseRoute()}?id=${this.preview.code}`,
     );
   }
 

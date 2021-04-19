@@ -1,6 +1,6 @@
 {
   "case": {
     "noDataError": "Something went wrong while retrieving your case.",
-    "noData": "No case data available."
+    "noData": "There is no case data available."
   }
 }

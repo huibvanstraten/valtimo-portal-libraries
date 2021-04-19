@@ -1,6 +1,6 @@
 {
   "case": {
-    "noDataError": "Er ging iets mis bij het ophalen van uw aanvraag.",
-    "noData": "Geen informatie over de aanvraag beschikbaar."
+    "noDataError": "Er ging iets mis bij het ophalen van jouw aanvraag.",
+    "noData": "Er is geen informatie over de aanvraag beschikbaar."
   }
 }

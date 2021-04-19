@@ -16,3 +16,4 @@
 
 export * from './get-all-case-definitions';
 export * from './get-all-case-instances';
+export * from './get-case-instance';

@@ -15,7 +15,7 @@
  */
 
 import {Injectable} from '@angular/core';
-import {GetAllCaseDefinitionsGQL, GetAllCaseInstancesGQL} from './queries';
+import {GetAllCaseDefinitionsGQL, GetAllCaseInstancesGQL, GetCaseInstanceGQL} from './queries';
 import {map} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 import {CreateCaseGQL, CreateCaseMutation} from './mutations';
@@ -23,7 +23,6 @@ import {FetchResult} from '@apollo/client/core';
 import {CaseDefinition, CaseInstance, Exact} from '@valtimo-portal/graphql';
 import {GetAllCaseInstancesQuery} from './queries/get-all-case-instances/get-all-case-instances.graphql-gen';
 import {QueryRef} from 'apollo-angular';
-import {GetCaseInstanceGQL} from './queries/get-case-instance';
 
 @Injectable({
   providedIn: 'root'

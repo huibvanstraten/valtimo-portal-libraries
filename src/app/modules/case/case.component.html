@@ -16,11 +16,16 @@
 
 <div fxFlex fxLayout="column" fxLayoutGap="16px" class="module-container">
   <div fxLayout="row wrap">
-    <div
-      fxFlex="100"
-      style="padding: 16px;"
-    >
-      test
-    </div>
+    <ng-container *ngIf="case$ | async as cases; else loading"></ng-container>
   </div>
 </div>
+
+<ng-template #loading>
+  <div
+    fxFlex="100"
+    fxLayout="column"
+    style="padding: 16px;"
+  >
+    <nl-material-spinner></nl-material-spinner>
+  </div>
+</ng-template>

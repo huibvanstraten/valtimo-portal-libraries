@@ -16,6 +16,8 @@
 
 import {Component, OnInit} from '@angular/core';
 import {CaseService} from '@valtimo-portal/case';
+import {switchMap} from 'rxjs/operators';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-case',
@@ -24,7 +26,11 @@ import {CaseService} from '@valtimo-portal/case';
 })
 export class CaseComponent implements OnInit {
 
-  constructor(private readonly caseService: CaseService) {
+  case$ = this.route.queryParams.pipe(
+    switchMap((params) => this.caseService.getCaseInstanceById(params?.id))
+  );
+
+  constructor(private readonly caseService: CaseService, private readonly route: ActivatedRoute) {
   }
 
   ngOnInit(): void {

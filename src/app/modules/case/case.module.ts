@@ -19,13 +19,17 @@ import {CommonModule} from '@angular/common';
 import {CaseRoutingModule} from './case-routing.module';
 import {CaseComponent} from './case.component';
 import {FlexLayoutModule} from '@angular/flex-layout';
+import {CaseServiceModule} from '@valtimo-portal/case';
+import {SpinnerModule} from '@valtimo-portal/nl-material';
 
 @NgModule({
   declarations: [CaseComponent],
   imports: [
     CommonModule,
     FlexLayoutModule,
-    CaseRoutingModule
+    CaseRoutingModule,
+    CaseServiceModule,
+    SpinnerModule,
   ]
 })
 export class CaseModule {

@@ -11,8 +11,8 @@
       "buttonText": "Submit project idea"
     },
     "preview": {
-      "secondaryButtonText": "Ask a question",
-      "primaryButtonText": "Go to case"
+      "secondaryButtonText": "Go to case",
+      "primaryButtonText": "Ask a question"
     }
   }
 }

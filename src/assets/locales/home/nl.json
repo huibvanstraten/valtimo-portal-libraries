@@ -11,8 +11,8 @@
       "buttonText": "Projectidee indienen"
     },
     "preview": {
-      "secondaryButtonText": "Stel een vraag",
-      "primaryButtonText": "Bekijk aanvraag"
+      "secondaryButtonText": "Bekijk aanvraag",
+      "primaryButtonText": "Stel een vraag"
     }
   }
 }

@@ -16,17 +16,17 @@
 
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {CaseService} from './case.service';
-import {NotificationServiceModule} from '@valtimo-portal/shared';
+import {NotificationService} from './notification.service';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
-    NotificationServiceModule
+    MatSnackBarModule
   ],
   exports: [],
-  providers: [CaseService]
+  providers: [NotificationService]
 })
-export class CaseServiceModule {
+export class NotificationServiceModule {
 }

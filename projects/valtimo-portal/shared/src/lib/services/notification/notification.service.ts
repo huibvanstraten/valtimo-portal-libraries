@@ -16,12 +16,25 @@
 
 import {Injectable} from '@angular/core';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {Observable, of} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NotificationService {
   constructor(private readonly snackBar: MatSnackBar) {
+  }
+
+  catchError(err: any, returnValue: any): Observable<any> {
+    if (err.graphQLErrors) {
+      err.graphQLErrors.forEach(e => {
+        this.show(`${e}`);
+      });
+    }
+    if (err.networkError) {
+      this.show(`${err.networkError}`);
+    }
+    return of(returnValue);
   }
 
   show(message: string): void {

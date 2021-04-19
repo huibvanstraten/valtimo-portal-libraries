@@ -112,12 +112,12 @@ export const GetCaseInstanceDocument = gql`
 }
     `;
 
-@Injectable({
+  @Injectable({
     providedIn: 'root'
   })
   export class GetCaseInstanceGQL extends Apollo.Query<GetCaseInstanceQuery, GetCaseInstanceQueryVariables> {
     document = GetCaseInstanceDocument;
-
+    client = 'portal-api';
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
     }

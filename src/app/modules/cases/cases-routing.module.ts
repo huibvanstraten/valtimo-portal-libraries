@@ -40,7 +40,7 @@ const routes: Routes = [
     loadChildren: () => import('@case/case.module').then(m => m.CaseModule),
     canActivate: [KeycloakAppAuthGuard],
     data: {
-      title: 'TITLES.newCase',
+      title: 'TITLES.case',
       animation: 'DetailPage',
     }
   }

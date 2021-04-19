@@ -1,5 +1,5 @@
 query GetCaseInstance($id: UUID!) {
-  getCaseInstance(id: $id) {
+  getCaseInstance(id: $id) @namedClient(name: "portal-api") {
     caseDefinitionId
     id
     status

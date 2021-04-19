@@ -1,0 +1,8 @@
+query GetCaseInstanceBy($id: UUID!) {
+  getCaseInstance(id: $id) {
+    caseDefinitionId
+    id
+    status
+    submision
+  }
+}

@@ -88,24 +88,26 @@ export interface QueryGetFormDefinitionArgs {
 }
 
 
-export type CreateCaseMutationVariables = Types.Exact<{
-  submission: Types.Scalars['JSON'];
-  caseDefinitionId: Types.Scalars['String'];
+export type GetCaseInstanceByQueryVariables = Types.Exact<{
+  id: Types.Scalars['UUID'];
 }>;
 
 
-export type CreateCaseMutation = (
-  { __typename?: 'Mutation' }
-  & { processSubmission: (
-    { __typename?: 'CaseCreated' }
-    & Pick<Types.CaseCreated, 'caseId'>
-  ) }
+export type GetCaseInstanceByQuery = (
+  { __typename?: 'Query' }
+  & { getCaseInstance?: Types.Maybe<(
+    { __typename?: 'CaseInstance' }
+    & Pick<Types.CaseInstance, 'caseDefinitionId' | 'id' | 'status' | 'submision'>
+  )> }
 );
 
-export const CreateCaseDocument = gql`
-    mutation CreateCase($submission: JSON!, $caseDefinitionId: String!) {
-  processSubmission(submission: $submission, caseDefinitionId: $caseDefinitionId) {
-    caseId
+export const GetCaseInstanceByDocument = gql`
+    query GetCaseInstanceBy($id: UUID!) {
+  getCaseInstance(id: $id) {
+    caseDefinitionId
+    id
+    status
+    submision
   }
 }
     `;
@@ -113,9 +115,9 @@ export const CreateCaseDocument = gql`
   @Injectable({
     providedIn: 'root'
   })
-  export class CreateCaseGQL extends Apollo.Mutation<CreateCaseMutation, CreateCaseMutationVariables> {
-    document = CreateCaseDocument;
-    client = 'portal-api';
+  export class GetCaseInstanceByGQL extends Apollo.Query<GetCaseInstanceByQuery, GetCaseInstanceByQueryVariables> {
+    document = GetCaseInstanceByDocument;
+    
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
     }

@@ -16,7 +16,9 @@
 
 <div fxFlex fxLayout="column" fxLayoutGap="16px" class="module-container">
   <div fxLayout="row wrap">
-    <ng-container *ngIf="case$ | async as cases; else loading"></ng-container>
+    <ng-container *ngIf="{case: case$ | async} as obs; else loading">
+      <ng-container *ngIf="obs.case; else noData"></ng-container>
+    </ng-container>
   </div>
 </div>
 
@@ -26,5 +28,14 @@
     fxLayout="column"
   >
     <nl-material-spinner></nl-material-spinner>
+  </div>
+</ng-template>
+
+<ng-template #noData>
+  <div
+    fxFlex="100"
+    fxLayout="column"
+  >
+    <h2 class="mat-h2">{{'case.noData' | translate}}</h2>
   </div>
 </ng-template>

@@ -21,6 +21,7 @@ import {CaseComponent} from './case.component';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {CaseServiceModule} from '@valtimo-portal/case';
 import {SpinnerModule} from '@valtimo-portal/nl-material';
+import {TranslateModule} from '@ngx-translate/core';
 
 @NgModule({
   declarations: [CaseComponent],
@@ -30,6 +31,7 @@ import {SpinnerModule} from '@valtimo-portal/nl-material';
     CaseRoutingModule,
     CaseServiceModule,
     SpinnerModule,
+    TranslateModule,
   ]
 })
 export class CaseModule {

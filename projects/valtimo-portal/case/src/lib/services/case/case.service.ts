@@ -17,13 +17,14 @@
 import {Injectable} from '@angular/core';
 import {GetAllCaseDefinitionsGQL, GetAllCaseInstancesGQL, GetCaseInstanceGQL} from './queries';
 import {catchError, map} from 'rxjs/operators';
-import {Observable} from 'rxjs';
+import {Observable, of} from 'rxjs';
 import {CreateCaseGQL, CreateCaseMutation} from './mutations';
 import {FetchResult} from '@apollo/client/core';
 import {CaseDefinition, CaseInstance, Exact} from '@valtimo-portal/graphql';
 import {GetAllCaseInstancesQuery} from './queries/get-all-case-instances/get-all-case-instances.graphql-gen';
 import {QueryRef} from 'apollo-angular';
 import {NotificationService} from '@valtimo-portal/shared';
+import {TranslateService} from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root'
@@ -37,7 +38,8 @@ export class CaseService {
     private readonly getAllCaseInstancesGQL: GetAllCaseInstancesGQL,
     private readonly getCaseInstanceGQL: GetCaseInstanceGQL,
     private readonly createCaseGQL: CreateCaseGQL,
-    private readonly notificationService: NotificationService
+    private readonly notificationService: NotificationService,
+    private readonly translateService: TranslateService
   ) {
   }
 
@@ -63,7 +65,11 @@ export class CaseService {
   getCaseInstanceById(id: string): Observable<CaseInstance | null | undefined> {
     return this.getCaseInstanceGQL.fetch({id}).pipe(
       map((res) => res.data.getCaseInstance),
-      catchError((err) => this.notificationService.catchError(err, undefined) as Observable<undefined>)
+      catchError((err) => {
+          this.notificationService.show(this.translateService.instant('case.noDataError'));
+          return of(undefined);
+        }
+      )
     );
   }
 

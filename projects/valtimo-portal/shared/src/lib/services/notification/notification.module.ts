@@ -26,7 +26,7 @@ import {MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarModule} from '@angular/materia
     MatSnackBarModule
   ],
   exports: [],
-  providers: [NotificationService, {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2500}}]
+  providers: [NotificationService, {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 4000}}]
 })
 export class NotificationServiceModule {
 }

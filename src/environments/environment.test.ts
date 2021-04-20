@@ -48,7 +48,7 @@ export const environment: Environment = {
   api: {
     graphql: {
       clients: [
-        {name: 'portal-api', uri: 'http://portaal.test.valtimo.nl/graphql'}
+        {name: 'portal-api', uri: 'https://portaal.test.valtimo.nl/graphql'}
       ]
     }
   }

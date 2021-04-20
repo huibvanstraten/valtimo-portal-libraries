@@ -32,7 +32,8 @@
     "graphql:schema": "apollo client:download-schema ./projects/valtimo-portal/graphql/src/lib/schemas/portal-api-schema.json",
     "graphql:generate": "run-s graphql:generate:*",
     "graphql:generate:codegen": "graphql-codegen",
-    "graphql:generate:fix-imports": "node ./scripts/fix-graphql-types-imports.js"
+    "graphql:generate:fix-imports": "node ./scripts/fix-graphql-types-imports.js",
+    "buildTest": "npm run build-all --prod --configuration=test"
   },
   "private": true,
   "dependencies": {

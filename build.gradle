@@ -43,11 +43,6 @@ class WriteBuildInfoFile extends DefaultTask {
   @TaskAction
   def doWriteBuildInfoFile() {
     def buildPropertiesFile = new File(filePath)
-    def parentFolder = buildPropertiesFile.getParentFile();
-
-    if (!parentFolder.exists()) {
-      parentFolder.mkdirs()
-    }
 
     buildPropertiesFile << "commitId=${gitHash}\n"
     buildPropertiesFile << "environment=${environment}\n"

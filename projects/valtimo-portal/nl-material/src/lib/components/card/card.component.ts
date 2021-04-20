@@ -37,6 +37,7 @@ export class CardComponent {
   readonly reminderType = CardType.reminder;
   readonly casePreviewClippingType = CardType.casePreviewClipping;
   readonly casePreviewCurrentType = CardType.casePreviewCurrent;
+  readonly caseStatusType = CardType.caseStatus;
 
   handlePrimaryButtonClick(): void {
     this.primaryButtonClick.emit();

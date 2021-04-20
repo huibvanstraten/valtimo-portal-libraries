@@ -60,14 +60,16 @@
     *ngIf="previewTasks$ | async as previewTasks"
   >
     <h1 class="mat-h1 primary-bold">{{'case.status' | translate}}</h1>
-    <nl-material-card>
-      <nl-material-case-status
-        [caseDefinitionId]="case.caseDefinitionId"
-        [mode]="clippingPreviewMode"
-        [previewTasks]="previewTasks"
-      >
-      </nl-material-case-status>
-    </nl-material-card>
+    <div class="case-status">
+      <nl-material-card [type]="caseStatusType">
+        <nl-material-case-status
+          [caseDefinitionId]="case.caseDefinitionId"
+          [mode]="clippingPreviewMode"
+          [previewTasks]="previewTasks"
+        >
+        </nl-material-case-status>
+      </nl-material-card>
+    </div>
   </div>
 </ng-template>
 

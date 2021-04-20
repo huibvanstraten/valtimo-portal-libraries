@@ -21,6 +21,7 @@ import {BreadcrumbsService, CaseDetail, CasePreviewMode, TaskPreview} from '@val
 import {CaseInstance} from '@valtimo-portal/graphql';
 import {ActivatedRoute} from '@angular/router';
 import {Observable} from 'rxjs';
+import {CardType} from '../../../../projects/valtimo-portal/nl-material/src/lib';
 
 @Component({
   selector: 'app-case',
@@ -58,7 +59,8 @@ export class CaseComponent {
     })
   );
 
-  clippingPreviewMode = CasePreviewMode.clipping;
+  readonly clippingPreviewMode = CasePreviewMode.clipping;
+  readonly caseStatusType = CardType.caseStatus;
 
   constructor(
     private readonly caseService: CaseService,

@@ -14,17 +14,16 @@
  * limitations under the License.
  */
 
-export * from './toolbar';
-export * from './navigation-menu';
-export * from './menu-icon';
-export * from './sidenav';
-export * from './card';
-export * from './header-menu';
-export * from './breadcrumbs';
-export * from './header-logo';
-export * from './language-selector';
-export * from './new-case-menu';
-export * from './form-io';
-export * from './case-preview';
-export * from './spinner';
-export * from './case-details';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {CaseDetailsComponent} from './case-details.component';
+
+@NgModule({
+  declarations: [CaseDetailsComponent],
+  imports: [
+    CommonModule,
+  ],
+  exports: [CaseDetailsComponent],
+})
+export class CaseDetailsModule {
+}

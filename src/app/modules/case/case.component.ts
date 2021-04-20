@@ -16,7 +16,9 @@
 
 import {Component, OnInit} from '@angular/core';
 import {CaseService} from '@valtimo-portal/case';
-import {switchMap} from 'rxjs/operators';
+import {switchMap, tap} from 'rxjs/operators';
+import {BreadcrumbsService} from '@valtimo-portal/nl-material';
+import {CaseInstance} from '@valtimo-portal/graphql';
 import {ActivatedRoute} from '@angular/router';
 
 @Component({
@@ -27,10 +29,20 @@ import {ActivatedRoute} from '@angular/router';
 export class CaseComponent implements OnInit {
 
   case$ = this.route.queryParams.pipe(
-    switchMap((params) => this.caseService.getCaseInstanceById(params?.id))
+    // @ts-ignore
+    switchMap((params) => this.caseService.getCaseInstanceById(params?.id)),
+    tap((caseInstance: CaseInstance) => {
+      if (caseInstance?.caseDefinitionId) {
+        this.breadcrumbsService.lastBreadcrumbTitle = caseInstance.caseDefinitionId;
+      }
+    })
   );
 
-  constructor(private readonly caseService: CaseService, private readonly route: ActivatedRoute) {
+  constructor(
+    private readonly caseService: CaseService,
+    private readonly route: ActivatedRoute,
+    private readonly breadcrumbsService: BreadcrumbsService
+  ) {
   }
 
   ngOnInit(): void {

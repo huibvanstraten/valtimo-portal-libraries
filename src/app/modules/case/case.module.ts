@@ -20,7 +20,7 @@ import {CaseRoutingModule} from './case-routing.module';
 import {CaseComponent} from './case.component';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {CaseServiceModule} from '@valtimo-portal/case';
-import {SpinnerModule} from '@valtimo-portal/nl-material';
+import {BreadcrumbsServiceModule, SpinnerModule} from '@valtimo-portal/nl-material';
 import {TranslateModule} from '@ngx-translate/core';
 
 @NgModule({
@@ -32,6 +32,7 @@ import {TranslateModule} from '@ngx-translate/core';
     CaseServiceModule,
     SpinnerModule,
     TranslateModule,
+    BreadcrumbsServiceModule
   ]
 })
 export class CaseModule {

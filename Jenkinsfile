@@ -12,10 +12,10 @@ pipeline {
     }
 
     environment {
-        REPO_URL = 'git@bitbucket.org:ritense/portaal-libraries-ecs-configuration.git'
+        REPO_URL = 'git@bitbucket.org:ritense/portal-libraries-ecs-configuration.git'
         AWSPROFILE = 'ritense'
-        SERVICENAME = 'portaal-libraries'
-        TASKDEFINITIONNAME = 'portaal-libraries'
+        SERVICENAME = 'portal-libraries'
+        TASKDEFINITIONNAME = 'portal-libraries'
 
         REPO_BRANCH_TEST = 'test'
         CLUSTERNAME_TEST = 'valtimo-test'

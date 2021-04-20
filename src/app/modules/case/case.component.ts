@@ -14,19 +14,20 @@
  * limitations under the License.
  */
 
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {CaseService} from '@valtimo-portal/case';
-import {switchMap, tap} from 'rxjs/operators';
-import {BreadcrumbsService} from '@valtimo-portal/nl-material';
+import {map, switchMap, tap} from 'rxjs/operators';
+import {BreadcrumbsService, CaseDetail} from '@valtimo-portal/nl-material';
 import {CaseInstance} from '@valtimo-portal/graphql';
 import {ActivatedRoute} from '@angular/router';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-case',
   templateUrl: './case.component.html',
   styleUrls: ['./case.component.scss']
 })
-export class CaseComponent implements OnInit {
+export class CaseComponent {
 
   case$ = this.route.queryParams.pipe(
     // @ts-ignore
@@ -38,14 +39,18 @@ export class CaseComponent implements OnInit {
     })
   );
 
+  caseDetails$: Observable<Array<CaseDetail>> = this.case$.pipe(
+    map((caseInstance) => {
+      return Object.keys(caseInstance.submision).map((key) => {
+        return {key, value: caseInstance.submision[key]};
+      }) || [];
+    })
+  );
+
   constructor(
     private readonly caseService: CaseService,
     private readonly route: ActivatedRoute,
     private readonly breadcrumbsService: BreadcrumbsService
   ) {
   }
-
-  ngOnInit(): void {
-  }
-
 }

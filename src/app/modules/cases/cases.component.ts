@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {CasePreview, CasePreviewMode} from '@valtimo-portal/nl-material';
 import {CaseService} from '@valtimo-portal/case';
 import {map} from 'rxjs/operators';
@@ -25,7 +25,7 @@ import {Observable} from 'rxjs';
   templateUrl: './cases.component.html',
   styleUrls: ['./cases.component.scss']
 })
-export class CasesComponent implements OnInit {
+export class CasesComponent {
 
   currentPreviewMode = CasePreviewMode.current;
 
@@ -43,8 +43,4 @@ export class CasesComponent implements OnInit {
 
   constructor(private readonly caseService: CaseService) {
   }
-
-  ngOnInit(): void {
-  }
-
 }

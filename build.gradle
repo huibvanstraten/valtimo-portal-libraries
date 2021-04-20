@@ -146,7 +146,7 @@ task copyDockerfileToDeploymentContext(type: Copy) {
 
 task copyHttpdRewriteFileToDeploymentDir(type: Copy) {
   from 'conf'
-  into 'deployment'
+  into '.'
 
   include('rewrite-to-index.conf')
 }

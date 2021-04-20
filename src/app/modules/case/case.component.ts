@@ -17,7 +17,7 @@
 import {Component} from '@angular/core';
 import {CaseService} from '@valtimo-portal/case';
 import {map, switchMap, tap} from 'rxjs/operators';
-import {BreadcrumbsService, CaseDetail} from '@valtimo-portal/nl-material';
+import {BreadcrumbsService, CaseDetail, CasePreviewMode, TaskPreview} from '@valtimo-portal/nl-material';
 import {CaseInstance} from '@valtimo-portal/graphql';
 import {ActivatedRoute} from '@angular/router';
 import {Observable} from 'rxjs';
@@ -47,6 +47,18 @@ export class CaseComponent {
         || [];
     })
   );
+
+  previewTasks$: Observable<Array<TaskPreview>> = this.case$.pipe(
+    map((caseInstance) => {
+      if (caseInstance) {
+        return [{id: caseInstance.status, completed: false}];
+      } else {
+        return [];
+      }
+    })
+  );
+
+  clippingPreviewMode = CasePreviewMode.clipping;
 
   constructor(
     private readonly caseService: CaseService,

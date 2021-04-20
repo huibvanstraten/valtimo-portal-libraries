@@ -19,6 +19,7 @@
     <ng-container *ngIf="{case: case$ | async} as obs; else loading">
       <ng-container *ngIf="obs.case; else noData">
         <ng-container *ngTemplateOutlet="title;context:{case: obs.case}"></ng-container>
+        <ng-container *ngTemplateOutlet="status;context:{case: obs.case}"></ng-container>
         <ng-container *ngTemplateOutlet="details;context:{case: obs.case}"></ng-container>
       </ng-container>
     </ng-container>
@@ -50,6 +51,24 @@
     <h1 class="mat-h1 primary-bold large">{{case.caseDefinitionId + '.my' | translate}}</h1>
   </div>
 </ng-template>
+
+<ng-template #status let-case="case">
+  <div
+    fxFlex.gt-sm="33.3"
+    fxFlex.sm="50"
+    fxFlex="100"
+    *ngIf="previewTasks$ | async as previewTasks"
+  >
+    <h1 class="mat-h1 primary-bold">{{'case.details' | translate}}</h1>
+    <nl-material-case-status
+      [caseDefinitionId]="case.caseDefinitionId"
+      [mode]="clippingPreviewMode"
+      [previewTasks]="previewTasks"
+    >
+    </nl-material-case-status>
+  </div>
+</ng-template>
+
 
 <ng-template #details let-case="case">
   <div

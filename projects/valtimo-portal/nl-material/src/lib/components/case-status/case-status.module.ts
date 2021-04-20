@@ -19,6 +19,8 @@ import {CommonModule} from '@angular/common';
 import {CaseStatusComponent} from './case-status.component';
 import {MatListModule} from '@angular/material/list';
 import {TranslateModule} from '@ngx-translate/core';
+import {MatIconModule} from '@angular/material/icon';
+import {SidenavServiceModule} from '../../services';
 
 @NgModule({
   declarations: [CaseStatusComponent],
@@ -26,6 +28,8 @@ import {TranslateModule} from '@ngx-translate/core';
     CommonModule,
     MatListModule,
     TranslateModule,
+    MatIconModule,
+    SidenavServiceModule
   ],
   exports: [CaseStatusComponent],
 })

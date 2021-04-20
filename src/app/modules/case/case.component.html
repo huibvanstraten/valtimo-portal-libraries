@@ -17,7 +17,13 @@
 <div fxFlex fxLayout="column" fxLayoutGap="16px" class="module-container">
   <div fxLayout="row wrap">
     <ng-container *ngIf="{case: case$ | async} as obs; else loading">
-      <ng-container *ngIf="obs.case; else noData"></ng-container>
+      <ng-container *ngIf="obs.case; else noData">
+        <div
+          fxFlex="100"
+        >
+          <h1 class="mat-h1 primary-bold">{{obs.case.caseDefinitionId + '.my' | translate}}</h1>
+        </div>
+      </ng-container>
     </ng-container>
   </div>
 </div>

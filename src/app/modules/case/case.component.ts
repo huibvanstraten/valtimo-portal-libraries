@@ -42,8 +42,9 @@ export class CaseComponent {
   caseDetails$: Observable<Array<CaseDetail>> = this.case$.pipe(
     map((caseInstance) => {
       return Object.keys(caseInstance.submision).map((key) => {
-        return {key, value: caseInstance.submision[key]};
-      }) || [];
+          return {key, value: caseInstance.submision[key]};
+        }).filter((detail) => detail.key !== 'submit')
+        || [];
     })
   );
 

@@ -53,6 +53,8 @@
 
 <ng-template #details let-case="case">
   <div
+    fxFlex.gt-sm="33.3"
+    fxFlex.sm="50"
     fxFlex="100"
     *ngIf="caseDetails$ | async as caseDetails"
   >

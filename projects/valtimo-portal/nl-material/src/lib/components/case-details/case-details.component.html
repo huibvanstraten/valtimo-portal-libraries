@@ -1,4 +1,4 @@
-<mat-list *ngIf="caseDetails.length > 0; else notAvailable">
+<mat-list *ngIf="caseDetails.length > 0; else notAvailable" class="case-details">
   <mat-list-item *ngFor="let detail of caseDetails">
     <div mat-line>{{detail.key}}</div>
     <div mat-line> {{detail.value}}</div>

@@ -65,7 +65,7 @@ export class CaseService {
   getCaseInstanceById(id: string): Observable<CaseInstance | null | undefined> {
     return this.getCaseInstanceGQL.fetch({id}).pipe(
       map((res) => res.data.getCaseInstance),
-      catchError((err) => {
+      catchError(() => {
           this.notificationService.show(this.translateService.instant('case.noDataError'));
           return of(undefined);
         }

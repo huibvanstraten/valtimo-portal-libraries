@@ -39,7 +39,7 @@ export const environment: Environment = {
   authentication: {
     provider: AuthenticationProvider.keycloak,
     config: {
-      url: 'https://keycloak.test.valtimo.nl/auth',
+      url: 'https://keycloak.valtimo.nl/auth',
       realm: 'valtimo',
       clientId: 'valtimo-console',
       redirectUri: '/keycloak/callback'
@@ -48,7 +48,7 @@ export const environment: Environment = {
   api: {
     graphql: {
       clients: [
-        {name: 'portal-api', uri: 'http://localhost:8080/graphql'}
+        {name: 'portal-api', uri: 'http://portaal.test.valtimo.nl/graphql'}
       ]
     }
   }

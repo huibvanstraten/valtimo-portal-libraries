@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {TaskPreview} from '../../interfaces';
 import {CardType, CasePreviewMode} from '../../enums';
 import {SidenavService} from '../../services';
@@ -9,7 +9,7 @@ import {Observable} from 'rxjs';
   templateUrl: './case-status.component.html',
   styleUrls: ['../case-preview/case-preview.component.scss']
 })
-export class CaseStatusComponent implements OnInit {
+export class CaseStatusComponent {
   @Input() previewTasks: Array<TaskPreview> = [];
   @Input() mode: CasePreviewMode = CasePreviewMode.clipping;
   @Input() caseDefinitionId = '';
@@ -24,9 +24,6 @@ export class CaseStatusComponent implements OnInit {
   constructor(private readonly sidenavService: SidenavService,
   ) {
     this.currentLang$ = this.sidenavService.currentLang$;
-  }
-
-  ngOnInit(): void {
   }
 
   isClippingPreview(): boolean {

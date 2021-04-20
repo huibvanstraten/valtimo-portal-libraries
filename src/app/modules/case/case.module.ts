@@ -22,6 +22,7 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 import {CaseServiceModule} from '@valtimo-portal/case';
 import {
   BreadcrumbsServiceModule,
+  CardModule,
   CaseDetailsModule,
   CaseStatusModule,
   SpinnerModule
@@ -39,7 +40,8 @@ import {TranslateModule} from '@ngx-translate/core';
     SpinnerModule,
     TranslateModule,
     BreadcrumbsServiceModule,
-    CaseStatusModule
+    CaseStatusModule,
+    CardModule
   ]
 })
 export class CaseModule {

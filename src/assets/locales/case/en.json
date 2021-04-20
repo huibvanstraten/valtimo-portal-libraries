@@ -3,6 +3,7 @@
     "noDataError": "Something went wrong while retrieving your case.",
     "noData": "There is no case data available.",
     "noDetails": "There are no case details available.",
-    "details": "Details"
+    "details": "Details",
+    "status": "Status"
   }
 }

@@ -23,6 +23,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {SidenavServiceModule} from '../../services';
 import {MatButtonModule} from '@angular/material/button';
 import {RouterModule} from '@angular/router';
+import {CaseStatusModule} from '../case-status';
 
 @NgModule({
   declarations: [CasePreviewComponent],
@@ -33,7 +34,8 @@ import {RouterModule} from '@angular/router';
     MatIconModule,
     SidenavServiceModule,
     MatButtonModule,
-    RouterModule
+    RouterModule,
+    CaseStatusModule
   ],
   exports: [CasePreviewComponent],
 })

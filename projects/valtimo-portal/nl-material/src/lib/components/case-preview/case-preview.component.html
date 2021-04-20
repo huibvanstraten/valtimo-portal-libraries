@@ -30,25 +30,12 @@
 </ng-template>
 
 <ng-template #tasks let-currentLang="currentLang" let-previewTasks="previewTasks">
-  <ul *ngIf="previewTasks.length > 0" [ngClass]="mode === currentPreviewMode ? 'current' : ''" class="tasks">
-    <li
-      *ngFor="let task of previewTasks; let i = index"
-      [ngClass]="isCurrentCasePreview() && i === 0 ? 'first' : ''"
-      class="task"
-    >
-      <div *ngIf="isCurrentCasePreview() && i === 0" class="line"></div>
-      <div [ngClass]="{'empty': !task.completed}" class="circle-icon">
-        <mat-icon *ngIf="task.completed" fontIcon="fa-check" fontSet="fa"></mat-icon>
-        <mat-icon *ngIf="getOpenTasks(previewTasks)[0] === task" fontIcon="fa-arrow-right" fontSet="fa"></mat-icon>
-      </div>
-      <div *ngIf="isClippingPreview() || i !== 0" class="description">
-        <span>{{preview.id + '.statuses.' + task.id | translate}}</span>
-        <span *ngIf="isClippingPreview()">
-          {{task.date ? (task.date | date: 'shortDate' : '' : currentLang) : 'cases.noDate' | translate}}
-        </span>
-      </div>
-    </li>
-  </ul>
+  <nl-material-case-status
+    [previewTasks]="previewTasks"
+    [mode]="mode"
+    [caseDefinitionId]="preview.id"
+  >
+  </nl-material-case-status>
 </ng-template>
 
 <ng-template #currentCaseActions let-currentLang="currentLang" let-previewTasks="previewTasks">

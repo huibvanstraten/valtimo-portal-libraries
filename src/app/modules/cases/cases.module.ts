@@ -33,7 +33,7 @@ import {CaseServiceModule} from '@valtimo-portal/case';
     CasePreviewModule,
     TranslateModule,
     CaseServiceModule,
-    SpinnerModule
+    SpinnerModule,
   ]
 })
 export class CasesModule {

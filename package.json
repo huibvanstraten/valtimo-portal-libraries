@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --hmr --port 4200 --proxy-config proxy.conf.json",
+    "start": "ng serve --hmr --port 4200 --proxy-config conf/proxy.conf.json",
     "build-all": "npm run build-libs && npm run build",
     "build": "ng build",
     "test": "jest",

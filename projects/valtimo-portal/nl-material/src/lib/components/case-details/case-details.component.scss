@@ -1,4 +1,8 @@
 ::ng-deep .case-details {
+  .mat-list-item:not(:last-child) {
+    margin-bottom: 16px;
+  }
+
   .mat-list-item-content {
     padding: 0 !important;
   }

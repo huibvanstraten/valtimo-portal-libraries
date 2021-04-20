@@ -7,7 +7,8 @@
       "portal-case-created": "Aanvraag ingediend"
     },
     "properties": {
-      "firstName": ""
+      "firstName": "Voornaam",
+      "age": "Leeftijd"
     }
   }
 }

@@ -59,6 +59,10 @@
     *ngIf="caseDetails$ | async as caseDetails"
   >
     <h1 class="mat-h1 primary-bold">{{'case.details' | translate}}</h1>
-    <nl-material-case-details [caseDetails]="caseDetails"></nl-material-case-details>
+    <nl-material-case-details
+      [caseDetails]="caseDetails"
+      [caseDefinitionId]="case.caseDefinitionId"
+    >
+    </nl-material-case-details>
   </div>
 </ng-template>

@@ -8,4 +8,5 @@ import {CaseDetail} from '../../interfaces';
 })
 export class CaseDetailsComponent {
   @Input() caseDetails: Array<CaseDetail> = [];
+  @Input() caseDefinitionId = '';
 }

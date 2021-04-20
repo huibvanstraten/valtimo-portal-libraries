@@ -44,7 +44,7 @@
       <div *ngIf="isClippingPreview() || i !== 0" class="description">
         <span>{{preview.id + '.statuses.' + task.id | translate}}</span>
         <span *ngIf="isClippingPreview()">
-          {{task.date | date: 'shortDate' : '' : currentLang}}
+          {{task.date ? (task.date | date: 'shortDate' : '' : currentLang) : 'cases.noDate' | translate}}
         </span>
       </div>
     </li>

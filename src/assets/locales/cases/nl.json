@@ -1,5 +1,6 @@
 {
   "cases": {
-    "title": "Lopende aanvragen"
+    "title": "Lopende aanvragen",
+    "noDate": "Datum onbekend"
   }
 }

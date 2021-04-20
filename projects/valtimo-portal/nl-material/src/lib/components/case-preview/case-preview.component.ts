@@ -129,10 +129,10 @@ export class CasePreviewComponent implements OnInit, OnDestroy {
   private setStatusPreview(): void {
     this.setPreviewTasks(
       [
-        {
+        ...(this.isCurrentCasePreview() ? [{
           id: '',
           completed: true
-        },
+        }] : []),
         {
           id: this.preview.status || '',
           completed: false

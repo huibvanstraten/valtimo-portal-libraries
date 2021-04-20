@@ -15,12 +15,12 @@
   -->
 
 <div fxFlex fxLayout="column" fxLayoutGap="16px" class="module-container">
-  <div fxLayout="row wrap">
-    <ng-container *ngIf="{case: case$ | async} as obs; else loading">
+  <div fxLayout="row wrap" *ngIf="{case: case$ | async} as obs">
+    <ng-container *ngIf="!(loading$ | async); else loading">
       <ng-container *ngIf="obs.case; else noData">
         <ng-container *ngTemplateOutlet="title;context:{case: obs.case}"></ng-container>
         <ng-container *ngTemplateOutlet="status;context:{case: obs.case}"></ng-container>
-        <ng-container *ngTemplateOutlet="details;context:{case: obs.case}"></ng-container>
+        <ng-container *ngTemplateOutlet="details;context:{case:obs.case}"></ng-container>
       </ng-container>
     </ng-container>
   </div>

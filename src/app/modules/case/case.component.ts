@@ -20,7 +20,7 @@ import {map, switchMap, tap} from 'rxjs/operators';
 import {BreadcrumbsService, CaseDetail, CasePreviewMode, TaskPreview} from '@valtimo-portal/nl-material';
 import {CaseInstance} from '@valtimo-portal/graphql';
 import {ActivatedRoute} from '@angular/router';
-import {Observable} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {CardType} from '../../../../projects/valtimo-portal/nl-material/src/lib';
 
 @Component({
@@ -30,10 +30,13 @@ import {CardType} from '../../../../projects/valtimo-portal/nl-material/src/lib'
 })
 export class CaseComponent {
 
+  loading$ = new BehaviorSubject<boolean>(true);
+
   case$ = this.route.queryParams.pipe(
     // @ts-ignore
     switchMap((params) => this.caseService.getCaseInstanceById(params?.id)),
     tap((caseInstance: CaseInstance) => {
+      this.loading$.next(false);
       if (caseInstance?.caseDefinitionId) {
         this.breadcrumbsService.lastBreadcrumbTitle = caseInstance.caseDefinitionId;
       }

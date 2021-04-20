@@ -74,10 +74,6 @@ export class CasePreviewComponent implements OnInit, OnDestroy {
     this.routeLangSubscription.unsubscribe();
   }
 
-  getOpenTasks(tasks: Array<TaskPreview>): Array<TaskPreview> {
-    return tasks.filter((task) => !task.completed);
-  }
-
   setTasksForPreview(): void {
     const preview = this.preview;
 

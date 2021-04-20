@@ -138,7 +138,7 @@ def cleanTags() {
 // TASKS
 task makeBuildInfoFile(type: WriteBuildInfoFile) {
   gitHash = getCheckedOutGitCommitHash()
-  filePath = 'deployment/build.properties'
+  filePath = 'build.properties'
 }
 
 task copyDockerfileToDeploymentContext(type: Copy) {

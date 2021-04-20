@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-export * from './navigation-menu';
-export * from './breadcrumbs';
-export * from './case-preview';
-export * from './case-detail';
+export interface CaseDetail {
+  key: string;
+  value: string;
+}

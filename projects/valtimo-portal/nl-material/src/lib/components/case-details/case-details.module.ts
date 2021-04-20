@@ -17,11 +17,15 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {CaseDetailsComponent} from './case-details.component';
+import {MatListModule} from '@angular/material/list';
+import {TranslateModule} from '@ngx-translate/core';
 
 @NgModule({
   declarations: [CaseDetailsComponent],
   imports: [
     CommonModule,
+    MatListModule,
+    TranslateModule,
   ],
   exports: [CaseDetailsComponent],
 })

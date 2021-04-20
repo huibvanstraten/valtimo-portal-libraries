@@ -18,11 +18,8 @@
   <div fxLayout="row wrap">
     <ng-container *ngIf="{case: case$ | async} as obs; else loading">
       <ng-container *ngIf="obs.case; else noData">
-        <div
-          fxFlex="100"
-        >
-          <h1 class="mat-h1 primary-bold">{{obs.case.caseDefinitionId + '.my' | translate}}</h1>
-        </div>
+        <ng-container *ngTemplateOutlet="title;context:{case: obs.case}"></ng-container>
+        <ng-container *ngTemplateOutlet="details;context:{case: obs.case}"></ng-container>
       </ng-container>
     </ng-container>
   </div>
@@ -43,5 +40,22 @@
     fxLayout="column"
   >
     <h2 class="mat-h2">{{'case.noData' | translate}}</h2>
+  </div>
+</ng-template>
+
+<ng-template #title let-case="case">
+  <div
+    fxFlex="100"
+  >
+    <h1 class="mat-h1 primary-bold large">{{case.caseDefinitionId + '.my' | translate}}</h1>
+  </div>
+</ng-template>
+
+<ng-template #details let-case="case">
+  <div
+    fxFlex="100"
+  >
+    <h1 class="mat-h1 primary-bold">{{'case.details' | translate}}</h1>
+    <nl-material-case-details></nl-material-case-details>
   </div>
 </ng-template>

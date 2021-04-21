@@ -20,7 +20,6 @@ import {CaseStatusComponent} from './case-status.component';
 import {MatListModule} from '@angular/material/list';
 import {TranslateModule} from '@ngx-translate/core';
 import {MatIconModule} from '@angular/material/icon';
-import {SidenavServiceModule} from '../../services';
 
 @NgModule({
   declarations: [CaseStatusComponent],
@@ -29,7 +28,6 @@ import {SidenavServiceModule} from '../../services';
     MatListModule,
     TranslateModule,
     MatIconModule,
-    SidenavServiceModule
   ],
   exports: [CaseStatusComponent],
 })

@@ -17,11 +17,13 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {TipsComponent} from './tips.component';
+import {TipsServiceModule} from '../../services';
 
 @NgModule({
   declarations: [TipsComponent],
   imports: [
     CommonModule,
+    TipsServiceModule
   ],
   exports: [TipsComponent]
 })

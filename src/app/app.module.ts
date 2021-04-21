@@ -26,6 +26,7 @@ import {
   HeaderMenuModule,
   NavigationMenuModule,
   SidenavModule,
+  SidenavServiceModule,
   ToolbarModule,
 } from '@valtimo-portal/nl-material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -74,6 +75,7 @@ export const HttpLoaderFactory = (http: HttpClient, env: Environment) =>
     ToolbarModule,
     HeaderLogoModule,
     NavigationMenuModule,
+    SidenavServiceModule,
     SidenavModule,
     HeaderMenuModule,
     BreadcrumbsServiceModule,

@@ -47,13 +47,13 @@ export const environment: Environment = {
       url: 'https://keycloak.test.valtimo.nl/auth',
       realm: 'valtimo',
       clientId: 'valtimo-console',
-      redirectUri: 'http://localhost:4200/keycloak/callback'
+      redirectUri: 'http://localhost:4201/keycloak/callback'
     }
   },
   api: {
     graphql: {
       clients: [
-        {name: 'portal-api', uri: 'http://localhost:4200/graphql'}
+        {name: 'portal-api', uri: 'http://localhost:4201/graphql'}
       ]
     }
   }

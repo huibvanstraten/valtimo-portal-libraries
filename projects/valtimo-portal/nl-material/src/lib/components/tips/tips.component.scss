@@ -1,0 +1,8 @@
+@import "colors";
+@import "variables";
+
+.tips-container {
+  background-color: $nl-material-primary-lightest;
+  padding: 26px;
+  overflow: hidden;
+}

@@ -1,22 +1,28 @@
-import {Component} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {TipsService} from '../../services';
 import {Tip} from '../../interfaces';
-import {BehaviorSubject, Observable} from 'rxjs';
-import {take, tap} from 'rxjs/operators';
+import {BehaviorSubject, combineLatest, Subscription} from 'rxjs';
+import {map, take, tap} from 'rxjs/operators';
 import {CardType} from '../../enums';
 import {LocalizeRouterService} from '@gilsdav/ngx-translate-router';
 import {Router} from '@angular/router';
+import {fadeInAnimations} from '../../animations';
 
 @Component({
   selector: 'nl-material-tips',
   templateUrl: './tips.component.html',
-  styleUrls: ['./tips.component.scss']
+  styleUrls: ['./tips.component.scss'],
+  animations: fadeInAnimations
 })
-export class TipsComponent {
+export class TipsComponent implements OnInit, OnDestroy {
 
   index$ = new BehaviorSubject<number>(0);
 
-  tips$!: Observable<Array<Tip>>;
+  tipsLength$ = new BehaviorSubject<number>(0);
+
+  tip$ = new Subject<Tip>;
+
+  private tipsSubscription!: Subscription;
 
   readonly tipType = CardType.tip;
 
@@ -25,12 +31,20 @@ export class TipsComponent {
     private readonly localizeRouterService: LocalizeRouterService,
     private readonly router: Router
   ) {
-    this.tips$ = this.tipsService.tips$
-      .pipe(
-        tap(() => {
-          this.index$.next(0);
-        })
-      );
+  }
+
+  ngOnInit(): void {
+    this.tipsSubscription =
+      combineLatest([this.tipsService.tips$, this.index$])
+        .pipe(
+          tap(([tips]) => this.tipsLength$.next(tips.length)),
+          map(([tips, index]) => this.tip$.next(tips[index]))
+        )
+        .subscribe();
+  }
+
+  ngOnDestroy(): void {
+    this.tipsSubscription.unsubscribe();
   }
 
   next(): void {

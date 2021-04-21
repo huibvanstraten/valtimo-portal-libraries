@@ -18,6 +18,13 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 
 Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
+## GraphQL
+
+Run `graphql:generate` to generate TypeScript classes for the various .graphql files throughout the project. These can
+be used through dependency injection.
+
+Do not forget to run `graphql:schema` first, and run it each time there are updates to your GraphQL endpoint.
+
 ## Running end-to-end tests
 
 Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).

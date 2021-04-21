@@ -14,7 +14,13 @@
  * limitations under the License.
  */
 
-export * from './sidenav';
-export * from './breadcrumbs';
-export * from './animated-dots';
-export * from './tips';
+import {Injectable} from '@angular/core';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class TipsService {
+
+  constructor() {
+  }
+}

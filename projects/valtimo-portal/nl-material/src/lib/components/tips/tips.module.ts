@@ -17,23 +17,11 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {TipsComponent} from './tips.component';
-import {TipsServiceModule} from '../../services';
-import {CardModule} from '../card';
-import {TranslateModule} from '@ngx-translate/core';
-import {MatIconModule} from '@angular/material/icon';
-import {SpinnerModule} from '../spinner';
-import {MatButtonModule} from '@angular/material/button';
 
 @NgModule({
   declarations: [TipsComponent],
   imports: [
     CommonModule,
-    TipsServiceModule,
-    CardModule,
-    TranslateModule,
-    MatIconModule,
-    MatButtonModule,
-    SpinnerModule
   ],
   exports: [TipsComponent]
 })

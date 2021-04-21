@@ -128,7 +128,7 @@ export const GetCaseInstanceDocument = gql`
 }
     `;
 
-  @Injectable({
+@Injectable({
     providedIn: 'root'
   })
   export class GetCaseInstanceGQL extends Apollo.Query<GetCaseInstanceQuery, GetCaseInstanceQueryVariables> {

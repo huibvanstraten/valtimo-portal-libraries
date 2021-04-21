@@ -14,19 +14,5 @@
  * limitations under the License.
  */
 
-import {Injectable} from '@angular/core';
-import {CaseService} from '@valtimo-portal/case';
-import {TranslateService} from '@ngx-translate/core';
-import {take} from 'rxjs/operators';
-
-@Injectable({
-  providedIn: 'root'
-})
-export class TipsService {
-
-  allCaseDefinitions$ = this.caseService.getAllCaseDefinitions();
-
-  constructor(private readonly caseService: CaseService, private readonly translateService: TranslateService) {
-    this.translateService.getTranslation('en').pipe(take(1)).subscribe((trans) => console.log(trans));
-  }
-}
+export * from './tips.module';
+export * from './tips.component';

@@ -21,6 +21,7 @@
         <ng-container *ngTemplateOutlet="title;context:{case: obs.case}"></ng-container>
         <ng-container *ngTemplateOutlet="status;context:{case: obs.case}"></ng-container>
         <ng-container *ngTemplateOutlet="details;context:{case:obs.case}"></ng-container>
+        <ng-container *ngTemplateOutlet="tips"></ng-container>
       </ng-container>
     </ng-container>
   </div>
@@ -89,3 +90,16 @@
     </nl-material-case-details>
   </div>
 </ng-template>
+
+<ng-template #tips>
+  <div
+    fxFlex.gt-sm="33.3"
+    fxFlex.sm="50"
+    fxFlex.xs="100"
+    fxLayout="column"
+  >
+    <h1 class="mat-h1 primary-bold">{{'tips.title' | translate}}</h1>
+    <nl-material-tips></nl-material-tips>
+  </div>
+</ng-template>
+

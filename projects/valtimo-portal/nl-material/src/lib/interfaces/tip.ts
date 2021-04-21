@@ -14,22 +14,7 @@
  * limitations under the License.
  */
 
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {TipsComponent} from './tips.component';
-import {TipsServiceModule} from '../../services';
-import {CardModule} from '../card';
-import {TranslateModule} from '@ngx-translate/core';
-
-@NgModule({
-  declarations: [TipsComponent],
-  imports: [
-    CommonModule,
-    TipsServiceModule,
-    CardModule,
-    TranslateModule,
-  ],
-  exports: [TipsComponent]
-})
-export class TipsModule {
+export interface Tip {
+  caseDefinitionId: string;
+  body: string;
 }

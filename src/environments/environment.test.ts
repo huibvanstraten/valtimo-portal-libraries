@@ -14,15 +14,11 @@
  * limitations under the License.
  */
 
-// This file can be replaced during build by using the `fileReplacements` array.
-// `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
-// The list of file replacements can be found in `angular.json`.
-
-import {AuthenticationProvider, Environment} from '@valtimo-portal/shared';
+import {AuthenticationProvider, Environment} from "@valtimo-portal/shared";
 
 export const environment: Environment = {
   flags: {
-    production: false,
+    production: true,
   },
   styling: {
     logoImagePath: 'assets/img/logo/dh.svg'
@@ -43,26 +39,17 @@ export const environment: Environment = {
   authentication: {
     provider: AuthenticationProvider.keycloak,
     config: {
-      url: 'https://keycloak.test.valtimo.nl/auth',
+      url: 'https://keycloak.valtimo.nl/auth',
       realm: 'valtimo',
-      clientId: 'valtimo-console',
-      redirectUri: 'http://localhost:4200/keycloak/callback'
+      clientId: 'valtimo-console-test',
+      redirectUri: 'https://portal.test.valtimo.nl/keycloak/callback'
     }
   },
   api: {
     graphql: {
       clients: [
-        {name: 'portal-api', uri: 'http://localhost:4200/graphql'}
+        {name: 'portal-api', uri: 'https://portal.test.valtimo.nl/graphql'}
       ]
     }
   }
 };
-
-/*
- * For easier debugging in development mode, you can import the following file
- * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
- *
- * This import should be commented out in production mode because it will have a negative impact
- * on performance if an error is thrown.
- */
-// import 'zone.js/dist/zone-error';  // Included with Angular CLI.

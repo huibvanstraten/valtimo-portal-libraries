@@ -9,6 +9,10 @@
     "properties": {
       "firstName": "Voornaam",
       "age": "Leeftijd"
-    }
+    },
+    "tips": [
+      "Vul alsjeblieft jouw persoonsgegevens zo compleet en accuraat mogelijk in. Zo kunnen we jou het snelst helpen.",
+      "Wees voorzichtig met je persoonsgegevens. Let bijvoorbeeld goed op dat derde partijen zich houden aan privacywetgeving."
+    ]
   }
 }

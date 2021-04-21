@@ -4,6 +4,9 @@
     "new": "New test file",
     "my": "My test file",
     "statuses": {
-    }
+    },
+    "tips": [
+      "Welcome to our application! We have provided a test process for you to help show you around."
+    ]
   }
 }

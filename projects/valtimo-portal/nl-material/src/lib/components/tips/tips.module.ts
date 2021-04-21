@@ -20,6 +20,8 @@ import {TipsComponent} from './tips.component';
 import {TipsServiceModule} from '../../services';
 import {CardModule} from '../card';
 import {TranslateModule} from '@ngx-translate/core';
+import {MatIconModule} from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
 
 @NgModule({
   declarations: [TipsComponent],
@@ -28,6 +30,8 @@ import {TranslateModule} from '@ngx-translate/core';
     TipsServiceModule,
     CardModule,
     TranslateModule,
+    MatIconModule,
+    MatButtonModule
   ],
   exports: [TipsComponent]
 })

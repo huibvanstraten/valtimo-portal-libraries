@@ -18,7 +18,7 @@
     "build:form": "ng build @valtimo-portal/form",
     "build:case": "ng build @valtimo-portal/case",
     "build:nl-material": "ng build @valtimo-portal/nl-material",
-    "serve:app": "wait-on dist/valtimo-portal/nl-material/public-api.d.ts && ng serve",
+    "serve:app": "wait-on dist/valtimo-portal/nl-material/public-api.d.ts && npm run start",
     "watch-all:clean": "npm run clean",
     "watch-all:serve": "run-p watch:* serve:app",
     "watch:shared": "ng build @valtimo-portal/shared --watch",

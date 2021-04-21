@@ -20,7 +20,6 @@ import {HeaderMenuComponent} from './header-menu.component';
 import {TranslateModule} from '@ngx-translate/core';
 import {MatSelectModule} from '@angular/material/select';
 import {FormsModule} from '@angular/forms';
-import {SidenavServiceModule} from '../../services';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatIconModule} from '@angular/material/icon';
 import {FlexLayoutModule} from '@angular/flex-layout';
@@ -36,7 +35,6 @@ import {UserMenuModule} from '../user-menu/user-menu.module';
     MatSelectModule,
     TranslateModule,
     FormsModule,
-    SidenavServiceModule,
     MatMenuModule,
     MatIconModule,
     FlexLayoutModule,

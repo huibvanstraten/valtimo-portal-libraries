@@ -17,15 +17,11 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {TipsService} from './tips.service';
-import {CaseServiceModule} from '@valtimo-portal/case';
-import {TranslateModule} from '@ngx-translate/core';
 
 @NgModule({
   declarations: [],
   imports: [
-    CommonModule,
-    CaseServiceModule,
-    TranslateModule
+    CommonModule
   ],
   exports: [],
   providers: [TipsService]

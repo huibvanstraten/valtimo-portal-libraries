@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --hmr --port 4200 --proxy-config proxy.conf.json",
+    "start": "ng serve --hmr --port 4200 --proxy-config conf/proxy.conf.json",
     "build-all": "npm run build-libs && npm run build",
     "watch-all": "run-s watch-all:*",
     "build": "ng build",
@@ -37,7 +37,8 @@
     "graphql:schema": "apollo client:download-schema ./projects/valtimo-portal/graphql/src/lib/schemas/portal-api-schema.json",
     "graphql:generate": "run-s graphql:generate:*",
     "graphql:generate:codegen": "graphql-codegen",
-    "graphql:generate:fix-imports": "node ./scripts/fix-graphql-types-imports.js"
+    "graphql:generate:fix-imports": "node ./scripts/fix-graphql-types-imports.js",
+    "build:test": "npm run build-libs && node --max_old_space_size=4096 ./node_modules/@angular/cli/bin/ng build --prod --configuration=test"
   },
   "private": true,
   "dependencies": {

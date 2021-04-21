@@ -20,7 +20,6 @@ import {LanguageSelectorComponent} from './language-selector.component';
 import {MatSelectModule} from '@angular/material/select';
 import {TranslateModule} from '@ngx-translate/core';
 import {FormsModule} from '@angular/forms';
-import {SidenavServiceModule} from '../../services';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 
 @NgModule({
@@ -30,7 +29,6 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
     MatSelectModule,
     TranslateModule,
     FormsModule,
-    SidenavServiceModule,
     MatButtonToggleModule
   ],
   exports: [LanguageSelectorComponent]

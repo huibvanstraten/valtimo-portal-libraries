@@ -22,6 +22,7 @@
     <ng-container *ngTemplateOutlet="reminder"></ng-container>
     <ng-container *ngTemplateOutlet="casePreview"></ng-container>
     <ng-container *ngTemplateOutlet="newCase"></ng-container>
+    <ng-container *ngTemplateOutlet="tips"></ng-container>
   </div>
 </div>
 
@@ -81,5 +82,16 @@
     fxLayout="column"
   >
     <nl-material-new-case-menu></nl-material-new-case-menu>
+  </div>
+</ng-template>
+
+<ng-template #tips>
+  <div
+    fxFlex.gt-sm="33.3"
+    fxFlex.sm="50"
+    fxFlex.xs="100"
+    fxLayout="column"
+  >
+    <nl-material-tips></nl-material-tips>
   </div>
 </ng-template>

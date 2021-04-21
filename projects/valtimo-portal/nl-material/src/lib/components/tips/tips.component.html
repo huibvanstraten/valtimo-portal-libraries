@@ -3,6 +3,7 @@
     *ngFor="let tip of tips"
     [buttonText]="tip.caseDefinitionId + '.new' | translate"
     [type]="tipType"
+    (primaryButtonClick)="goToNewCase(tip.caseDefinitionId)"
   >
     {{tip.body}}
   </nl-material-card>

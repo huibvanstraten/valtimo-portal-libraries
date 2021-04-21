@@ -14,7 +14,17 @@
  * limitations under the License.
  */
 
-export * from './sidenav';
-export * from './breadcrumbs';
-export * from './animated-dots';
-export * from './tips';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {TipsService} from './tips.service';
+
+@NgModule({
+  declarations: [],
+  imports: [
+    CommonModule
+  ],
+  exports: [],
+  providers: [TipsService]
+})
+export class TipsServiceModule {
+}

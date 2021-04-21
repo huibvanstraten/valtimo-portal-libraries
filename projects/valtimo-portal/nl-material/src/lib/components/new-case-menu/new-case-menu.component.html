@@ -3,7 +3,7 @@
   <mat-list class="header-menu-mat-list" *ngIf="!(loading$ | async); else loading">
     <ng-container *ngIf="obs.caseDefinitions && obs.caseDefinitions[0]; else noData">
       <mat-list-item *ngFor="let caseDefinition of obs.caseDefinitions">
-        <button mat-menu-item [routerLink]="getNewCaseRoute()" [queryParams]="{id:caseDefinition.id}">
+        <button mat-menu-item [routerLink]="newCaseRoute$ | async" [queryParams]="{id:caseDefinition.id}">
           <mat-icon fontSet="fa" fontIcon="fa-chevron-right"></mat-icon>
           {{ caseDefinition.id + '.wouldLikeTo' | translate }}
         </button>

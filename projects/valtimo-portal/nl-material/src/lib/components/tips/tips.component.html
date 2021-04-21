@@ -1,1 +1,9 @@
-<p>tips works!</p>
+<ng-container *ngIf="tips$ | async as tips">
+  <nl-material-card
+    *ngFor="let tip of tips"
+    [buttonText]="tip.caseDefinitionId + '.new' | translate"
+    [type]="tipType"
+  >
+    {{tip.body}}
+  </nl-material-card>
+</ng-container>

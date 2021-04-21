@@ -14,7 +14,5 @@
  * limitations under the License.
  */
 
-export * from './sidenav';
-export * from './breadcrumbs';
-export * from './animated-dots';
-export * from './tips';
+export * from './tips.service.module';
+export * from './tips.service';

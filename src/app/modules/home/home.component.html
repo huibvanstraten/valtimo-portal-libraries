@@ -22,6 +22,8 @@
     <ng-container *ngTemplateOutlet="reminder"></ng-container>
     <ng-container *ngTemplateOutlet="casePreview"></ng-container>
     <ng-container *ngTemplateOutlet="newCase"></ng-container>
+  </div>
+  <div fxLayout="row wrap">
     <ng-container *ngTemplateOutlet="tips"></ng-container>
   </div>
 </div>
@@ -87,9 +89,8 @@
 
 <ng-template #tips>
   <div
+    fxFlex="100"
     fxFlex.gt-sm="33.3"
-    fxFlex.sm="50"
-    fxFlex.xs="100"
     fxLayout="column"
   >
     <h1 class="mat-h1 primary-bold">{{'tips.title' | translate}}</h1>

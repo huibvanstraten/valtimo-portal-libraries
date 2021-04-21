@@ -38,6 +38,7 @@ export class CardComponent {
   readonly casePreviewClippingType = CardType.casePreviewClipping;
   readonly casePreviewCurrentType = CardType.casePreviewCurrent;
   readonly caseStatusType = CardType.caseStatus;
+  readonly tipType = CardType.tip;
 
   handlePrimaryButtonClick(): void {
     this.primaryButtonClick.emit();

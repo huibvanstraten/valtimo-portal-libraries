@@ -142,7 +142,7 @@ task buildArtifacts(type: NpmTask, dependsOn: [makeBuildInfoFile, copyDockerFile
   ext.resolvedEnv = (project.hasProperty('env')) ? env : 'test'
   def buildTask = "build"
   if (ext.resolvedEnv.equalsIgnoreCase("test")) {
-    buildTask = "build:test"
+    buildTask = "buildTest"
   } else if (ext.resolvedEnv.equalsIgnoreCase("production")) {
     buildTask = "buildProd"
   }

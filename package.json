@@ -33,7 +33,7 @@
     "graphql:generate": "run-s graphql:generate:*",
     "graphql:generate:codegen": "graphql-codegen",
     "graphql:generate:fix-imports": "node ./scripts/fix-graphql-types-imports.js",
-    "build:test": "npm run build-libs && node --max_old_space_size=4096 ./node_modules/@angular/cli/bin/ng build --prod --configuration=test"
+    "buildTest": "npm run build-libs && node --max_old_space_size=4096 ./node_modules/@angular/cli/bin/ng build --prod --configuration=test"
   },
   "private": true,
   "dependencies": {

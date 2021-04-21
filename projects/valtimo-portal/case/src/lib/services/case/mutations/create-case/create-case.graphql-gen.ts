@@ -126,7 +126,7 @@ export const CreateCaseDocument = gql`
 }
     `;
 
-@Injectable({
+  @Injectable({
     providedIn: 'root'
   })
   export class CreateCaseGQL extends Apollo.Mutation<CreateCaseMutation, CreateCaseMutationVariables> {

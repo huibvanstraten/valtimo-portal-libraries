@@ -46,7 +46,12 @@ export class CaseService {
   getAllCaseDefinitions(): Observable<Array<CaseDefinition>> {
     return this.getAllCaseDefinitionsGQL.fetch()
       .pipe(
-        map((res) => res.data.allCaseDefinitions)
+        map((res) => res.data.allCaseDefinitions),
+        catchError(() => {
+            this.notificationService.show(this.translateService.instant('newCaseMenu.noDataError'));
+            return of([]);
+          }
+        )
       );
   }
 
@@ -58,7 +63,12 @@ export class CaseService {
     }
     return this.caseInstancesQueryRef.valueChanges
       .pipe(
-        map((res) => res.data.allCaseInstances)
+        map((res) => res.data.allCaseInstances),
+        catchError(() => {
+            this.notificationService.show(this.translateService.instant('cases.noDataError'));
+            return of([]);
+          }
+        )
       );
   }
 

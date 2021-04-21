@@ -17,8 +17,8 @@
 import {Component} from '@angular/core';
 import {CasePreview, CasePreviewMode} from '@valtimo-portal/nl-material';
 import {CaseService} from '@valtimo-portal/case';
-import {map} from 'rxjs/operators';
-import {Observable} from 'rxjs';
+import {map, tap} from 'rxjs/operators';
+import {BehaviorSubject, Observable} from 'rxjs';
 
 @Component({
   selector: 'app-cases',
@@ -26,6 +26,8 @@ import {Observable} from 'rxjs';
   styleUrls: ['./cases.component.scss']
 })
 export class CasesComponent {
+
+  loading$ = new BehaviorSubject<boolean>(true);
 
   currentPreviewMode = CasePreviewMode.current;
 
@@ -39,7 +41,11 @@ export class CasesComponent {
             tasks: []
           }
         ))
-      ));
+      ),
+      tap(() => {
+        this.loading$.next(false);
+      })
+    );
 
   constructor(private readonly caseService: CaseService) {
   }

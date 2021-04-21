@@ -35,6 +35,13 @@ Run `npm run test` to execute the unit tests via [Jest](https://jestjs.io/).
 Run `npm run test:` plus your library name (e.g. `npm run test:shared`) to execute the unit tests for that specific
 library while watching for changes.
 
+## GraphQL
+
+Run `graphql:generate` to generate TypeScript classes for the various .graphql files throughout the project. These can
+be used through dependency injection.
+
+Do not forget to run `graphql:schema` first, and run it each time there are updates to your GraphQL endpoint.
+
 ## Running end-to-end tests
 
 Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).

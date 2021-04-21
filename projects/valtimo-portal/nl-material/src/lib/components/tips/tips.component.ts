@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {TipsService} from '../../services';
 
 @Component({
   selector: 'nl-material-tips',
@@ -7,7 +8,7 @@ import {Component, OnInit} from '@angular/core';
 })
 export class TipsComponent implements OnInit {
 
-  constructor() {
+  constructor(private readonly tipsService: TipsService) {
   }
 
   ngOnInit(): void {

@@ -14,19 +14,32 @@
  * limitations under the License.
  */
 
-import {Injectable} from '@angular/core';
+import {Injectable, OnDestroy} from '@angular/core';
 import {CaseService} from '@valtimo-portal/case';
 import {TranslateService} from '@ngx-translate/core';
-import {take} from 'rxjs/operators';
+import {Subscription} from 'rxjs';
+import {SidenavService} from '../sidenav';
 
 @Injectable({
   providedIn: 'root'
 })
-export class TipsService {
+export class TipsService implements OnDestroy {
 
   allCaseDefinitions$ = this.caseService.getAllCaseDefinitions();
 
-  constructor(private readonly caseService: CaseService, private readonly translateService: TranslateService) {
-    this.translateService.getTranslation('en').pipe(take(1)).subscribe((trans) => console.log(trans));
+  currentLangSubscription!: Subscription;
+
+  constructor(
+    private readonly caseService: CaseService,
+    private readonly translateService: TranslateService,
+    private readonly sidenavService: SidenavService
+  ) {
+    this.currentLangSubscription = this.sidenavService.currentLang$.subscribe((currentLang) => {
+      console.log(currentLang)
+    })
+  }
+
+  ngOnDestroy(): void {
+    this.currentLangSubscription.unsubscribe();
   }
 }

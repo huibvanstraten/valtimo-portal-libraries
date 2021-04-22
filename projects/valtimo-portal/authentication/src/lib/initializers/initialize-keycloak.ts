@@ -27,7 +27,7 @@ export const initializeKeycloak = (keycloak: KeycloakService, environment: Envir
         onLoad: 'login-required',
         checkLoginIframe: false,
         flow: 'standard',
-        redirectUri: `http://localhost:4200${config.redirectUri}`
+        redirectUri: `${config.redirectUri}`
       },
     });
 };

@@ -30,7 +30,6 @@ export const environment: Environment = {
       {prefix: './translate/', suffix: '.json'},
       {prefix: './translate/home/', suffix: '.json'},
       {prefix: './translate/cases/', suffix: '.json'},
-      {prefix: './translate/case/', suffix: '.json'},
       {prefix: './translate/definitions/form-example/', suffix: '.json'},
       {prefix: './translate/definitions/grant-application/', suffix: '.json'},
       {prefix: './translate/definitions/person/', suffix: '.json'},
@@ -40,16 +39,16 @@ export const environment: Environment = {
   authentication: {
     provider: AuthenticationProvider.keycloak,
     config: {
-      url: 'https://keycloak.test.valtimo.nl/auth',
+      url: 'https://keycloak.valtimo.nl/auth',
       realm: 'valtimo',
-      clientId: 'valtimo-console',
-      redirectUri: '/keycloak/callback'
+      clientId: 'valtimo-console-test',
+      redirectUri: 'https://portal.test.valtimo.nl/keycloak/callback'
     }
   },
   api: {
     graphql: {
       clients: [
-        {name: 'portal-api', uri: 'http://localhost:8081/graphql'}
+        {name: 'portal-api', uri: 'https://portal.test.valtimo.nl/graphql'}
       ]
     }
   }

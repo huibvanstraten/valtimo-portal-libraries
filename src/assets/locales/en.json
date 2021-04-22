@@ -25,5 +25,9 @@
     "title": "I would like to",
     "noDataError": "Something went wrong while retrieving case definitions.",
     "noData": "There are no case definitions available."
+  },
+  "tips": {
+    "title": "Useful tips",
+    "tip": "Tip"
   }
 }

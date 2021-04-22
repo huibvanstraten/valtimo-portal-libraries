@@ -20,7 +20,6 @@ import {CasePreviewComponent} from './case-preview.component';
 import {CardModule} from '../card';
 import {TranslateModule} from '@ngx-translate/core';
 import {MatIconModule} from '@angular/material/icon';
-import {SidenavServiceModule} from '../../services';
 import {MatButtonModule} from '@angular/material/button';
 import {RouterModule} from '@angular/router';
 import {CaseStatusModule} from '../case-status';
@@ -32,7 +31,6 @@ import {CaseStatusModule} from '../case-status';
     CardModule,
     TranslateModule,
     MatIconModule,
-    SidenavServiceModule,
     MatButtonModule,
     RouterModule,
     CaseStatusModule

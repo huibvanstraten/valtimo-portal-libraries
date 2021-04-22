@@ -1,0 +1,34 @@
+<ng-container *ngIf="{tip: tip$ | async, index: index$ | async, length: tipsLength$ | async} as obs">
+  <div *ngIf="obs.tip as tip; else loading" class="tips-container" @fadeInSlow>
+    <div class="tips-header mat-typography">
+      <span class="title">{{'tips.tip' | translate}} {{(obs.index || 0) + 1}}</span>
+      <div class="navigator">
+        <button (click)="previous()" mat-button class="previous-button" [disabled]="obs.index === 0">
+          <mat-icon fontIcon="fa-arrow-left" fontSet="fa"></mat-icon>
+        </button>
+        <div class="circles">
+          <div
+            class="circle"
+            *ngFor="let item of [].constructor(obs.length); let i = index"
+            [ngClass]="{'active': obs.index === i}"
+          >
+          </div>
+        </div>
+        <button (click)="next()" mat-button class="next-button" [disabled]="obs.index === (obs.length || 1) - 1">
+          <mat-icon fontIcon="fa-arrow-right" fontSet="fa"></mat-icon>
+        </button>
+      </div>
+    </div>
+    <nl-material-card
+      [buttonText]="tip.caseDefinitionId + '.new' | translate"
+      [type]="tipType"
+      (primaryButtonClick)="goToNewCase(tip.caseDefinitionId)"
+    >
+      {{tip.body}}
+    </nl-material-card>
+  </div>
+</ng-container>
+
+<ng-template #loading>
+  <nl-material-spinner></nl-material-spinner>
+</ng-template>

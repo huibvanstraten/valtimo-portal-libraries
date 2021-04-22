@@ -23,7 +23,6 @@ import {TranslateModule} from '@ngx-translate/core';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {RouterModule} from '@angular/router';
-import {SidenavServiceModule} from '../../services';
 import {CaseServiceModule} from '@valtimo-portal/case';
 import {SpinnerModule} from '../spinner';
 
@@ -38,7 +37,6 @@ import {SpinnerModule} from '../spinner';
     MatIconModule,
     MatButtonModule,
     RouterModule,
-    SidenavServiceModule,
     SpinnerModule
   ],
   exports: [NewCaseMenuComponent]

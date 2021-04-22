@@ -182,3 +182,16 @@ mat-card {
     width: 100%;
   }
 }
+
+.tip {
+  box-shadow: none;
+  padding: 0;
+  background: none;
+
+  .mat-card-content {
+    font-size: $font-large;
+    line-height: $font-xl;
+    font-weight: bold;
+    color: $nl-material-primary;
+  }
+}

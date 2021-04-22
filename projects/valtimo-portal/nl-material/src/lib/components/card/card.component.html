@@ -21,7 +21,8 @@
   'reminder': type === reminderType,
   'case-preview-clipping': type === casePreviewClippingType,
   'case-preview-current': type === casePreviewCurrentType,
-  'case-status': type === caseStatusType
+  'case-status': type === caseStatusType,
+  'tip': type === tipType
   }"
 >
   <ng-content select="[extra]"></ng-content>
@@ -47,6 +48,7 @@
 <ng-template #buttons>
   <div class="buttons-container">
     <ng-container *ngTemplateOutlet="reminderButton"></ng-container>
+    <ng-container *ngTemplateOutlet="tipButton"></ng-container>
     <ng-container *ngTemplateOutlet="casePreviewClippingSecondary"></ng-container>
     <ng-container *ngTemplateOutlet="casePreviewClippingPrimary"></ng-container>
   </div>
@@ -57,6 +59,17 @@
     *ngIf="buttonText && type === reminderType"
     mat-flat-button
     color="warn"
+    (click)="handlePrimaryButtonClick()"
+  >
+    {{buttonText}}
+  </button>
+</ng-template>
+
+<ng-template #tipButton>
+  <button
+    *ngIf="buttonText && type === tipType"
+    mat-flat-button
+    color="primary"
     (click)="handlePrimaryButtonClick()"
   >
     {{buttonText}}

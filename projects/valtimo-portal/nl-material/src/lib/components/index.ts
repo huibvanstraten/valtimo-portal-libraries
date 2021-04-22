@@ -29,3 +29,4 @@ export * from './case-preview';
 export * from './spinner';
 export * from './case-details';
 export * from './case-status';
+export * from './tips';

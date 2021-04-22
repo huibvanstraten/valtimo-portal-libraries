@@ -21,7 +21,6 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 import {RouterModule} from '@angular/router';
 import {MenuIconModule} from '../menu-icon';
 import {LayoutModule} from '@angular/cdk/layout';
-import {SidenavServiceModule} from '../../services';
 import {TranslateModule} from '@ngx-translate/core';
 
 @NgModule({
@@ -32,7 +31,6 @@ import {TranslateModule} from '@ngx-translate/core';
     RouterModule,
     MenuIconModule,
     LayoutModule,
-    SidenavServiceModule,
     TranslateModule
   ],
   exports: [NavigationMenuComponent]

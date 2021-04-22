@@ -14,16 +14,19 @@
   ~ limitations under the License.
   -->
 
-<div fxFlex fxLayout="column" fxLayoutGap="16px" class="module-container">
-  <div fxLayout="row wrap" *ngIf="{case: case$ | async} as obs">
-    <ng-container *ngIf="!(loading$ | async); else loading">
+<div fxFlex fxLayout="column" fxLayoutGap="16px" class="module-container" *ngIf="{case: case$ | async} as obs">
+  <ng-container *ngIf="!(loading$ | async); else loading">
+    <div fxLayout="row wrap">
       <ng-container *ngIf="obs.case; else noData">
         <ng-container *ngTemplateOutlet="title;context:{case: obs.case}"></ng-container>
         <ng-container *ngTemplateOutlet="status;context:{case: obs.case}"></ng-container>
         <ng-container *ngTemplateOutlet="details;context:{case:obs.case}"></ng-container>
       </ng-container>
-    </ng-container>
-  </div>
+    </div>
+    <div fxLayout="row wrap" *ngIf="obs.case">
+      <ng-container *ngTemplateOutlet="tips"></ng-container>
+    </div>
+  </ng-container>
 </div>
 
 <ng-template #loading>
@@ -89,3 +92,15 @@
     </nl-material-case-details>
   </div>
 </ng-template>
+
+<ng-template #tips>
+  <div
+    fxFlex.gt-sm="33.3"
+    fxFlex.xs="100"
+    fxLayout="column"
+  >
+    <h1 class="mat-h1 primary-bold">{{'tips.title' | translate}}</h1>
+    <nl-material-tips></nl-material-tips>
+  </div>
+</ng-template>
+

@@ -25,7 +25,8 @@ import {
   CardModule,
   CaseDetailsModule,
   CaseStatusModule,
-  SpinnerModule
+  SpinnerModule,
+  TipsModule
 } from '@valtimo-portal/nl-material';
 import {TranslateModule} from '@ngx-translate/core';
 
@@ -41,7 +42,8 @@ import {TranslateModule} from '@ngx-translate/core';
     TranslateModule,
     BreadcrumbsServiceModule,
     CaseStatusModule,
-    CardModule
+    CardModule,
+    TipsModule
   ]
 })
 export class CaseModule {

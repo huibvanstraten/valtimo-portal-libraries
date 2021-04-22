@@ -1,0 +1,66 @@
+@import "colors";
+@import "variables";
+
+.tips-container {
+  background-color: $nl-material-primary-lightest;
+  padding: 26px;
+  overflow: hidden;
+  border-radius: 5px;
+
+  .mat-button {
+    opacity: 1;
+    transition: 0.2s ease-in-out;
+    padding: 5px !important;
+    min-width: 0 !important;
+  }
+
+  .mat-button-disabled {
+    opacity: 0.3;
+  }
+
+  .mat-icon {
+    color: $nl-material-primary;
+  }
+
+}
+
+.tips-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+
+  .title {
+    color: $nl-material-primary;
+    font-weight: bold;
+    font-size: $font-smaller;
+    line-height: $font-smaller;
+  }
+}
+
+.navigator {
+  display: flex;
+  align-items: center;
+
+  .circles {
+    display: flex;
+    margin: 0 11px;
+
+    .circle {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: $nl-material-primary;
+      opacity: 0.5;
+      transition: opacity 0.2s ease-in-out;
+
+      &.active {
+        opacity: 1;
+      }
+
+      &:not(:last-child) {
+        margin-right: 5px;
+      }
+    }
+  }
+}

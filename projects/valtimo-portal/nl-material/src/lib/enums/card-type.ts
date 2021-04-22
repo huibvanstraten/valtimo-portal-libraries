@@ -20,5 +20,6 @@ export enum CardType {
   reminder,
   casePreviewClipping,
   casePreviewCurrent,
-  caseStatus
+  caseStatus,
+  tip
 }

@@ -23,6 +23,9 @@
     <ng-container *ngTemplateOutlet="casePreview"></ng-container>
     <ng-container *ngTemplateOutlet="newCase"></ng-container>
   </div>
+  <div fxLayout="row wrap">
+    <ng-container *ngTemplateOutlet="tips"></ng-container>
+  </div>
 </div>
 
 <ng-template #introduction>
@@ -81,5 +84,16 @@
     fxLayout="column"
   >
     <nl-material-new-case-menu></nl-material-new-case-menu>
+  </div>
+</ng-template>
+
+<ng-template #tips>
+  <div
+    fxFlex="100"
+    fxFlex.gt-sm="33.3"
+    fxLayout="column"
+  >
+    <h1 class="mat-h1 primary-bold">{{'tips.title' | translate}}</h1>
+    <nl-material-tips></nl-material-tips>
   </div>
 </ng-template>

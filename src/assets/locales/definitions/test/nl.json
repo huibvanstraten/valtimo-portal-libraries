@@ -4,6 +4,9 @@
     "new": "Nieuw testdossier",
     "my": "Mijn testdossier",
     "statuses": {
-    }
+    },
+    "tips": [
+      "Welkom bij onze applicatie! We hebben een testproces voor je klaargezet, zodat je alvast een beetje rond kunt kijken."
+    ]
   }
 }

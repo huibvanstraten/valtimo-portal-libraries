@@ -68,6 +68,8 @@ export interface Query {
   allFormDefinitions: Array<FormDefinition>;
   /** retrieves single form definition from repository */
   getFormDefinition?: Maybe<FormDefinition>;
+  /** find all available tasks for external case id */
+  findTasks?: Maybe<Array<Task>>;
 }
 
 
@@ -78,5 +80,19 @@ export interface QueryGetCaseInstanceArgs {
 
 export interface QueryGetFormDefinitionArgs {
   name: Scalars['String'];
+}
+
+
+export interface QueryFindTasksArgs {
+  externalCaseId: Scalars['String'];
+}
+
+export interface Task {
+  __typename?: 'Task';
+  completed: Scalars['Boolean'];
+  createdOn: Scalars['String'];
+  externalCaseId: Scalars['String'];
+  formDefinition: Scalars['JSON'];
+  taskId: Scalars['UUID'];
 }
 

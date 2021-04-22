@@ -17,3 +17,4 @@
 export * from './sidenav';
 export * from './breadcrumbs';
 export * from './animated-dots';
+export * from './tips';

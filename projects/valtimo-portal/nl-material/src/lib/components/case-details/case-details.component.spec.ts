@@ -1,6 +1,8 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { CaseDetailsComponent } from './case-details.component';
+import {CaseDetailsComponent} from './case-details.component';
+import {TranslateModule} from '@ngx-translate/core';
+import {MatListModule} from '@angular/material/list';
 
 describe('CaseDetailsComponent', () => {
   let component: CaseDetailsComponent;
@@ -8,9 +10,13 @@ describe('CaseDetailsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CaseDetailsComponent ]
+      declarations: [CaseDetailsComponent],
+      imports: [
+        TranslateModule.forRoot(),
+        MatListModule
+      ]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

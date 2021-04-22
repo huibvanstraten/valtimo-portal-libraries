@@ -17,12 +17,29 @@
 import {TestBed} from '@angular/core/testing';
 
 import {TipsService} from './tips.service';
+import {TranslateModule} from '@ngx-translate/core';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {FakeLocalizeRouterService} from '@valtimo-portal/shared';
+import {environment} from '@src/environments';
+import {LocalizeRouterService} from '@gilsdav/ngx-translate-router';
+import {ApolloTestingModule} from 'apollo-angular/testing';
 
 describe('TipsService', () => {
   let service: TipsService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      providers: [
+        {provide: 'environment', useValue: environment},
+        {provide: LocalizeRouterService, useClass: FakeLocalizeRouterService}
+      ],
+      imports: [
+        TranslateModule.forRoot(),
+        MatSnackBarModule,
+        ApolloTestingModule.withClients(environment.api.graphql.clients.map((client) => client.name))
+      ]
+    })
+    ;
     service = TestBed.inject(TipsService);
   });
 

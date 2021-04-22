@@ -20,6 +20,8 @@ import {ApolloTestingController, ApolloTestingModule} from 'apollo-angular/testi
 import {GetAllCaseDefinitionsDocument} from './queries/get-all-case-definitions/get-all-case-definitions.graphql-gen';
 import {environment} from '@src/environments';
 import {mockCaseDefinitionsResult} from './mock-data';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {TranslateModule} from '@ngx-translate/core';
 
 describe('CaseService', () => {
   let service: CaseService;
@@ -30,7 +32,9 @@ describe('CaseService', () => {
       imports: [
         ApolloTestingModule.withClients(
           environment.api.graphql.clients.map((client) => client.name)
-        )
+        ),
+        MatSnackBarModule,
+        TranslateModule.forRoot()
       ],
     });
     service = TestBed.inject(CaseService);

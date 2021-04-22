@@ -10,6 +10,8 @@ import {environment} from '@src/environments';
 import {LocalizeRouterService} from '@gilsdav/ngx-translate-router';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {FakeLocalizeRouterService} from '@valtimo-portal/shared';
+import {CaseStatusModule} from '../case-status';
+import {RouterTestingModule} from '@angular/router/testing';
 
 describe('CasePreviewComponent', () => {
   let component: CasePreviewComponent;
@@ -28,7 +30,9 @@ describe('CasePreviewComponent', () => {
         TranslateModule.forRoot(),
         MatIconModule,
         SidenavServiceModule,
-        MatButtonModule
+        MatButtonModule,
+        CaseStatusModule,
+        RouterTestingModule
       ]
     })
       .compileComponents();

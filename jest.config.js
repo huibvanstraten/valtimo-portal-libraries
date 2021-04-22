@@ -9,6 +9,7 @@ module.exports = {
     "<rootDir>/projects/valtimo-portal/shared/src"
   ],
   modulePathIgnorePatterns: ['<rootDir>/dist'],
+  testPathIgnorePatterns: ['<rootDir>/src/environments'],
   moduleNameMapper: {
     '@src/(.*)': '<rootDir>/src/$1',
     '@app/(.*)': '<rootDir>/src/app/$1',

@@ -17,7 +17,7 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {HomeComponent} from './home.component';
-import {CardModule, CasePreviewModule, NewCaseMenuModule} from '@valtimo-portal/nl-material';
+import {CardModule, CasePreviewModule, NewCaseMenuModule, TipsModule} from '@valtimo-portal/nl-material';
 import {TranslateModule} from '@ngx-translate/core';
 import {KeycloakAngularModule} from 'keycloak-angular';
 import {LocalizeRouterService} from '@gilsdav/ngx-translate-router';
@@ -45,7 +45,9 @@ describe('HomeComponent', () => {
         CasePreviewModule,
         KeycloakAngularModule,
         RouterTestingModule,
-        ApolloTestingModule.withClients(['portal-api'])]
+        ApolloTestingModule.withClients(['portal-api']),
+        TipsModule
+      ],
     })
       .compileComponents();
   });

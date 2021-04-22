@@ -21,6 +21,7 @@ import {TipsServiceModule} from '../../services';
 import {CardModule} from '../card';
 import {TranslateModule} from '@ngx-translate/core';
 import {MatIconModule} from '@angular/material/icon';
+import {SpinnerModule} from '../spinner';
 import {MatButtonModule} from '@angular/material/button';
 
 @NgModule({
@@ -31,7 +32,8 @@ import {MatButtonModule} from '@angular/material/button';
     CardModule,
     TranslateModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    SpinnerModule
   ],
   exports: [TipsComponent]
 })

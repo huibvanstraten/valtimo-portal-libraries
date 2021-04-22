@@ -9,6 +9,7 @@ import {LocalizeRouterService} from '@gilsdav/ngx-translate-router';
 import {FakeLocalizeRouterService} from '@valtimo-portal/shared';
 import {environment} from '@src/environments';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
+import {TranslateModule} from '@ngx-translate/core';
 
 describe('FormIoComponent', () => {
   let component: FormIoComponent;
@@ -26,7 +27,8 @@ describe('FormIoComponent', () => {
         MatFormioModule,
         MatIconModule,
         CaseServiceModule,
-        RouterTestingModule
+        RouterTestingModule,
+        TranslateModule.forRoot()
       ]
     })
       .compileComponents();

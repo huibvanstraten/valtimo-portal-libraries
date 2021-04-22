@@ -4,6 +4,8 @@
     "new": "New test file",
     "my": "My test file",
     "statuses": {
+      "portal-case-created": "Case opened",
+      "portal-case-in-progress": "Case is in progress"
     },
     "tips": [
       "Welcome to our application! We have provided a test process for you to help show you around."

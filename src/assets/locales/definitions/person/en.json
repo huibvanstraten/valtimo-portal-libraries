@@ -4,7 +4,8 @@
     "new": "New personal file",
     "my": "My personal file",
     "statuses": {
-      "portal-case-created": "Case opened"
+      "portal-case-created": "Case opened",
+      "portal-case-in-progress": "Case is in progress"
     },
     "properties": {
       "firstName": "First name",

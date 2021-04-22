@@ -5,6 +5,10 @@
     "my": "My personal file",
     "statuses": {
       "portal-case-created": "Case opened"
+    },
+    "properties": {
+      "firstName": "First name",
+      "age": "Age"
     }
   }
 }

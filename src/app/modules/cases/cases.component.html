@@ -15,33 +15,12 @@
   -->
 
 <div fxFlex fxLayout="column" fxLayoutGap="16px" class="module-container">
-  <div fxLayout="row wrap">
-    <div
-      fxFlex="100"
-      style="padding: 16px;"
-    >
-      <h1 class="mat-h1">{{'cases.title' | translate}}</h1>
-    </div>
-    <ng-container *ngIf="cases$ | async as cases; else loading">
-      <div
-        *ngFor="let case of cases"
-        fxFlex.gt-sm="33.3"
-        fxFlex.sm="50"
-        fxFlex="100"
-        fxLayout="column"
-        style="padding: 16px;"
-      >
-        <nl-material-case-preview [mode]="currentPreviewMode" [preview]="case"></nl-material-case-preview>
-      </div>
-      <div
-        fxFlex.gt-sm="33.3"
-        fxFlex.sm="50"
-        fxFlex="100"
-        fxLayout="column"
-        style="padding: 16px;"
-      >
-        <nl-material-case-preview [mode]="currentPreviewMode"></nl-material-case-preview>
-      </div>
+  <div fxLayout="row wrap" *ngIf="{cases: cases$ | async} as obs">
+    <ng-container *ngIf="!(loading$ | async); else loading">
+      <ng-container *ngIf="obs.cases && obs.cases[0]; else noData">
+        <ng-container *ngTemplateOutlet="openCasesTitle"></ng-container>
+        <ng-container *ngTemplateOutlet="openCases;context:{cases: obs.cases}"></ng-container>
+      </ng-container>
     </ng-container>
   </div>
 </div>
@@ -50,8 +29,36 @@
   <div
     fxFlex="100"
     fxLayout="column"
-    style="padding: 16px;"
   >
     <nl-material-spinner></nl-material-spinner>
+  </div>
+</ng-template>
+
+<ng-template #noData>
+  <div
+    fxFlex="100"
+    fxLayout="column"
+  >
+    <h2 class="mat-h2">{{'cases.noData' | translate}}</h2>
+  </div>
+</ng-template>
+
+<ng-template #openCasesTitle>
+  <div
+    fxFlex="100"
+  >
+    <h1 class="mat-h1 primary-bold large">{{'cases.title' | translate}}</h1>
+  </div>
+</ng-template>
+
+<ng-template #openCases let-cases="cases">
+  <div
+    *ngFor="let case of cases"
+    fxFlex.gt-sm="33.3"
+    fxFlex.sm="50"
+    fxFlex="100"
+    fxLayout="column"
+  >
+    <nl-material-case-preview [mode]="currentPreviewMode" [preview]="case"></nl-material-case-preview>
   </div>
 </ng-template>

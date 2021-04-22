@@ -3,14 +3,16 @@
     "notifications": "notifications",
     "cases": "cases",
     "tasks": "tasks",
-    "newCase": "new-case"
+    "newCase": "new-case",
+    "case": "case"
   },
   "TITLES": {
     "home": "Home",
     "notifications": "Notifications",
     "cases": "Cases",
     "tasks": "Tasks",
-    "newCase": "New case"
+    "newCase": "New case",
+    "case": "Case"
   },
   "headerMenu": {
     "language": "Language",
@@ -20,6 +22,8 @@
     "loggingOut": "Signing out..."
   },
   "newCaseMenu": {
-    "title": "I would like to"
+    "title": "I would like to",
+    "noDataError": "Something went wrong while retrieving case definitions.",
+    "noData": "There are no case definitions available."
   }
 }

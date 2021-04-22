@@ -191,6 +191,21 @@ nl-material-user-menu {
   }
 }
 
+/* Mat title */
+
+.mat-h1 {
+  &.primary-bold {
+    color: $nl-material-primary;
+    font-weight: bold;
+  }
+
+  &.large {
+    margin: 0;
+    font-size: $font-xl;
+  }
+}
+
+
 /* Mobile animations */
 
 @include layout-bp(xs) {

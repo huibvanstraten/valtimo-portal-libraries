@@ -1,5 +1,8 @@
 {
   "cases": {
-    "title": "Lopende aanvragen"
+    "noDataError": "Er ging iets mis bij het ophalen van jouw aanvragen.",
+    "noData": "Er is geen informatie over jouw aanvragen beschikbaar.",
+    "title": "Lopende aanvragen",
+    "noDate": "Datum onbekend"
   }
 }

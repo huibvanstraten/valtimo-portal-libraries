@@ -22,7 +22,6 @@
       fxFlex.sm="70"
       fxFlex.xs="100"
       fxLayout="column"
-      style="padding: 16px;"
     >
       <ng-container *ngIf="formDefinition$ | async as definition; else loading">
         <nl-material-form-io [definition]="definition" [title]="(title$ | async) || ''"></nl-material-form-io>
@@ -35,7 +34,6 @@
   <div
     fxFlex="100"
     fxLayout="column"
-    style="padding: 16px;"
   >
     <nl-material-spinner></nl-material-spinner>
   </div>

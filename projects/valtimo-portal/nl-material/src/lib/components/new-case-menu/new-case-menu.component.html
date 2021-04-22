@@ -1,15 +1,26 @@
-<div class="new-case-menu-container">
+<div class="new-case-menu-container" *ngIf="{caseDefinitions: allCaseDefinitions$ | async} as obs">
   <h1 class="mat-h1">{{'newCaseMenu.title' | translate}}</h1>
-  <mat-list class="header-menu-mat-list" *ngIf="allCaseDefinitions$ | async as caseDefinitions; else loading">
-    <mat-list-item *ngFor="let caseDefinition of caseDefinitions">
-      <button mat-menu-item [routerLink]="newCaseRoute$ | async" [queryParams]="{id:caseDefinition.id}">
-        <mat-icon fontSet="fa" fontIcon="fa-chevron-right"></mat-icon>
-        {{ caseDefinition.id + '.wouldLikeTo' | translate }}
-      </button>
-    </mat-list-item>
+  <mat-list class="header-menu-mat-list" *ngIf="!(loading$ | async); else loading">
+    <ng-container *ngIf="obs.caseDefinitions && obs.caseDefinitions[0]; else noData">
+      <mat-list-item *ngFor="let caseDefinition of obs.caseDefinitions">
+        <button mat-menu-item [routerLink]="getNewCaseRoute()" [queryParams]="{id:caseDefinition.id}">
+          <mat-icon fontSet="fa" fontIcon="fa-chevron-right"></mat-icon>
+          {{ caseDefinition.id + '.wouldLikeTo' | translate }}
+        </button>
+      </mat-list-item>
+    </ng-container>
   </mat-list>
 </div>
 
 <ng-template #loading>
   <nl-material-spinner></nl-material-spinner>
+</ng-template>
+
+<ng-template #noData>
+  <div
+    fxFlex="100"
+    fxLayout="column"
+  >
+    <h2 class="mat-h2">{{'newCaseMenu.noData' | translate}}</h2>
+  </div>
 </ng-template>

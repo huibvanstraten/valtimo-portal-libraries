@@ -27,3 +27,5 @@ export * from './new-case-menu';
 export * from './form-io';
 export * from './case-preview';
 export * from './spinner';
+export * from './case-details';
+export * from './case-status';

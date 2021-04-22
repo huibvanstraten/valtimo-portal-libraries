@@ -3,14 +3,16 @@
     "notifications": "meldingen",
     "cases": "aanvragen",
     "tasks": "taken",
-    "newCase": "nieuwe-aanvraag"
+    "newCase": "nieuwe-aanvraag",
+    "case": "aanvraag"
   },
   "TITLES": {
     "home": "Home",
     "notifications": "Meldingen",
     "cases": "Aanvragen",
     "tasks": "Taken",
-    "newCase": "Nieuwe aanvraag"
+    "newCase": "Nieuwe aanvraag",
+    "case": "Aanvraag"
   },
   "headerMenu": {
     "language": "Taal",
@@ -20,6 +22,8 @@
     "loggingOut": "Uitloggen..."
   },
   "newCaseMenu": {
-    "title": "Ik wil graag"
+    "title": "Ik wil graag",
+    "noDataError": "Er ging iets mis bij het ophalen van aanvraagdefinities.",
+    "noData": "Er zijn geen aanvraagdefinities beschikbaar."
   }
 }

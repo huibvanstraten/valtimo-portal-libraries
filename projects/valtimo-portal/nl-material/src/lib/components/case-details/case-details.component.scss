@@ -1,0 +1,18 @@
+::ng-deep .case-details {
+  .mat-list-item:not(:last-child) {
+    margin-bottom: 16px;
+  }
+
+  .mat-list-item-content {
+    padding: 0 !important;
+  }
+
+  .mat-list-text {
+    flex-direction: row !important;
+    justify-content: space-between;
+
+    div:nth-child(2) {
+      font-weight: bold;
+    }
+  }
+}

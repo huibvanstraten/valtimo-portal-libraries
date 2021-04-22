@@ -24,6 +24,7 @@ const routes: Routes = [
   {
     path: '',
     component: CasesComponent,
+    canActivate: [KeycloakAppAuthGuard],
   },
   {
     path: 'newCase',
@@ -31,6 +32,15 @@ const routes: Routes = [
     canActivate: [KeycloakAppAuthGuard],
     data: {
       title: 'TITLES.newCase',
+      animation: 'DetailPage',
+    }
+  },
+  {
+    path: 'case',
+    loadChildren: () => import('@case/case.module').then(m => m.CaseModule),
+    canActivate: [KeycloakAppAuthGuard],
+    data: {
+      title: 'TITLES.case',
       animation: 'DetailPage',
     }
   }

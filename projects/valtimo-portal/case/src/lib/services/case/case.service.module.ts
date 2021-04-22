@@ -17,11 +17,13 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {CaseService} from './case.service';
+import {NotificationServiceModule} from '@valtimo-portal/shared';
 
 @NgModule({
   declarations: [],
   imports: [
-    CommonModule
+    CommonModule,
+    NotificationServiceModule
   ],
   exports: [],
   providers: [CaseService]

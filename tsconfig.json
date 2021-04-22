@@ -24,6 +24,9 @@
       "@new-case/*": [
         "src/app/modules/new-case/*"
       ],
+      "@case/*": [
+        "src/app/modules/case/*"
+      ],
       "@valtimo-portal/shared": [
         "dist/valtimo-portal/shared/valtimo-portal-shared",
         "dist/valtimo-portal/shared"

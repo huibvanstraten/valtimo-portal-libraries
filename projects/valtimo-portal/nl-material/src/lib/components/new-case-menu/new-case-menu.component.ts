@@ -5,6 +5,7 @@ import {SidenavService} from '../../services';
 import {LocalizeRouterService} from '@gilsdav/ngx-translate-router';
 import {Router} from '@angular/router';
 import {CaseService} from '@valtimo-portal/case';
+import {tap} from 'rxjs/operators';
 
 @Component({
   selector: 'nl-material-new-case-menu',
@@ -14,7 +15,12 @@ import {CaseService} from '@valtimo-portal/case';
 })
 export class NewCaseMenuComponent implements OnInit, OnDestroy {
 
-  allCaseDefinitions$ = this.caseService.getAllCaseDefinitions();
+  loading$ = new BehaviorSubject<boolean>(true);
+
+  allCaseDefinitions$ = this.caseService.getAllCaseDefinitions()
+    .pipe(
+      tap(() => this.loading$.next(false))
+    );
 
   routeLangSubscription!: Subscription;
 
@@ -46,7 +52,7 @@ export class NewCaseMenuComponent implements OnInit, OnDestroy {
     );
   }
 
-  private getNewCaseRoute(): string {
+  getNewCaseRoute(): string {
     return `${this.localizeRouterService.translateRoute('/cases/newCase')}`;
   }
 }

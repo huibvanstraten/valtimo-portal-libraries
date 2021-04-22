@@ -17,6 +17,7 @@ module.exports = {
     '@notifications/(.*)': '<rootDir>/src/app/modules/notifications/$1',
     '@tasks/(.*)': '<rootDir>/src/app/modules/tasks/$1',
     '@new-case/(.*)': '<rootDir>/src/app/modules/new-case/$1',
+    '@case/(.*)': '<rootDir>/src/app/modules/case/$1',
     "@valtimo-portal/shared": "<rootDir>/projects/valtimo-portal/shared/src/lib",
     "@valtimo-portal/authentication": "<rootDir>/projects/valtimo-portal/authentication/src/lib",
     "@valtimo-portal/case": "<rootDir>/projects/valtimo-portal/case/src/lib",

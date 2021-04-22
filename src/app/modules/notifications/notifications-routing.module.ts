@@ -14,14 +14,18 @@
  * limitations under the License.
  */
 
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { NotificationsComponent } from './notifications.component';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
+import {NotificationsComponent} from './notifications.component';
+import {KeycloakAppAuthGuard} from '@valtimo-portal/authentication';
 
-const routes: Routes = [{ path: '', component: NotificationsComponent }];
+const routes: Routes = [{
+  path: '', component: NotificationsComponent, canActivate: [KeycloakAppAuthGuard],
+}];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class NotificationsRoutingModule { }
+export class NotificationsRoutingModule {
+}

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {CardType} from '../../enums';
 
 @Component({
@@ -22,7 +22,7 @@ import {CardType} from '../../enums';
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.scss'],
 })
-export class CardComponent implements OnInit {
+export class CardComponent {
   @Input() type: CardType = CardType.default;
   @Input() title!: string;
   @Input() subtitle!: string;
@@ -30,15 +30,20 @@ export class CardComponent implements OnInit {
   @Input() secondaryButtonText!: string;
   @Input() icon!: string;
 
+  @Output() primaryButtonClick = new EventEmitter<any>();
+  @Output() secondaryButtonClick = new EventEmitter<any>();
+
   readonly introductionType = CardType.introduction;
   readonly reminderType = CardType.reminder;
   readonly casePreviewClippingType = CardType.casePreviewClipping;
   readonly casePreviewCurrentType = CardType.casePreviewCurrent;
+  readonly caseStatusType = CardType.caseStatus;
 
-  constructor() {
+  handlePrimaryButtonClick(): void {
+    this.primaryButtonClick.emit();
   }
 
-  ngOnInit(): void {
+  handleSecondaryButtonClick(): void {
+    this.secondaryButtonClick.emit();
   }
-
 }

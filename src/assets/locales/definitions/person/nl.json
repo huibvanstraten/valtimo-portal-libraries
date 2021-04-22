@@ -5,6 +5,10 @@
     "my": "Mijn persoonsdossier",
     "statuses": {
       "portal-case-created": "Aanvraag ingediend"
+    },
+    "properties": {
+      "firstName": "Voornaam",
+      "age": "Leeftijd"
     }
   }
 }

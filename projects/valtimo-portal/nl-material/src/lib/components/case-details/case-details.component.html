@@ -1,0 +1,10 @@
+<mat-list *ngIf="caseDetails.length > 0; else notAvailable" class="case-details">
+  <mat-list-item *ngFor="let detail of caseDetails">
+    <div mat-line>{{caseDefinitionId + '.properties.' + detail.key | translate }}</div>
+    <div mat-line> {{detail.value}}</div>
+  </mat-list-item>
+</mat-list>
+
+<ng-template #notAvailable>
+  <h2 class="mat-h2">{{'case.noDetails' | translate}}</h2>
+</ng-template>

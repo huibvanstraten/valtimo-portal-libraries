@@ -9,6 +9,10 @@
       "title": "Don't forget to submit your project idea before the 31st of April",
       "content": "Your grant application still lacks a project idea. Make sure you submit this before the 31st of April, so that we can process your application.",
       "buttonText": "Submit project idea"
+    },
+    "preview": {
+      "secondaryButtonText": "Go to case",
+      "primaryButtonText": "Ask a question"
     }
   }
 }

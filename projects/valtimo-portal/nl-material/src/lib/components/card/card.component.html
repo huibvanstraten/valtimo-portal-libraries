@@ -20,7 +20,8 @@
   'introduction': type === introductionType,
   'reminder': type === reminderType,
   'case-preview-clipping': type === casePreviewClippingType,
-  'case-preview-current': type === casePreviewCurrentType
+  'case-preview-current': type === casePreviewCurrentType,
+  'case-status': type === caseStatusType
   }"
 >
   <ng-content select="[extra]"></ng-content>
@@ -45,16 +46,42 @@
 
 <ng-template #buttons>
   <div class="buttons-container">
-    <button *ngIf="buttonText && type === reminderType" mat-flat-button color="warn">{{buttonText}}</button>
-    <button *ngIf="buttonText && type === casePreviewClippingType" mat-flat-button
-            color="accent">{{buttonText}}</button>
-    <button
-      *ngIf="secondaryButtonText && type === casePreviewClippingType"
-      mat-button
-      color="primary"
-    >
-      <mat-icon fontSet="fa" fontIcon="fa-arrow-right"></mat-icon>
-      {{secondaryButtonText}}
-    </button>
+    <ng-container *ngTemplateOutlet="reminderButton"></ng-container>
+    <ng-container *ngTemplateOutlet="casePreviewClippingSecondary"></ng-container>
+    <ng-container *ngTemplateOutlet="casePreviewClippingPrimary"></ng-container>
   </div>
+</ng-template>
+
+<ng-template #reminderButton>
+  <button
+    *ngIf="buttonText && type === reminderType"
+    mat-flat-button
+    color="warn"
+    (click)="handlePrimaryButtonClick()"
+  >
+    {{buttonText}}
+  </button>
+</ng-template>
+
+<ng-template #casePreviewClippingSecondary>
+  <button
+    *ngIf="buttonText && type === casePreviewClippingType"
+    mat-flat-button
+    color="accent"
+    (click)="handleSecondaryButtonClick()"
+  >
+    {{buttonText}}
+  </button>
+</ng-template>
+
+<ng-template #casePreviewClippingPrimary>
+  <button
+    *ngIf="secondaryButtonText && type === casePreviewClippingType"
+    mat-button
+    color="primary"
+    (click)="handlePrimaryButtonClick()"
+  >
+    <mat-icon fontSet="fa" fontIcon="fa-arrow-right"></mat-icon>
+    {{secondaryButtonText}}
+  </button>
 </ng-template>

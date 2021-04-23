@@ -125,7 +125,7 @@ export const GetFormDefinitionByNameDocument = gql`
 }
     `;
 
-@Injectable({
+  @Injectable({
     providedIn: 'root'
   })
   export class GetFormDefinitionByNameGQL extends Apollo.Query<GetFormDefinitionByNameQuery, GetFormDefinitionByNameQueryVariables> {

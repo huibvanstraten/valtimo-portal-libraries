@@ -14,7 +14,11 @@
  * limitations under the License.
  */
 
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {CaseService} from '@valtimo-portal/case';
+import {TaskService} from '@valtimo-portal/task';
+import {map, switchMap, tap} from 'rxjs/operators';
+import {combineLatest} from 'rxjs';
 
 @Component({
   selector: 'app-tasks',
@@ -23,9 +27,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TasksComponent implements OnInit {
 
-  constructor() { }
+  tasks$ = this.caseService.getAllCaseInstances()
+    .pipe(
+      switchMap((instances) =>
+        combineLatest(instances.map((instance) => this.taskService.findTasks(instance.id)))
+      ),
+      map((caseTasks) => Array.prototype.concat.apply([], caseTasks)),
+      tap((tasks) => console.log(tasks))
+    );
 
-  ngOnInit(): void {
+  constructor(private readonly caseService: CaseService, private readonly taskService: TaskService) {
+  }
+
+  ngOnInit()
+    :
+    void {
   }
 
 }

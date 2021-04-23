@@ -14,7 +14,7 @@
   ~ limitations under the License.
   -->
 
-<div fxFlex fxLayout="column" fxLayoutGap="16px" class="module-container">
+<div fxFlex fxLayout="column" fxLayoutGap="16px" class="module-container" *ngIf="tasks$ | async">
   <div fxLayout="row wrap">
     <div
       fxFlex="60"
@@ -22,7 +22,7 @@
       fxFlex.sm="70"
       fxFlex.xs="100"
       fxLayout="column"
-    ><p>tasks works!</p>
+    ><p>tasks wowrks!</p>
     </div>
   </div>
 </div>

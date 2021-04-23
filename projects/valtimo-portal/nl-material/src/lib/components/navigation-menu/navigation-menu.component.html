@@ -16,9 +16,14 @@
 
 <div class="navigator" fxHide.lt-md *ngIf="items$ | async as items">
   <ng-container *ngIf="activeNavLinkIndicator$ | async as indicator">
-    <div *ngIf="indicator.width !== 0" class="indicator" [style.width.px]="indicator.width"
+    <div *ngIf="indicator.width !== 0 && {hidden: indicatorHidden$ | async} as obs" class="indicator"
+         [style.width.px]="indicator.width"
          [style.left.px]="indicator.offset"
-         [style.transition]="'all ' + getTransitionDuration(indicator) + 's ease-out'"></div>
+         [style.transition]="'width ' + getTransitionDuration(indicator) + 's ease-out, left ' + getTransitionDuration(indicator) + 's ease-out, opacity 0.15s ease-in-out'"
+         [ngClass]="{'hidden': obs.hidden}"
+    >
+
+    </div>
   </ng-container>
   <nav *ngIf="currentUrl$ | async as currentUrl" fxLayout="row" fxLayoutGap="20px">
     <a

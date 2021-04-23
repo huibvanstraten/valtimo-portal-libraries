@@ -1,0 +1,6 @@
+{
+  "task": {
+    "noDataError": "Something went wrong while retrieving your tasks.",
+    "noData": "There are no tasks available."
+  }
+}

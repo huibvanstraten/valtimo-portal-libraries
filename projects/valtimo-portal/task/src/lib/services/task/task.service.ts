@@ -15,12 +15,36 @@
  */
 
 import {Injectable} from '@angular/core';
+import {FindTasksGQL} from './queries';
+import {Task} from '@valtimo-portal/graphql';
+import {catchError, map} from 'rxjs/operators';
+import {Observable, of} from 'rxjs';
+import {NotificationService} from '@valtimo-portal/shared';
+import {TranslateService} from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TaskService {
 
-  constructor() {
+  constructor(
+    private readonly findTasksGQL: FindTasksGQL,
+    private readonly notificationService: NotificationService,
+    private readonly translateService: TranslateService
+  ) {
+  }
+
+  /* tslint:disable-next-line */
+  findTasks(externalCaseId: string, hideError = false): Observable<Array<Pick<Task, "completed" | "createdOn" | "formDefinition" | "taskId">> | null | undefined> {
+    return this.findTasksGQL.fetch({externalCaseId}).pipe(
+      map((res) => res.data.findTasks),
+      catchError(() => {
+          if (!hideError) {
+            this.notificationService.show(this.translateService.instant('task.noDataError'));
+          }
+          return of([]);
+        }
+      )
+    );
   }
 }

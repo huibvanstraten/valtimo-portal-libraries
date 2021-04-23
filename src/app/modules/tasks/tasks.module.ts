@@ -14,18 +14,23 @@
  * limitations under the License.
  */
 
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 
-import { TasksRoutingModule } from './tasks-routing.module';
-import { TasksComponent } from './tasks.component';
+import {TasksRoutingModule} from './tasks-routing.module';
+import {TasksComponent} from './tasks.component';
+import {TaskServiceModule} from '@valtimo-portal/task';
+import {CaseServiceModule} from '@valtimo-portal/case';
 
 
 @NgModule({
   declarations: [TasksComponent],
   imports: [
     CommonModule,
-    TasksRoutingModule
+    TasksRoutingModule,
+    TaskServiceModule,
+    CaseServiceModule
   ]
 })
-export class TasksModule { }
+export class TasksModule {
+}

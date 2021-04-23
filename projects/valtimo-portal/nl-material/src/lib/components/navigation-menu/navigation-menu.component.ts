@@ -17,29 +17,35 @@
 import {AfterViewInit, Component, OnDestroy, OnInit, ViewChildren} from '@angular/core';
 import {ActiveNavLinkIndicator, NavigationMenuItem} from '../../interfaces';
 import {Event, NavigationEnd, Router} from '@angular/router';
-import {BehaviorSubject, combineLatest, Observable, Subscription} from 'rxjs';
+import {BehaviorSubject, combineLatest, Observable, Subscription, timer} from 'rxjs';
 import {BreakpointObserver} from '@angular/cdk/layout';
 import {SidenavService} from '../../services';
-import {delay} from 'rxjs/operators';
 import {NavLinkElements} from '../../types';
+import {take, tap, throttleTime} from 'rxjs/operators';
 
 @Component({
   selector: 'nl-material-navigation-menu',
   templateUrl: './navigation-menu.component.html',
   styleUrls: ['./navigation-menu.component.scss']
 })
-export class NavigationMenuComponent implements OnInit, AfterViewInit, OnDestroy {
+export class NavigationMenuComponent implements OnInit, AfterViewInit, OnDestroy, AfterViewInit {
   @ViewChildren('navLink') navLinks!: NavLinkElements;
 
   items$!: Observable<Array<NavigationMenuItem>>;
 
-  currentUrl$: BehaviorSubject<string> = new BehaviorSubject<string>('');
+  currentUrl$ = new BehaviorSubject<string>('');
+
+  indicatorHidden$ = new BehaviorSubject<boolean>(true);
 
   activeNavLinkIndicator$: BehaviorSubject<ActiveNavLinkIndicator> = new BehaviorSubject<ActiveNavLinkIndicator>({
     width: 0,
     offset: 0,
     previousOffset: 0
   });
+
+  currentLang$!: Observable<string>;
+
+  previousLang!: string;
 
   private routerSubscription!: Subscription;
 
@@ -53,6 +59,7 @@ export class NavigationMenuComponent implements OnInit, AfterViewInit, OnDestroy
     private readonly sidenavService: SidenavService
   ) {
     this.items$ = this.sidenavService.items$;
+    this.currentLang$ = this.sidenavService.currentLang$;
   }
 
   ngOnInit(): void {
@@ -62,6 +69,7 @@ export class NavigationMenuComponent implements OnInit, AfterViewInit, OnDestroy
   ngAfterViewInit(): void {
     this.openNavLinksSubscription();
     this.openBreakpointSubscription();
+    this.showIndicator();
   }
 
   ngOnDestroy(): void {
@@ -75,6 +83,20 @@ export class NavigationMenuComponent implements OnInit, AfterViewInit, OnDestroy
     const difference = Math.abs(indicator.offset - indicator.previousOffset);
     const multiplier = difference / 150;
     return (Math.round((multiplier > 1 ? (baseSpeed * multiplier) : baseSpeed) * 100) / 100).toString();
+  }
+
+  getCoreUrl(url: string): string {
+    const splitString = url.split('/');
+    const urlPartLimit = 3;
+    if (splitString.length <= urlPartLimit) {
+      return url;
+    } else {
+      return `/${splitString.slice(0, urlPartLimit).reduce((acc, curr) => `${acc}/${curr}`, '')}/`;
+    }
+  }
+
+  removeSlashes(text: string): string {
+    return text.replace(/\\|\//g, '');
   }
 
   private openBreakpointSubscription(): void {
@@ -93,17 +115,32 @@ export class NavigationMenuComponent implements OnInit, AfterViewInit, OnDestroy
   }
 
   private openNavLinksSubscription(): void {
-    this.navLinksSubscription = combineLatest([this.navLinks.changes, this.currentUrl$])
-      .pipe(delay(150))
-      .subscribe(([navLinks, currentUrl]) => {
-        this.setActiveNavLink(navLinks, currentUrl);
-      });
+    this.navLinksSubscription = combineLatest([this.navLinks.changes, this.currentUrl$, this.currentLang$])
+      .pipe(
+        throttleTime(100),
+        tap(([navLinks, currentUrl, currentLang]) => {
+          if (!this.previousLang || (this.previousLang === currentLang)) {
+            this.setActiveNavLink(navLinks, currentUrl);
+          } else {
+            this.hideIndicator();
+            this.setActiveNavLinkWithDelay();
+          }
+          this.previousLang = currentLang;
+        })
+      )
+      .subscribe();
   }
 
   private handleRouterEvent(event: Event): void {
     if (event instanceof NavigationEnd) {
       this.currentUrl$.next(event.url);
     }
+  }
+
+  private setActiveNavLinkWithDelay(): void {
+    timer(1000).pipe(take(1)).subscribe(() => {
+      this.setActiveNavLink(this.navLinks, this.currentUrl$.getValue());
+    });
   }
 
   private setActiveNavLink(navLinks: NavLinkElements, currentUrl: string): void {
@@ -129,19 +166,17 @@ export class NavigationMenuComponent implements OnInit, AfterViewInit, OnDestroy
         previousOffset: this.activeNavLinkIndicator$.getValue().offset
       });
     }
+
+    setTimeout(() => {
+      this.showIndicator();
+    }, 350);
   }
 
-  getCoreUrl(url: string): string {
-    const splitString = url.split('/');
-    const urlPartLimit = 3;
-    if (splitString.length <= urlPartLimit) {
-      return url;
-    } else {
-      return `/${splitString.slice(0, urlPartLimit).reduce((acc, curr) => `${acc}/${curr}`, '')}/`;
-    }
+  private hideIndicator(): void {
+    this.indicatorHidden$.next(true);
   }
 
-  removeSlashes(text: string): string {
-    return text.replace(/\\|\//g, '');
+  private showIndicator(): void {
+    this.indicatorHidden$.next(false);
   }
 }

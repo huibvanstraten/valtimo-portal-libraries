@@ -105,7 +105,7 @@ export class AppModule {
     });
 
     if (!href.toLowerCase().includes('callback') && !href.toLowerCase().includes('#state')) {
-      localStorage.setItem(`${environment.authentication.config.entryUrlStorageKey}`, href);
+      sessionStorage.setItem(`${environment.authentication.config.entryUrlStorageKey}`, href);
     }
   }
 }

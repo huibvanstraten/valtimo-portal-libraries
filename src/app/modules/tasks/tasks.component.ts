@@ -48,7 +48,9 @@ export class TasksComponent {
         combineLatest(instances.map((instance) => this.taskService.findTasks(instance.id)))
       ),
       map((caseTasks) => Array.prototype.concat.apply([], caseTasks)),
-      map((portalTasks) => ([...portalTasks, mockTaskCompleted, mockTaskOpen, mockTaskCompleted, mockTaskOpen])),
+      map((portalTasks) =>
+        ([...portalTasks, mockTaskCompleted, mockTaskOpen, mockTaskCompleted, mockTaskOpen, mockTaskOpen])
+      ),
       tap(() => {
         this.loading$.next(false);
       })

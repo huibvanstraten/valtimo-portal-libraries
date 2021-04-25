@@ -19,12 +19,14 @@
 /* Material */
 
 $nl-material-primary: map-get($nl-material-primary-palette, 500);
+$nl-material-primary-fold: map-get($nl-material-primary-palette, 200);
 $nl-material-primary-light: map-get($nl-material-primary-palette, 100);
 $nl-material-primary-lightest: map-get($nl-material-primary-palette, 50);
 
 $nl-material-accent: map-get($nl-material-accent-palette, 500);
 
 $nl-material-warn: map-get($nl-material-warn-palette, 500);
+$nl-material-warn-fold: map-get($nl-material-warn-palette, 200);
 $nl-material-warn-background: map-get($nl-material-warn-palette, 50);
 
 /* Grey tints from NL design theme */

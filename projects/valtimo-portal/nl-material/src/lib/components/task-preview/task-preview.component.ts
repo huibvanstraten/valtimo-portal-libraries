@@ -16,7 +16,6 @@ import {CardType} from '../../enums';
 })
 export class TaskPreviewComponent implements OnInit, OnDestroy {
   @Input() preview!: PortalTask;
-
   currentLang$!: Observable<string>;
 
   routeLangSubscription!: Subscription;
@@ -24,6 +23,7 @@ export class TaskPreviewComponent implements OnInit, OnDestroy {
   readonly taskRoute$ = new BehaviorSubject<string>(this.getTaskRoute());
 
   readonly taskPreviewType = CardType.taskPreview;
+  readonly taskPreviewCompletedType = CardType.taskPreviewCompleted;
 
   constructor(
     private readonly sidenavService: SidenavService,

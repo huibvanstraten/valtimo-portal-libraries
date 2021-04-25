@@ -96,7 +96,7 @@ mat-card {
   }
 }
 
-.reminder, .case-preview-clipping, .case-preview-current, .case-status {
+.reminder, .case-preview-clipping, .case-preview-current, .case-status, .task-preview {
   box-shadow: none;
   padding: 26px;
 
@@ -106,7 +106,7 @@ mat-card {
   }
 }
 
-.reminder {
+.reminder, .task-preview {
   background-color: $nl-material-warn-background;
 
   mat-card-title {
@@ -193,5 +193,18 @@ mat-card {
     line-height: $font-xl;
     font-weight: bold;
     color: $nl-material-primary;
+  }
+}
+
+.task-preview {
+  border-radius: 5px;
+  clip-path: polygon(calc(100% - 24px) 0, 100% 24px, 100% 100%, 0 100%, 0 0);
+
+  &.completed {
+    background-color: $nl-material-primary-lightest;
+  }
+
+  .mat-card-content-container {
+    width: 100%;
   }
 }

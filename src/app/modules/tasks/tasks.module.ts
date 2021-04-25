@@ -23,11 +23,13 @@ import {TaskServiceModule} from '@valtimo-portal/task';
 import {CaseServiceModule} from '@valtimo-portal/case';
 import {SpinnerModule, TaskPreviewModule} from '@valtimo-portal/nl-material';
 import {TranslateModule} from '@ngx-translate/core';
+import {FlexLayoutModule} from '@angular/flex-layout';
 
 @NgModule({
   declarations: [TasksComponent],
   imports: [
     CommonModule,
+    FlexLayoutModule,
     TasksRoutingModule,
     TaskServiceModule,
     CaseServiceModule,

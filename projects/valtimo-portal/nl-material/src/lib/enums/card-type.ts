@@ -22,5 +22,6 @@ export enum CardType {
   casePreviewCurrent,
   caseStatus,
   tip,
-  taskPreview
+  taskPreview,
+  taskPreviewCompleted
 }

@@ -138,7 +138,7 @@ export class NavigationMenuComponent implements OnInit, AfterViewInit, OnDestroy
   }
 
   private setActiveNavLinkWithDelay(): void {
-    timer(1000).pipe(take(1)).subscribe(() => {
+    timer(1500).pipe(take(1)).subscribe(() => {
       this.setActiveNavLink(this.navLinks, this.currentUrl$.getValue());
     });
   }

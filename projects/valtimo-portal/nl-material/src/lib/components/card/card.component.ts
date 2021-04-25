@@ -39,6 +39,7 @@ export class CardComponent {
   readonly casePreviewCurrentType = CardType.casePreviewCurrent;
   readonly caseStatusType = CardType.caseStatus;
   readonly tipType = CardType.tip;
+  readonly taskPreviewType = CardType.taskPreview;
 
   handlePrimaryButtonClick(): void {
     this.primaryButtonClick.emit();

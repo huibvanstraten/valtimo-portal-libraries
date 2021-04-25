@@ -1,0 +1,36 @@
+<div @fadeIn>
+  <nl-material-card
+    *ngIf="(currentLang$ | async) as currentLang"
+    [buttonText]="'home.preview.primaryButtonText' | translate"
+    [secondaryButtonText]="'home.preview.secondaryButtonText' | translate"
+    [subtitle]="preview.taskId"
+    [title]="preview.taskId + '.my' | translate"
+    (primaryButtonClick)="navigateToTask()"
+    [type]="taskPreviewType"
+  >
+    <ng-container *ngTemplateOutlet="extras"></ng-container>
+    <ng-container
+      *ngTemplateOutlet="currentTaskActions;context:{currentLang: currentLang, preview: preview}">
+    </ng-container>
+  </nl-material-card>
+</div>
+
+<ng-template #extras>
+  <div class="top-right-folder-design" extra>
+    <div class="diagonal"></div>
+    <div class="inner"></div>
+  </div>
+</ng-template>
+
+<ng-template #currentTaskActions let-currentLang="currentLang" let-preview="preview">
+  <div
+    class="current-case-actions"
+  >
+      <span>
+        {{preview.createdOn | date: 'shortDate' : '' : currentLang}}
+      </span>
+    <button mat-button [routerLink]="taskRoute$ | async" [queryParams]="{id:preview.taskId}">
+      <mat-icon fontIcon="fa-arrow-right" fontSet="fa"></mat-icon>
+    </button>
+  </div>
+</ng-template>

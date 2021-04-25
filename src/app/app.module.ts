@@ -89,6 +89,8 @@ export class AppModule {
   constructor(private translateService: TranslateService) {
     const translationEnv = environment.translation;
     const defaultLocaleIndex = translationEnv.defaultLocaleIndex || 0;
+    const href = window.location.href;
+
     translateService.setDefaultLang(translationEnv.supportedLocales[defaultLocaleIndex]);
 
     environment.translation.supportedLocales.forEach((locale) => {
@@ -101,5 +103,9 @@ export class AppModule {
           break;
       }
     });
+
+    if (!href.toLowerCase().includes('callback') && !href.toLowerCase().includes('#state')) {
+      localStorage.setItem(`${environment.authentication.config.entryUrlStorageKey}`, href);
+    }
   }
 }

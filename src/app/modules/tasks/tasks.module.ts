@@ -21,6 +21,8 @@ import {TasksRoutingModule} from './tasks-routing.module';
 import {TasksComponent} from './tasks.component';
 import {TaskServiceModule} from '@valtimo-portal/task';
 import {CaseServiceModule} from '@valtimo-portal/case';
+import {SpinnerModule} from '@valtimo-portal/nl-material';
+import {TranslateModule} from '@ngx-translate/core';
 
 
 @NgModule({
@@ -29,7 +31,9 @@ import {CaseServiceModule} from '@valtimo-portal/case';
     CommonModule,
     TasksRoutingModule,
     TaskServiceModule,
-    CaseServiceModule
+    CaseServiceModule,
+    SpinnerModule,
+    TranslateModule
   ]
 })
 export class TasksModule {

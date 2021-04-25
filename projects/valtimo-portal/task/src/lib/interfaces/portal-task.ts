@@ -14,6 +14,9 @@
  * limitations under the License.
  */
 
-export * from './task.module';
-export * from './services';
-export * from './interfaces';
+export interface PortalTask {
+  completed: boolean;
+  createdOn: Date;
+  formDefinition: any;
+  taskId: string;
+}

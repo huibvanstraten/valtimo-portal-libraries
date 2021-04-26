@@ -15,7 +15,6 @@
  */
 
 import {Component} from '@angular/core';
-import {CaseService} from '@valtimo-portal/case';
 import {TaskService} from '@valtimo-portal/task';
 import {map, tap} from 'rxjs/operators';
 import {BehaviorSubject} from 'rxjs';
@@ -39,6 +38,6 @@ export class TasksComponent {
 
   completedTasks$ = this.tasks$.pipe(map((tasks) => tasks?.filter((task) => task.isCompleted)));
 
-  constructor(private readonly caseService: CaseService, private readonly taskService: TaskService) {
+  constructor(private readonly taskService: TaskService) {
   }
 }

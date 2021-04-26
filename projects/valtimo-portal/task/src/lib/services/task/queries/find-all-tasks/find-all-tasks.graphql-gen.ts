@@ -138,7 +138,7 @@ export const FindAllTasksDocument = gql`
 }
     `;
 
-  @Injectable({
+@Injectable({
     providedIn: 'root'
   })
   export class FindAllTasksGQL extends Apollo.Query<FindAllTasksQuery, FindAllTasksQueryVariables> {

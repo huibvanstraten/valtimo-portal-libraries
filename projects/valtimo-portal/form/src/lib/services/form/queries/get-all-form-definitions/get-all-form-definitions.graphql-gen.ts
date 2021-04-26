@@ -136,7 +136,7 @@ export const GetAllFormDefinitionsDocument = gql`
 }
     `;
 
-  @Injectable({
+@Injectable({
     providedIn: 'root'
   })
   export class GetAllFormDefinitionsGQL extends Apollo.Query<GetAllFormDefinitionsQuery, GetAllFormDefinitionsQueryVariables> {

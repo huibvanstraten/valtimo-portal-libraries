@@ -14,9 +14,19 @@
  * limitations under the License.
  */
 
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { TasksComponent } from './tasks.component';
+import {TasksComponent} from './tasks.component';
+import {NoopAnimationsModule} from '@angular/platform-browser/animations';
+import {TranslateModule} from '@ngx-translate/core';
+import {SpinnerModule, TaskPreviewModule} from '@valtimo-portal/nl-material';
+import {CaseServiceModule} from '@valtimo-portal/case';
+import {KeycloakAngularModule} from 'keycloak-angular';
+import {RouterTestingModule} from '@angular/router/testing';
+import {ApolloTestingModule} from 'apollo-angular/testing';
+import {environment} from '@src/environments';
+import {TasksRoutingModule} from '@tasks/tasks-routing.module';
+import {TaskServiceModule} from '@valtimo-portal/task';
 
 describe('TasksComponent', () => {
   let component: TasksComponent;
@@ -24,9 +34,21 @@ describe('TasksComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TasksComponent ]
+      declarations: [TasksComponent],
+      imports: [
+        NoopAnimationsModule,
+        TranslateModule.forRoot(),
+        TasksRoutingModule,
+        TaskPreviewModule,
+        TranslateModule,
+        CaseServiceModule,
+        TaskServiceModule,
+        SpinnerModule,
+        KeycloakAngularModule,
+        RouterTestingModule,
+        ApolloTestingModule.withClients(environment.api.graphql.clients.map((client) => client.name))]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

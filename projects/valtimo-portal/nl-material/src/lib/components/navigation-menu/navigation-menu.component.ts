@@ -17,29 +17,41 @@
 import {AfterViewInit, Component, OnDestroy, OnInit, ViewChildren} from '@angular/core';
 import {ActiveNavLinkIndicator, NavigationMenuItem} from '../../interfaces';
 import {Event, NavigationEnd, Router} from '@angular/router';
-import {BehaviorSubject, combineLatest, Observable, Subscription} from 'rxjs';
+import {BehaviorSubject, combineLatest, interval, Observable, Subscription} from 'rxjs';
 import {BreakpointObserver} from '@angular/cdk/layout';
 import {SidenavService} from '../../services';
-import {delay} from 'rxjs/operators';
 import {NavLinkElements} from '../../types';
+import {finalize, take, tap, throttleTime} from 'rxjs/operators';
 
 @Component({
   selector: 'nl-material-navigation-menu',
   templateUrl: './navigation-menu.component.html',
   styleUrls: ['./navigation-menu.component.scss']
 })
-export class NavigationMenuComponent implements OnInit, AfterViewInit, OnDestroy {
+export class NavigationMenuComponent implements OnInit, AfterViewInit, OnDestroy, AfterViewInit {
   @ViewChildren('navLink') navLinks!: NavLinkElements;
 
   items$!: Observable<Array<NavigationMenuItem>>;
 
-  currentUrl$: BehaviorSubject<string> = new BehaviorSubject<string>('');
+  currentUrl$ = new BehaviorSubject<string>('');
 
-  activeNavLinkIndicator$: BehaviorSubject<ActiveNavLinkIndicator> = new BehaviorSubject<ActiveNavLinkIndicator>({
+  indicatorHidden$ = new BehaviorSubject<boolean>(true);
+
+  private readonly emptyIndicator = {
     width: 0,
     offset: 0,
-    previousOffset: 0
-  });
+    previousOffset: 0,
+    index: 0,
+    textContent: '',
+  };
+
+  activeNavLinkIndicator$: BehaviorSubject<ActiveNavLinkIndicator> = new BehaviorSubject<ActiveNavLinkIndicator>(
+    this.emptyIndicator
+  );
+
+  currentLang$!: Observable<string>;
+
+  previousLang!: string;
 
   private routerSubscription!: Subscription;
 
@@ -47,12 +59,17 @@ export class NavigationMenuComponent implements OnInit, AfterViewInit, OnDestroy
 
   private breakPointSubscription!: Subscription;
 
+  private intervalSubscription!: Subscription;
+
+  private readonly indicatorBeforeLangSwitch$ = new BehaviorSubject<ActiveNavLinkIndicator>(this.emptyIndicator);
+
   constructor(
     private readonly router: Router,
     private readonly observer: BreakpointObserver,
     private readonly sidenavService: SidenavService
   ) {
     this.items$ = this.sidenavService.items$;
+    this.currentLang$ = this.sidenavService.currentLang$;
   }
 
   ngOnInit(): void {
@@ -62,12 +79,14 @@ export class NavigationMenuComponent implements OnInit, AfterViewInit, OnDestroy
   ngAfterViewInit(): void {
     this.openNavLinksSubscription();
     this.openBreakpointSubscription();
+    this.showIndicator();
   }
 
   ngOnDestroy(): void {
     this.routerSubscription?.unsubscribe();
     this.navLinksSubscription?.unsubscribe();
     this.breakPointSubscription?.unsubscribe();
+    this.intervalSubscription?.unsubscribe();
   }
 
   getTransitionDuration(indicator: ActiveNavLinkIndicator): string {
@@ -75,6 +94,20 @@ export class NavigationMenuComponent implements OnInit, AfterViewInit, OnDestroy
     const difference = Math.abs(indicator.offset - indicator.previousOffset);
     const multiplier = difference / 150;
     return (Math.round((multiplier > 1 ? (baseSpeed * multiplier) : baseSpeed) * 100) / 100).toString();
+  }
+
+  getCoreUrl(url: string): string {
+    const splitString = url.split('/');
+    const urlPartLimit = 3;
+    if (splitString.length <= urlPartLimit) {
+      return url;
+    } else {
+      return `/${splitString.slice(0, urlPartLimit).reduce((acc, curr) => `${acc}/${curr}`, '')}/`;
+    }
+  }
+
+  removeSlashes(text: string): string {
+    return text.replace(/\\|\//g, '');
   }
 
   private openBreakpointSubscription(): void {
@@ -93,11 +126,21 @@ export class NavigationMenuComponent implements OnInit, AfterViewInit, OnDestroy
   }
 
   private openNavLinksSubscription(): void {
-    this.navLinksSubscription = combineLatest([this.navLinks.changes, this.currentUrl$])
-      .pipe(delay(150))
-      .subscribe(([navLinks, currentUrl]) => {
-        this.setActiveNavLink(navLinks, currentUrl);
-      });
+    this.navLinksSubscription = combineLatest([this.navLinks.changes, this.currentUrl$, this.currentLang$])
+      .pipe(
+        throttleTime(100),
+        tap(([navLinks, currentUrl, currentLang]) => {
+          if (!this.previousLang || (this.previousLang === currentLang)) {
+            this.setActiveNavLink(navLinks, currentUrl);
+          } else {
+            this.indicatorBeforeLangSwitch$.next(this.activeNavLinkIndicator$.getValue());
+            this.hideIndicator();
+            this.setActiveNavLinkWithDelay();
+          }
+          this.previousLang = currentLang;
+        })
+      )
+      .subscribe();
   }
 
   private handleRouterEvent(event: Event): void {
@@ -106,17 +149,40 @@ export class NavigationMenuComponent implements OnInit, AfterViewInit, OnDestroy
     }
   }
 
+  private setActiveNavLinkWithDelay(): void {
+    this.intervalSubscription = interval(250)
+      .pipe(
+        take(10),
+        finalize(() => {
+          this.closeIntervalSubscription();
+        })
+      )
+      .subscribe(() => {
+        const current = this.activeNavLinkIndicator$.getValue();
+        const beforeSwitch = this.indicatorBeforeLangSwitch$.getValue();
+        const change = JSON.stringify(current) !== JSON.stringify(beforeSwitch);
+        const indexSameAfterSwitch = beforeSwitch.index === current.index;
+
+        if (change && indexSameAfterSwitch) {
+          this.closeIntervalSubscription();
+        } else {
+          this.setActiveNavLink(this.navLinks, this.currentUrl$.getValue());
+        }
+      });
+  }
+
   private setActiveNavLink(navLinks: NavLinkElements, currentUrl: string): void {
     const nativeElements = navLinks.toArray().map((link) => link.nativeElement);
     const elementLinks = nativeElements.map((element) => element.getAttribute('data-link'));
+    const elementTextContents = this.navLinks.toArray().map(((link) => link.nativeElement.textContent));
 
     const currentElementIndex = elementLinks.findIndex((link) => (
-      this.removeSlashes(link || '') === this.removeSlashes(this.getCoreUrl(currentUrl)))
+      this.removeSlashes(`${link}`) === this.removeSlashes(this.getCoreUrl(currentUrl)))
     );
 
     const firstElementAbsoluteOffset = nativeElements[0]?.offsetLeft;
 
-    const activeElement = nativeElements[currentElementIndex] || nativeElements[0];
+    const activeElement = nativeElements[currentElementIndex];
     const activeElementWidth = activeElement?.offsetWidth;
     const activeElementAbsolutetOffset = activeElement?.offsetLeft;
     const activeElementRelativeOffset = (activeElementAbsolutetOffset && firstElementAbsoluteOffset) ?
@@ -126,22 +192,23 @@ export class NavigationMenuComponent implements OnInit, AfterViewInit, OnDestroy
       this.activeNavLinkIndicator$.next({
         width: activeElementWidth,
         offset: activeElementRelativeOffset,
-        previousOffset: this.activeNavLinkIndicator$.getValue().offset
+        previousOffset: this.activeNavLinkIndicator$.getValue().offset,
+        index: currentElementIndex,
+        textContent: `${elementTextContents}`
       });
     }
   }
 
-  getCoreUrl(url: string): string {
-    const splitString = url.split('/');
-    const urlPartLimit = 3;
-    if (splitString.length <= urlPartLimit) {
-      return url;
-    } else {
-      return `/${splitString.slice(0, urlPartLimit).reduce((acc, curr) => `${acc}/${curr}`, '')}/`;
-    }
+  private hideIndicator(): void {
+    this.indicatorHidden$.next(true);
   }
 
-  removeSlashes(text: string): string {
-    return text.replace(/\\|\//g, '');
+  private showIndicator(): void {
+    this.indicatorHidden$.next(false);
+  }
+
+  private closeIntervalSubscription(): void {
+    this.intervalSubscription?.unsubscribe();
+    this.showIndicator();
   }
 }

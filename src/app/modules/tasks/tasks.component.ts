@@ -14,18 +14,30 @@
  * limitations under the License.
  */
 
-import { Component, OnInit } from '@angular/core';
+import {Component} from '@angular/core';
+import {TaskService} from '@valtimo-portal/task';
+import {map, tap} from 'rxjs/operators';
+import {BehaviorSubject} from 'rxjs';
 
 @Component({
   selector: 'app-tasks',
   templateUrl: './tasks.component.html',
   styleUrls: ['./tasks.component.scss']
 })
-export class TasksComponent implements OnInit {
+export class TasksComponent {
 
-  constructor() { }
+  loading$ = new BehaviorSubject<boolean>(true);
 
-  ngOnInit(): void {
+  tasks$ = this.taskService.findAllTasks().pipe(
+    tap(() => {
+      this.loading$.next(false);
+    })
+  );
+
+  openTasks$ = this.tasks$.pipe(map((tasks) => tasks?.filter((task) => !task.isCompleted)));
+
+  completedTasks$ = this.tasks$.pipe(map((tasks) => tasks?.filter((task) => task.isCompleted)));
+
+  constructor(private readonly taskService: TaskService) {
   }
-
 }

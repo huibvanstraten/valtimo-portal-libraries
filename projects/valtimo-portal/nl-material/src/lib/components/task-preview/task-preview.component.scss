@@ -1,0 +1,47 @@
+@import "colors";
+@import "variables";
+
+.current-task-actions {
+  display: flex;
+  width: 100%;
+  margin-top: 24px;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: -24px !important;
+
+  span {
+    line-height: $font-larger;
+    font-size: $font-smaller;
+  }
+
+  span, svg {
+    color: $nl-material-warn-dark;
+  }
+
+  button {
+    margin-right: -8px;
+    margin-left: auto;
+  }
+}
+
+.top-right-fold {
+  background-color: $nl-material-warn-fold;
+  position: absolute;
+  top: 0;
+  right: 0;
+  border-radius: 5px;
+  width: 24px;
+  height: 24px;
+}
+
+.completed {
+  .top-right-fold {
+    background-color: $nl-material-primary-fold;
+  }
+
+  .current-task-actions {
+    span, svg {
+      color: $nl-material-primary;
+    }
+  }
+}

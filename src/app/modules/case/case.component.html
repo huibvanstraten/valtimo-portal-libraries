@@ -15,7 +15,7 @@
   -->
 
 <div fxFlex fxLayout="column" fxLayoutGap="16px" class="module-container" *ngIf="{case: case$ | async} as obs">
-  <ng-container *ngIf="!(loading$ | async); else loading">
+  <ng-container *ngIf="(loading$ | async) === false; else loading">
     <div fxLayout="row wrap">
       <ng-container *ngIf="obs.case; else noData">
         <ng-container *ngTemplateOutlet="title;context:{case: obs.case}"></ng-container>

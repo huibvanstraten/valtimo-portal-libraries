@@ -1,0 +1,8 @@
+{
+  "tasks": {
+    "noDataError": "Er ging iets mis bij het ophalen van jouw taken.",
+    "noData": "Er zijn geen taken beschikbaar.",
+    "openTasks": "Open taken",
+    "completedTasks": "Afgeronde taken"
+  }
+}

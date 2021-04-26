@@ -3,6 +3,7 @@ query GetCaseInstance($id: UUID!) {
     caseDefinitionId
     id
     status
-    submision
+    submission
+    userId
   }
 }

@@ -17,7 +17,7 @@
 import {Component} from '@angular/core';
 import {routes} from '@app/app-routing.module';
 import {NavigationMenuItem} from '@valtimo-portal/nl-material';
-import {RouterOutlet} from '@angular/router';
+import {Router, RouterOutlet} from '@angular/router';
 import {slideInAnimation} from '@app/animations';
 import {environment} from '../environments/environment';
 
@@ -43,6 +43,20 @@ export class AppComponent {
     }));
 
   readonly locales: Array<string> = environment.translation.supportedLocales;
+
+  constructor(
+    private readonly router: Router
+  ) {
+    const entryUrlStorageKey = `${environment.authentication.config.entryUrlStorageKey}`;
+    const entryUrl = sessionStorage.getItem(entryUrlStorageKey);
+    const entryUrlRouterLink = entryUrl?.split(window.location.host)[1];
+
+    if (environment.authentication.config.redirectToEntryUrl && entryUrlRouterLink) {
+      this.router.navigateByUrl(entryUrlRouterLink);
+    }
+
+    sessionStorage.removeItem(entryUrlStorageKey);
+  }
 
   prepareRoute(outlet: RouterOutlet): any {
     return outlet && outlet.activatedRouteData && outlet.activatedRouteData.animation;

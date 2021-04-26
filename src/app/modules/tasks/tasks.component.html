@@ -15,14 +15,81 @@
   -->
 
 <div fxFlex fxLayout="column" fxLayoutGap="16px" class="module-container">
-  <div fxLayout="row wrap">
-    <div
-      fxFlex="60"
-      fxFlex.md="60"
-      fxFlex.sm="70"
-      fxFlex.xs="100"
-      fxLayout="column"
-    ><p>tasks works!</p>
-    </div>
+  <div
+    fxLayout="row wrap"
+    *ngIf="{tasks: tasks$ | async, openTasks: openTasks$ | async, completedTasks: completedTasks$ | async} as obs"
+  >
+    <ng-container *ngIf="(loading$ | async) === false; else loading">
+      <ng-container *ngIf="obs.tasks && obs.tasks[0]; else noData">
+        <ng-container *ngIf="obs.openTasks && obs.openTasks[0]">
+          <ng-container *ngTemplateOutlet="openTasksTitle"></ng-container>
+          <ng-container *ngTemplateOutlet="openTasks;context:{tasks: obs.openTasks}"></ng-container>
+        </ng-container>
+        <ng-container *ngIf="obs.completedTasks && obs.completedTasks[0]">
+          <ng-container *ngTemplateOutlet="completedTasksTitle"></ng-container>
+          <ng-container *ngTemplateOutlet="completedTasks;context:{tasks: obs.completedTasks}"></ng-container>
+        </ng-container>
+      </ng-container>
+    </ng-container>
   </div>
 </div>
+
+<ng-template #loading>
+  <div
+    fxFlex="100"
+    fxLayout="column"
+  >
+    <nl-material-spinner></nl-material-spinner>
+  </div>
+</ng-template>
+
+<ng-template #noData>
+  <div
+    fxFlex="100"
+    fxLayout="column"
+  >
+    <h2 class="mat-h2">{{'tasks.noData' | translate}}</h2>
+  </div>
+</ng-template>
+
+<ng-template #openTasksTitle>
+  <div
+    fxFlex="100"
+  >
+    <h1 class="mat-h1 primary-bold large">{{'tasks.openTasks' | translate}}</h1>
+  </div>
+</ng-template>
+
+<ng-template #openTasks let-tasks="tasks">
+  <div
+    *ngFor="let task of tasks"
+    fxFlex.gt-md="25"
+    fxFlex.md="33.3"
+    fxFlex.sm="50"
+    fxFlex.xs="100"
+    fxLayout="column"
+  >
+    <nl-material-task-preview [preview]="task"></nl-material-task-preview>
+  </div>
+</ng-template>
+
+<ng-template #completedTasksTitle>
+  <div
+    fxFlex="100"
+  >
+    <h1 class="mat-h1 primary-bold large">{{'tasks.completedTasks' | translate}}</h1>
+  </div>
+</ng-template>
+
+<ng-template #completedTasks let-tasks="tasks">
+  <div
+    *ngFor="let task of tasks"
+    fxFlex.gt-md="25"
+    fxFlex.md="33.3"
+    fxFlex.sm="50"
+    fxFlex.xs="100"
+    fxLayout="column"
+  >
+    <nl-material-task-preview [preview]="task"></nl-material-task-preview>
+  </div>
+</ng-template>

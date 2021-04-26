@@ -31,6 +31,7 @@ export const environment: Environment = {
       {prefix: './translate/home/', suffix: '.json'},
       {prefix: './translate/cases/', suffix: '.json'},
       {prefix: './translate/case/', suffix: '.json'},
+      {prefix: './translate/tasks/', suffix: '.json'},
       {prefix: './translate/definitions/form-example/', suffix: '.json'},
       {prefix: './translate/definitions/grant-application/', suffix: '.json'},
       {prefix: './translate/definitions/person/', suffix: '.json'},
@@ -43,7 +44,9 @@ export const environment: Environment = {
       url: 'https://keycloak.test.valtimo.nl/auth',
       realm: 'valtimo',
       clientId: 'valtimo-console',
-      redirectUri: '/keycloak/callback'
+      redirectUri: '/keycloak/callback',
+      redirectToEntryUrl: true,
+      entryUrlStorageKey: 'entryUrl'
     }
   },
   api: {

@@ -19,6 +19,8 @@ import {AuthenticationProvider} from '../enums';
 
 interface ExtendedKeycloakConfig extends KeycloakConfig {
   redirectUri: string;
+  redirectToEntryUrl?: boolean;
+  entryUrlStorageKey?: string;
 }
 
 export type Authentication = {

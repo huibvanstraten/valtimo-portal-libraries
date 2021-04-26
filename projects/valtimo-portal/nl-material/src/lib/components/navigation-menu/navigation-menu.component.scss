@@ -58,6 +58,11 @@ a {
   height: 3px;
   background-color: $nl-material-primary;
   margin-bottom: -3px;
+  opacity: 1;
+
+  &.hidden {
+    opacity: 0;
+  }
 }
 
 .sidenav-shadow {

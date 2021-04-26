@@ -50,6 +50,10 @@
       "@valtimo-portal/nl-material": [
         "dist/valtimo-portal/nl-material/valtimo-portal-nl-material",
         "dist/valtimo-portal/nl-material"
+      ],
+      "@valtimo-portal/task": [
+        "dist/valtimo-portal/task/valtimo-portal-task",
+        "dist/valtimo-portal/task"
       ]
     },
     "baseUrl": "./",

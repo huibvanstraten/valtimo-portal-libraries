@@ -14,18 +14,27 @@
  * limitations under the License.
  */
 
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 
-import { TasksRoutingModule } from './tasks-routing.module';
-import { TasksComponent } from './tasks.component';
-
+import {TasksRoutingModule} from './tasks-routing.module';
+import {TasksComponent} from './tasks.component';
+import {TaskServiceModule} from '@valtimo-portal/task';
+import {SpinnerModule, TaskPreviewModule} from '@valtimo-portal/nl-material';
+import {TranslateModule} from '@ngx-translate/core';
+import {FlexLayoutModule} from '@angular/flex-layout';
 
 @NgModule({
   declarations: [TasksComponent],
   imports: [
     CommonModule,
-    TasksRoutingModule
+    FlexLayoutModule,
+    TasksRoutingModule,
+    TaskServiceModule,
+    SpinnerModule,
+    TranslateModule,
+    TaskPreviewModule
   ]
 })
-export class TasksModule { }
+export class TasksModule {
+}

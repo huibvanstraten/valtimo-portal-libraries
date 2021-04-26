@@ -1,6 +1,6 @@
 <div class="new-case-menu-container" *ngIf="{caseDefinitions: allCaseDefinitions$ | async} as obs">
   <h1 class="mat-h1">{{'newCaseMenu.title' | translate}}</h1>
-  <mat-list class="header-menu-mat-list" *ngIf="!(loading$ | async); else loading">
+  <mat-list class="header-menu-mat-list" *ngIf="(loading$ | async) === false; else loading">
     <ng-container *ngIf="obs.caseDefinitions && obs.caseDefinitions[0]; else noData">
       <mat-list-item *ngFor="let caseDefinition of obs.caseDefinitions">
         <button mat-menu-item [routerLink]="newCaseRoute$ | async" [queryParams]="{id:caseDefinition.id}">

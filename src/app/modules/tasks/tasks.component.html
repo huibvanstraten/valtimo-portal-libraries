@@ -19,7 +19,7 @@
     fxLayout="row wrap"
     *ngIf="{tasks: tasks$ | async, openTasks: openTasks$ | async, completedTasks: completedTasks$ | async} as obs"
   >
-    <ng-container *ngIf="!(loading$ | async); else loading">
+    <ng-container *ngIf="(loading$ | async) === false; else loading">
       <ng-container *ngIf="obs.tasks && obs.tasks[0]; else noData">
         <ng-container *ngIf="obs.openTasks && obs.openTasks[0]">
           <ng-container *ngTemplateOutlet="openTasksTitle"></ng-container>

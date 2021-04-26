@@ -1,0 +1,8 @@
+query FindAllTasks {
+  findAllTasks @namedClient(name: "portal-api") {
+    isCompleted
+    createdOn
+    formDefinition
+    taskId
+  }
+}

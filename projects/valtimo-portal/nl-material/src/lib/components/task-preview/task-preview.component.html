@@ -6,8 +6,8 @@
     [subtitle]="preview.taskId"
     [title]="preview.taskId + '.my' | translate"
     (primaryButtonClick)="navigateToTask()"
-    [type]="!preview.completed ? taskPreviewType : taskPreviewCompletedType"
-    [ngClass]="{'completed': preview.completed}"
+    [type]="!preview.isCompleted ? taskPreviewType : taskPreviewCompletedType"
+    [ngClass]="{'completed': preview.isCompleted}"
   >
     <ng-container *ngTemplateOutlet="extras"></ng-container>
     <ng-container

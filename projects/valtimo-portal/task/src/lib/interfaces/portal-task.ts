@@ -15,7 +15,7 @@
  */
 
 export interface PortalTask {
-  completed: boolean;
+  isCompleted: boolean;
   createdOn: Date;
   formDefinition: any;
   taskId: string;

@@ -32,9 +32,11 @@ export interface CaseDefinition {
 export interface CaseInstance {
   __typename?: 'CaseInstance';
   caseDefinitionId: Scalars['String'];
+  externalId?: Maybe<Scalars['String']>;
   id: Scalars['UUID'];
   status: Scalars['String'];
-  submision: Scalars['JSON'];
+  submission: Scalars['JSON'];
+  userId: Scalars['String'];
 }
 
 export interface FormDefinition {
@@ -48,12 +50,20 @@ export interface Mutation {
   __typename?: 'Mutation';
   /** Convert submission to json return resulting data */
   processSubmission: CaseCreated;
+  /** Complete task mutation */
+  completeTask: TaskInstance;
 }
 
 
 export interface MutationProcessSubmissionArgs {
   submission: Scalars['JSON'];
   caseDefinitionId: Scalars['String'];
+}
+
+
+export interface MutationCompleteTaskArgs {
+  taskId: Scalars['UUID'];
+  submission: Scalars['JSON'];
 }
 
 export interface Query {
@@ -68,8 +78,10 @@ export interface Query {
   allFormDefinitions: Array<FormDefinition>;
   /** retrieves single form definition from repository */
   getFormDefinition?: Maybe<FormDefinition>;
+  /** find all available tasks */
+  findAllTasks?: Maybe<Array<TaskInstance>>;
   /** find all available tasks for external case id */
-  findTasks?: Maybe<Array<Task>>;
+  findTasks?: Maybe<Array<TaskInstance>>;
 }
 
 
@@ -87,12 +99,12 @@ export interface QueryFindTasksArgs {
   externalCaseId: Scalars['String'];
 }
 
-export interface Task {
-  __typename?: 'Task';
-  completed: Scalars['Boolean'];
+export interface TaskInstance {
+  __typename?: 'TaskInstance';
   createdOn: Scalars['String'];
   externalCaseId: Scalars['String'];
   formDefinition: Scalars['JSON'];
+  isCompleted: Scalars['Boolean'];
   taskId: Scalars['UUID'];
 }
 

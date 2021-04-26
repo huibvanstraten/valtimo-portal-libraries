@@ -16,22 +16,9 @@
 
 import {Component} from '@angular/core';
 import {CaseService} from '@valtimo-portal/case';
-import {PortalTask, TaskService} from '@valtimo-portal/task';
-import {map, switchMap, tap} from 'rxjs/operators';
-import {BehaviorSubject, combineLatest} from 'rxjs';
-
-const mockTaskCompleted: PortalTask = {
-  completed: true,
-  createdOn: new Date(2021, 4, 12),
-  formDefinition: {},
-  taskId: 'XXX'
-};
-const mockTaskOpen: PortalTask = {
-  completed: false,
-  createdOn: new Date(2021, 4, 14),
-  formDefinition: {},
-  taskId: 'YYY'
-};
+import {TaskService} from '@valtimo-portal/task';
+import {map, tap} from 'rxjs/operators';
+import {BehaviorSubject} from 'rxjs';
 
 @Component({
   selector: 'app-tasks',
@@ -42,23 +29,15 @@ export class TasksComponent {
 
   loading$ = new BehaviorSubject<boolean>(true);
 
-  tasks$ = this.caseService.getAllCaseInstances()
-    .pipe(
-      switchMap((instances) =>
-        combineLatest(instances.map((instance) => this.taskService.findTasks(instance.id)))
-      ),
-      map((caseTasks) => Array.prototype.concat.apply([], caseTasks)),
-      map((portalTasks) =>
-        ([...portalTasks, mockTaskCompleted, mockTaskOpen, mockTaskCompleted, mockTaskOpen, mockTaskOpen])
-      ),
-      tap(() => {
-        this.loading$.next(false);
-      })
-    );
+  tasks$ = this.taskService.findAllTasks().pipe(
+    tap(() => {
+      this.loading$.next(false);
+    })
+  )
 
-  openTasks$ = this.tasks$.pipe(map((tasks) => tasks.filter((task) => !task.completed)));
+  openTasks$ = this.tasks$.pipe(map((tasks) => tasks?.filter((task) => !task.isCompleted)));
 
-  completedTasks$ = this.tasks$.pipe(map((tasks) => tasks.filter((task) => task.completed)));
+  completedTasks$ = this.tasks$.pipe(map((tasks) => tasks?.filter((task) => task.isCompleted)));
 
   constructor(private readonly caseService: CaseService, private readonly taskService: TaskService) {
   }

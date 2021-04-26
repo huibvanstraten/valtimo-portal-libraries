@@ -1,6 +1,6 @@
 query FindTasks($externalCaseId: String!) {
   findTasks(externalCaseId: $externalCaseId) @namedClient(name: "portal-api") {
-    completed
+    isCompleted
     createdOn
     formDefinition
     taskId

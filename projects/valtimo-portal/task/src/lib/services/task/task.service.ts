@@ -15,7 +15,7 @@
  */
 
 import {Injectable} from '@angular/core';
-import {FindTasksGQL} from './queries';
+import {FindAllTasksGQL, FindTasksGQL} from './queries';
 import {catchError, map} from 'rxjs/operators';
 import {Observable, of} from 'rxjs';
 import {NotificationService} from '@valtimo-portal/shared';
@@ -29,6 +29,7 @@ export class TaskService {
 
   constructor(
     private readonly findTasksGQL: FindTasksGQL,
+    private readonly findAllTasksGQL: FindAllTasksGQL,
     private readonly notificationService: NotificationService,
     private readonly translateService: TranslateService
   ) {
@@ -37,6 +38,19 @@ export class TaskService {
   findTasks(externalCaseId: string, hideError = false): Observable<Array<PortalTask> | null | undefined> {
     return this.findTasksGQL.fetch({externalCaseId}).pipe(
       map((res) => res.data.findTasks?.map((task) => ({...task, createdOn: new Date(task.createdOn)}))),
+      catchError(() => {
+          if (!hideError) {
+            this.notificationService.show(this.translateService.instant('tasks.noDataError'));
+          }
+          return of([]);
+        }
+      )
+    );
+  }
+
+  findAllTasks(hideError = false): Observable<Array<PortalTask> | null | undefined> {
+    return this.findAllTasksGQL.fetch().pipe(
+      map((res) => res.data.findAllTasks?.map((task) => ({...task, createdOn: new Date(task.createdOn)}))),
       catchError(() => {
           if (!hideError) {
             this.notificationService.show(this.translateService.instant('tasks.noDataError'));

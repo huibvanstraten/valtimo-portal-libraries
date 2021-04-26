@@ -21,7 +21,7 @@ import {BehaviorSubject, combineLatest, interval, Observable, Subscription} from
 import {BreakpointObserver} from '@angular/cdk/layout';
 import {SidenavService} from '../../services';
 import {NavLinkElements} from '../../types';
-import {tap, throttleTime} from 'rxjs/operators';
+import {finalize, take, tap, throttleTime} from 'rxjs/operators';
 
 @Component({
   selector: 'nl-material-navigation-menu',
@@ -150,21 +150,25 @@ export class NavigationMenuComponent implements OnInit, AfterViewInit, OnDestroy
   }
 
   private setActiveNavLinkWithDelay(): void {
-    this.intervalSubscription = interval(250).subscribe(() => {
-      const current = this.activeNavLinkIndicator$.getValue();
-      const beforeSwitch = this.indicatorBeforeLangSwitch$.getValue();
+    this.intervalSubscription = interval(250)
+      .pipe(
+        take(10),
+        finalize(() => {
+          this.closeIntervalSubscription();
+        })
+      )
+      .subscribe(() => {
+        const current = this.activeNavLinkIndicator$.getValue();
+        const beforeSwitch = this.indicatorBeforeLangSwitch$.getValue();
+        const change = JSON.stringify(current) !== JSON.stringify(beforeSwitch);
+        const indexSameAfterSwitch = beforeSwitch.index === current.index;
 
-      const change = JSON.stringify(current) !== JSON.stringify(beforeSwitch);
-
-      const indexSameAfterSwitch = beforeSwitch.index === current.index;
-
-      if (change && indexSameAfterSwitch) {
-        this.intervalSubscription.unsubscribe();
-        this.showIndicator();
-      } else {
-        this.setActiveNavLink(this.navLinks, this.currentUrl$.getValue());
-      }
-    });
+        if (change && indexSameAfterSwitch) {
+          this.closeIntervalSubscription();
+        } else {
+          this.setActiveNavLink(this.navLinks, this.currentUrl$.getValue());
+        }
+      });
   }
 
   private setActiveNavLink(navLinks: NavLinkElements, currentUrl: string): void {
@@ -173,12 +177,12 @@ export class NavigationMenuComponent implements OnInit, AfterViewInit, OnDestroy
     const elementTextContents = this.navLinks.toArray().map(((link) => link.nativeElement.textContent));
 
     const currentElementIndex = elementLinks.findIndex((link) => (
-      this.removeSlashes(link || '') === this.removeSlashes(this.getCoreUrl(currentUrl)))
+      this.removeSlashes(`${link}`) === this.removeSlashes(this.getCoreUrl(currentUrl)))
     );
 
     const firstElementAbsoluteOffset = nativeElements[0]?.offsetLeft;
 
-    const activeElement = nativeElements[currentElementIndex] || nativeElements[0];
+    const activeElement = nativeElements[currentElementIndex];
     const activeElementWidth = activeElement?.offsetWidth;
     const activeElementAbsolutetOffset = activeElement?.offsetLeft;
     const activeElementRelativeOffset = (activeElementAbsolutetOffset && firstElementAbsoluteOffset) ?
@@ -201,5 +205,10 @@ export class NavigationMenuComponent implements OnInit, AfterViewInit, OnDestroy
 
   private showIndicator(): void {
     this.indicatorHidden$.next(false);
+  }
+
+  private closeIntervalSubscription(): void {
+    this.intervalSubscription?.unsubscribe();
+    this.showIndicator();
   }
 }

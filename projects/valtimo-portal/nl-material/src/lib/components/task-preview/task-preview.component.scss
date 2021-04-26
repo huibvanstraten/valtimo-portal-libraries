@@ -9,13 +9,18 @@
   justify-content: space-between;
   margin-bottom: -24px !important;
 
+  span {
+    line-height: $font-larger;
+    font-size: $font-smaller;
+  }
+
+  span, svg {
+    color: $nl-material-warn-dark;
+  }
+
   button {
     margin-right: -8px;
     margin-left: auto;
-
-    .mat-icon {
-      color: $nl-dark-gray;
-    }
   }
 }
 
@@ -32,5 +37,11 @@
 .completed {
   .top-right-fold {
     background-color: $nl-material-primary-fold;
+  }
+
+  .current-task-actions {
+    span, svg {
+      color: $nl-material-primary;
+    }
   }
 }

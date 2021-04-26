@@ -200,8 +200,27 @@ mat-card {
   border-radius: 5px;
   clip-path: polygon(calc(100% - 24px) 0, 100% 24px, 100% 100%, 0 100%, 0 0);
 
+  .mat-card-title {
+    font-weight: bold;
+    font-size: $font-larger;
+    line-height: $font-largest;
+  }
+
+  .mat-card-subtitle {
+    line-height: $font-largest;
+    font-size: $font-medium;
+  }
+
+  .mat-card-title, .mat-card-subtitle {
+    color: $nl-material-warn-dark;
+  }
+
   &.completed {
     background-color: $nl-material-primary-lightest;
+
+    .mat-card-title, .mat-card-subtitle {
+      color: $nl-material-primary;
+    }
   }
 
   .mat-card-content-container {

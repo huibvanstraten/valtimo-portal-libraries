@@ -25,6 +25,8 @@ interface ActiveNavLinkIndicator {
   width: number;
   offset: number;
   previousOffset: number;
+  index: number;
+  textContent: string;
 }
 
 export {NavigationMenuItem, ActiveNavLinkIndicator};

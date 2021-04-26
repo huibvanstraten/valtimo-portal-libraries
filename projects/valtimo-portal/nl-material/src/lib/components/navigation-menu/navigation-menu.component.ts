@@ -17,11 +17,11 @@
 import {AfterViewInit, Component, OnDestroy, OnInit, ViewChildren} from '@angular/core';
 import {ActiveNavLinkIndicator, NavigationMenuItem} from '../../interfaces';
 import {Event, NavigationEnd, Router} from '@angular/router';
-import {BehaviorSubject, combineLatest, Observable, Subscription, timer} from 'rxjs';
+import {BehaviorSubject, combineLatest, interval, Observable, Subscription} from 'rxjs';
 import {BreakpointObserver} from '@angular/cdk/layout';
 import {SidenavService} from '../../services';
 import {NavLinkElements} from '../../types';
-import {take, tap, throttleTime} from 'rxjs/operators';
+import {tap, throttleTime} from 'rxjs/operators';
 
 @Component({
   selector: 'nl-material-navigation-menu',
@@ -37,11 +37,17 @@ export class NavigationMenuComponent implements OnInit, AfterViewInit, OnDestroy
 
   indicatorHidden$ = new BehaviorSubject<boolean>(true);
 
-  activeNavLinkIndicator$: BehaviorSubject<ActiveNavLinkIndicator> = new BehaviorSubject<ActiveNavLinkIndicator>({
+  private readonly emptyIndicator = {
     width: 0,
     offset: 0,
-    previousOffset: 0
-  });
+    previousOffset: 0,
+    index: 0,
+    textContent: '',
+  };
+
+  activeNavLinkIndicator$: BehaviorSubject<ActiveNavLinkIndicator> = new BehaviorSubject<ActiveNavLinkIndicator>(
+    this.emptyIndicator
+  );
 
   currentLang$!: Observable<string>;
 
@@ -52,6 +58,10 @@ export class NavigationMenuComponent implements OnInit, AfterViewInit, OnDestroy
   private navLinksSubscription!: Subscription;
 
   private breakPointSubscription!: Subscription;
+
+  private intervalSubscription!: Subscription;
+
+  private readonly indicatorBeforeLangSwitch$ = new BehaviorSubject<ActiveNavLinkIndicator>(this.emptyIndicator);
 
   constructor(
     private readonly router: Router,
@@ -76,6 +86,7 @@ export class NavigationMenuComponent implements OnInit, AfterViewInit, OnDestroy
     this.routerSubscription?.unsubscribe();
     this.navLinksSubscription?.unsubscribe();
     this.breakPointSubscription?.unsubscribe();
+    this.intervalSubscription?.unsubscribe();
   }
 
   getTransitionDuration(indicator: ActiveNavLinkIndicator): string {
@@ -122,6 +133,7 @@ export class NavigationMenuComponent implements OnInit, AfterViewInit, OnDestroy
           if (!this.previousLang || (this.previousLang === currentLang)) {
             this.setActiveNavLink(navLinks, currentUrl);
           } else {
+            this.indicatorBeforeLangSwitch$.next(this.activeNavLinkIndicator$.getValue());
             this.hideIndicator();
             this.setActiveNavLinkWithDelay();
           }
@@ -138,14 +150,27 @@ export class NavigationMenuComponent implements OnInit, AfterViewInit, OnDestroy
   }
 
   private setActiveNavLinkWithDelay(): void {
-    timer(1500).pipe(take(1)).subscribe(() => {
-      this.setActiveNavLink(this.navLinks, this.currentUrl$.getValue());
+    this.intervalSubscription = interval(250).subscribe(() => {
+      const current = this.activeNavLinkIndicator$.getValue();
+      const beforeSwitch = this.indicatorBeforeLangSwitch$.getValue();
+
+      const change = JSON.stringify(current) !== JSON.stringify(beforeSwitch);
+
+      const indexSameAfterSwitch = beforeSwitch.index === current.index;
+
+      if (change && indexSameAfterSwitch) {
+        this.intervalSubscription.unsubscribe();
+        this.showIndicator();
+      } else {
+        this.setActiveNavLink(this.navLinks, this.currentUrl$.getValue());
+      }
     });
   }
 
   private setActiveNavLink(navLinks: NavLinkElements, currentUrl: string): void {
     const nativeElements = navLinks.toArray().map((link) => link.nativeElement);
     const elementLinks = nativeElements.map((element) => element.getAttribute('data-link'));
+    const elementTextContents = this.navLinks.toArray().map(((link) => link.nativeElement.textContent));
 
     const currentElementIndex = elementLinks.findIndex((link) => (
       this.removeSlashes(link || '') === this.removeSlashes(this.getCoreUrl(currentUrl)))
@@ -163,13 +188,11 @@ export class NavigationMenuComponent implements OnInit, AfterViewInit, OnDestroy
       this.activeNavLinkIndicator$.next({
         width: activeElementWidth,
         offset: activeElementRelativeOffset,
-        previousOffset: this.activeNavLinkIndicator$.getValue().offset
+        previousOffset: this.activeNavLinkIndicator$.getValue().offset,
+        index: currentElementIndex,
+        textContent: `${elementTextContents}`
       });
     }
-
-    setTimeout(() => {
-      this.showIndicator();
-    }, 350);
   }
 
   private hideIndicator(): void {

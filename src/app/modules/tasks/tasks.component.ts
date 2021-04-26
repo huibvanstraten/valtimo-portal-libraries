@@ -33,7 +33,7 @@ export class TasksComponent {
     tap(() => {
       this.loading$.next(false);
     })
-  )
+  );
 
   openTasks$ = this.tasks$.pipe(map((tasks) => tasks?.filter((task) => !task.isCompleted)));
 

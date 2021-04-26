@@ -14,67 +14,15 @@
  * limitations under the License.
  */
 
-export const mockCaseDefinitionsResult =
+export const mockTasksResult =
   {
     data: {
-      allCaseDefinitions: [
+      findTasks: [
         {
-          id: 'person',
-          schema: {
-            $id: 'person.schema',
-            $schema: 'http://json-schema.org/draft-07/schema#',
-            title: 'Person',
-            type: 'object',
-            properties: {
-              firstName: {
-                type: 'string',
-                description: 'The person\'s first name.',
-                maxLength: 15
-              },
-              age: {
-                description: 'Age in years which must be equal to or greater than zero.',
-                type: 'integer',
-                minimum: 0
-              },
-              birthday: {
-                description: 'Birthday',
-                type: 'string',
-                format: 'date'
-              },
-              'is-cool': {
-                description: 'is cool',
-                type: 'boolean'
-              }
-            }
-          },
-          __typename: 'CaseDefinition'
-        },
-        {
-          id: 'test',
-          schema: {
-            $id: 'test.schema',
-            $schema: 'http://json-schema.org/draft-07/schema#',
-            title: 'Test',
-            type: 'object',
-            properties: {
-              person: {
-                type: 'object',
-                description: 'The person\'s age and first name.',
-                properties: {
-                  age: {
-                    description: 'Age in years which must be equal to or greater than zero.',
-                    type: 'integer',
-                    minimum: 0
-                  },
-                  firstName: {
-                    description: 'firstname',
-                    type: 'string'
-                  }
-                }
-              }
-            }
-          },
-          __typename: 'CaseDefinition'
+          completed: true,
+          createdOn: '2021-04-21',
+          formDefinition: {},
+          taskId: 'XXX'
         }
       ]
     }

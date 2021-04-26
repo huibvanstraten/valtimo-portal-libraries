@@ -17,9 +17,9 @@
 import {TestBed} from '@angular/core/testing';
 import {TaskService} from './task.service';
 import {ApolloTestingController, ApolloTestingModule} from 'apollo-angular/testing';
-import {GetAllCaseDefinitionsDocument} from './queries/get-all-case-definitions/get-all-case-definitions.graphql-gen';
+import {FindTasksDocument} from './queries/find-tasks/find-tasks.graphql-gen';
 import {environment} from '@src/environments';
-import {mockCaseDefinitionsResult} from './mock-data';
+import {mockTasksResult} from './mock-data';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {TranslateModule} from '@ngx-translate/core';
 
@@ -49,14 +49,18 @@ describe('TaskService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should return task definitions', (done) => {
-    service.getAllCaseDefinitions().subscribe((definitions) => {
-      expect(definitions[1].id).toEqual('test');
+  it('should return tasks', (done) => {
+    service.findTasks('').subscribe((tasks) => {
+      if (tasks) {
+        expect(tasks[0].taskId).toEqual('XXX');
+      } else {
+        expect(tasks).toBeFalsy();
+      }
       done();
     });
 
-    const op = controller.expectOne(GetAllCaseDefinitionsDocument);
+    const op = controller.expectOne(FindTasksDocument);
 
-    op.flush(mockCaseDefinitionsResult);
+    op.flush(mockTasksResult);
   });
 });

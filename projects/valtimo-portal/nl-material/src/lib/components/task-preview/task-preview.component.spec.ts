@@ -1,6 +1,4 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
-
-import {CasePreviewComponent} from './case-preview.component';
 import {CardModule} from '../card';
 import {TranslateModule} from '@ngx-translate/core';
 import {MatIconModule} from '@angular/material/icon';
@@ -12,10 +10,11 @@ import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {FakeLocalizeRouterService} from '@valtimo-portal/shared';
 import {CaseStatusModule} from '../case-status';
 import {RouterTestingModule} from '@angular/router/testing';
+import {TaskPreviewComponent} from './task-preview.component';
 
-describe('CasePreviewComponent', () => {
-  let component: CasePreviewComponent;
-  let fixture: ComponentFixture<CasePreviewComponent>;
+describe('TaskPreviewComponent', () => {
+  let component: TaskPreviewComponent;
+  let fixture: ComponentFixture<TaskPreviewComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -23,7 +22,7 @@ describe('CasePreviewComponent', () => {
         {provide: 'environment', useValue: environment},
         {provide: LocalizeRouterService, useClass: FakeLocalizeRouterService}
       ],
-      declarations: [CasePreviewComponent],
+      declarations: [TaskPreviewComponent],
       imports: [
         NoopAnimationsModule,
         CardModule,
@@ -39,7 +38,7 @@ describe('CasePreviewComponent', () => {
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CasePreviewComponent);
+    fixture = TestBed.createComponent(TaskPreviewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

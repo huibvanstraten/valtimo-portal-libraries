@@ -14,4 +14,4 @@
  * limitations under the License.
  */
 
-export {FindAllTasksGQL} from './find-all-tasks.graphql-gen';
+export {FindAllTasksGQL, FindAllTasksQuery} from './find-all-tasks.graphql-gen';

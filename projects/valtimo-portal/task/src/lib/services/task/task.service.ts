@@ -15,17 +15,21 @@
  */
 
 import {Injectable} from '@angular/core';
-import {FindAllTasksGQL, FindTasksGQL} from './queries';
+import {FindAllTasksGQL, FindAllTasksQuery, FindTasksGQL} from './queries';
 import {catchError, map} from 'rxjs/operators';
 import {Observable, of} from 'rxjs';
 import {NotificationService} from '@valtimo-portal/shared';
 import {TranslateService} from '@ngx-translate/core';
 import {PortalTask} from '../../interfaces';
+import {QueryRef} from 'apollo-angular';
+import {Exact} from '@valtimo-portal/graphql';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TaskService {
+
+  private findAllTasksQueryRef!: QueryRef<FindAllTasksQuery, Exact<{ [key: string]: never; }>>;
 
   constructor(
     private readonly findTasksGQL: FindTasksGQL,
@@ -49,7 +53,13 @@ export class TaskService {
   }
 
   findAllTasks(hideError = false): Observable<Array<PortalTask> | null | undefined> {
-    return this.findAllTasksGQL.fetch().pipe(
+    if (!this.findAllTasksQueryRef) {
+      this.findAllTasksQueryRef = this.findAllTasksGQL.watch();
+    } else {
+      this.findAllTasksQueryRef.refetch();
+    }
+
+    return this.findAllTasksQueryRef.valueChanges.pipe(
       map((res) => res.data.findAllTasks?.map((task) => ({...task, createdOn: new Date(task.createdOn)}))),
       catchError(() => {
           if (!hideError) {

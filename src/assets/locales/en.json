@@ -12,7 +12,8 @@
     "cases": "Cases",
     "tasks": "Tasks",
     "newCase": "New case",
-    "case": "Case"
+    "case": "Case",
+    "task": "Task"
   },
   "headerMenu": {
     "language": "Language",

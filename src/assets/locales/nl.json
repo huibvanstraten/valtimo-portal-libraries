@@ -12,7 +12,8 @@
     "cases": "Aanvragen",
     "tasks": "Taken",
     "newCase": "Nieuwe aanvraag",
-    "case": "Aanvraag"
+    "case": "Aanvraag",
+    "task": "Taak"
   },
   "headerMenu": {
     "language": "Taal",

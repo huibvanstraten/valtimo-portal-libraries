@@ -16,8 +16,9 @@
 
 import {Component} from '@angular/core';
 import {TaskService} from '@valtimo-portal/task';
-import {tap} from 'rxjs/operators';
-import {BehaviorSubject} from 'rxjs';
+import {map, tap} from 'rxjs/operators';
+import {BehaviorSubject, combineLatest} from 'rxjs';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-task',
@@ -28,12 +29,17 @@ export class TaskComponent {
 
   loading$ = new BehaviorSubject<boolean>(true);
 
-  tasks$ = this.taskService.findAllTasks().pipe(
-    tap(() => {
-      this.loading$.next(false);
-    })
-  );
+  task$ = combineLatest([this.route.queryParams, this.taskService.findAllTasks()])
+    .pipe(
+      map(([params, tasks]) => tasks?.find((task) => task.taskId === params?.id)),
+      tap((task) => {
+        this.loading$.next(false);
+      })
+    );
 
-  constructor(private readonly taskService: TaskService) {
+  constructor(
+    private readonly taskService: TaskService,
+    private readonly route: ActivatedRoute
+  ) {
   }
 }

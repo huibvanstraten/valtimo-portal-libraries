@@ -1,1 +1,52 @@
-Tasks works!
+<!--
+  ~ Copyright 2015-2021 Ritense BV, the Netherlands.
+  ~
+  ~ Licensed under EUPL, Version 1.2 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ https://joinup.ec.europa.eu/collection/eupl/eupl-text-eupl-12
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" basis,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<div fxFlex fxLayout="column" fxLayoutGap="16px" class="module-container" *ngIf="{task: task$ | async} as obs">
+  <ng-container *ngIf="(loading$ | async) === false; else loading">
+    <div fxLayout="row wrap">
+      <ng-container *ngIf="obs.task; else noData">
+        <ng-container *ngTemplateOutlet="task;context:{task: obs.task}"></ng-container>
+      </ng-container>
+    </div>
+  </ng-container>
+</div>
+
+<ng-template #loading>
+  <div
+    fxFlex="100"
+    fxLayout="column"
+  >
+    <nl-material-spinner></nl-material-spinner>
+  </div>
+</ng-template>
+
+<ng-template #noData>
+  <div
+    fxFlex="100"
+    fxLayout="column"
+  >
+    <h2 class="mat-h2">{{'case.noData' | translate}}</h2>
+  </div>
+</ng-template>
+
+<ng-template #task let-task="task">
+  <div
+    fxFlex="100"
+    fxLayout="column"
+  >
+    <nl-material-form-io [definition]="task.formDefinition" [title]=" ''"></nl-material-form-io>
+  </div>
+</ng-template>

@@ -1,0 +1,5 @@
+mutation CompleteTask($submission: JSON!, $taskId: UUID!) {
+  completeTask(submission: $submission, taskId:  $taskId) @namedClient(name: "portal-api") {
+    taskId
+  }
+}

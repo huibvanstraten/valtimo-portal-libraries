@@ -20,7 +20,7 @@ import {CommonModule} from '@angular/common';
 import {TaskRoutingModule} from './task-routing.module';
 import {TaskComponent} from './task.component';
 import {TaskServiceModule} from '@valtimo-portal/task';
-import {SpinnerModule, TaskPreviewModule} from '@valtimo-portal/nl-material';
+import {FormIoModule, SpinnerModule, TaskPreviewModule} from '@valtimo-portal/nl-material';
 import {TranslateModule} from '@ngx-translate/core';
 import {FlexLayoutModule} from '@angular/flex-layout';
 
@@ -33,7 +33,8 @@ import {FlexLayoutModule} from '@angular/flex-layout';
     TaskServiceModule,
     SpinnerModule,
     TranslateModule,
-    TaskPreviewModule
+    TaskPreviewModule,
+    FormIoModule
   ]
 })
 export class TaskModule {

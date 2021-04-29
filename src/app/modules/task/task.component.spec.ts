@@ -16,10 +16,10 @@
 
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {TaskComponent} from './tasks.component';
+import {TaskComponent} from './task.component';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {TranslateModule} from '@ngx-translate/core';
-import {SpinnerModule, TaskPreviewModule} from '@valtimo-portal/nl-material';
+import {FormIoModule, SpinnerModule, TaskPreviewModule} from '@valtimo-portal/nl-material';
 import {CaseServiceModule} from '@valtimo-portal/case';
 import {KeycloakAngularModule} from 'keycloak-angular';
 import {RouterTestingModule} from '@angular/router/testing';
@@ -27,14 +27,20 @@ import {ApolloTestingModule} from 'apollo-angular/testing';
 import {environment} from '@src/environments';
 import {TasksRoutingModule} from '@tasks/tasks-routing.module';
 import {TaskServiceModule} from '@valtimo-portal/task';
+import {TasksComponent} from '@src/app';
+import {LocalizeRouterService} from '@gilsdav/ngx-translate-router';
+import {FakeLocalizeRouterService} from '@valtimo-portal/shared';
 
-describe('TasksComponent', () => {
+describe('TaskComponent', () => {
   let component: TaskComponent;
   let fixture: ComponentFixture<TaskComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [TaskComponent],
+      providers: [
+        {provide: LocalizeRouterService, useClass: FakeLocalizeRouterService}
+      ],
+      declarations: [TaskComponent, TasksComponent],
       imports: [
         NoopAnimationsModule,
         TranslateModule.forRoot(),
@@ -46,7 +52,9 @@ describe('TasksComponent', () => {
         SpinnerModule,
         KeycloakAngularModule,
         RouterTestingModule,
-        ApolloTestingModule.withClients(environment.api.graphql.clients.map((client) => client.name))]
+        ApolloTestingModule.withClients(environment.api.graphql.clients.map((client) => client.name)),
+        FormIoModule
+      ],
     })
       .compileComponents();
   });

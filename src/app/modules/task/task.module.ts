@@ -16,7 +16,6 @@
 
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-
 import {TaskRoutingModule} from './task-routing.module';
 import {TaskComponent} from './task.component';
 import {TaskServiceModule} from '@valtimo-portal/task';

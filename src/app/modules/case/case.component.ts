@@ -14,21 +14,24 @@
  * limitations under the License.
  */
 
-import {Component} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {CaseService} from '@valtimo-portal/case';
-import {map, switchMap, tap} from 'rxjs/operators';
+import {map, switchMap, take, tap} from 'rxjs/operators';
 import {BreadcrumbsService, CaseDetail, CasePreviewMode, TaskPreview} from '@valtimo-portal/nl-material';
 import {CaseInstance} from '@valtimo-portal/graphql';
 import {ActivatedRoute} from '@angular/router';
-import {BehaviorSubject, Observable} from 'rxjs';
+import {BehaviorSubject, Observable, Subscription} from 'rxjs';
 import {CardType} from '../../../../projects/valtimo-portal/nl-material/src/lib';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-case',
   templateUrl: './case.component.html',
   styleUrls: ['./case.component.scss']
 })
-export class CaseComponent {
+export class CaseComponent implements OnInit, OnDestroy {
+
+  title$!: Observable<string>;
 
   loading$ = new BehaviorSubject<boolean>(true);
 
@@ -65,10 +68,44 @@ export class CaseComponent {
   readonly clippingPreviewMode = CasePreviewMode.clipping;
   readonly caseStatusType = CardType.caseStatus;
 
+  private langChangeSubscription!: Subscription;
+
   constructor(
     private readonly caseService: CaseService,
     private readonly route: ActivatedRoute,
-    private readonly breadcrumbsService: BreadcrumbsService
+    private readonly breadcrumbsService: BreadcrumbsService,
+    private readonly translateService: TranslateService
   ) {
+    this.title$ = this.breadcrumbsService.lastBreadcrumbTitle$;
+  }
+
+  ngOnInit(): void {
+    this.setBreadcrumbTitle();
+    this.openLangChangeSubscription();
+  }
+
+  ngOnDestroy(): void {
+    this.langChangeSubscription?.unsubscribe();
+    this.breadcrumbsService.clearLastBreadcrumbTitle();
+  }
+
+  openLangChangeSubscription(): void {
+    this.langChangeSubscription =
+      this.translateService.onLangChange
+        .subscribe(() => {
+          this.setBreadcrumbTitle();
+        });
+  }
+
+  private setBreadcrumbTitle(): void {
+    this.route.queryParams.pipe(
+      take(1)
+    ).subscribe((params) => {
+        this.breadcrumbsService.lastBreadcrumbTitle =
+          this.translateService.instant(
+            `${params.id}.my`
+          );
+      }
+    );
   }
 }

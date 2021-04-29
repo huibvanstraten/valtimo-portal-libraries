@@ -24,7 +24,12 @@
       fxLayout="column"
     >
       <ng-container *ngIf="formDefinition$ | async as definition; else loading">
-        <nl-material-form-io [definition]="definition" [title]="(title$ | async) || ''"></nl-material-form-io>
+        <nl-material-form-io
+          [definition]="definition"
+          [title]="(title$ | async) || ''"
+          [submitting]="!!(submitting$ | async)"
+          (onSubmit)="handleSubmit($event)"
+        ></nl-material-form-io>
       </ng-container>
     </div>
   </div>

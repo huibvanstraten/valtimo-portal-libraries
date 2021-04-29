@@ -16,7 +16,7 @@
 
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {CaseService} from '@valtimo-portal/case';
-import {map, switchMap, take, tap} from 'rxjs/operators';
+import {map, switchMap, tap} from 'rxjs/operators';
 import {BreadcrumbsService, CaseDetail, CasePreviewMode, TaskPreview} from '@valtimo-portal/nl-material';
 import {CaseInstance} from '@valtimo-portal/graphql';
 import {ActivatedRoute} from '@angular/router';
@@ -39,9 +39,10 @@ export class CaseComponent implements OnInit, OnDestroy {
     // @ts-ignore
     switchMap((params) => this.caseService.getCaseInstanceById(params?.id)),
     tap((caseInstance: CaseInstance) => {
+      const caseDefinitionId = caseInstance?.caseDefinitionId;
       this.loading$.next(false);
-      if (caseInstance?.caseDefinitionId) {
-        this.breadcrumbsService.lastBreadcrumbTitle = caseInstance.caseDefinitionId;
+      if (caseDefinitionId) {
+        this.setBreadcrumbTitle(caseDefinitionId);
       }
     })
   );
@@ -80,7 +81,6 @@ export class CaseComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.setBreadcrumbTitle();
     this.openLangChangeSubscription();
   }
 
@@ -90,22 +90,21 @@ export class CaseComponent implements OnInit, OnDestroy {
   }
 
   openLangChangeSubscription(): void {
-    this.langChangeSubscription =
-      this.translateService.onLangChange
-        .subscribe(() => {
-          this.setBreadcrumbTitle();
-        });
+    this.langChangeSubscription = this.translateService.onLangChange
+      .pipe(
+        switchMap(() => this.case$),
+      ).subscribe((caseInstance) => {
+        const caseDefinitionId = caseInstance?.caseDefinitionId;
+        if (caseDefinitionId) {
+          this.setBreadcrumbTitle(caseDefinitionId);
+        }
+      });
   }
 
-  private setBreadcrumbTitle(): void {
-    this.route.queryParams.pipe(
-      take(1)
-    ).subscribe((params) => {
-        this.breadcrumbsService.lastBreadcrumbTitle =
-          this.translateService.instant(
-            `${params.id}.my`
-          );
-      }
-    );
+  private setBreadcrumbTitle(caseDefinitionId: string): void {
+    this.breadcrumbsService.lastBreadcrumbTitle =
+      this.translateService.instant(
+        `${caseDefinitionId}.my`
+      );
   }
 }

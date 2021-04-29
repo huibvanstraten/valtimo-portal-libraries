@@ -14,21 +14,24 @@
  * limitations under the License.
  */
 
-import {Component} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {CaseService} from '@valtimo-portal/case';
 import {map, switchMap, tap} from 'rxjs/operators';
 import {BreadcrumbsService, CaseDetail, CasePreviewMode, TaskPreview} from '@valtimo-portal/nl-material';
 import {CaseInstance} from '@valtimo-portal/graphql';
 import {ActivatedRoute} from '@angular/router';
-import {BehaviorSubject, Observable} from 'rxjs';
+import {BehaviorSubject, Observable, Subscription} from 'rxjs';
 import {CardType} from '../../../../projects/valtimo-portal/nl-material/src/lib';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-case',
   templateUrl: './case.component.html',
   styleUrls: ['./case.component.scss']
 })
-export class CaseComponent {
+export class CaseComponent implements OnInit, OnDestroy {
+
+  title$!: Observable<string>;
 
   loading$ = new BehaviorSubject<boolean>(true);
 
@@ -36,9 +39,10 @@ export class CaseComponent {
     // @ts-ignore
     switchMap((params) => this.caseService.getCaseInstanceById(params?.id)),
     tap((caseInstance: CaseInstance) => {
+      const caseDefinitionId = caseInstance?.caseDefinitionId;
       this.loading$.next(false);
-      if (caseInstance?.caseDefinitionId) {
-        this.breadcrumbsService.lastBreadcrumbTitle = caseInstance.caseDefinitionId;
+      if (caseDefinitionId) {
+        this.setBreadcrumbTitle(caseDefinitionId);
       }
     })
   );
@@ -65,10 +69,42 @@ export class CaseComponent {
   readonly clippingPreviewMode = CasePreviewMode.clipping;
   readonly caseStatusType = CardType.caseStatus;
 
+  private langChangeSubscription!: Subscription;
+
   constructor(
     private readonly caseService: CaseService,
     private readonly route: ActivatedRoute,
-    private readonly breadcrumbsService: BreadcrumbsService
+    private readonly breadcrumbsService: BreadcrumbsService,
+    private readonly translateService: TranslateService
   ) {
+    this.title$ = this.breadcrumbsService.lastBreadcrumbTitle$;
+  }
+
+  ngOnInit(): void {
+    this.openLangChangeSubscription();
+  }
+
+  ngOnDestroy(): void {
+    this.langChangeSubscription?.unsubscribe();
+    this.breadcrumbsService.clearLastBreadcrumbTitle();
+  }
+
+  openLangChangeSubscription(): void {
+    this.langChangeSubscription = this.translateService.onLangChange
+      .pipe(
+        switchMap(() => this.case$),
+      ).subscribe((caseInstance) => {
+        const caseDefinitionId = caseInstance?.caseDefinitionId;
+        if (caseDefinitionId) {
+          this.setBreadcrumbTitle(caseDefinitionId);
+        }
+      });
+  }
+
+  private setBreadcrumbTitle(caseDefinitionId: string): void {
+    this.breadcrumbsService.lastBreadcrumbTitle =
+      this.translateService.instant(
+        `${caseDefinitionId}.my`
+      );
   }
 }

@@ -19,7 +19,6 @@ import {CommonModule} from '@angular/common';
 import {FormIoComponent} from './form-io.component';
 import {MatFormioModule} from '@formio/angular-material';
 import {MatIconModule} from '@angular/material/icon';
-import {CaseServiceModule} from '@valtimo-portal/case';
 
 @NgModule({
   declarations: [FormIoComponent],
@@ -27,7 +26,6 @@ import {CaseServiceModule} from '@valtimo-portal/case';
     CommonModule,
     MatFormioModule,
     MatIconModule,
-    CaseServiceModule
   ],
   exports: [FormIoComponent]
 })

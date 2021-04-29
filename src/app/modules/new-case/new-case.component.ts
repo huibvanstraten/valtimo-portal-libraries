@@ -17,10 +17,12 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {BreadcrumbsService} from '@valtimo-portal/nl-material';
 import {FormService} from '@valtimo-portal/form';
-import {Observable, Subscription} from 'rxjs';
-import {ActivatedRoute} from '@angular/router';
+import {BehaviorSubject, Observable, Subscription} from 'rxjs';
+import {ActivatedRoute, Router} from '@angular/router';
 import {TranslateService} from '@ngx-translate/core';
 import {switchMap, take} from 'rxjs/operators';
+import {CaseService} from '@valtimo-portal/case';
+import {LocalizeRouterService} from '@gilsdav/ngx-translate-router';
 
 @Component({
   selector: 'app-new-case',
@@ -29,19 +31,24 @@ import {switchMap, take} from 'rxjs/operators';
 })
 export class NewCaseComponent implements OnInit, OnDestroy {
 
-  private langChangeSubscription!: Subscription;
-
   formDefinition$ = this.route.queryParams.pipe(
     switchMap((params) => this.formService.getFormDefinitionByName(params.id))
   );
 
   title$!: Observable<string>;
 
+  submitting$ = new BehaviorSubject<boolean>(false);
+
+  private langChangeSubscription!: Subscription;
+
   constructor(
     private readonly breadcrumbsService: BreadcrumbsService,
     private readonly translateService: TranslateService,
     private readonly route: ActivatedRoute,
     private readonly formService: FormService,
+    private readonly caseService: CaseService,
+    private readonly localizeRouterService: LocalizeRouterService,
+    private readonly router: Router
   ) {
     this.title$ = this.breadcrumbsService.lastBreadcrumbTitle$;
   }
@@ -62,6 +69,22 @@ export class NewCaseComponent implements OnInit, OnDestroy {
         .subscribe(() => {
           this.setBreadcrumbTitle();
         });
+  }
+
+  handleSubmit(submission: any): void {
+    this.submitting$.next(true);
+
+    this.route.queryParams
+      .pipe(take(1))
+      .subscribe((params) => {
+          this.caseService.submitCase(submission.data, params.id).subscribe(() => {
+            this.submitting$.next(false);
+            this.router.navigateByUrl(
+              `${this.localizeRouterService.translateRoute('/cases')}`
+            );
+          });
+        }
+      );
   }
 
   private setBreadcrumbTitle(): void {

@@ -47,6 +47,11 @@
     fxFlex="100"
     fxLayout="column"
   >
-    <nl-material-form-io [definition]="task.formDefinition" [title]=" ''"></nl-material-form-io>
+    <nl-material-form-io
+      [definition]="task.formDefinition"
+      [title]=" ''"
+      [submitting]="!!(submitting$ | async)"
+      (onSubmit)="handleSubmit($event)"
+    ></nl-material-form-io>
   </div>
 </ng-template>

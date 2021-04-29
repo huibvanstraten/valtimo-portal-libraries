@@ -16,9 +16,10 @@
 
 import {Component} from '@angular/core';
 import {TaskService} from '@valtimo-portal/task';
-import {map, tap} from 'rxjs/operators';
+import {map, take, tap} from 'rxjs/operators';
 import {BehaviorSubject, combineLatest} from 'rxjs';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
+import {LocalizeRouterService} from '@gilsdav/ngx-translate-router';
 
 @Component({
   selector: 'app-task',
@@ -28,6 +29,8 @@ import {ActivatedRoute} from '@angular/router';
 export class TaskComponent {
 
   loading$ = new BehaviorSubject<boolean>(true);
+
+  submitting$ = new BehaviorSubject<boolean>(false);
 
   task$ = combineLatest([this.route.queryParams, this.taskService.findAllTasks()])
     .pipe(
@@ -39,7 +42,25 @@ export class TaskComponent {
 
   constructor(
     private readonly taskService: TaskService,
-    private readonly route: ActivatedRoute
+    private readonly route: ActivatedRoute,
+    private readonly localizeRouterService: LocalizeRouterService,
+    private readonly router: Router
   ) {
+  }
+
+  handleSubmit(submission: any): void {
+    this.submitting$.next(true);
+
+    this.route.queryParams
+      .pipe(take(1))
+      .subscribe((params) => {
+          this.taskService.completeTask(submission.data, params.id).subscribe(() => {
+            this.submitting$.next(false);
+            this.router.navigateByUrl(
+              `${this.localizeRouterService.translateRoute('/tasks')}`
+            );
+          });
+        }
+      );
   }
 }

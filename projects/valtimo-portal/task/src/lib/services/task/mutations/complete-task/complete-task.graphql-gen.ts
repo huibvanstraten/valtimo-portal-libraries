@@ -138,7 +138,7 @@ export const CompleteTaskDocument = gql`
 }
     `;
 
-  @Injectable({
+@Injectable({
     providedIn: 'root'
   })
   export class CompleteTaskGQL extends Apollo.Mutation<CompleteTaskMutation, CompleteTaskMutationVariables> {

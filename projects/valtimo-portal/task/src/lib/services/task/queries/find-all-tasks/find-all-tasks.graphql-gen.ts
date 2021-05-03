@@ -126,7 +126,7 @@ export type FindAllTasksQuery = (
   { __typename?: 'Query' }
   & { findAllTasks?: Types.Maybe<Array<(
     { __typename?: 'TaskInstance' }
-    & Pick<Types.TaskInstance, 'isCompleted' | 'createdOn' | 'formDefinition' | 'taskId'>
+    & Pick<Types.TaskInstance, 'isCompleted' | 'createdOn' | 'formDefinition' | 'taskId' | 'caseDefinitionId'>
   )>> }
 );
 
@@ -137,6 +137,7 @@ export const FindAllTasksDocument = gql`
     createdOn
     formDefinition
     taskId
+    caseDefinitionId
   }
 }
     `;

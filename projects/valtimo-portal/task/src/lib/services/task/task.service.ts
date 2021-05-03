@@ -43,8 +43,8 @@ export class TaskService {
   ) {
   }
 
-  findTasks(externalCaseId: string, hideError = false): Observable<Array<PortalTask> | null | undefined> {
-    return this.findTasksGQL.fetch({externalCaseId}).pipe(
+  findTasks(caseId: string, hideError = false): Observable<Array<PortalTask> | null | undefined> {
+    return this.findTasksGQL.fetch({caseId}).pipe(
       map((res) => res.data.findTasks?.map((task) => ({...task, createdOn: new Date(task.createdOn)}))),
       catchError(() => {
           if (!hideError) {

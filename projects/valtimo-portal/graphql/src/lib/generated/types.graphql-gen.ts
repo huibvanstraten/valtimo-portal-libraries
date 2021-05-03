@@ -20,7 +20,7 @@ export interface Scalars {
 
 export interface CaseCreated {
   __typename?: 'CaseCreated';
-  caseId: Scalars['String'];
+  caseId: Scalars['UUID'];
 }
 
 export interface CaseDefinition {
@@ -74,14 +74,14 @@ export interface Query {
   allCaseInstances: Array<CaseInstance>;
   /** retrieves single case instance from repository */
   getCaseInstance?: Maybe<CaseInstance>;
-  /** retrieves all form definitions from repository */
-  allFormDefinitions: Array<FormDefinition>;
-  /** retrieves single form definition from repository */
-  getFormDefinition?: Maybe<FormDefinition>;
   /** find all available tasks */
   findAllTasks?: Maybe<Array<TaskInstance>>;
   /** find all available tasks for external case id */
   findTasks?: Maybe<Array<TaskInstance>>;
+  /** find all form definitions from repository */
+  allFormDefinitions: Array<FormDefinition>;
+  /** find single form definition from repository */
+  getFormDefinition?: Maybe<FormDefinition>;
 }
 
 
@@ -90,21 +90,24 @@ export interface QueryGetCaseInstanceArgs {
 }
 
 
+export interface QueryFindTasksArgs {
+  caseId: Scalars['UUID'];
+}
+
+
 export interface QueryGetFormDefinitionArgs {
   name: Scalars['String'];
 }
 
-
-export interface QueryFindTasksArgs {
-  externalCaseId: Scalars['String'];
-}
-
 export interface TaskInstance {
   __typename?: 'TaskInstance';
+  caseDefinitionId: Scalars['String'];
   createdOn: Scalars['String'];
   externalCaseId: Scalars['String'];
+  externalTaskId: Scalars['String'];
   formDefinition: Scalars['JSON'];
   isCompleted: Scalars['Boolean'];
+  taskDefinitionKey: Scalars['String'];
   taskId: Scalars['UUID'];
 }
 

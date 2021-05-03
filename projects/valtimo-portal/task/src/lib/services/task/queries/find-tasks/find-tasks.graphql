@@ -1,5 +1,5 @@
-query FindTasks($externalCaseId: String!) {
-  findTasks(externalCaseId: $externalCaseId) @namedClient(name: "portal-api") {
+query FindTasks($caseId: UUID!) {
+  findTasks(caseId: $caseId) @namedClient(name: "portal-api") {
     isCompleted
     createdOn
     formDefinition

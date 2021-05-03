@@ -16,6 +16,7 @@
 
 import {Injectable} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
+import {FormioForm} from '@formio/angular';
 
 @Injectable({
   providedIn: 'root'
@@ -27,4 +28,33 @@ export class FormTranslationService {
   ) {
   }
 
+  translateForm(form: FormioForm, caseDefinitionId: string): FormioForm {
+    return {
+      ...form,
+      components: this.translateComponents(form.components, caseDefinitionId)
+    };
+  }
+
+  private getTranslation(text: string, caseDefinitionId: string): string | boolean {
+    const genericKey = `formTranslations.${text}`;
+    const genericTranslation = this.translateService.instant(genericKey);
+
+    const definitionKey = `${caseDefinitionId}.properties.${text}`;
+    const definitionTranslation = this.translateService.instant(definitionKey);
+
+    if (definitionKey !== definitionTranslation) {
+      return definitionTranslation;
+    } else if (genericKey !== genericTranslation) {
+      return genericTranslation;
+    } else {
+      return false;
+    }
+  }
+
+  private translateComponents(components: FormioForm['components'], caseDefinitionId: string): FormioForm['components'] {
+    return components?.map((component) => ({
+      ...component,
+      label: this.getTranslation(`${component.key}`, caseDefinitionId) || component.label
+    })) as FormioForm['components'];
+  }
 }

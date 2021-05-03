@@ -1,7 +1,8 @@
 <div class="mat-form-io-container" @fadeInSlow>
   <h1 class="mat-h1">{{title}}</h1>
   <mat-formio
-    [form]="definition"
+    *ngIf="translatedDefinition"
+    [form]="translatedDefinition"
     (submit)="handleSubmit($event)"
     [readOnly]="submitting"
     [refresh]="refresh">

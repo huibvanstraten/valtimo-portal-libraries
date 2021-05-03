@@ -18,7 +18,7 @@ export class FormIoComponent implements OnInit, OnDestroy {
   @Input() title!: string;
   @Input() submitting = false;
 
-  @Output() onSubmit = new EventEmitter<any>();
+  @Output() submission = new EventEmitter<any>();
 
   translatedDefinition!: FormioForm;
 
@@ -44,7 +44,7 @@ export class FormIoComponent implements OnInit, OnDestroy {
   }
 
   handleSubmit(submission: any): void {
-    this.onSubmit.emit(submission);
+    this.submission.emit(submission);
   }
 
   private getTranslatedDefinition(): FormioForm {

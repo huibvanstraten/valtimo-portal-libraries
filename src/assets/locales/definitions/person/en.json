@@ -14,6 +14,9 @@
     "tips": [
       "Please fill in your personal details completely and accurately. In this way, we can help you as quickly as possible.",
       "Be careful in handling your personal information. For example, make sure that third parties keep to privacy legislation."
-    ]
+    ],
+    "formTranslations": {
+      ""
+    }
   }
 }

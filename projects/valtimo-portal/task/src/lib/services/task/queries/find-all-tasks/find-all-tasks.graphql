@@ -4,5 +4,6 @@ query FindAllTasks {
     createdOn
     formDefinition
     taskId
+    caseDefinitionId
   }
 }

@@ -4,5 +4,6 @@ query FindTasks($caseId: UUID!) {
     createdOn
     formDefinition
     taskId
+    caseDefinitionId
   }
 }

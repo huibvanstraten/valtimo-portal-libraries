@@ -1,6 +1,9 @@
-import {Component, EventEmitter, Input, Output, ViewEncapsulation} from '@angular/core';
-import {FormioForm} from '@formio/angular';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewEncapsulation} from '@angular/core';
+import {FormioForm, FormioRefreshValue} from '@formio/angular';
 import {fadeInAnimations} from '../../animations';
+import {FormTranslationService} from '@valtimo-portal/form';
+import {SidenavService} from '../../services';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'nl-material-form-io',
@@ -9,14 +12,50 @@ import {fadeInAnimations} from '../../animations';
   encapsulation: ViewEncapsulation.None,
   animations: fadeInAnimations
 })
-export class FormIoComponent {
+export class FormIoComponent implements OnInit, OnDestroy {
   @Input() definition!: FormioForm;
+  @Input() caseDefinitionId!: string;
   @Input() title!: string;
   @Input() submitting = false;
 
-  @Output() onSubmit = new EventEmitter<any>();
+  @Output() submission = new EventEmitter<any>();
+
+  translatedDefinition!: FormioForm;
+
+  refresh = new EventEmitter<FormioRefreshValue>();
+
+  currentLangSubscription!: Subscription;
+
+  constructor(
+    private readonly formTranslationService: FormTranslationService,
+    private readonly sidenavService: SidenavService
+  ) {
+    this.currentLangSubscription = this.sidenavService.currentLang$.subscribe(() => {
+      this.emitFormRefresh();
+    });
+  }
+
+  ngOnInit(): void {
+    this.translatedDefinition = this.getTranslatedDefinition();
+  }
+
+  ngOnDestroy(): void {
+    this.currentLangSubscription.unsubscribe();
+  }
 
   handleSubmit(submission: any): void {
-    this.onSubmit.emit(submission);
+    this.submission.emit(submission);
+  }
+
+  private getTranslatedDefinition(): FormioForm {
+    return this.formTranslationService.translateForm(this.definition, this.caseDefinitionId);
+  }
+
+  private emitFormRefresh(): void {
+    setTimeout(() => {
+      this.refresh.emit(
+        {form: this.getTranslatedDefinition()}
+      );
+    });
   }
 }

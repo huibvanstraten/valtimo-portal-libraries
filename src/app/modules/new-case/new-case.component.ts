@@ -20,7 +20,7 @@ import {FormService} from '@valtimo-portal/form';
 import {BehaviorSubject, Observable, Subscription} from 'rxjs';
 import {ActivatedRoute, Router} from '@angular/router';
 import {TranslateService} from '@ngx-translate/core';
-import {switchMap, take} from 'rxjs/operators';
+import {map, switchMap, take} from 'rxjs/operators';
 import {CaseService} from '@valtimo-portal/case';
 import {LocalizeRouterService} from '@gilsdav/ngx-translate-router';
 
@@ -33,6 +33,10 @@ export class NewCaseComponent implements OnInit, OnDestroy {
 
   formDefinition$ = this.route.queryParams.pipe(
     switchMap((params) => this.formService.getFormDefinitionByName(params.id))
+  );
+
+  caseDefinitionId$ = this.route.queryParams.pipe(
+    map((params) => params?.id)
   );
 
   title$!: Observable<string>;

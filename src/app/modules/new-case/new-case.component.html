@@ -26,9 +26,10 @@
       <ng-container *ngIf="formDefinition$ | async as definition; else loading">
         <nl-material-form-io
           [definition]="definition"
+          [caseDefinitionId]="caseDefinitionId$ | async"
           [title]="(title$ | async) || ''"
-          [submitting]="!!(submitting$ | async)"
-          (onSubmit)="handleSubmit($event)"
+          [submitting]="(submitting$ | async) !== false"
+          (submission)="handleSubmit($event)"
         ></nl-material-form-io>
       </ng-container>
     </div>

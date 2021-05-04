@@ -1,0 +1,37 @@
+{
+  "bezwaar": {
+    "title": "Bezwaarschrift",
+    "wouldLikeTo": "een bezwaar indienen",
+    "new": "Nieuw bezwaar indienen",
+    "my": "Mijn bezwaarschrift",
+    "statuses": {
+      "portal-case-created": "Bezwaar ingediend",
+      "portal-case-in-progress": "Bezwaar is in behandeling"
+    },
+    "properties": {
+      "aanhef": "Aanhef",
+      "voornaam": "Voornaam",
+      "achternaam": "Achternaam",
+      "bsn": "Burger service nummer",
+      "straatnaam": "Straatnaam",
+      "huisnummer": "Huisnummer",
+      "toevoeging": "Toevoeging",
+      "postcode": "Postcode",
+      "plaats": "Plaats",
+      "telefoonnummer": "Telefoonnummer",
+      "e-mailadres": "E-mailadres",
+      "zaaknummer": "Tegen welk besluit maakt u bezwaar?",
+      "datumBesluit": "Wanneer heeft de gemeente het besluit kenbaar gemaakt? (dd-mm-jjjj)",
+      "naamBeslisser": "Wie heeft het besluit genomen?",
+      "besluit": "Waarover ging het besluit?",
+      "bezwaar": "Waarom bent u het niet eens met het besluit?",
+      "communicatie": "Hebt u een voorkeur voor de manier waarop de gemeente met u communiceert over het bezwaar?",
+      "ingevuld": "Ja, ik heb alles juist ingevuld."
+    },
+    "tips": [
+      "Wees bij het indienen van een bezwaar zo volledig mogelijk, zodat wij jou zo snel mogelijk kunnen helpen."
+    ],
+    "tasks": {
+    }
+  }
+}

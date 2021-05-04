@@ -39,6 +39,7 @@ export interface CaseDefinition {
 export interface CaseInstance {
   __typename?: 'CaseInstance';
   caseDefinitionId: Scalars['String'];
+  createdOn: Scalars['String'];
   externalId?: Maybe<Scalars['String']>;
   id: Scalars['UUID'];
   status: Scalars['String'];
@@ -139,7 +140,7 @@ export const GetAllFormDefinitionsDocument = gql`
 }
     `;
 
-@Injectable({
+  @Injectable({
     providedIn: 'root'
   })
   export class GetAllFormDefinitionsGQL extends Apollo.Query<GetAllFormDefinitionsQuery, GetAllFormDefinitionsQueryVariables> {

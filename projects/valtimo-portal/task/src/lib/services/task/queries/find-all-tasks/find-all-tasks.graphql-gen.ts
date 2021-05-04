@@ -39,6 +39,7 @@ export interface CaseDefinition {
 export interface CaseInstance {
   __typename?: 'CaseInstance';
   caseDefinitionId: Scalars['String'];
+  createdOn: Scalars['String'];
   externalId?: Maybe<Scalars['String']>;
   id: Scalars['UUID'];
   status: Scalars['String'];
@@ -126,7 +127,7 @@ export type FindAllTasksQuery = (
   { __typename?: 'Query' }
   & { findAllTasks?: Types.Maybe<Array<(
     { __typename?: 'TaskInstance' }
-    & Pick<Types.TaskInstance, 'isCompleted' | 'createdOn' | 'formDefinition' | 'taskId' | 'caseDefinitionId'>
+    & Pick<Types.TaskInstance, 'isCompleted' | 'createdOn' | 'formDefinition' | 'taskId' | 'caseDefinitionId' | 'taskDefinitionKey'>
   )>> }
 );
 
@@ -138,11 +139,12 @@ export const FindAllTasksDocument = gql`
     formDefinition
     taskId
     caseDefinitionId
+    taskDefinitionKey
   }
 }
     `;
 
-@Injectable({
+  @Injectable({
     providedIn: 'root'
   })
   export class FindAllTasksGQL extends Apollo.Query<FindAllTasksQuery, FindAllTasksQueryVariables> {

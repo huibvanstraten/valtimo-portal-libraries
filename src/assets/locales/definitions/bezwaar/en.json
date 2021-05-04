@@ -1,0 +1,37 @@
+{
+  "bezwaar": {
+    "title": "Notice of objection",
+    "wouldLikeTo": "lodge an objection",
+    "new": "New notice of objection",
+    "my": "My notice of objection",
+    "statuses": {
+      "portal-case-created": "Objection lodged",
+      "portal-case-in-progress": "Notice of objection received"
+    },
+    "properties": {
+      "aanhef": "Salutation",
+      "voornaam": "First name",
+      "achternaam": "Last name",
+      "bsn": "Citizen service number",
+      "straatnaam": "Street",
+      "huisnummer": "House number",
+      "toevoeging": "Addition",
+      "postcode": "Postal Code",
+      "plaats": "Place of residence",
+      "telefoonnummer": "Phone number",
+      "e-mailadres": "E-mail address",
+      "zaaknummer": "Which decision are you objecting to?",
+      "datumBesluit": "When did the municipality make the decision known? (dd-mm-yyyy)",
+      "naamBeslisser": "Who made this decision?",
+      "besluit": "What was the decision about?",
+      "bezwaar": "Why do you disagree with the decision?",
+      "communicatie": "Do you have a preference for the way in which the municipality will communicate with you about the objection?",
+      "ingevuld": "Yes, I entered everything correctly."
+    },
+    "tips": [
+      "Please provide as much information as possible when lodging an objection, so that you can be helped as quickly as possible."
+    ],
+    "tasks": {
+    }
+  }
+}

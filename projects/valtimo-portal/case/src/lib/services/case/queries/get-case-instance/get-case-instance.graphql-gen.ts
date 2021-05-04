@@ -39,6 +39,7 @@ export interface CaseDefinition {
 export interface CaseInstance {
   __typename?: 'CaseInstance';
   caseDefinitionId: Scalars['String'];
+  createdOn: Scalars['String'];
   externalId?: Maybe<Scalars['String']>;
   id: Scalars['UUID'];
   status: Scalars['String'];
@@ -128,7 +129,7 @@ export type GetCaseInstanceQuery = (
   { __typename?: 'Query' }
   & { getCaseInstance?: Types.Maybe<(
     { __typename?: 'CaseInstance' }
-    & Pick<Types.CaseInstance, 'caseDefinitionId' | 'id' | 'status' | 'submission' | 'userId'>
+    & Pick<Types.CaseInstance, 'caseDefinitionId' | 'createdOn' | 'externalId' | 'id' | 'submission' | 'status' | 'userId'>
   )> }
 );
 
@@ -136,15 +137,17 @@ export const GetCaseInstanceDocument = gql`
     query GetCaseInstance($id: UUID!) {
   getCaseInstance(id: $id) {
     caseDefinitionId
+    createdOn
+    externalId
     id
-    status
     submission
+    status
     userId
   }
 }
     `;
 
-@Injectable({
+  @Injectable({
     providedIn: 'root'
   })
   export class GetCaseInstanceGQL extends Apollo.Query<GetCaseInstanceQuery, GetCaseInstanceQueryVariables> {

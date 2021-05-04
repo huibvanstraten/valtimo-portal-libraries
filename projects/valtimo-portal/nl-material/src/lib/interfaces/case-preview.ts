@@ -24,6 +24,7 @@ interface CasePreview {
   id: string;
   code?: string;
   status?: string;
+  date?: Date;
   tasks: Array<TaskPreview>;
 }
 

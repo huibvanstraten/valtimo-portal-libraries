@@ -3,7 +3,6 @@
     *ngIf="(currentLang$ | async) as currentLang"
     [buttonText]="'home.preview.primaryButtonText' | translate"
     [secondaryButtonText]="'home.preview.secondaryButtonText' | translate"
-    [subtitle]="(mode === currentPreviewMode) ? preview.code || '' : ''"
     [title]="preview.id + '.my' | translate"
     [type]="isClippingPreview() ? casePreviewClippingType : casePreviewCurrentType"
     (primaryButtonClick)="navigateToCase()"
@@ -13,7 +12,7 @@
       <ng-container
         *ngTemplateOutlet="tasks;context:{currentLang: currentLang, previewTasks: previewTasks}"></ng-container>
       <ng-container
-        *ngTemplateOutlet="currentCaseActions;context:{currentLang: currentLang, previewTasks: previewTasks}"></ng-container>
+        *ngTemplateOutlet="currentCaseActions;context:{currentLang: currentLang, previewTasks: previewTasks, preview: preview}"></ng-container>
     </ng-container>
   </nl-material-card>
 </div>
@@ -38,18 +37,25 @@
   </nl-material-case-status>
 </ng-template>
 
-<ng-template #currentCaseActions let-currentLang="currentLang" let-previewTasks="previewTasks">
+<ng-template #currentCaseActions let-currentLang="currentLang" let-previewTasks="previewTasks" let-preview="preview">
   <div
     *ngIf="mode === currentPreviewMode"
     class="current-case-actions"
   >
     <ng-container *ngIf="previewTasks[1]?.date as date">
-      <span>
-        {{date | date: 'shortDate' : '' : currentLang}}
-      </span>
+      <ng-container *ngTemplateOutlet="date;context:{currentLang: currentLang, date: date}"></ng-container>
+    </ng-container>
+    <ng-container *ngIf="!previewTasks[1]?.date && preview.date">
+      <ng-container *ngTemplateOutlet="date;context:{currentLang: currentLang, date: preview.date}"></ng-container>
     </ng-container>
     <button mat-button [routerLink]="caseRoute$ | async" [queryParams]="{id:preview.code}">
       <mat-icon fontIcon="fa-arrow-right" fontSet="fa"></mat-icon>
     </button>
   </div>
+</ng-template>
+
+<ng-template #date let-date="date" let-currentLang="currentLang">
+      <span>
+        {{date | date: 'shortDate' : '' : currentLang}}
+      </span>
 </ng-template>

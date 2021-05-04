@@ -1,11 +1,13 @@
 {
   "person": {
+    "title": "Personal file case",
     "wouldLikeTo": "open a personal file",
     "new": "New personal file",
     "my": "My personal file",
     "statuses": {
       "portal-case-created": "Case opened",
-      "portal-case-in-progress": "Case is in progress"
+      "portal-case-in-progress": "Case is in progress",
+      "Case is in progress": "Case is in progress"
     },
     "properties": {
       "firstName": "First name",
@@ -14,6 +16,9 @@
     "tips": [
       "Please fill in your personal details completely and accurately. In this way, we can help you as quickly as possible.",
       "Be careful in handling your personal information. For example, make sure that third parties keep to privacy legislation."
-    ]
+    ],
+    "tasks": {
+      "external-portal-task": "External portal task"
+    }
   }
 }

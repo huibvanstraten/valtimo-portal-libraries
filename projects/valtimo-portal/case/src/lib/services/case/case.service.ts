@@ -20,11 +20,12 @@ import {catchError, map} from 'rxjs/operators';
 import {Observable, of} from 'rxjs';
 import {CreateCaseGQL, CreateCaseMutation} from './mutations';
 import {FetchResult} from '@apollo/client/core';
-import {CaseDefinition, CaseInstance, Exact} from '@valtimo-portal/graphql';
+import {CaseDefinition, Exact} from '@valtimo-portal/graphql';
 import {GetAllCaseInstancesQuery} from './queries/get-all-case-instances/get-all-case-instances.graphql-gen';
 import {QueryRef} from 'apollo-angular';
 import {NotificationService} from '@valtimo-portal/shared';
 import {TranslateService} from '@ngx-translate/core';
+import {PortalCaseInstance} from '../../interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -55,7 +56,7 @@ export class CaseService {
       );
   }
 
-  getAllCaseInstances(): Observable<Array<CaseInstance>> {
+  getAllCaseInstances(): Observable<Array<PortalCaseInstance>> {
     if (!this.caseInstancesQueryRef) {
       this.caseInstancesQueryRef = this.getAllCaseInstancesGQL.watch();
     } else {
@@ -63,7 +64,10 @@ export class CaseService {
     }
     return this.caseInstancesQueryRef.valueChanges
       .pipe(
-        map((res) => res.data.allCaseInstances),
+        map((res) => res.data.allCaseInstances?.map((caseInstance) => ({
+          ...caseInstance,
+          createdOn: new Date(caseInstance.createdOn)
+        }))),
         catchError(() => {
             this.notificationService.show(this.translateService.instant('cases.noDataError'));
             return of([]);
@@ -72,9 +76,17 @@ export class CaseService {
       );
   }
 
-  getCaseInstanceById(id: string): Observable<CaseInstance | null | undefined> {
+  getCaseInstanceById(id: string): Observable<PortalCaseInstance | null | undefined> {
     return this.getCaseInstanceGQL.fetch({id}).pipe(
-      map((res) => res.data.getCaseInstance),
+      map((res) => {
+        const caseInstance = res.data.getCaseInstance;
+
+        if (caseInstance) {
+          return {...caseInstance, createdOn: new Date(caseInstance.createdOn)};
+        } else {
+          return undefined;
+        }
+      }),
       catchError(() => {
           this.notificationService.show(this.translateService.instant('case.noDataError'));
           return of(undefined);

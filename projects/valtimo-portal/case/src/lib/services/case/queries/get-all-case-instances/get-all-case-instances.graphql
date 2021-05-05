@@ -1,6 +1,8 @@
 query GetAllCaseInstances {
   allCaseInstances @namedClient(name: "portal-api") {
     caseDefinitionId
+    createdOn
+    externalId
     id
     submission
     status

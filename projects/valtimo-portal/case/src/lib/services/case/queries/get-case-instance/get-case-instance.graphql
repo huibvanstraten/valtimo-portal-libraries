@@ -1,9 +1,11 @@
 query GetCaseInstance($id: UUID!) {
   getCaseInstance(id: $id) @namedClient(name: "portal-api") {
     caseDefinitionId
+    createdOn
+    externalId
     id
-    status
     submission
+    status
     userId
   }
 }

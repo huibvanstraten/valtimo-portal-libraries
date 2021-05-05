@@ -39,6 +39,7 @@ export interface CaseDefinition {
 export interface CaseInstance {
   __typename?: 'CaseInstance';
   caseDefinitionId: Scalars['String'];
+  createdOn: Scalars['String'];
   externalId?: Maybe<Scalars['String']>;
   id: Scalars['UUID'];
   status: Scalars['String'];
@@ -126,7 +127,7 @@ export type GetAllCaseInstancesQuery = (
   { __typename?: 'Query' }
   & { allCaseInstances: Array<(
     { __typename?: 'CaseInstance' }
-    & Pick<Types.CaseInstance, 'caseDefinitionId' | 'id' | 'submission' | 'status' | 'userId'>
+    & Pick<Types.CaseInstance, 'caseDefinitionId' | 'createdOn' | 'externalId' | 'id' | 'submission' | 'status' | 'userId'>
   )> }
 );
 
@@ -134,6 +135,8 @@ export const GetAllCaseInstancesDocument = gql`
     query GetAllCaseInstances {
   allCaseInstances {
     caseDefinitionId
+    createdOn
+    externalId
     id
     submission
     status
@@ -142,7 +145,7 @@ export const GetAllCaseInstancesDocument = gql`
 }
     `;
 
-@Injectable({
+  @Injectable({
     providedIn: 'root'
   })
   export class GetAllCaseInstancesGQL extends Apollo.Query<GetAllCaseInstancesQuery, GetAllCaseInstancesQueryVariables> {

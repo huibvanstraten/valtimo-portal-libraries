@@ -38,7 +38,8 @@ export class CasesComponent {
             id: instance.caseDefinitionId,
             code: instance.id,
             status: instance.status,
-            tasks: []
+            tasks: [],
+            date: instance.createdOn
           }
         ))
       ),

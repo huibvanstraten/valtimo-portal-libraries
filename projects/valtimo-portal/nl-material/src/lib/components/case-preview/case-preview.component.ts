@@ -18,12 +18,12 @@ const mockCasePreview: CasePreview = {
     },
     {
       id: 'processed',
-      date: new Date(2020, 2, 21),
+      date: new Date(2021, 2, 21),
       completed: false
     },
     {
       id: 'plan',
-      date: new Date(2020, 4, 31),
+      date: new Date(2021, 4, 31),
       completed: false
     }
   ]

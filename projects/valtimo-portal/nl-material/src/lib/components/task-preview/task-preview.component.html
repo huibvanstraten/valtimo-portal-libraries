@@ -3,8 +3,8 @@
     *ngIf="(currentLang$ | async) as currentLang"
     [buttonText]="'home.preview.primaryButtonText' | translate"
     [secondaryButtonText]="'home.preview.secondaryButtonText' | translate"
-    [subtitle]="preview.taskId"
-    [title]="preview.taskId + '.my' | translate"
+    [title]="preview.caseDefinitionId + '.tasks.' + preview.taskDefinitionKey | translate"
+    [subtitle]="preview.caseDefinitionId + '.title' | translate"
     (primaryButtonClick)="navigateToTask()"
     [type]="!preview.isCompleted ? taskPreviewType : taskPreviewCompletedType"
     [ngClass]="{'completed': preview.isCompleted}"
@@ -20,7 +20,6 @@
   <div class="top-right-fold"></div>
 </ng-template>
 
-
 <ng-template #currentTaskActions let-currentLang="currentLang" let-preview="preview">
   <div
     class="current-task-actions"
@@ -28,7 +27,12 @@
       <span>
         {{preview.createdOn | date: 'shortDate' : '' : currentLang}}
       </span>
-    <button mat-button [routerLink]="taskRoute$ | async" [queryParams]="{id:preview.taskId}">
+    <button
+      *ngIf="!preview.isCompleted"
+      mat-button
+      [routerLink]="taskRoute$ | async"
+      [queryParams]="{id:preview.taskId}"
+    >
       <mat-icon fontIcon="fa-arrow-right" fontSet="fa"></mat-icon>
     </button>
   </div>

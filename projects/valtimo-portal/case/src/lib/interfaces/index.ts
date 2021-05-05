@@ -14,11 +14,4 @@
  * limitations under the License.
  */
 
-export interface PortalTask {
-  isCompleted: boolean;
-  createdOn: Date;
-  formDefinition: any;
-  taskId: string;
-  caseDefinitionId: string;
-  taskDefinitionKey: string;
-}
+export * from './portal-case-instance';

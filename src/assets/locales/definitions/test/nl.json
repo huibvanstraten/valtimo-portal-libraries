@@ -1,5 +1,6 @@
 {
   "test": {
+    "title": "Aanvraag testdossier",
     "wouldLikeTo": "een testdossier openen",
     "new": "Nieuw testdossier",
     "my": "Mijn testdossier",

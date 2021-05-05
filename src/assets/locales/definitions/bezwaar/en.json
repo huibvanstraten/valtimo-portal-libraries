@@ -6,7 +6,11 @@
     "my": "My notice of objection",
     "statuses": {
       "portal-case-created": "Objection lodged",
-      "portal-case-in-progress": "Notice of objection received"
+      "portal-case-in-progress": "Notice of objection received",
+      "portal-case-decision-made": "Decision is made",
+      "portal-case-dismissed": "Objection dismissed",
+      "portal-case-approved": "Objection approved",
+      "portal-case-finished": "Objection finished"
     },
     "properties": {
       "aanhef": "Salutation",

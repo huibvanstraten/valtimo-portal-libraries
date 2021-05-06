@@ -7,7 +7,11 @@
     "statuses": {
       "portal-case-created": "Bezwaar ingediend",
       "portal-case-received": "Bezwaar ontvangen",
-      "portal-case-in-progress": "Bezwaar is in behandeling"
+      "portal-case-in-progress": "Bezwaar is in behandeling",
+      "portal-case-decision-made": "Besluit genomen",
+      "portal-case-dismissed": "Bezwaar ongegrond",
+      "portal-case-approved": "Bezwaar gegrond",
+      "portal-case-finished": "Bezwaar afgerond"
     },
     "properties": {
       "aanhef": "Aanhef",

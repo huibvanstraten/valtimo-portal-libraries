@@ -59,7 +59,7 @@ export class CaseComponent implements OnInit, OnDestroy {
   previewTasks$: Observable<Array<TaskPreview>> = this.case$.pipe(
     map((caseInstance) => {
       if (caseInstance) {
-        return [{id: caseInstance.status, completed: false}];
+        return [{id: caseInstance.status?.name || '', completed: false}];
       } else {
         return [];
       }

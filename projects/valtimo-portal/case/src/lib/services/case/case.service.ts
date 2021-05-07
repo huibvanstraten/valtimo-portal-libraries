@@ -20,7 +20,7 @@ import {catchError, map} from 'rxjs/operators';
 import {Observable, of} from 'rxjs';
 import {CreateCaseGQL, CreateCaseMutation} from './mutations';
 import {FetchResult} from '@apollo/client/core';
-import {CaseDefinition, Exact} from '@valtimo-portal/graphql';
+import {CaseDefinition, CaseInstance, Exact} from '@valtimo-portal/graphql';
 import {GetAllCaseInstancesQuery} from './queries/get-all-case-instances/get-all-case-instances.graphql-gen';
 import {QueryRef} from 'apollo-angular';
 import {NotificationService} from '@valtimo-portal/shared';
@@ -64,10 +64,10 @@ export class CaseService {
     }
     return this.caseInstancesQueryRef.valueChanges
       .pipe(
-        map((res) => res.data.allCaseInstances?.map((caseInstance) => ({
-          ...caseInstance,
-          createdOn: new Date(caseInstance.createdOn)
-        }))),
+        map((res) => res.data.allCaseInstances?.map((caseInstance) => {
+            return caseInstance && this.mapCaseInstance(caseInstance as CaseInstance);
+          }
+        )),
         catchError(() => {
             this.notificationService.show(this.translateService.instant('cases.noDataError'));
             return of([]);
@@ -82,7 +82,7 @@ export class CaseService {
         const caseInstance = res.data.getCaseInstance;
 
         if (caseInstance) {
-          return {...caseInstance, createdOn: new Date(caseInstance.createdOn)};
+          return this.mapCaseInstance(caseInstance as CaseInstance);
         } else {
           return undefined;
         }
@@ -98,4 +98,20 @@ export class CaseService {
   submitCase(submission: any, caseDefinitionId: string): Observable<FetchResult<CreateCaseMutation>> {
     return this.createCaseGQL.mutate({submission, caseDefinitionId});
   }
+
+  private mapCaseInstance(caseInstance: CaseInstance): PortalCaseInstance {
+    return {
+      ...caseInstance,
+      createdOn: new Date(caseInstance.createdOn),
+      status: {
+        name: `${caseInstance.status?.name}`,
+        createdOn: caseInstance.status?.createdOn ? new Date(caseInstance.status?.createdOn) : undefined
+      },
+      statusHistory: caseInstance.statusHistory?.map((history) => ({
+        createdOn: new Date(history.createdOn),
+        name: `${history.status.name}`
+      }))
+    };
+  }
 }
+

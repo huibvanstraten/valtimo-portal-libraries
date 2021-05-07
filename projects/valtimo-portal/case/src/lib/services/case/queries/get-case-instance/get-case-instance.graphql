@@ -5,7 +5,16 @@ query GetCaseInstance($id: UUID!) {
     externalId
     id
     submission
-    status
     userId
+    status {
+      createdOn
+      name
+    }
+    statusHistory {
+      createdOn
+      status {
+        name
+      }
+    }
   }
 }

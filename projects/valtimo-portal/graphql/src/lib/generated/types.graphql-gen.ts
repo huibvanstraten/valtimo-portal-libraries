@@ -27,6 +27,7 @@ export interface CaseDefinition {
   __typename?: 'CaseDefinition';
   id: Scalars['String'];
   schema: Scalars['JSON'];
+  statusDefinition: Array<Scalars['String']>;
 }
 
 export interface CaseInstance {
@@ -35,7 +36,8 @@ export interface CaseInstance {
   createdOn: Scalars['String'];
   externalId?: Maybe<Scalars['String']>;
   id: Scalars['UUID'];
-  status: Scalars['String'];
+  status?: Maybe<Status>;
+  statusHistory?: Maybe<Array<HistoricStatus>>;
   submission: Scalars['JSON'];
   userId: Scalars['String'];
 }
@@ -44,6 +46,12 @@ export interface FormDefinition {
   __typename?: 'FormDefinition';
   formDefinition: Scalars['JSON'];
   name: Scalars['String'];
+}
+
+export interface HistoricStatus {
+  __typename?: 'HistoricStatus';
+  createdOn: Scalars['String'];
+  status: Status;
 }
 
 
@@ -59,6 +67,7 @@ export interface Mutation {
 export interface MutationProcessSubmissionArgs {
   submission: Scalars['JSON'];
   caseDefinitionId: Scalars['String'];
+  initialStatus?: Maybe<Scalars['String']>;
 }
 
 
@@ -97,6 +106,12 @@ export interface QueryFindTasksArgs {
 
 
 export interface QueryGetFormDefinitionArgs {
+  name: Scalars['String'];
+}
+
+export interface Status {
+  __typename?: 'Status';
+  createdOn: Scalars['String'];
   name: Scalars['String'];
 }
 

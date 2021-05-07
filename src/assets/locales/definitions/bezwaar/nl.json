@@ -1,11 +1,12 @@
 {
   "bezwaar": {
     "title": "Bezwaarschrift",
-    "wouldLikeTo": "een bezwaar indienen",
+    "wouldLikeTo": "Een bezwaar indienen",
     "new": "Nieuw bezwaar indienen",
     "my": "Mijn bezwaarschrift",
     "statuses": {
       "portal-case-created": "Bezwaar ingediend",
+      "portal-case-received": "Bezwaar ontvangen",
       "portal-case-in-progress": "Bezwaar is in behandeling",
       "portal-case-decision-made": "Besluit genomen",
       "portal-case-dismissed": "Bezwaar ongegrond",
@@ -30,12 +31,18 @@
       "besluit": "Waarover ging het besluit?",
       "bezwaar": "Waarom bent u het niet eens met het besluit?",
       "communicatie": "Hebt u een voorkeur voor de manier waarop de gemeente met u communiceert over het bezwaar?",
-      "ingevuld": "Ja, ik heb alles juist ingevuld."
+      "ingevuld": "Ja, ik heb alles juist ingevuld.",
+      "welkeBeschikking": "Met welke beslissing bent u het niet eens?",
+      "waaromBentUHetNietEensMetDezeBeschikking": "Waarom bent u het niet eens met deze beschikking?",
+      "watIsDieUitkomstDieUVerwacht": "Wat is die uitkomst die volgens u terecht zou zijn?",
+      "emailadres": "E-mailadres"
     },
     "tips": [
       "Wees bij het indienen van een bezwaar zo volledig mogelijk, zodat wij jou zo snel mogelijk kunnen helpen."
     ],
     "tasks": {
+      "external-portal-task": "Externe portaal taak",
+      "gegevens-aanvullen": "Meer informatie nodig"
     }
   }
 }

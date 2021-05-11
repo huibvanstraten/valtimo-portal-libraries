@@ -14,5 +14,16 @@
  * limitations under the License.
  */
 
-export * from './portal-case-instance';
-export * from './case-preview';
+interface CasePreviewStatus {
+  id: string;
+  date?: Date;
+  completed: boolean;
+}
+
+interface CasePreview {
+  id: string;
+  caseDefinitionId: string;
+  statuses: Array<CasePreviewStatus>;
+}
+
+export {CasePreviewStatus, CasePreview};

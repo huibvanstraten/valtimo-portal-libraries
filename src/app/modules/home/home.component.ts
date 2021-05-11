@@ -18,7 +18,7 @@ import {Component, OnInit} from '@angular/core';
 import {AnimatedDotsService, CardType} from '@valtimo-portal/nl-material';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {KeycloakService} from 'keycloak-angular';
-import {CaseService, PortalCaseInstance} from '@valtimo-portal/case';
+import {CasePreview, CaseService} from '@valtimo-portal/case';
 
 @Component({
   selector: 'app-home',
@@ -27,7 +27,7 @@ import {CaseService, PortalCaseInstance} from '@valtimo-portal/case';
 })
 export class HomeComponent implements OnInit {
 
-  latestCaseInstance$: Observable<PortalCaseInstance | undefined> = this.caseService.getLatestCaseInstance();
+  latestCaseInstancePreview$: Observable<CasePreview | undefined> = this.caseService.getLatestCasePreview();
 
   dots$!: Observable<string>;
 

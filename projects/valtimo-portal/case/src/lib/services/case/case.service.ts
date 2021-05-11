@@ -17,7 +17,7 @@
 import {Injectable} from '@angular/core';
 import {GetAllCaseDefinitionsGQL, GetAllCaseInstancesGQL, GetCaseInstanceGQL} from './queries';
 import {catchError, map} from 'rxjs/operators';
-import {Observable, of} from 'rxjs';
+import {combineLatest, Observable, of} from 'rxjs';
 import {CreateCaseGQL, CreateCaseMutation} from './mutations';
 import {FetchResult} from '@apollo/client/core';
 import {CaseDefinition, CaseInstance, Exact} from '@valtimo-portal/graphql';
@@ -25,7 +25,7 @@ import {GetAllCaseInstancesQuery} from './queries/get-all-case-instances/get-all
 import {QueryRef} from 'apollo-angular';
 import {NotificationService} from '@valtimo-portal/shared';
 import {TranslateService} from '@ngx-translate/core';
-import {PortalCaseInstance} from '../../interfaces';
+import {CasePreview, PortalCaseInstance, PortalStatus} from '../../interfaces';
 
 interface ObjectWithCreatedOnDate {
   [key: string]: any;
@@ -82,6 +82,20 @@ export class CaseService {
       );
   }
 
+  getAllCasePreviews(): Observable<Array<CasePreview>> {
+    return combineLatest([this.getAllCaseDefinitions(), this.getAllCaseInstances()])
+      .pipe(
+        map(([definitions, caseInstances]) => {
+          return caseInstances.map((instance) => {
+            const statusDefinition = definitions.find((definition) =>
+              definition.id === instance.caseDefinitionId)?.statusDefinition || [];
+
+            return this.getCaseInstancePreview(instance, statusDefinition);
+          });
+        })
+      );
+  }
+
   getLatestCaseInstance(): Observable<PortalCaseInstance | undefined> {
     return this.getAllCaseInstances().pipe(
       map((caseInstances) => {
@@ -93,6 +107,23 @@ export class CaseService {
         }
       })
     );
+  }
+
+  getLatestCasePreview(): Observable<CasePreview | undefined> {
+    return combineLatest([this.getAllCaseDefinitions(), this.getLatestCaseInstance()])
+      .pipe(
+        map(([definitions, latestInstance]) => {
+          const statusDefinition = latestInstance &&
+            definitions.find((definition) =>
+              definition.id === latestInstance.caseDefinitionId)?.statusDefinition;
+
+          if (latestInstance && statusDefinition) {
+            return this.getCaseInstancePreview(latestInstance, statusDefinition);
+          } else {
+            return undefined;
+          }
+        })
+      );
   }
 
   getCaseInstanceById(id: string): Observable<PortalCaseInstance | null | undefined> {
@@ -116,6 +147,27 @@ export class CaseService {
 
   submitCase(submission: any, caseDefinitionId: string): Observable<FetchResult<CreateCaseMutation>> {
     return this.createCaseGQL.mutate({submission, caseDefinitionId});
+  }
+
+  getCaseInstancePreview(caseInstance: PortalCaseInstance, statusDefinition: Array<string>): CasePreview {
+    const caseInstanceStatuses: Array<PortalStatus> = [
+      ...(caseInstance.status ? [caseInstance.status] : []),
+      ...(caseInstance.statusHistory ? caseInstance.statusHistory : []),
+    ];
+
+    return {
+      id: caseInstance.id,
+      caseDefinitionId: caseInstance.caseDefinitionId,
+      statuses: statusDefinition.map((statusName) => {
+        const findCaseInstanceStatus = caseInstanceStatuses.find((instanceStatus) => instanceStatus.name === statusName);
+
+        return {
+          completed: !!findCaseInstanceStatus,
+          date: findCaseInstanceStatus?.createdOn,
+          id: statusName
+        };
+      })
+    };
   }
 
   private mapCaseInstance(caseInstance: CaseInstance): PortalCaseInstance {

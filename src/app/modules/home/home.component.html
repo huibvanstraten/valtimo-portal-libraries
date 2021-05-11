@@ -72,8 +72,8 @@
     fxFlex.xs="100"
     fxLayout="column"
   >
-    <ng-container *ngIf="latestCaseInstance$ | async as latestCaseInstance">
-      <nl-material-case-preview></nl-material-case-preview>
+    <ng-container *ngIf="latestCaseInstancePreview$ | async as latestPreview">
+      <nl-material-case-preview [preview]="latestPreview"></nl-material-case-preview>
     </ng-container>
   </div>
 </ng-template>

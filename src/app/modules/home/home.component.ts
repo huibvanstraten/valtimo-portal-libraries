@@ -44,9 +44,7 @@ export class HomeComponent implements OnInit {
     this.dots$ = this.animatedDotsService.dots$;
   }
 
-  ngOnInit()
-    :
-    void {
+  ngOnInit(): void {
     this.keycloakService.loadUserProfile().then((profile) => {
       this.userFirstName$.next(`${profile.firstName}`);
     });

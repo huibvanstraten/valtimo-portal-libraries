@@ -18,6 +18,7 @@ import {Component, OnInit} from '@angular/core';
 import {AnimatedDotsService, CardType} from '@valtimo-portal/nl-material';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {KeycloakService} from 'keycloak-angular';
+import {CaseService, PortalCaseInstance} from '@valtimo-portal/case';
 
 @Component({
   selector: 'app-home',
@@ -25,6 +26,8 @@ import {KeycloakService} from 'keycloak-angular';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+
+  latestCaseInstance$: Observable<PortalCaseInstance | undefined> = this.caseService.getLatestCaseInstance();
 
   dots$!: Observable<string>;
 
@@ -35,12 +38,15 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private readonly keycloakService: KeycloakService,
-    private readonly animatedDotsService: AnimatedDotsService
+    private readonly animatedDotsService: AnimatedDotsService,
+    private readonly caseService: CaseService
   ) {
     this.dots$ = this.animatedDotsService.dots$;
   }
 
-  ngOnInit(): void {
+  ngOnInit()
+    :
+    void {
     this.keycloakService.loadUserProfile().then((profile) => {
       this.userFirstName$.next(`${profile.firstName}`);
     });

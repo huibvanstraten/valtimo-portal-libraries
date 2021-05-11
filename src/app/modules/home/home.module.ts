@@ -22,6 +22,7 @@ import {HomeComponent} from './home.component';
 import {CardModule, CasePreviewModule, NewCaseMenuModule, TipsModule} from '@valtimo-portal/nl-material';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {TranslateModule} from '@ngx-translate/core';
+import {CaseServiceModule} from '@valtimo-portal/case';
 
 @NgModule({
   declarations: [HomeComponent],
@@ -33,7 +34,8 @@ import {TranslateModule} from '@ngx-translate/core';
     TranslateModule,
     NewCaseMenuModule,
     CasePreviewModule,
-    TipsModule
+    TipsModule,
+    CaseServiceModule
   ]
 })
 export class HomeModule {

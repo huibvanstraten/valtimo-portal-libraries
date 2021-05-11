@@ -3,7 +3,7 @@ interface PortalStatus {
   name: string;
 }
 
-export interface PortalCaseInstance {
+interface PortalCaseInstance {
   caseDefinitionId: string;
   createdOn: Date;
   externalId?: string | null | undefined;
@@ -13,3 +13,5 @@ export interface PortalCaseInstance {
   submission: any;
   userId: string;
 }
+
+export {PortalStatus, PortalCaseInstance};

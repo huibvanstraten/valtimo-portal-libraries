@@ -27,6 +27,12 @@ import {NotificationService} from '@valtimo-portal/shared';
 import {TranslateService} from '@ngx-translate/core';
 import {PortalCaseInstance} from '../../interfaces';
 
+interface ObjectWithCreatedOnDate {
+  [key: string]: any;
+
+  createdOn: Date;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -76,6 +82,19 @@ export class CaseService {
       );
   }
 
+  getLatestCaseInstance(): Observable<PortalCaseInstance | undefined> {
+    return this.getAllCaseInstances().pipe(
+      map((caseInstances) => {
+        if (caseInstances.length === 0) {
+          return undefined;
+        } else {
+          return caseInstances.sort((a, b) =>
+            this.getLatestCaseInstanceDate(b).getTime() - this.getLatestCaseInstanceDate(a).getTime())[0];
+        }
+      })
+    );
+  }
+
   getCaseInstanceById(id: string): Observable<PortalCaseInstance | null | undefined> {
     return this.getCaseInstanceGQL.fetch({id}).pipe(
       map((res) => {
@@ -112,6 +131,26 @@ export class CaseService {
         name: `${history.status.name}`
       }))
     };
+  }
+
+  private getLatestCaseInstanceDate(caseInstance: PortalCaseInstance): Date {
+    const statusHistoryWithDates = caseInstance.statusHistory?.filter(
+      (history) => history.createdOn) as Array<ObjectWithCreatedOnDate> || [];
+
+    if (statusHistoryWithDates.length === 1) {
+      return statusHistoryWithDates[0].createdOn;
+    } else if (statusHistoryWithDates.length > 1) {
+      return this.getLatest(statusHistoryWithDates)[0].createdOn;
+    } else if (caseInstance.status?.createdOn) {
+      return caseInstance.status.createdOn;
+    } else {
+      return caseInstance.createdOn;
+    }
+  }
+
+  private getLatest(array: Array<ObjectWithCreatedOnDate>): ObjectWithCreatedOnDate {
+    return array.sort((a, b) =>
+      a.createdOn.getTime() - b.createdOn.getTime())[0];
   }
 }
 

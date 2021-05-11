@@ -13,9 +13,13 @@
       <mat-icon *ngIf="getUncompletedStatuses()[0].id === status.id" fontIcon="fa-arrow-right" fontSet="fa"></mat-icon>
     </div>
     <div *ngIf="isClippingPreview() || i !== 0" class="description">
-      <span>{{caseDefinitionId + '.statuses.' + status.id | translate}}</span>
-      <span *ngIf="isClippingPreview()">
-          {{status.date ? (status.date | date: 'shortDate' : '' : currentLang) : 'cases.noDate' | translate}}
+      <span
+        [ngClass]="{'title-no-date': !status.date}"
+      >
+        {{caseDefinitionId + '.statuses.' + status.id | translate}}
+      </span>
+      <span *ngIf="isClippingPreview() && status.date" class="date">
+          {{status.date | date: 'shortDate' : '' : currentLang}}
         </span>
     </div>
   </li>

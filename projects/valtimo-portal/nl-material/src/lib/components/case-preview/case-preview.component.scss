@@ -17,11 +17,18 @@
     font-size: $font-medium;
     line-height: $font-large;
 
-    &:last-child {
-      font-weight: normal;
+    &.date, &.title-no-date {
       margin-bottom: 26px;
+    }
+
+    &.date {
+      font-weight: normal;
       color: $nl-darker-gray;
       margin-top: 2px;
+    }
+
+    &.title-no-date {
+      margin-top: 3px;
     }
   }
 }

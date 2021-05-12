@@ -38,4 +38,8 @@ export class CaseStatusComponent {
     return this.statuses.filter((status) => !status.completed);
   }
 
+  getLastCompletedStatus(): Array<CasePreviewStatus> {
+    const completedStatuses = this.statuses.filter((status) => status.completed);
+    return [{date: new Date(), id: '', completed: true}, completedStatuses[completedStatuses.length - 1]];
+  }
 }

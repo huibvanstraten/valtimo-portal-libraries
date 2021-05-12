@@ -37,16 +37,13 @@
   </nl-material-case-status>
 </ng-template>
 
-<ng-template #currentCaseActions let-currentLang="currentLang" let-previewTasks="previewTasks" let-preview="preview">
+<ng-template #currentCaseActions let-currentLang="currentLang" let-preview="preview">
   <div
     *ngIf="mode === currentPreviewMode"
     class="current-case-actions"
   >
-    <ng-container *ngIf="previewTasks[1]?.date as date">
-      <ng-container *ngTemplateOutlet="date;context:{currentLang: currentLang, date: date}"></ng-container>
-    </ng-container>
-    <ng-container *ngIf="!previewTasks[1]?.date && preview.date">
-      <ng-container *ngTemplateOutlet="date;context:{currentLang: currentLang, date: preview.date}"></ng-container>
+    <ng-container *ngIf="getLatestPreviewDate(preview) as latestDate">
+      <ng-container *ngTemplateOutlet="date;context:{currentLang: currentLang, date: latestDate}"></ng-container>
     </ng-container>
     <button mat-button [routerLink]="caseRoute$ | async" [queryParams]="{id:preview.code}">
       <mat-icon fontIcon="fa-arrow-right" fontSet="fa"></mat-icon>
@@ -55,7 +52,7 @@
 </ng-template>
 
 <ng-template #date let-date="date" let-currentLang="currentLang">
-      <span>
-        {{date | date: 'shortDate' : '' : currentLang}}
-      </span>
+  <span>
+    {{date | date: 'shortDate' : '' : currentLang}}
+  </span>
 </ng-template>

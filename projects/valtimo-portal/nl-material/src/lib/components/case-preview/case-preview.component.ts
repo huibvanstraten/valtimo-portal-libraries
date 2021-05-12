@@ -66,6 +66,11 @@ export class CasePreviewComponent implements OnInit, OnDestroy {
     );
   }
 
+  getLatestPreviewDate(preview: CasePreview): Date {
+    const completedStatuses = preview.statuses.filter((status) => status.date && status.completed);
+    return completedStatuses[completedStatuses.length - 1].date as Date;
+  }
+
   private setCaseRoute(): void {
     this.caseRoute$.next(
       this.getCaseRoute()

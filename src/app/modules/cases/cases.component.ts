@@ -34,7 +34,6 @@ export class CasesComponent {
   cases$: Observable<Array<CasePreview>> = this.caseService.getAllCasePreviews()
     .pipe(
       tap((previews) => {
-        console.log('previews', previews);
         this.loading$.next(false);
       })
     );

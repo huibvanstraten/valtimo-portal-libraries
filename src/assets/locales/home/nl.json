@@ -11,8 +11,10 @@
       "buttonText": "Projectidee indienen"
     },
     "preview": {
+      "title": "Recente aanvraag",
       "secondaryButtonText": "Bekijk aanvraag",
-      "primaryButtonText": "Stel een vraag"
+      "primaryButtonText": "Stel een vraag",
+      "noData": "Er is geen recente aanvraag om te tonen"
     }
   }
 }

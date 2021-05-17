@@ -72,9 +72,20 @@
     fxFlex.xs="100"
     fxLayout="column"
   >
-    <ng-container *ngIf="latestCaseInstancePreview$ | async as latestPreview">
-      <nl-material-case-preview [preview]="latestPreview"></nl-material-case-preview>
+    <ng-container *ngIf="{latestCaseInstancePreview: latestCaseInstancePreview$ | async} as obs">
+      <ng-container *ngIf="(loadingLatestCaseInstance$ | async) === false; else loading">
+        <ng-container *ngIf="obs.latestCaseInstancePreview; else noLatestCaseInstancePreview">
+          <nl-material-case-preview [preview]="obs.latestCaseInstancePreview"></nl-material-case-preview>
+        </ng-container>
+      </ng-container>
     </ng-container>
+  </div>
+</ng-template>
+
+<ng-template #noLatestCaseInstancePreview>
+  <div class="no-data-container">
+    <h1 class="mat-h1">{{'home.preview.title' | translate}}</h1>
+    <h1 class="mat-h2">{{'home.preview.noData' | translate}}</h1>
   </div>
 </ng-template>
 
@@ -98,4 +109,8 @@
     <h1 class="mat-h1 primary-bold">{{'tips.title' | translate}}</h1>
     <nl-material-tips></nl-material-tips>
   </div>
+</ng-template>
+
+<ng-template #loading>
+  <nl-material-spinner></nl-material-spinner>
 </ng-template>

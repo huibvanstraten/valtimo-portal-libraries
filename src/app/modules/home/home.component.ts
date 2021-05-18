@@ -19,7 +19,7 @@ import {AnimatedDotsService, CardType} from '@valtimo-portal/nl-material';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {KeycloakService} from 'keycloak-angular';
 import {CasePreview, CaseService} from '@valtimo-portal/case';
-import {map, tap} from 'rxjs/operators';
+import {tap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
@@ -30,9 +30,7 @@ export class HomeComponent implements OnInit {
 
   latestCaseInstancePreview$: Observable<CasePreview | undefined> = this.caseService.getLatestCasePreview()
     .pipe(
-      map(() => undefined),
       tap(() => {
-        console.log('hi');
         this.loadingLatestCaseInstance$.next(false);
       })
     );

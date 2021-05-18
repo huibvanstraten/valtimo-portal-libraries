@@ -182,7 +182,7 @@ export class NavigationMenuComponent implements OnInit, AfterViewInit, OnDestroy
 
     const firstElementAbsoluteOffset = nativeElements[0]?.offsetLeft;
 
-    const activeElement = nativeElements[currentElementIndex];
+    const activeElement = nativeElements[currentElementIndex !== -1 ? currentElementIndex : 0];
     const activeElementWidth = activeElement?.offsetWidth;
     const activeElementAbsolutetOffset = activeElement?.offsetLeft;
     const activeElementRelativeOffset = (activeElementAbsolutetOffset && firstElementAbsoluteOffset) ?

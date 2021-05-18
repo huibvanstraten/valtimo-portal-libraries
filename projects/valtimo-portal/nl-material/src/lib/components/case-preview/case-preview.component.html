@@ -45,7 +45,7 @@
     <ng-container *ngIf="getLatestPreviewDate(preview) as latestDate">
       <ng-container *ngTemplateOutlet="date;context:{currentLang: currentLang, date: latestDate}"></ng-container>
     </ng-container>
-    <button mat-button [routerLink]="caseRoute$ | async" [queryParams]="{id:preview.code}">
+    <button mat-button [routerLink]="caseRoute$ | async" [queryParams]="{id:preview.id}">
       <mat-icon fontIcon="fa-arrow-right" fontSet="fa"></mat-icon>
     </button>
   </div>

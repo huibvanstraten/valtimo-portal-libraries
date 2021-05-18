@@ -4,6 +4,8 @@
     "noData": "There is no case data available.",
     "noDetails": "There are no case details available.",
     "details": "Details",
-    "status": "Status"
+    "status": "Status",
+    "true": "Yes",
+    "false": "No"
   }
 }

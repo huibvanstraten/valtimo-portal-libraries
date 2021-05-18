@@ -35,7 +35,7 @@ import {TranslateModule} from '@ngx-translate/core';
     TranslateModule,
     CaseStatusModule,
     CardModule,
-    TipsModule
+    TipsModule,
   ]
 })
 export class CaseModule {

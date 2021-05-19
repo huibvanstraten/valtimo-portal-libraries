@@ -1,8 +1,8 @@
 import {Component, Input} from '@angular/core';
-import {TaskPreview} from '../../interfaces';
 import {CardType, CasePreviewMode} from '../../enums';
 import {SidenavService} from '../../services';
 import {Observable} from 'rxjs';
+import {CasePreviewStatus} from '@valtimo-portal/case';
 
 @Component({
   selector: 'nl-material-case-status',
@@ -10,7 +10,7 @@ import {Observable} from 'rxjs';
   styleUrls: ['../case-preview/case-preview.component.scss']
 })
 export class CaseStatusComponent {
-  @Input() previewTasks: Array<TaskPreview> = [];
+  @Input() statuses: Array<CasePreviewStatus> = [];
   @Input() mode: CasePreviewMode = CasePreviewMode.clipping;
   @Input() caseDefinitionId = '';
 
@@ -34,8 +34,12 @@ export class CaseStatusComponent {
     return this.mode === this.currentPreviewMode;
   }
 
-  getOpenTasks(tasks: Array<TaskPreview>): Array<TaskPreview> {
-    return tasks.filter((task) => !task.completed);
+  getUncompletedStatuses(): Array<CasePreviewStatus> {
+    return this.statuses.filter((status) => !status.completed);
   }
 
+  getLastCompletedStatus(): Array<CasePreviewStatus> {
+    const completedStatuses = this.statuses.filter((status) => status.completed);
+    return [{date: new Date(), id: '', completed: true}, completedStatuses[completedStatuses.length - 1]];
+  }
 }

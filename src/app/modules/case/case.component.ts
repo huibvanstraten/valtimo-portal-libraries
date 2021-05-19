@@ -15,12 +15,11 @@
  */
 
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {CaseService} from '@valtimo-portal/case';
+import {CasePreviewStatus, CaseService, PortalCaseInstance} from '@valtimo-portal/case';
 import {map, switchMap, tap} from 'rxjs/operators';
-import {BreadcrumbsService, CaseDetail, CasePreviewMode, TaskPreview} from '@valtimo-portal/nl-material';
-import {CaseInstance} from '@valtimo-portal/graphql';
+import {BreadcrumbsService, CaseDetail, CasePreviewMode} from '@valtimo-portal/nl-material';
 import {ActivatedRoute} from '@angular/router';
-import {BehaviorSubject, Observable, Subscription} from 'rxjs';
+import {BehaviorSubject, combineLatest, Observable, Subscription} from 'rxjs';
 import {CardType} from '../../../../projects/valtimo-portal/nl-material/src/lib';
 import {TranslateService} from '@ngx-translate/core';
 
@@ -38,7 +37,7 @@ export class CaseComponent implements OnInit, OnDestroy {
   case$ = this.route.queryParams.pipe(
     // @ts-ignore
     switchMap((params) => this.caseService.getCaseInstanceById(params?.id)),
-    tap((caseInstance: CaseInstance) => {
+    tap((caseInstance: PortalCaseInstance) => {
       const caseDefinitionId = caseInstance?.caseDefinitionId;
       this.loading$.next(false);
       if (caseDefinitionId) {
@@ -56,15 +55,22 @@ export class CaseComponent implements OnInit, OnDestroy {
     })
   );
 
-  previewTasks$: Observable<Array<TaskPreview>> = this.case$.pipe(
-    map((caseInstance) => {
-      if (caseInstance) {
-        return [{id: caseInstance.status, completed: false}];
-      } else {
-        return [];
-      }
-    })
-  );
+  previewStatuses$: Observable<Array<CasePreviewStatus>> = combineLatest(
+    [this.case$, this.caseService.getAllCaseDefinitions()]
+  )
+    .pipe(
+      map(([caseInstance, definitions]) => {
+        const statusDefinition = caseInstance &&
+          definitions.find((definition) =>
+            definition.id === caseInstance.caseDefinitionId)?.statusDefinition;
+
+        if (caseInstance && statusDefinition) {
+          return this.caseService.getCaseInstancePreview(caseInstance, statusDefinition).statuses;
+        } else {
+          return [];
+        }
+      })
+    );
 
   readonly clippingPreviewMode = CasePreviewMode.clipping;
   readonly caseStatusType = CardType.caseStatus;

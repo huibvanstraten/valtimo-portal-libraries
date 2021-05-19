@@ -1,18 +1,18 @@
-<div @fadeIn>
+<div @fadeIn *ngIf="preview">
   <nl-material-card
     *ngIf="(currentLang$ | async) as currentLang"
     [buttonText]="'home.preview.primaryButtonText' | translate"
     [secondaryButtonText]="'home.preview.secondaryButtonText' | translate"
-    [title]="preview.id + '.my' | translate"
+    [title]="preview.caseDefinitionId + '.my' | translate"
     [type]="isClippingPreview() ? casePreviewClippingType : casePreviewCurrentType"
     (primaryButtonClick)="navigateToCase()"
   >
     <ng-container *ngTemplateOutlet="extras"></ng-container>
-    <ng-container *ngIf="previewTasks$ | async as previewTasks">
+    <ng-container *ngIf="preview.statuses.length > 1">
       <ng-container
-        *ngTemplateOutlet="tasks;context:{currentLang: currentLang, previewTasks: previewTasks}"></ng-container>
+        *ngTemplateOutlet="statuses;context:{currentLang: currentLang, preview: preview}"></ng-container>
       <ng-container
-        *ngTemplateOutlet="currentCaseActions;context:{currentLang: currentLang, previewTasks: previewTasks, preview: preview}"></ng-container>
+        *ngTemplateOutlet="currentCaseActions;context:{currentLang: currentLang, preview: preview}"></ng-container>
     </ng-container>
   </nl-material-card>
 </div>
@@ -28,25 +28,22 @@
   </div>
 </ng-template>
 
-<ng-template #tasks let-currentLang="currentLang" let-previewTasks="previewTasks">
+<ng-template #statuses let-currentLang="currentLang" let-preview="preview">
   <nl-material-case-status
-    [previewTasks]="previewTasks"
+    [statuses]="preview.statuses"
     [mode]="mode"
-    [caseDefinitionId]="preview.id"
+    [caseDefinitionId]="preview.caseDefinitionId"
   >
   </nl-material-case-status>
 </ng-template>
 
-<ng-template #currentCaseActions let-currentLang="currentLang" let-previewTasks="previewTasks" let-preview="preview">
+<ng-template #currentCaseActions let-currentLang="currentLang" let-preview="preview">
   <div
     *ngIf="mode === currentPreviewMode"
     class="current-case-actions"
   >
-    <ng-container *ngIf="previewTasks[1]?.date as date">
-      <ng-container *ngTemplateOutlet="date;context:{currentLang: currentLang, date: date}"></ng-container>
-    </ng-container>
-    <ng-container *ngIf="!previewTasks[1]?.date && preview.date">
-      <ng-container *ngTemplateOutlet="date;context:{currentLang: currentLang, date: preview.date}"></ng-container>
+    <ng-container *ngIf="getLatestPreviewDate(preview) as latestDate">
+      <ng-container *ngTemplateOutlet="date;context:{currentLang: currentLang, date: latestDate}"></ng-container>
     </ng-container>
     <button mat-button [routerLink]="caseRoute$ | async" [queryParams]="{id:preview.code}">
       <mat-icon fontIcon="fa-arrow-right" fontSet="fa"></mat-icon>
@@ -55,7 +52,7 @@
 </ng-template>
 
 <ng-template #date let-date="date" let-currentLang="currentLang">
-      <span>
-        {{date | date: 'shortDate' : '' : currentLang}}
-      </span>
+  <span>
+    {{date | date: 'shortDate' : '' : currentLang}}
+  </span>
 </ng-template>

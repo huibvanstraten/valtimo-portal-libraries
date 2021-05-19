@@ -1,33 +1,11 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {CasePreview, TaskPreview} from '../../interfaces';
+import {CasePreview} from '@valtimo-portal/case';
 import {CardType, CasePreviewMode} from '../../enums';
 import {SidenavService} from '../../services';
 import {BehaviorSubject, combineLatest, Observable, Subscription} from 'rxjs';
 import {fadeInAnimations} from '../../animations';
 import {LocalizeRouterService} from '@gilsdav/ngx-translate-router';
 import {Router} from '@angular/router';
-
-const mockCasePreview: CasePreview = {
-  id: 'grant-application',
-  code: 'xxx',
-  tasks: [
-    {
-      id: 'submitted',
-      date: new Date(2021, 2, 20),
-      completed: true
-    },
-    {
-      id: 'processed',
-      date: new Date(2021, 2, 21),
-      completed: false
-    },
-    {
-      id: 'plan',
-      date: new Date(2021, 4, 31),
-      completed: false
-    }
-  ]
-};
 
 @Component({
   selector: 'nl-material-case-preview',
@@ -36,7 +14,7 @@ const mockCasePreview: CasePreview = {
   animations: fadeInAnimations
 })
 export class CasePreviewComponent implements OnInit, OnDestroy {
-  @Input() preview: CasePreview = mockCasePreview;
+  @Input() preview!: CasePreview;
   @Input() mode: CasePreviewMode = CasePreviewMode.clipping;
 
   currentLang$!: Observable<string>;
@@ -47,8 +25,6 @@ export class CasePreviewComponent implements OnInit, OnDestroy {
   readonly casePreviewCurrentType = CardType.casePreviewCurrent;
   readonly clippingPreviewMode = CasePreviewMode.clipping;
   readonly currentPreviewMode = CasePreviewMode.current;
-
-  readonly previewTasks$ = new BehaviorSubject<Array<TaskPreview>>([]);
 
   readonly caseRoute$ = new BehaviorSubject<string>(this.getCaseRoute());
 
@@ -61,8 +37,6 @@ export class CasePreviewComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.setTasksForPreview();
-
     this.routeLangSubscription =
       combineLatest([this.sidenavService.currentLang$, this.router.events])
         .subscribe(() => {
@@ -72,32 +46,6 @@ export class CasePreviewComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.routeLangSubscription.unsubscribe();
-  }
-
-  setTasksForPreview(): void {
-    const preview = this.preview;
-
-    if (preview.tasks.length > 0) {
-      if (this.isClippingPreview()) {
-        this.setPreviewTasks(preview.tasks);
-      } else {
-        this.setPreviewTasks(this.getCurrentCaseTasks(preview.tasks));
-      }
-    } else if (preview.status) {
-      this.setStatusPreview();
-    }
-  }
-
-  getCurrentCaseTasks(tasks: Array<TaskPreview>): Array<TaskPreview> {
-    if (tasks.length === 1) {
-      return tasks;
-    } else {
-      const completedTasks = tasks.filter((task) => task.completed);
-      const lastCompletedTaskIndex = completedTasks.length - 1;
-      const lastCompletedTask = completedTasks[lastCompletedTaskIndex];
-      const nextTask = tasks[lastCompletedTaskIndex + 1];
-      return [lastCompletedTask, nextTask].filter((value) => value);
-    }
   }
 
   isClippingPreview(): boolean {
@@ -114,27 +62,13 @@ export class CasePreviewComponent implements OnInit, OnDestroy {
 
   navigateToCase(): void {
     this.router.navigateByUrl(
-      `${this.getCaseRoute()}?id=${this.preview.code}`,
+      `${this.getCaseRoute()}?id=${this.preview.id}`,
     );
   }
 
-  private setPreviewTasks(tasks: Array<TaskPreview>): void {
-    this.previewTasks$.next(tasks);
-  }
-
-  private setStatusPreview(): void {
-    this.setPreviewTasks(
-      [
-        ...(this.isCurrentCasePreview() ? [{
-          id: '',
-          completed: true
-        }] : []),
-        {
-          id: this.preview.status || '',
-          completed: false
-        }
-      ]
-    );
+  getLatestPreviewDate(preview: CasePreview): Date {
+    const completedStatuses = preview.statuses.filter((status) => status.date && status.completed);
+    return completedStatuses[completedStatuses.length - 1].date as Date;
   }
 
   private setCaseRoute(): void {

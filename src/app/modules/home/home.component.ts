@@ -18,6 +18,8 @@ import {Component, OnInit} from '@angular/core';
 import {AnimatedDotsService, CardType} from '@valtimo-portal/nl-material';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {KeycloakService} from 'keycloak-angular';
+import {CasePreview, CaseService} from '@valtimo-portal/case';
+import {tap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
@@ -25,6 +27,15 @@ import {KeycloakService} from 'keycloak-angular';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+
+  latestCaseInstancePreview$: Observable<CasePreview | undefined> = this.caseService.getLatestCasePreview()
+    .pipe(
+      tap(() => {
+        this.loadingLatestCaseInstance$.next(false);
+      })
+    );
+
+  loadingLatestCaseInstance$ = new BehaviorSubject<boolean>(true);
 
   dots$!: Observable<string>;
 
@@ -35,7 +46,8 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private readonly keycloakService: KeycloakService,
-    private readonly animatedDotsService: AnimatedDotsService
+    private readonly animatedDotsService: AnimatedDotsService,
+    private readonly caseService: CaseService
   ) {
     this.dots$ = this.animatedDotsService.dots$;
   }

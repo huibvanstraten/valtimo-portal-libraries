@@ -15,9 +15,9 @@
  */
 
 import {Component} from '@angular/core';
-import {CasePreview, CasePreviewMode} from '@valtimo-portal/nl-material';
-import {CaseService} from '@valtimo-portal/case';
-import {map, tap} from 'rxjs/operators';
+import {CasePreviewMode} from '@valtimo-portal/nl-material';
+import {CasePreview, CaseService} from '@valtimo-portal/case';
+import {tap} from 'rxjs/operators';
 import {BehaviorSubject, Observable} from 'rxjs';
 
 @Component({
@@ -31,19 +31,9 @@ export class CasesComponent {
 
   currentPreviewMode = CasePreviewMode.current;
 
-  cases$: Observable<Array<CasePreview>> = this.caseService.getAllCaseInstances()
+  cases$: Observable<Array<CasePreview>> = this.caseService.getAllCasePreviews()
     .pipe(
-      map((instances) => instances.map((instance) => (
-          {
-            id: instance.caseDefinitionId,
-            code: instance.id,
-            status: instance.status,
-            tasks: [],
-            date: instance.createdOn
-          }
-        ))
-      ),
-      tap(() => {
+      tap((previews) => {
         this.loading$.next(false);
       })
     );

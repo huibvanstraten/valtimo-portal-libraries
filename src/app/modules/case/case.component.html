@@ -60,7 +60,7 @@
     fxFlex.gt-sm="33.3"
     fxFlex.sm="50"
     fxFlex="100"
-    *ngIf="previewTasks$ | async as previewTasks"
+    *ngIf="previewStatuses$ | async as statuses"
   >
     <h1 class="mat-h1 primary-bold">{{'case.status' | translate}}</h1>
     <div class="case-status">
@@ -68,7 +68,7 @@
         <nl-material-case-status
           [caseDefinitionId]="case.caseDefinitionId"
           [mode]="clippingPreviewMode"
-          [previewTasks]="previewTasks"
+          [statuses]="statuses"
         >
         </nl-material-case-status>
       </nl-material-card>

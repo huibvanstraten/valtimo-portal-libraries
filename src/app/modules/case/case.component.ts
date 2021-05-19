@@ -19,7 +19,7 @@ import {CasePreviewStatus, CaseService, PortalCaseInstance} from '@valtimo-porta
 import {map, switchMap, tap} from 'rxjs/operators';
 import {BreadcrumbsService, CaseDetail, CasePreviewMode} from '@valtimo-portal/nl-material';
 import {ActivatedRoute} from '@angular/router';
-import {BehaviorSubject, combineLatest, Observable, Subscription} from 'rxjs';
+import {BehaviorSubject, combineLatest, merge, Observable, Subscription} from 'rxjs';
 import {CardType} from '../../../../projects/valtimo-portal/nl-material/src/lib';
 import {TranslateService} from '@ngx-translate/core';
 
@@ -46,14 +46,30 @@ export class CaseComponent implements OnInit, OnDestroy {
     })
   );
 
-  caseDetails$: Observable<Array<CaseDetail>> = this.case$.pipe(
-    map((caseInstance) => {
-      return Object.keys(caseInstance.submission).map((key) => {
-          return {key, value: caseInstance.submission[key]};
-        }).filter((detail) => detail.key !== 'submit')
-        || [];
-    })
-  );
+  caseDetails$: Observable<Array<CaseDetail>> = merge(this.translateService.onLangChange, this.case$)
+    .pipe(
+      switchMap(() => this.case$),
+      map((caseInstance) => {
+        return Object.keys(caseInstance.submission)
+            .map((key) => {
+              return {key, value: caseInstance.submission[key]};
+            })
+            .filter((detail) => detail.key !== 'submit')
+            .map((detail) => {
+              console.log('remap');
+              const value = `${detail.value}`.trim().toLocaleLowerCase();
+
+              if (value === 'true') {
+                return {...detail, value: this.translateService.instant('case.true')};
+              } else if (value === 'false') {
+                return {...detail, value: this.translateService.instant('case.false')};
+              }
+
+              return detail;
+            })
+          || [];
+      })
+    );
 
   previewStatuses$: Observable<Array<CasePreviewStatus>> = combineLatest(
     [this.case$, this.caseService.getAllCaseDefinitions()]
@@ -81,7 +97,7 @@ export class CaseComponent implements OnInit, OnDestroy {
     private readonly caseService: CaseService,
     private readonly route: ActivatedRoute,
     private readonly breadcrumbsService: BreadcrumbsService,
-    private readonly translateService: TranslateService
+    private readonly translateService: TranslateService,
   ) {
     this.title$ = this.breadcrumbsService.lastBreadcrumbTitle$;
   }

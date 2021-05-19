@@ -1,18 +1,32 @@
-::ng-deep .case-details {
-  .mat-list-item:not(:last-child) {
-    margin-bottom: 16px;
-  }
+@import "colors";
+@import "variables";
+@import 'mixins';
 
-  .mat-list-item-content {
-    padding: 0 !important;
-  }
+.mat-table {
+  border-spacing: 0px;
+  padding: 26px;
+  border-radius: 5px;
+  border: 1px solid $nl-medium-gray;
 
-  .mat-list-text {
-    flex-direction: row !important;
-    justify-content: space-between;
+  .mat-row {
+    .mat-cell {
+      padding: 8px 0;
+      font-size: $font-medium;
+      line-height: $font-xl;
+      border-bottom: 1px solid $nl-light-gray;
 
-    div:nth-child(2) {
-      font-weight: bold;
+      &:nth-child(2) {
+        font-weight: bold;
+        padding-left: 32px;
+      }
+    }
+
+    &:last-child {
+      .mat-cell {
+        border-bottom: none;
+      }
     }
   }
+
 }
+

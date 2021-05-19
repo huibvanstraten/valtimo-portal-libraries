@@ -4,6 +4,8 @@
     "noData": "Er is geen informatie over de aanvraag beschikbaar.",
     "noDetails": "Er zijn geen details van uw aanvraag beschikbaar.",
     "details": "Details",
-    "status": "Status"
+    "status": "Status",
+    "true": "Ja",
+    "false": "Nee"
   }
 }

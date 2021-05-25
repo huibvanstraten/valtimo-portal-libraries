@@ -42,8 +42,7 @@
             ],
             "styles": [
               "src/styles.scss",
-              "node_modules/@fortawesome/fontawesome-free/css/all.css",
-              "node_modules/material-design-icons/iconfont/material-icons.css"
+              "node_modules/@fortawesome/fontawesome-free/css/all.css"
             ],
             "scripts": [
               "./node_modules/hammerjs/hammer.min.js",

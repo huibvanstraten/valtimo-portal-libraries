@@ -14,18 +14,20 @@
  * limitations under the License.
  */
 
-import {Injectable} from '@angular/core';
-import {FormioForm} from '@formio/angular';
+import {TestBed} from '@angular/core/testing';
+import {FormMappingService} from './form-mapping.service';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class FormStylingService {
+describe('FormMappingService', () => {
+  let service: FormMappingService;
 
-  constructor() {
-  }
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: []
+    });
+    service = TestBed.inject(FormMappingService);
+  });
 
-  styleForm(form: FormioForm): FormioForm {
-    return {...form, cssClass: 'mat-form-field-infix'} as any as FormioForm;
-  }
-}
+  it('should be created', () => {
+    expect(service).toBeTruthy();
+  });
+});

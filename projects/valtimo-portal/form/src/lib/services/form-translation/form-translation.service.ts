@@ -17,6 +17,8 @@
 import {Injectable} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 import {FormioForm} from '@formio/angular';
+import {FormMappingService} from '../form-mapping';
+import {ExtendedComponentSchema} from 'formiojs';
 
 @Injectable({
   providedIn: 'root'
@@ -24,15 +26,18 @@ import {FormioForm} from '@formio/angular';
 export class FormTranslationService {
 
   constructor(
-    private readonly translateService: TranslateService
+    private readonly translateService: TranslateService,
+    private readonly formMappingService: FormMappingService
   ) {
   }
 
   translateForm(form: FormioForm, caseDefinitionId: string): FormioForm {
-    return {
-      ...form,
-      components: this.translateComponents(form.components, caseDefinitionId)
-    };
+    const translateFunction = (component: ExtendedComponentSchema): ExtendedComponentSchema => ({
+      ...component,
+      ...(component.label && {label: `${this.getTranslation(`${component.key}`, caseDefinitionId) || component.label}`})
+    });
+
+    return this.formMappingService.mapComponents(form, translateFunction);
   }
 
   private getTranslation(text: string, caseDefinitionId: string): string | boolean {
@@ -49,12 +54,5 @@ export class FormTranslationService {
     } else {
       return false;
     }
-  }
-
-  private translateComponents(components: FormioForm['components'], caseDefinitionId: string): FormioForm['components'] {
-    return components?.map((component) => ({
-      ...component,
-      label: this.getTranslation(`${component.key}`, caseDefinitionId) || component.label
-    })) as FormioForm['components'];
   }
 }

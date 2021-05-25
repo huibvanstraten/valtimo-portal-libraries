@@ -16,16 +16,25 @@
 
 import {Injectable} from '@angular/core';
 import {FormioForm} from '@formio/angular';
+import {FormMappingService} from '../form-mapping';
+import {ExtendedComponentSchema} from 'formiojs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FormStylingService {
 
-  constructor() {
+  constructor(
+    private readonly formMappingService: FormMappingService
+  ) {
   }
 
   styleForm(form: FormioForm): FormioForm {
-    return {...form, cssClass: 'mat-form-field-infix'} as any as FormioForm;
+    const styleFunction = (component: ExtendedComponentSchema): ExtendedComponentSchema => ({
+      ...component,
+      customClass: 'mat-form-field-infix'
+    });
+
+    return this.formMappingService.mapComponents(form, styleFunction);
   }
 }

@@ -19,6 +19,7 @@ import {CommonModule} from '@angular/common';
 import {FormIoComponent} from './form-io.component';
 import {MatIconModule} from '@angular/material/icon';
 import {FormioModule as AngularFormioModule} from '@formio/angular';
+import {SpinnerModule} from '../spinner';
 
 @NgModule({
   declarations: [FormIoComponent],
@@ -26,6 +27,7 @@ import {FormioModule as AngularFormioModule} from '@formio/angular';
     CommonModule,
     AngularFormioModule,
     MatIconModule,
+    SpinnerModule,
   ],
   exports: [FormIoComponent]
 })

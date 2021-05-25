@@ -16,3 +16,4 @@
 
 export * from './form';
 export * from './form-translation';
+export * from './form-styling';

@@ -20,6 +20,18 @@
     margin-bottom: 26px;
   }
 
+  .formio-component:first-child {
+    border-top: 0;
+  }
+
+  .formio-component-submit:last-child {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 24px;
+    border-top: 1px solid $nl-medium-gray;
+    margin-top: 24px;
+  }
+
   .mat-form-field-infix {
     width: auto;
     font-weight: normal;
@@ -65,6 +77,6 @@
   .formio-component-button.mat-flat-button {
     @include no-shadow-no-background;
     padding: 0 !important;
-    padding-top: 1em !important;
+    padding-top: 1.5em !important;
   }
 }

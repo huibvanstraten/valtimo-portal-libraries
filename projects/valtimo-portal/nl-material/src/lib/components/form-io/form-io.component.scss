@@ -50,5 +50,11 @@
       width: calc(100% - 32px);
       resize: none;
     }
+
+    .text-muted {
+      margin-top: 8px;
+      color: $nl-darker-gray;
+      font-style: italic;
+    }
   }
 }

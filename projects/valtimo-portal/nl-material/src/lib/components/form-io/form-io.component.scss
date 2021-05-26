@@ -1,3 +1,6 @@
+@import '~@angular/material/theming';
+
+@include mat-core();
 @import 'colors';
 @import 'variables';
 
@@ -10,21 +13,33 @@
     max-width: $formio-max-width;
   }
 
-  mat-formio-button:last-child {
-    display: flex;
-    justify-content: flex-end;
-    padding-top: 24px;
-    border-top: 1px solid $nl-medium-gray;
-    margin-top: 24px;
-  }
-
-  .alert {
-    display: none;
-  }
-
   .mat-h1 {
     color: $nl-material-primary;
     font-weight: bold;
     margin-bottom: 26px;
+  }
+
+  .mat-form-field-infix {
+    width: auto;
+    font-weight: normal;
+    font-size: $font-smaller;
+    line-height: $font-larger;
+
+    &.formio-component-button {
+      background: none;
+      box-shadow: none;
+
+      &:hover {
+        background: none;
+        box-shadow: none;
+      }
+    }
+
+    input[type=text], input[type=email] {
+      padding: 14px 16px;
+      border: 1px solid $nl-medium-gray;
+      border-radius: 3px;
+      margin-top: 8px;
+    }
   }
 }

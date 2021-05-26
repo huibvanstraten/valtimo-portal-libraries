@@ -32,9 +32,20 @@ export class FormStylingService {
   styleForm(form: FormioForm): FormioForm {
     const styleFunction = (component: ExtendedComponentSchema): ExtendedComponentSchema => ({
       ...component,
-      customClass: 'mat-form-field-infix'
+      customClass: this.getCustomClasses(`${component.type}`)
     });
 
     return this.formMappingService.mapComponents(form, styleFunction);
+  }
+
+  private getCustomClasses(type: string): string {
+    const basicClasses = 'mat-form-field mat-form-field-infix';
+
+    switch (type) {
+      case 'button':
+        return 'mat-raised-button mat-primary';
+      default :
+        return basicClasses;
+    }
   }
 }

@@ -43,7 +43,7 @@ export class FormStylingService {
 
     switch (type) {
       case 'button':
-        return 'mat-raised-button mat-primary';
+        return 'mat-flat-button mat-primary';
       default :
         return basicClasses;
     }

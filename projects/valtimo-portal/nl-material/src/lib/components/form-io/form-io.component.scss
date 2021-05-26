@@ -40,6 +40,10 @@
       @include layout-bp(lt-sm) {
         width: calc(100% - 32px);
       }
+
+      &:focus {
+        outline-color: $nl-material-primary;
+      }
     }
 
     textarea {
@@ -52,6 +56,10 @@
       color: $nl-darker-gray;
       font-style: italic;
     }
+  }
+
+  input[type=radio] {
+    opacity: 0;
   }
 
   .formio-component-button.mat-flat-button {

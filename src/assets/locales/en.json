@@ -1,4 +1,7 @@
 {
+  "portal": {
+    "title": "Valtimo Portal"
+  },
   "ROUTES": {
     "notifications": "notifications",
     "cases": "cases",

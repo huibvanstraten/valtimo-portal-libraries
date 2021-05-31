@@ -31,7 +31,8 @@ export class CaseConfirmationComponent implements OnInit, OnDestroy {
 
   private langChangeSubscription!: Subscription;
 
-  private readonly breadcrumbPosition = 2;
+  private readonly breadcrumbPosition = 3;
+  private readonly previousBreadcrumbPosition = 2;
 
   constructor(
     private readonly breadcrumbsService: BreadcrumbsService,
@@ -47,6 +48,7 @@ export class CaseConfirmationComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.langChangeSubscription?.unsubscribe();
+    this.breadcrumbsService.clearBreadcrumbReplacement(this.previousBreadcrumbPosition);
     this.breadcrumbsService.clearBreadcrumbReplacement(this.breadcrumbPosition);
   }
 
@@ -62,20 +64,34 @@ export class CaseConfirmationComponent implements OnInit, OnDestroy {
     this.route.queryParams.pipe(
       take(1)
     ).subscribe((params) => {
-        const translatedTitle = this.translateService.instant(
-          `${params.id}.new`
-        );
+        this.setCurrentBreadcrumbTitle(params?.id);
+        this.setPreviousBreadcrumbTitle(params?.id);
+      }
+    );
+  }
 
-        this.breadcrumbsService.setBreadcrumbReplacement(
-          {
-            positionInUrl: this.breadcrumbPosition,
-            replacementTitle: translatedTitle,
-            parameter: {
-              key: 'id',
-              value: params.id
-            }
-          }
-        );
+  private setCurrentBreadcrumbTitle(id: string): void {
+    this.breadcrumbsService.setBreadcrumbReplacement(
+      {
+        positionInUrl: this.breadcrumbPosition,
+        replacementTitle: this.translateService.instant(
+          `${id}.confirmed`
+        )
+      }
+    );
+  }
+
+  private setPreviousBreadcrumbTitle(id: string): void {
+    this.breadcrumbsService.setBreadcrumbReplacement(
+      {
+        positionInUrl: this.previousBreadcrumbPosition,
+        replacementTitle: this.translateService.instant(
+          `${id}.new`
+        ),
+        parameter: {
+          key: 'id',
+          value: id
+        }
       }
     );
   }

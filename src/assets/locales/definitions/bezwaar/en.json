@@ -4,6 +4,8 @@
     "wouldLikeTo": "lodge an objection",
     "new": "New notice of objection",
     "my": "My notice of objection",
+    "confirmed": "Objection lodged",
+    "isConfirmed": "Your objection has been lodged",
     "statuses": {
       "portal-case-created": "Objection lodged",
       "portal-case-in-progress": "Notice of objection received",

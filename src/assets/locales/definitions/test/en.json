@@ -4,6 +4,8 @@
     "wouldLikeTo": "open a test file",
     "new": "New test file",
     "my": "My test file",
+    "confirmed": "Test file opened",
+    "isConfirmed": "Your test file has been opened",
     "statuses": {
       "portal-case-created": "Case opened",
       "portal-case-in-progress": "Case is in progress"

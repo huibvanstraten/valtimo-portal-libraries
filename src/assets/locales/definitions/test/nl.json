@@ -4,6 +4,8 @@
     "wouldLikeTo": "een testdossier openen",
     "new": "Nieuw testdossier",
     "my": "Mijn testdossier",
+    "confirmed": "Testdossier geopend",
+    "isConfirmed": "Jouw testdossier is geopend",
     "statuses": {
       "portal-case-created": "Aanvraag ingediend",
       "portal-case-in-progress": "Aanvraag is in behandeling"

@@ -4,6 +4,8 @@
     "wouldLikeTo": "een persoonsdossier openen",
     "new": "Nieuw persoonsdossier",
     "my": "Mijn persoonsdossier",
+    "confirmed": "Persoonsdossier geopend",
+    "isConfirmed": "Jouw persoonsdossier is geopend",
     "statuses": {
       "portal-case-created": "Aanvraag ingediend",
       "portal-case-in-progress": "Aanvraag is in behandeling",

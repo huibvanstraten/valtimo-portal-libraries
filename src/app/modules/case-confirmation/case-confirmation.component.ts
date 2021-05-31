@@ -14,17 +14,65 @@
  * limitations under the License.
  */
 
-import {Component} from '@angular/core';
-import {BehaviorSubject} from 'rxjs';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {BehaviorSubject, Subscription} from 'rxjs';
+import {take} from 'rxjs/operators';
+import {BreadcrumbsService} from '@valtimo-portal/nl-material';
+import {TranslateService} from '@ngx-translate/core';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-case-confirmation',
   templateUrl: './case-confirmation.component.html',
   styleUrls: ['./case-confirmation.component.scss']
 })
-export class CaseConfirmationComponent {
+export class CaseConfirmationComponent implements OnInit, OnDestroy {
   loading$ = new BehaviorSubject<boolean>(true);
 
-  constructor() {
+  private langChangeSubscription!: Subscription;
+
+  private readonly breadcrumbPosition = 2;
+
+  constructor(
+    private readonly breadcrumbsService: BreadcrumbsService,
+    private readonly translateService: TranslateService,
+    private readonly route: ActivatedRoute,
+  ) {
+  }
+
+  ngOnInit(): void {
+    this.setBreadcrumbTitle();
+    this.openLangChangeSubscription();
+  }
+
+  ngOnDestroy(): void {
+    this.langChangeSubscription?.unsubscribe();
+    this.breadcrumbsService.clearBreadcrumbTitleReplacement(this.breadcrumbPosition);
+  }
+
+  openLangChangeSubscription(): void {
+    this.langChangeSubscription =
+      this.translateService.onLangChange
+        .subscribe(() => {
+          this.setBreadcrumbTitle();
+        });
+  }
+
+  private setBreadcrumbTitle(): void {
+    this.route.queryParams.pipe(
+      take(1)
+    ).subscribe((params) => {
+        const translatedTitle = this.translateService.instant(
+          `${params.id}.new`
+        );
+
+        this.breadcrumbsService.setBreadcrumbTitleReplacement(
+          {
+            positionInUrl: this.breadcrumbPosition,
+            replacementTitle: translatedTitle
+          }
+        );
+      }
+    );
   }
 }

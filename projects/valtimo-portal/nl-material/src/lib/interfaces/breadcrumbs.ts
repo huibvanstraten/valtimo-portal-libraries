@@ -14,14 +14,22 @@
  * limitations under the License.
  */
 
+interface QueryParameter {
+  key: string;
+  value: string;
+}
+
+
 interface Breadcrumb {
   link: string;
   title: string;
+  parameter?: QueryParameter;
 }
 
-interface BreadcrumbTitleReplacement {
+interface BreadcrumbReplacement {
   positionInUrl: number;
   replacementTitle: string;
+  parameter?: QueryParameter;
 }
 
-export {Breadcrumb, BreadcrumbTitleReplacement};
+export {Breadcrumb, BreadcrumbReplacement};

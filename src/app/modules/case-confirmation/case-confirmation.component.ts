@@ -47,7 +47,7 @@ export class CaseConfirmationComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.langChangeSubscription?.unsubscribe();
-    this.breadcrumbsService.clearBreadcrumbTitleReplacement(this.breadcrumbPosition);
+    this.breadcrumbsService.clearBreadcrumbReplacement(this.breadcrumbPosition);
   }
 
   openLangChangeSubscription(): void {
@@ -66,10 +66,14 @@ export class CaseConfirmationComponent implements OnInit, OnDestroy {
           `${params.id}.new`
         );
 
-        this.breadcrumbsService.setBreadcrumbTitleReplacement(
+        this.breadcrumbsService.setBreadcrumbReplacement(
           {
             positionInUrl: this.breadcrumbPosition,
-            replacementTitle: translatedTitle
+            replacementTitle: translatedTitle,
+            parameter: {
+              key: 'id',
+              value: params.id
+            }
           }
         );
       }

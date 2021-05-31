@@ -16,7 +16,7 @@
 
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
-import {BreadcrumbTitleReplacement} from '../../interfaces';
+import {BreadcrumbReplacement} from '../../interfaces';
 import {map, take} from 'rxjs/operators';
 
 @Injectable({
@@ -24,42 +24,42 @@ import {map, take} from 'rxjs/operators';
 })
 export class BreadcrumbsService {
 
-  private _breadcrumbTitleReplacements$ = new BehaviorSubject<Array<BreadcrumbTitleReplacement>>([]);
+  private _breadcrumbReplacements$ = new BehaviorSubject<Array<BreadcrumbReplacement>>([]);
 
-  get breadcrumbTitleReplacements$(): Observable<Array<BreadcrumbTitleReplacement>> {
-    return this._breadcrumbTitleReplacements$.asObservable();
+  get breadcrumbReplacements$(): Observable<Array<BreadcrumbReplacement>> {
+    return this._breadcrumbReplacements$.asObservable();
   }
 
-  getBreadcrumbTitleReplacement(position: number): Observable<string> {
-    return this._breadcrumbTitleReplacements$.pipe(
+  getBreadcrumbReplacement(position: number): Observable<string> {
+    return this._breadcrumbReplacements$.pipe(
       map((replacements) =>
         replacements.find((replacement) => replacement.positionInUrl === position)?.replacementTitle || '')
     );
   }
 
-  clearBreadcrumbTitleReplacements(): void {
-    this._breadcrumbTitleReplacements$.next([]);
+  clearBreadcrumbReplacements(): void {
+    this._breadcrumbReplacements$.next([]);
   }
 
-  clearBreadcrumbTitleReplacement(position: number): void {
-    this._breadcrumbTitleReplacements$.pipe(take(1))
-      .subscribe((breadcrumbTitleReplacements) => {
-        this._breadcrumbTitleReplacements$.next(
-          breadcrumbTitleReplacements.filter((replacement) => replacement.positionInUrl !== position)
+  clearBreadcrumbReplacement(position: number): void {
+    this._breadcrumbReplacements$.pipe(take(1))
+      .subscribe((breadcrumbReplacements) => {
+        this._breadcrumbReplacements$.next(
+          breadcrumbReplacements.filter((replacement) => replacement.positionInUrl !== position)
         );
       });
   }
 
-  setBreadcrumbTitleReplacement(replacement: BreadcrumbTitleReplacement): void {
-    this.clearBreadcrumbTitleReplacement(replacement.positionInUrl);
-    this.addBreadcrumbTitleReplacement(replacement);
+  setBreadcrumbReplacement(replacement: BreadcrumbReplacement): void {
+    this.clearBreadcrumbReplacement(replacement.positionInUrl);
+    this.addBreadcrumbReplacement(replacement);
   }
 
-  private addBreadcrumbTitleReplacement(replacement: BreadcrumbTitleReplacement): void {
-    this._breadcrumbTitleReplacements$.pipe(take(1))
-      .subscribe((breadcrumbTitleReplacements) => {
-        this._breadcrumbTitleReplacements$.next(
-          [...breadcrumbTitleReplacements, replacement]
+  private addBreadcrumbReplacement(replacement: BreadcrumbReplacement): void {
+    this._breadcrumbReplacements$.pipe(take(1))
+      .subscribe((breadcrumbReplacements) => {
+        this._breadcrumbReplacements$.next(
+          [...breadcrumbReplacements, replacement]
         );
       });
   }

@@ -100,7 +100,7 @@ export class CaseComponent implements OnInit, OnDestroy {
     private readonly breadcrumbsService: BreadcrumbsService,
     private readonly translateService: TranslateService,
   ) {
-    this.title$ = this.breadcrumbsService.getBreadcrumbTitleReplacement(this.breadcrumbPosition);
+    this.title$ = this.breadcrumbsService.getBreadcrumbReplacement(this.breadcrumbPosition);
   }
 
   ngOnInit(): void {
@@ -109,7 +109,7 @@ export class CaseComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.langChangeSubscription?.unsubscribe();
-    this.breadcrumbsService.clearBreadcrumbTitleReplacement(this.breadcrumbPosition);
+    this.breadcrumbsService.clearBreadcrumbReplacement(this.breadcrumbPosition);
 
   }
 
@@ -130,7 +130,7 @@ export class CaseComponent implements OnInit, OnDestroy {
       `${caseDefinitionId}.my`
     );
 
-    this.breadcrumbsService.setBreadcrumbTitleReplacement(
+    this.breadcrumbsService.setBreadcrumbReplacement(
       {
         positionInUrl: this.breadcrumbPosition,
         replacementTitle: translatedTitle

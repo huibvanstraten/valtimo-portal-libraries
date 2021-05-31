@@ -56,7 +56,7 @@ export class NewCaseComponent implements OnInit, OnDestroy {
     private readonly localizeRouterService: LocalizeRouterService,
     private readonly router: Router
   ) {
-    this.title$ = this.breadcrumbsService.getBreadcrumbTitleReplacement(this.breadcrumbPosition);
+    this.title$ = this.breadcrumbsService.getBreadcrumbReplacement(this.breadcrumbPosition);
   }
 
   ngOnInit(): void {
@@ -66,7 +66,7 @@ export class NewCaseComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.langChangeSubscription?.unsubscribe();
-    this.breadcrumbsService.clearBreadcrumbTitleReplacement(this.breadcrumbPosition);
+    this.breadcrumbsService.clearBreadcrumbReplacement(this.breadcrumbPosition);
   }
 
   openLangChangeSubscription(): void {
@@ -101,7 +101,7 @@ export class NewCaseComponent implements OnInit, OnDestroy {
           `${params.id}.new`
         );
 
-        this.breadcrumbsService.setBreadcrumbTitleReplacement(
+        this.breadcrumbsService.setBreadcrumbReplacement(
           {
             positionInUrl: this.breadcrumbPosition,
             replacementTitle: translatedTitle

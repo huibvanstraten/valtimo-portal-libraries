@@ -49,22 +49,21 @@ export class BreadcrumbsComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.routerSubscription = combineLatest([
       this.router.events,
-      this.breadcrumbsService.lastBreadcrumbTitle$,
+      this.breadcrumbsService.breadcrumbTitleReplacements$,
       this.sidenavService.currentLang$
     ])
-      .subscribe(([event, lastBreadcrumbTitle]) => {
-        if (event instanceof NavigationEnd || lastBreadcrumbTitle) {
+      .subscribe(([event, titleReplacements]) => {
+        if (event instanceof NavigationEnd || titleReplacements.length > 0) {
           const snapshotRoutes: Array<ActivatedRouteSnapshot> = this.getSnapshotRoutes(this.route.snapshot);
 
           this.breadCrumbs$.next(
             snapshotRoutes.reduce((acc: Array<Breadcrumb>, curr, index) => {
+              const titleReplacement = titleReplacements.find((replacement) => replacement.positionInUrl === index)
               return [
                 ...acc,
                 {
                   link: `${index !== 0 ? acc[index - 1].link : ''}/${curr.routeConfig?.path}`,
-                  title: index === snapshotRoutes.length - 1 && lastBreadcrumbTitle ?
-                    lastBreadcrumbTitle :
-                    curr.data?.title
+                  title: titleReplacement ? titleReplacement.replacementTitle : curr.data?.title
                 }
               ] as Array<Breadcrumb>;
             }, [])

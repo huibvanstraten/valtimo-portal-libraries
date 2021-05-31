@@ -16,26 +16,51 @@
 
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
+import {BreadcrumbTitleReplacement} from '../../interfaces';
+import {map, take} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BreadcrumbsService {
 
-  private _lastBreadcrumbTitle$ = new BehaviorSubject<string>('');
+  private _breadcrumbTitleReplacements$ = new BehaviorSubject<Array<BreadcrumbTitleReplacement>>([]);
 
-  constructor() {
+  get breadcrumbTitleReplacements$(): Observable<Array<BreadcrumbTitleReplacement>> {
+    return this._breadcrumbTitleReplacements$.asObservable();
   }
 
-  get lastBreadcrumbTitle$(): Observable<string> {
-    return this._lastBreadcrumbTitle$.asObservable();
+  getBreadcrumbTitleReplacement(position: number): Observable<string> {
+    return this._breadcrumbTitleReplacements$.pipe(
+      map((replacements) =>
+        replacements.find((replacement) => replacement.positionInUrl === position)?.replacementTitle || '')
+    );
   }
 
-  set lastBreadcrumbTitle(title: string) {
-    this._lastBreadcrumbTitle$.next(title);
+  clearBreadcrumbTitleReplacements(): void {
+    this._breadcrumbTitleReplacements$.next([]);
   }
 
-  clearLastBreadcrumbTitle(): void {
-    this._lastBreadcrumbTitle$.next('');
+  clearBreadcrumbTitleReplacement(position: number): void {
+    this._breadcrumbTitleReplacements$.pipe(take(1))
+      .subscribe((breadcrumbTitleReplacements) => {
+        this._breadcrumbTitleReplacements$.next(
+          breadcrumbTitleReplacements.filter((replacement) => replacement.positionInUrl !== position)
+        );
+      });
+  }
+
+  setBreadcrumbTitleReplacement(replacement: BreadcrumbTitleReplacement): void {
+    this.clearBreadcrumbTitleReplacement(replacement.positionInUrl);
+    this.addBreadcrumbTitleReplacement(replacement);
+  }
+
+  private addBreadcrumbTitleReplacement(replacement: BreadcrumbTitleReplacement): void {
+    this._breadcrumbTitleReplacements$.pipe(take(1))
+      .subscribe((breadcrumbTitleReplacements) => {
+        this._breadcrumbTitleReplacements$.next(
+          [...breadcrumbTitleReplacements, replacement]
+        );
+      });
   }
 }

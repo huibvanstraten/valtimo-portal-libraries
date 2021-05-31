@@ -15,8 +15,13 @@
  */
 
 interface Breadcrumb {
-    link: string;
-    title: string;
+  link: string;
+  title: string;
 }
 
-export {Breadcrumb};
+interface BreadcrumbTitleReplacement {
+  positionInUrl: number;
+  replacementTitle: string;
+}
+
+export {Breadcrumb, BreadcrumbTitleReplacement};

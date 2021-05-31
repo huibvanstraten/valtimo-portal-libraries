@@ -43,6 +43,15 @@ const routes: Routes = [
       title: 'TITLES.case',
       animation: 'DetailPage',
     }
+  },
+  {
+    path: 'caseConfirmation',
+    loadChildren: () => import('@case-confirmation/case-confirmation.module').then(m => m.CaseConfirmationModule),
+    canActivate: [KeycloakAppAuthGuard],
+    data: {
+      title: 'TITLES.caseConfirmation',
+      animation: 'DetailPage',
+    }
   }
 ];
 

@@ -70,13 +70,13 @@
     }
   }
 
-  input[type=radio] {
-    opacity: 0;
-  }
-
   .formio-component-button.mat-flat-button {
     @include no-shadow-no-background;
     padding: 0 !important;
     padding-top: 1.5em !important;
+  }
+
+  .form-radio {
+    margin-top: 8px;
   }
 }

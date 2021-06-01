@@ -92,13 +92,15 @@ export class CaseComponent implements OnInit, OnDestroy {
 
   private langChangeSubscription!: Subscription;
 
+  private readonly breadcrumbPosition = 2;
+
   constructor(
     private readonly caseService: CaseService,
     private readonly route: ActivatedRoute,
     private readonly breadcrumbsService: BreadcrumbsService,
     private readonly translateService: TranslateService,
   ) {
-    this.title$ = this.breadcrumbsService.lastBreadcrumbTitle$;
+    this.title$ = this.breadcrumbsService.getBreadcrumbReplacement(this.breadcrumbPosition);
   }
 
   ngOnInit(): void {
@@ -107,7 +109,8 @@ export class CaseComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.langChangeSubscription?.unsubscribe();
-    this.breadcrumbsService.clearLastBreadcrumbTitle();
+    this.breadcrumbsService.clearBreadcrumbReplacement(this.breadcrumbPosition);
+
   }
 
   openLangChangeSubscription(): void {
@@ -123,9 +126,15 @@ export class CaseComponent implements OnInit, OnDestroy {
   }
 
   private setBreadcrumbTitle(caseDefinitionId: string): void {
-    this.breadcrumbsService.lastBreadcrumbTitle =
-      this.translateService.instant(
-        `${caseDefinitionId}.my`
-      );
+    const translatedTitle = this.translateService.instant(
+      `${caseDefinitionId}.my`
+    );
+
+    this.breadcrumbsService.setBreadcrumbReplacement(
+      {
+        positionInUrl: this.breadcrumbPosition,
+        replacementTitle: translatedTitle
+      }
+    );
   }
 }

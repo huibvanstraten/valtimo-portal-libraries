@@ -45,6 +45,8 @@ export class NewCaseComponent implements OnInit, OnDestroy {
 
   private langChangeSubscription!: Subscription;
 
+  private readonly breadcrumbPosition = 2;
+
   constructor(
     private readonly breadcrumbsService: BreadcrumbsService,
     private readonly translateService: TranslateService,
@@ -54,7 +56,7 @@ export class NewCaseComponent implements OnInit, OnDestroy {
     private readonly localizeRouterService: LocalizeRouterService,
     private readonly router: Router
   ) {
-    this.title$ = this.breadcrumbsService.lastBreadcrumbTitle$;
+    this.title$ = this.breadcrumbsService.getBreadcrumbReplacement(this.breadcrumbPosition);
   }
 
   ngOnInit(): void {
@@ -64,7 +66,7 @@ export class NewCaseComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.langChangeSubscription?.unsubscribe();
-    this.breadcrumbsService.clearLastBreadcrumbTitle();
+    this.breadcrumbsService.clearBreadcrumbReplacement(this.breadcrumbPosition);
   }
 
   openLangChangeSubscription(): void {
@@ -81,10 +83,14 @@ export class NewCaseComponent implements OnInit, OnDestroy {
     this.route.queryParams
       .pipe(take(1))
       .subscribe((params) => {
-          this.caseService.submitCase(submission.data, params.id).subscribe(() => {
+          this.caseService.submitCase(submission.data, params.id).subscribe((res) => {
+            const id = params.id;
+            const caseId = res.data?.processSubmission.caseId;
+
             this.submitting$.next(false);
-            this.router.navigateByUrl(
-              `${this.localizeRouterService.translateRoute('/cases')}`
+            this.router.navigate(
+              [`${this.localizeRouterService.translateRoute('/cases/newCase/caseConfirmation')}`],
+              {queryParams: {id, caseId}}
             );
           });
         }
@@ -95,10 +101,16 @@ export class NewCaseComponent implements OnInit, OnDestroy {
     this.route.queryParams.pipe(
       take(1)
     ).subscribe((params) => {
-        this.breadcrumbsService.lastBreadcrumbTitle =
-          this.translateService.instant(
-            `${params.id}.new`
-          );
+        const translatedTitle = this.translateService.instant(
+          `${params.id}.new`
+        );
+
+        this.breadcrumbsService.setBreadcrumbReplacement(
+          {
+            positionInUrl: this.breadcrumbPosition,
+            replacementTitle: translatedTitle
+          }
+        );
       }
     );
   }

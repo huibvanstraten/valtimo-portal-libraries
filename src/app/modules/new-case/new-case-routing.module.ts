@@ -20,9 +20,20 @@ import {NewCaseComponent} from './new-case.component';
 import {LocalizeRouterModule} from '@gilsdav/ngx-translate-router';
 import {KeycloakAppAuthGuard} from '@valtimo-portal/authentication';
 
-const routes: Routes = [{
-  path: '', component: NewCaseComponent, canActivate: [KeycloakAppAuthGuard],
-}];
+const routes: Routes = [
+  {
+    path: '', component: NewCaseComponent, canActivate: [KeycloakAppAuthGuard],
+  },
+  {
+    path: 'caseConfirmation',
+    loadChildren: () => import('@case-confirmation/case-confirmation.module').then(m => m.CaseConfirmationModule),
+    canActivate: [KeycloakAppAuthGuard],
+    data: {
+      title: 'TITLES.caseConfirmation',
+      animation: 'DetailPage',
+    }
+  }
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes), LocalizeRouterModule.forChild(routes)],

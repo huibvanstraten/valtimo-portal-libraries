@@ -4,6 +4,8 @@
     "wouldLikeTo": "Een bezwaar indienen",
     "new": "Nieuw bezwaar indienen",
     "my": "Mijn bezwaarschrift",
+    "confirmed": "Bezwaar ingediend",
+    "isConfirmed": "Jouw bezwaar is ingediend",
     "statuses": {
       "portal-case-created": "Bezwaar ingediend",
       "portal-case-received": "Bezwaar ontvangen",

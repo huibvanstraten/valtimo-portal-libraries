@@ -1,0 +1,9 @@
+{
+  "caseConfirmation": {
+    "caseSubmitted": "Your case has been submitted",
+    "emailSent": "A confirmation e-mail has been sent to",
+    "stayUpdated": "Stay updated on your case",
+    "follow": "You can view the status of your case in",
+    "goto": "Go to case"
+  }
+}

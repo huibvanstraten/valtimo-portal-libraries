@@ -29,6 +29,7 @@
           <a
             mat-button
             [routerLink]="breadcrumb.link"
+            [queryParams]="getQueryParams(breadcrumb)"
             [ngClass]="{'home': i === 0, 'last': i === (breadcrumbs.length - 1)}"
           >
             <ng-container *ngIf="i === 0">

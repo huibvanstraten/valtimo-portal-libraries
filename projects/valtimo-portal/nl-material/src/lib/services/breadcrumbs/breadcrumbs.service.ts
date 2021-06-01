@@ -16,26 +16,51 @@
 
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
+import {BreadcrumbReplacement} from '../../interfaces';
+import {map, take} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BreadcrumbsService {
 
-  private _lastBreadcrumbTitle$ = new BehaviorSubject<string>('');
+  private _breadcrumbReplacements$ = new BehaviorSubject<Array<BreadcrumbReplacement>>([]);
 
-  constructor() {
+  get breadcrumbReplacements$(): Observable<Array<BreadcrumbReplacement>> {
+    return this._breadcrumbReplacements$.asObservable();
   }
 
-  get lastBreadcrumbTitle$(): Observable<string> {
-    return this._lastBreadcrumbTitle$.asObservable();
+  getBreadcrumbReplacement(position: number): Observable<string> {
+    return this._breadcrumbReplacements$.pipe(
+      map((replacements) =>
+        replacements.find((replacement) => replacement.positionInUrl === position)?.replacementTitle || '')
+    );
   }
 
-  set lastBreadcrumbTitle(title: string) {
-    this._lastBreadcrumbTitle$.next(title);
+  clearBreadcrumbReplacements(): void {
+    this._breadcrumbReplacements$.next([]);
   }
 
-  clearLastBreadcrumbTitle(): void {
-    this._lastBreadcrumbTitle$.next('');
+  clearBreadcrumbReplacement(position: number): void {
+    this._breadcrumbReplacements$.pipe(take(1))
+      .subscribe((breadcrumbReplacements) => {
+        this._breadcrumbReplacements$.next(
+          breadcrumbReplacements.filter((replacement) => replacement.positionInUrl !== position)
+        );
+      });
+  }
+
+  setBreadcrumbReplacement(replacement: BreadcrumbReplacement): void {
+    this.clearBreadcrumbReplacement(replacement.positionInUrl);
+    this.addBreadcrumbReplacement(replacement);
+  }
+
+  private addBreadcrumbReplacement(replacement: BreadcrumbReplacement): void {
+    this._breadcrumbReplacements$.pipe(take(1))
+      .subscribe((breadcrumbReplacements) => {
+        this._breadcrumbReplacements$.next(
+          [...breadcrumbReplacements, replacement]
+        );
+      });
   }
 }

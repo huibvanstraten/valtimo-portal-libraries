@@ -15,7 +15,7 @@
  */
 
 import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
-import {ActivatedRoute, ActivatedRouteSnapshot, NavigationEnd, Router} from '@angular/router';
+import {ActivatedRoute, ActivatedRouteSnapshot, NavigationEnd, Params, Router} from '@angular/router';
 import {BehaviorSubject, combineLatest, Subscription} from 'rxjs';
 import {Breadcrumb} from '../../interfaces';
 import {BreadcrumbsService, SidenavService} from '../../services';
@@ -49,22 +49,23 @@ export class BreadcrumbsComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.routerSubscription = combineLatest([
       this.router.events,
-      this.breadcrumbsService.lastBreadcrumbTitle$,
+      this.breadcrumbsService.breadcrumbReplacements$,
       this.sidenavService.currentLang$
     ])
-      .subscribe(([event, lastBreadcrumbTitle]) => {
-        if (event instanceof NavigationEnd || lastBreadcrumbTitle) {
+      .subscribe(([event, breadcrumbReplacements]) => {
+        if (event instanceof NavigationEnd || breadcrumbReplacements.length > 0) {
           const snapshotRoutes: Array<ActivatedRouteSnapshot> = this.getSnapshotRoutes(this.route.snapshot);
 
           this.breadCrumbs$.next(
             snapshotRoutes.reduce((acc: Array<Breadcrumb>, curr, index) => {
+              const replacement = breadcrumbReplacements.find((replacement) => replacement.positionInUrl === index);
+
               return [
                 ...acc,
                 {
                   link: `${index !== 0 ? acc[index - 1].link : ''}/${curr.routeConfig?.path}`,
-                  title: index === snapshotRoutes.length - 1 && lastBreadcrumbTitle ?
-                    lastBreadcrumbTitle :
-                    curr.data?.title
+                  title: replacement ? replacement.replacementTitle : curr.data?.title,
+                  ...(replacement?.parameter && {parameter: replacement?.parameter})
                 }
               ] as Array<Breadcrumb>;
             }, [])
@@ -81,7 +82,11 @@ export class BreadcrumbsComponent implements OnInit, OnDestroy {
     return breadcrumbs[breadcrumbs.length - 1].link.includes(this.environment.authentication.config.redirectUri);
   }
 
-  private getSnapshotRoutes(snapshot: ActivatedRouteSnapshot): Array<ActivatedRouteSnapshot> {
+  getQueryParams(breadcrumb: Breadcrumb): Params {
+    return {[breadcrumb.parameter?.key || '']: breadcrumb.parameter?.value};
+  }
+
+  getSnapshotRoutes(snapshot: ActivatedRouteSnapshot): Array<ActivatedRouteSnapshot> {
     const snapshotRoutes: Array<ActivatedRouteSnapshot> = [];
 
     const pushChildrenToArray = (routeSnapshot: ActivatedRouteSnapshot) => {

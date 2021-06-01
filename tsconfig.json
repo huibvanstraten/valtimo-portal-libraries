@@ -24,6 +24,9 @@
       "@new-case/*": [
         "src/app/modules/new-case/*"
       ],
+      "@case-confirmation/*": [
+        "src/app/modules/case-confirmation/*"
+      ],
       "@case/*": [
         "src/app/modules/case/*"
       ],

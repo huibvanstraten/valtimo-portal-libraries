@@ -1,10 +1,14 @@
 {
+  "portal": {
+    "title": "Valtimo Portal"
+  },
   "ROUTES": {
     "notifications": "meldingen",
     "cases": "aanvragen",
     "tasks": "taken",
     "newCase": "nieuwe-aanvraag",
-    "case": "aanvraag"
+    "case": "aanvraag",
+    "caseConfirmation": "aanvraag-verstuurd"
   },
   "TITLES": {
     "home": "Home",
@@ -13,7 +17,8 @@
     "tasks": "Taken",
     "newCase": "Nieuwe aanvraag",
     "case": "Aanvraag",
-    "task": "Taak"
+    "task": "Taak",
+    "caseConfirmation": "Aanvraag verstuurd"
   },
   "headerMenu": {
     "language": "Taal",

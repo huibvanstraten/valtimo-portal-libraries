@@ -16,7 +16,7 @@
 
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {BehaviorSubject, Subscription} from 'rxjs';
-import {take} from 'rxjs/operators';
+import {map, take, tap} from 'rxjs/operators';
 import {BreadcrumbsService} from '@valtimo-portal/nl-material';
 import {TranslateService} from '@ngx-translate/core';
 import {ActivatedRoute} from '@angular/router';
@@ -28,6 +28,11 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class CaseConfirmationComponent implements OnInit, OnDestroy {
   loading$ = new BehaviorSubject<boolean>(true);
+
+  caseDefinitionId$ = this.route.queryParams.pipe(
+    map((params) => params?.id),
+    tap(() => this.loading$.next(false))
+  );
 
   private langChangeSubscription!: Subscription;
 

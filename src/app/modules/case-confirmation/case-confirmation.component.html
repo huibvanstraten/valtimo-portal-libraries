@@ -14,10 +14,23 @@
   ~ limitations under the License.
   -->
 
-<div fxFlex fxLayout="column" fxLayoutGap="16px" class="module-container">
+<div
+  fxFlex
+  fxLayout="column"
+  fxLayoutGap="16px"
+  class="module-container"
+  *ngIf="{caseDefinitionId: caseDefinitionId$ | async} as obs"
+>
   <ng-container *ngIf="(loading$ | async) === false; else loading">
+    <ng-container *ngTemplateOutlet="title;context:{caseDefinitionId: obs.caseDefinitionId}"></ng-container>
   </ng-container>
 </div>
+
+<ng-template #title let-caseDefinitionId="caseDefinitionId">
+  <div fxFlex="100">
+    <h1 class="mat-h1 primary-bold large">{{caseDefinitionId + '.isConfirmed' | translate}}</h1>
+  </div>
+</ng-template>
 
 <ng-template #loading>
   <div

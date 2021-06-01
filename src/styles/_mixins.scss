@@ -33,3 +33,12 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+@mixin no-shadow-no-background {
+  background: none;
+  box-shadow: none;
+  &:hover {
+    background: none;
+    box-shadow: none;
+  }
+}

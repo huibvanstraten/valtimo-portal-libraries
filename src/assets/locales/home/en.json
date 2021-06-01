@@ -14,7 +14,7 @@
       "title": "Recent case",
       "secondaryButtonText": "Go to case",
       "primaryButtonText": "Ask a question",
-      "noData": "There is no recent case to show"
+      "noData": "There is no recent case to show."
     }
   }
 }

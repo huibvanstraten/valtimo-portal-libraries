@@ -1,9 +1,9 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewEncapsulation} from '@angular/core';
 import {FormioForm, FormioRefreshValue} from '@formio/angular';
 import {fadeInAnimations} from '../../animations';
-import {FormTranslationService} from '@valtimo-portal/form';
+import {FormStylingService, FormTranslationService} from '@valtimo-portal/form';
 import {SidenavService} from '../../services';
-import {Subscription} from 'rxjs';
+import {BehaviorSubject, Subscription} from 'rxjs';
 
 @Component({
   selector: 'nl-material-form-io',
@@ -20,7 +20,7 @@ export class FormIoComponent implements OnInit, OnDestroy {
 
   @Output() submission = new EventEmitter<any>();
 
-  translatedDefinition!: FormioForm;
+  formDefinition$ = new BehaviorSubject<FormioForm | undefined>(undefined);
 
   refresh = new EventEmitter<FormioRefreshValue>();
 
@@ -28,6 +28,7 @@ export class FormIoComponent implements OnInit, OnDestroy {
 
   constructor(
     private readonly formTranslationService: FormTranslationService,
+    private readonly formStylingService: FormStylingService,
     private readonly sidenavService: SidenavService
   ) {
     this.currentLangSubscription = this.sidenavService.currentLang$.subscribe(() => {
@@ -36,7 +37,7 @@ export class FormIoComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.translatedDefinition = this.getTranslatedDefinition();
+    this.formDefinition$.next(this.getProcessedDefinition());
   }
 
   ngOnDestroy(): void {
@@ -47,14 +48,15 @@ export class FormIoComponent implements OnInit, OnDestroy {
     this.submission.emit(submission);
   }
 
-  private getTranslatedDefinition(): FormioForm {
-    return this.formTranslationService.translateForm(this.definition, this.caseDefinitionId);
+  private getProcessedDefinition(): FormioForm {
+    const translatedForm = this.formTranslationService.translateForm(this.definition, this.caseDefinitionId);
+    return this.formStylingService.styleForm(translatedForm);
   }
 
   private emitFormRefresh(): void {
     setTimeout(() => {
       this.refresh.emit(
-        {form: this.getTranslatedDefinition()}
+        {form: this.getProcessedDefinition()}
       );
     });
   }

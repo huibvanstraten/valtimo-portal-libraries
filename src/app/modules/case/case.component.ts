@@ -56,7 +56,6 @@ export class CaseComponent implements OnInit, OnDestroy {
             })
             .filter((detail) => detail.key !== 'submit')
             .map((detail) => {
-              console.log('remap');
               const value = `${detail.value}`.trim().toLocaleLowerCase();
 
               if (value === 'true') {

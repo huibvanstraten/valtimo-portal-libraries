@@ -14,7 +14,7 @@
       "title": "Recente aanvraag",
       "secondaryButtonText": "Bekijk aanvraag",
       "primaryButtonText": "Stel een vraag",
-      "noData": "Er is geen recente aanvraag om te tonen"
+      "noData": "Er is geen recente aanvraag om te tonen."
     }
   }
 }

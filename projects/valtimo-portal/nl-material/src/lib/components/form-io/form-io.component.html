@@ -1,10 +1,16 @@
-<div class="mat-form-io-container" @fadeInSlow>
+<div class="mat-form-io-container mat-typography" @fadeInSlow>
   <h1 class="mat-h1">{{title}}</h1>
-  <mat-formio
-    *ngIf="translatedDefinition"
-    [form]="translatedDefinition"
-    (submit)="handleSubmit($event)"
-    [readOnly]="submitting"
-    [refresh]="refresh">
-  </mat-formio>
+  <ng-container *ngIf="formDefinition$ | async as formDefinition; else loading">
+    <formio
+      [form]="formDefinition"
+      (submit)="handleSubmit($event)"
+      [readOnly]="submitting"
+      [refresh]="refresh"
+    >
+    </formio>
+  </ng-container>
 </div>
+
+<ng-template #loading>
+  <nl-material-spinner></nl-material-spinner>
+</ng-template>

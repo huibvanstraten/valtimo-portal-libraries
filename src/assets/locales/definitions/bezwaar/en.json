@@ -36,6 +36,8 @@
       "Please provide as much information as possible when lodging an objection, so that you can be helped as quickly as possible."
     ],
     "tasks": {
+      "external-portal-task": "External portal task",
+      "gegevens-aanvullen": "More information needed"
     }
   }
 }

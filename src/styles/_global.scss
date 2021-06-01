@@ -14,8 +14,12 @@
  * limitations under the License.
  */
 
+@import 'variables';
+
 html {
-  overflow-y: scroll;
+  @include layout-bp(gt-sm) {
+    overflow-y: scroll;
+  }
 }
 
 body, html {
@@ -32,4 +36,8 @@ body, html {
   > div > div {
     padding: 16px;
   }
+}
+
+textarea, input {
+  font: unset;
 }

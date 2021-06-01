@@ -19,16 +19,39 @@
   fxLayout="column"
   fxLayoutGap="16px"
   class="module-container"
-  *ngIf="{caseDefinitionId: caseDefinitionId$ | async} as obs"
+  *ngIf="{caseDefinitionId: caseDefinitionId$ | async, userEmail: userEmail$ | async} as obs"
 >
   <ng-container *ngIf="(loading$ | async) === false; else loading">
-    <ng-container *ngTemplateOutlet="title;context:{caseDefinitionId: obs.caseDefinitionId}"></ng-container>
+    <div fxLayout="row wrap">
+      <ng-container *ngTemplateOutlet="title;context:{caseDefinitionId: obs.caseDefinitionId}"></ng-container>
+      <ng-container *ngTemplateOutlet="confirmationSent;context:{userEmail: obs.userEmail}"></ng-container>
+      <ng-container *ngTemplateOutlet="stayUpdated;context:{caseDefinitionId: obs.caseDefinitionId}"></ng-container>
+    </div>
   </ng-container>
 </div>
 
 <ng-template #title let-caseDefinitionId="caseDefinitionId">
   <div fxFlex="100">
     <h1 class="mat-h1 primary-bold large">{{caseDefinitionId + '.isConfirmed' | translate}}</h1>
+  </div>
+</ng-template>
+
+<ng-template #confirmationSent let-userEmail="userEmail">
+  <div fxFlex="100">
+    <h3 class="mat-h3">{{('caseConfirmation.emailSent' | translate) + ' ' + userEmail + '.'}}</h3>
+  </div>
+</ng-template>
+
+<ng-template #stayUpdated let-caseDefinitionId="caseDefinitionId">
+  <div fxFlex="100">
+    <h2 class="mat-h2">{{'caseConfirmation.stayUpdated' | translate}}</h2>
+    <h3 class="mat-h3">
+      {{('caseConfirmation.follow' | translate) + ' ' + ('portal.title' | translate) + '.'}}
+    </h3>
+    <button mat-button mat-flat-button color="primary">
+      <mat-icon fontIcon="fa-arrow-right" fontSet="fa"></mat-icon>
+      {{'caseConfirmation.goto' | translate}}
+    </button>
   </div>
 </ng-template>
 

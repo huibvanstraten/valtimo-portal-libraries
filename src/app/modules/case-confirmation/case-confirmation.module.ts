@@ -19,9 +19,10 @@ import {CommonModule} from '@angular/common';
 import {CaseConfirmationRoutingModule} from './case-confirmation-routing.module';
 import {CaseConfirmationComponent} from './case-confirmation.component';
 import {FlexLayoutModule} from '@angular/flex-layout';
-import {CaseServiceModule} from '@valtimo-portal/case';
-import {CardModule, CaseDetailsModule, CaseStatusModule, SpinnerModule, TipsModule} from '@valtimo-portal/nl-material';
+import {SpinnerModule} from '@valtimo-portal/nl-material';
 import {TranslateModule} from '@ngx-translate/core';
+import {MatIconModule} from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
 
 @NgModule({
   declarations: [CaseConfirmationComponent],
@@ -29,13 +30,10 @@ import {TranslateModule} from '@ngx-translate/core';
     CommonModule,
     FlexLayoutModule,
     CaseConfirmationRoutingModule,
-    CaseServiceModule,
-    CaseDetailsModule,
     SpinnerModule,
     TranslateModule,
-    CaseStatusModule,
-    CardModule,
-    TipsModule,
+    MatIconModule,
+    MatButtonModule
   ]
 })
 export class CaseConfirmationModule {

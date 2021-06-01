@@ -20,6 +20,7 @@ import {map, take, tap} from 'rxjs/operators';
 import {BreadcrumbsService} from '@valtimo-portal/nl-material';
 import {TranslateService} from '@ngx-translate/core';
 import {ActivatedRoute} from '@angular/router';
+import {KeycloakService} from 'keycloak-angular';
 
 @Component({
   selector: 'app-case-confirmation',
@@ -34,6 +35,8 @@ export class CaseConfirmationComponent implements OnInit, OnDestroy {
     tap(() => this.loading$.next(false))
   );
 
+  readonly userEmail$ = new BehaviorSubject<string>('');
+
   private langChangeSubscription!: Subscription;
 
   private readonly breadcrumbPosition = 3;
@@ -43,12 +46,14 @@ export class CaseConfirmationComponent implements OnInit, OnDestroy {
     private readonly breadcrumbsService: BreadcrumbsService,
     private readonly translateService: TranslateService,
     private readonly route: ActivatedRoute,
+    private readonly keycloakService: KeycloakService
   ) {
   }
 
   ngOnInit(): void {
     this.setBreadcrumbTitle();
     this.openLangChangeSubscription();
+    this.setUserEmail();
   }
 
   ngOnDestroy(): void {
@@ -63,6 +68,14 @@ export class CaseConfirmationComponent implements OnInit, OnDestroy {
         .subscribe(() => {
           this.setBreadcrumbTitle();
         });
+  }
+
+  private setUserEmail(): void {
+    this.keycloakService.loadUserProfile().then((profile) => {
+      if (profile?.email) {
+        this.userEmail$.next(profile?.email);
+      }
+    });
   }
 
   private setBreadcrumbTitle(): void {

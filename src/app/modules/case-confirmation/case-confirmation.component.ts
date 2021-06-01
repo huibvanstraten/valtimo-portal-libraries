@@ -15,12 +15,14 @@
  */
 
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {BehaviorSubject, Subscription} from 'rxjs';
-import {map, take, tap} from 'rxjs/operators';
+import {BehaviorSubject, combineLatest, Subscription} from 'rxjs';
+import {map, take} from 'rxjs/operators';
 import {BreadcrumbsService} from '@valtimo-portal/nl-material';
 import {TranslateService} from '@ngx-translate/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {KeycloakService} from 'keycloak-angular';
+import {LocalizeRouterService} from '@gilsdav/ngx-translate-router';
+import {SidenavService} from '../../../../projects/valtimo-portal/nl-material/src/lib';
 
 @Component({
   selector: 'app-case-confirmation',
@@ -32,12 +34,17 @@ export class CaseConfirmationComponent implements OnInit, OnDestroy {
 
   caseDefinitionId$ = this.route.queryParams.pipe(
     map((params) => params?.id),
-    tap(() => this.loading$.next(false))
+  );
+
+  caseId$ = this.route.queryParams.pipe(
+    map((params) => params?.caseId),
   );
 
   readonly userEmail$ = new BehaviorSubject<string>('');
 
-  private langChangeSubscription!: Subscription;
+  private routeLangSubscription!: Subscription;
+
+  readonly caseRoute$ = new BehaviorSubject<string>(this.getCaseRoute());
 
   private readonly breadcrumbPosition = 3;
   private readonly previousBreadcrumbPosition = 2;
@@ -46,28 +53,40 @@ export class CaseConfirmationComponent implements OnInit, OnDestroy {
     private readonly breadcrumbsService: BreadcrumbsService,
     private readonly translateService: TranslateService,
     private readonly route: ActivatedRoute,
-    private readonly keycloakService: KeycloakService
+    private readonly sidenavService: SidenavService,
+    private readonly router: Router,
+    private readonly keycloakService: KeycloakService,
+    private readonly localizeRouterService: LocalizeRouterService,
   ) {
   }
 
   ngOnInit(): void {
     this.setBreadcrumbTitle();
-    this.openLangChangeSubscription();
+    this.openRouteLangSubscription();
     this.setUserEmail();
   }
 
   ngOnDestroy(): void {
-    this.langChangeSubscription?.unsubscribe();
+    this.routeLangSubscription?.unsubscribe();
     this.breadcrumbsService.clearBreadcrumbReplacement(this.previousBreadcrumbPosition);
     this.breadcrumbsService.clearBreadcrumbReplacement(this.breadcrumbPosition);
   }
 
-  openLangChangeSubscription(): void {
-    this.langChangeSubscription =
-      this.translateService.onLangChange
+  openRouteLangSubscription(): void {
+    this.routeLangSubscription =
+      combineLatest([this.sidenavService.currentLang$, this.router.events])
         .subscribe(() => {
           this.setBreadcrumbTitle();
+          this.setCaseRoute();
         });
+  }
+
+  private getCaseRoute(): string {
+    return `${this.localizeRouterService.translateRoute('/cases/case')}`;
+  }
+
+  private setCaseRoute(): void {
+    this.caseRoute$.next(this.getCaseRoute());
   }
 
   private setUserEmail(): void {
@@ -75,6 +94,8 @@ export class CaseConfirmationComponent implements OnInit, OnDestroy {
       if (profile?.email) {
         this.userEmail$.next(profile?.email);
       }
+
+      this.loading$.next(false);
     });
   }
 

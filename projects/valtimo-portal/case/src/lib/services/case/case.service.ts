@@ -20,7 +20,7 @@ import {catchError, map} from 'rxjs/operators';
 import {combineLatest, Observable, of} from 'rxjs';
 import {CreateCaseGQL, CreateCaseMutation} from './mutations';
 import {FetchResult} from '@apollo/client/core';
-import {CaseDefinition, CaseInstance, Exact} from '@valtimo-portal/graphql';
+import {CaseDefinition, CaseInstance, Exact, Sort} from '@valtimo-portal/graphql';
 import {GetAllCaseInstancesQuery} from './queries/get-all-case-instances/get-all-case-instances.graphql-gen';
 import {QueryRef} from 'apollo-angular';
 import {NotificationService} from '@valtimo-portal/shared';
@@ -38,7 +38,7 @@ interface ObjectWithCreatedOnDate {
 })
 export class CaseService {
 
-  private caseInstancesQueryRef!: QueryRef<GetAllCaseInstancesQuery, Exact<{ [key: string]: never; }>>;
+  private caseInstancesQueryRef!: QueryRef<GetAllCaseInstancesQuery, Exact<any>>;
 
   constructor(
     private readonly getAllCaseDefinitionsGQL: GetAllCaseDefinitionsGQL,
@@ -64,7 +64,7 @@ export class CaseService {
 
   getAllCaseInstances(): Observable<Array<PortalCaseInstance>> {
     if (!this.caseInstancesQueryRef) {
-      this.caseInstancesQueryRef = this.getAllCaseInstancesGQL.watch();
+      this.caseInstancesQueryRef = this.getAllCaseInstancesGQL.watch({sort: Sort.Desc});
     } else {
       this.caseInstancesQueryRef.refetch();
     }

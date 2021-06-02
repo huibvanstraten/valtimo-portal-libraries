@@ -14,15 +14,39 @@
  * limitations under the License.
  */
 
-import {Component} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {DropdownOption} from '../../interfaces';
 
 @Component({
   selector: 'nl-material-filter-dropdown',
   templateUrl: './filter-dropdown.component.html',
   styleUrls: ['./filter-dropdown.component.scss']
 })
-export class FilterDropdownComponent {
+export class FilterDropdownComponent implements OnInit {
+  @Input() options: Array<DropdownOption> = [];
+  @Output() selectionChange = new EventEmitter<any>();
 
-  constructor() {
+  selected!: any;
+
+  ngOnInit(): void {
+    this.setDefaultOption();
+  }
+
+  onSelectionChange(value: any): void {
+    this.selectionChange.emit(value);
+  }
+
+  private setDefaultOption(): void {
+    const options = this.options;
+
+    if (options.length > 0) {
+      const defaultOption = options.find((option) => option.default);
+
+      if (defaultOption) {
+        this.selected = defaultOption.value;
+      } else {
+        this.selected = options[0].value;
+      }
+    }
   }
 }

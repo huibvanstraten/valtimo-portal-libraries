@@ -14,22 +14,8 @@
  * limitations under the License.
  */
 
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {FilterDropdownComponent} from './filter-dropdown.component';
-import {MatSelectModule} from '@angular/material/select';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {TranslateModule} from '@ngx-translate/core';
-
-@NgModule({
-  declarations: [FilterDropdownComponent],
-  imports: [
-    CommonModule,
-    MatFormFieldModule,
-    MatSelectModule,
-    TranslateModule
-  ],
-  exports: [FilterDropdownComponent]
-})
-export class FilterDropdownModule {
+export interface DropdownOption {
+  translationKey: string;
+  value: any;
+  default?: boolean;
 }

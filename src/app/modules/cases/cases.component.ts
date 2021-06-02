@@ -15,7 +15,7 @@
  */
 
 import {Component} from '@angular/core';
-import {CasePreviewMode} from '@valtimo-portal/nl-material';
+import {CasePreviewMode, DropdownOption} from '@valtimo-portal/nl-material';
 import {CasePreview, CaseService} from '@valtimo-portal/case';
 import {switchMap, tap} from 'rxjs/operators';
 import {BehaviorSubject, Observable} from 'rxjs';
@@ -32,7 +32,12 @@ export class CasesComponent {
 
   currentPreviewMode = CasePreviewMode.current;
 
-  private readonly sort$ = new BehaviorSubject<Sort>(Sort.Desc);
+  readonly sortOptions: Array<DropdownOption> = [
+    {translationKey: 'dateDesc', value: Sort.Desc, default: true},
+    {translationKey: 'dateAsc', value: Sort.Asc}
+  ];
+
+  private readonly sort$ = new BehaviorSubject<Sort>(this.sortOptions[0].value);
 
   cases$: Observable<Array<CasePreview>> = this.sort$.pipe(
     switchMap((sort) => this.caseService.getAllCasePreviews(sort)
@@ -44,5 +49,9 @@ export class CasesComponent {
   );
 
   constructor(private readonly caseService: CaseService) {
+  }
+
+  sortChange(sort: Sort): void {
+    this.sort$.next(sort);
   }
 }

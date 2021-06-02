@@ -14,4 +14,12 @@
   ~ limitations under the License.
   -->
 
-works
+<ng-container *ngIf="options.length > 0 && selected">
+  <mat-form-field>
+    <mat-select [(value)]="selected" (selectionChange)="onSelectionChange($event.value)">
+      <mat-option *ngFor="let option of options" [value]="option.value">
+        {{option.translationKey | translate}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</ng-container>

@@ -30,6 +30,8 @@ export class CasesComponent implements OnInit, OnDestroy {
 
   loading$ = new BehaviorSubject<boolean>(true);
 
+  sortSwitch$ = new BehaviorSubject<boolean>(false);
+
   currentPreviewMode = CasePreviewMode.current;
 
   readonly casePreviews$ = new BehaviorSubject<Array<CasePreview>>([]);
@@ -56,6 +58,7 @@ export class CasesComponent implements OnInit, OnDestroy {
 
   sortChange(sort: Sort): void {
     this.sort$.next(sort);
+    this.sortSwitch$.next(true);
     this.setCasePreviewsSubscription();
   }
 
@@ -68,6 +71,7 @@ export class CasesComponent implements OnInit, OnDestroy {
           tap((casePreviews) => {
             this.casePreviews$.next(casePreviews);
             this.loading$.next(false);
+            this.sortSwitch$.next(false);
           })
         ).subscribe();
     });

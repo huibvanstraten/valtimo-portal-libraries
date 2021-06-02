@@ -17,10 +17,10 @@
 import {Injectable} from '@angular/core';
 import {GetAllCaseDefinitionsGQL, GetAllCaseInstancesGQL, GetCaseInstanceGQL} from './queries';
 import {catchError, map} from 'rxjs/operators';
-import {BehaviorSubject, combineLatest, Observable, of} from 'rxjs';
+import {combineLatest, Observable, of} from 'rxjs';
 import {CreateCaseGQL, CreateCaseMutation} from './mutations';
 import {FetchResult} from '@apollo/client/core';
-import {CaseDefinition, CaseInstance, Exact, Sort} from '@valtimo-portal/graphql';
+import {CaseDefinition, CaseInstance, Sort} from '@valtimo-portal/graphql';
 import {GetAllCaseInstancesQuery} from './queries/get-all-case-instances/get-all-case-instances.graphql-gen';
 import {QueryRef} from 'apollo-angular';
 import {NotificationService} from '@valtimo-portal/shared';
@@ -38,9 +38,7 @@ interface ObjectWithCreatedOnDate {
 })
 export class CaseService {
 
-  private caseInstancesQueryRef!: QueryRef<GetAllCaseInstancesQuery, Exact<any>>;
-
-  private readonly caseInstancesSort$ = new BehaviorSubject<Sort>(Sort.Desc);
+  private caseInstancesQueryRefs: { [key: string]: QueryRef<GetAllCaseInstancesQuery, any> } = {};
 
   constructor(
     private readonly getAllCaseDefinitionsGQL: GetAllCaseDefinitionsGQL,
@@ -65,17 +63,13 @@ export class CaseService {
   }
 
   getAllCaseInstances(sort: Sort = Sort.Desc): Observable<Array<PortalCaseInstance>> {
-    const currentSort = this.caseInstancesSort$.getValue();
-
-    if (!this.caseInstancesQueryRef || sort !== currentSort) {
-      this.setCaseInstancesQueryRef(sort);
+    if (!this.caseInstancesQueryRefs[sort]) {
+      this.caseInstancesQueryRefs[sort] = this.getAllCaseInstancesGQL.watch({sort});
     } else {
-      this.caseInstancesQueryRef.refetch();
+      this.caseInstancesQueryRefs[sort].refetch();
     }
 
-    this.caseInstancesSort$.next(sort);
-
-    return this.caseInstancesQueryRef.valueChanges
+    return this.caseInstancesQueryRefs[sort].valueChanges
       .pipe(
         map((res) => res.data.allCaseInstances?.map((caseInstance) => {
             return caseInstance && this.mapCaseInstance(caseInstance as CaseInstance);
@@ -210,10 +204,6 @@ export class CaseService {
   private getLatest(array: Array<ObjectWithCreatedOnDate>): ObjectWithCreatedOnDate {
     return array.sort((a, b) =>
       a.createdOn.getTime() - b.createdOn.getTime())[0];
-  }
-
-  private setCaseInstancesQueryRef(sort: Sort): void {
-    this.caseInstancesQueryRef = this.getAllCaseInstancesGQL.watch({sort});
   }
 }
 

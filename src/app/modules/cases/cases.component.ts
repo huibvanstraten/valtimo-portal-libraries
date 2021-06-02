@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-import {Component} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {CasePreviewMode, DropdownOption} from '@valtimo-portal/nl-material';
 import {CasePreview, CaseService} from '@valtimo-portal/case';
-import {switchMap, tap} from 'rxjs/operators';
-import {BehaviorSubject, Observable} from 'rxjs';
+import {take, tap} from 'rxjs/operators';
+import {BehaviorSubject, Subscription} from 'rxjs';
 import {Sort} from '@valtimo-portal/graphql';
 
 @Component({
@@ -26,32 +26,54 @@ import {Sort} from '@valtimo-portal/graphql';
   templateUrl: './cases.component.html',
   styleUrls: ['./cases.component.scss']
 })
-export class CasesComponent {
+export class CasesComponent implements OnInit, OnDestroy {
 
   loading$ = new BehaviorSubject<boolean>(true);
 
   currentPreviewMode = CasePreviewMode.current;
+
+  readonly casePreviews$ = new BehaviorSubject<Array<CasePreview>>([]);
 
   readonly sortOptions: Array<DropdownOption> = [
     {translationKey: 'dateDesc', value: Sort.Desc, default: true},
     {translationKey: 'dateAsc', value: Sort.Asc}
   ];
 
-  private readonly sort$ = new BehaviorSubject<Sort>(this.sortOptions[0].value);
+  private casePreviewsSubscription!: Subscription;
 
-  cases$: Observable<Array<CasePreview>> = this.sort$.pipe(
-    switchMap((sort) => this.caseService.getAllCasePreviews(sort)
-      .pipe(
-        tap((previews) => {
-          this.loading$.next(false);
-        })
-      ))
-  );
+  private readonly sort$ = new BehaviorSubject<Sort>(this.sortOptions[0].value);
 
   constructor(private readonly caseService: CaseService) {
   }
 
+  ngOnInit(): void {
+    this.setCasePreviewsSubscription();
+  }
+
+  ngOnDestroy(): void {
+    this.closeCasePreviewsSubscription();
+  }
+
   sortChange(sort: Sort): void {
     this.sort$.next(sort);
+    this.setCasePreviewsSubscription();
+  }
+
+  private setCasePreviewsSubscription(): void {
+    this.closeCasePreviewsSubscription();
+
+    this.sort$.pipe(take(1)).subscribe((sort) => {
+      this.casePreviewsSubscription = this.caseService.getAllCasePreviews(sort)
+        .pipe(
+          tap((casePreviews) => {
+            this.casePreviews$.next(casePreviews);
+            this.loading$.next(false);
+          })
+        ).subscribe();
+    });
+  }
+
+  private closeCasePreviewsSubscription(): void {
+    this.casePreviewsSubscription?.unsubscribe();
   }
 }

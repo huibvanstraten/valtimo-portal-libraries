@@ -48,8 +48,10 @@
     fxFlex="100"
   >
     <h1 class="mat-h1 primary-bold large">{{'cases.title' | translate}}</h1>
-    <nl-material-filter-dropdown [options]="sortOptions"
-                                 (selectionChange)="sortChange($event.value)"></nl-material-filter-dropdown>
+    <nl-material-filter-dropdown
+      [options]="sortOptions"
+      (selectionChange)="sortChange($event)">
+    </nl-material-filter-dropdown>
   </div>
 </ng-template>
 

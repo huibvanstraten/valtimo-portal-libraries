@@ -1,5 +1,5 @@
-query GetAllCaseInstances {
-  allCaseInstances @namedClient(name: "portal-api") {
+query GetAllCaseInstances($sort: Sort!) {
+  allCaseInstances(orderBy: {createdOn: $sort}) @namedClient(name: "portal-api") {
     caseDefinitionId
     createdOn
     externalId

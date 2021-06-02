@@ -49,6 +49,10 @@ export interface CaseInstance {
   userId: Scalars['String'];
 }
 
+export interface CaseInstanceOrderingInput {
+  createdOn: Sort;
+}
+
 export interface FormDefinition {
   __typename?: 'FormDefinition';
   formDefinition: Scalars['JSON'];
@@ -102,6 +106,11 @@ export interface Query {
 }
 
 
+export interface QueryAllCaseInstancesArgs {
+  orderBy: CaseInstanceOrderingInput;
+}
+
+
 export interface QueryGetCaseInstanceArgs {
   id: Scalars['UUID'];
 }
@@ -114,6 +123,11 @@ export interface QueryFindTasksArgs {
 
 export interface QueryGetFormDefinitionArgs {
   name: Scalars['String'];
+}
+
+export enum Sort {
+  Asc = 'ASC',
+  Desc = 'DESC'
 }
 
 export interface Status {
@@ -135,7 +149,9 @@ export interface TaskInstance {
 }
 
 
-export type GetAllCaseInstancesQueryVariables = Types.Exact<{ [key: string]: never; }>;
+export type GetAllCaseInstancesQueryVariables = Types.Exact<{
+  sort: Types.Sort;
+}>;
 
 
 export type GetAllCaseInstancesQuery = (
@@ -158,8 +174,8 @@ export type GetAllCaseInstancesQuery = (
 );
 
 export const GetAllCaseInstancesDocument = gql`
-    query GetAllCaseInstances {
-  allCaseInstances {
+    query GetAllCaseInstances($sort: Sort!) {
+  allCaseInstances(orderBy: {createdOn: $sort}) {
     caseDefinitionId
     createdOn
     externalId

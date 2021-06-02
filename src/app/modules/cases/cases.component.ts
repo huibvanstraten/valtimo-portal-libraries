@@ -17,8 +17,9 @@
 import {Component} from '@angular/core';
 import {CasePreviewMode} from '@valtimo-portal/nl-material';
 import {CasePreview, CaseService} from '@valtimo-portal/case';
-import {tap} from 'rxjs/operators';
+import {switchMap, tap} from 'rxjs/operators';
 import {BehaviorSubject, Observable} from 'rxjs';
+import {Sort} from '@valtimo-portal/graphql';
 
 @Component({
   selector: 'app-cases',
@@ -31,12 +32,16 @@ export class CasesComponent {
 
   currentPreviewMode = CasePreviewMode.current;
 
-  cases$: Observable<Array<CasePreview>> = this.caseService.getAllCasePreviews()
-    .pipe(
-      tap((previews) => {
-        this.loading$.next(false);
-      })
-    );
+  private readonly sort$ = new BehaviorSubject<Sort>(Sort.Desc);
+
+  cases$: Observable<Array<CasePreview>> = this.sort$.pipe(
+    switchMap((sort) => this.caseService.getAllCasePreviews(sort)
+      .pipe(
+        tap((previews) => {
+          this.loading$.next(false);
+        })
+      ))
+  );
 
   constructor(private readonly caseService: CaseService) {
   }

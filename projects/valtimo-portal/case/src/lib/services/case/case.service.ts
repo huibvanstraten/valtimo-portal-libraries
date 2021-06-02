@@ -73,6 +73,8 @@ export class CaseService {
       this.caseInstancesQueryRef.refetch();
     }
 
+    this.caseInstancesSort$.next(sort);
+
     return this.caseInstancesQueryRef.valueChanges
       .pipe(
         map((res) => res.data.allCaseInstances?.map((caseInstance) => {

@@ -22,7 +22,7 @@
       [panelClass]="'filter-dropdown-panel'"
     >
       <mat-option *ngFor="let option of options" [value]="option.value">
-        {{option.translationKey | translate}}
+        {{'filters.' + option.translationKey | translate}}
       </mat-option>
     </mat-select>
   </mat-form-field>

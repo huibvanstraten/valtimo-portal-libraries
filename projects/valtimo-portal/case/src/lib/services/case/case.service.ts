@@ -189,11 +189,12 @@ export class CaseService {
   private getLatestCaseInstanceDate(caseInstance: PortalCaseInstance): Date {
     const statusHistoryWithDates = caseInstance.statusHistory?.filter(
       (history) => history.createdOn) as Array<ObjectWithCreatedOnDate> || [];
+    const latestStatusHistory = this.getLatest(statusHistoryWithDates);
 
     if (statusHistoryWithDates.length === 1) {
       return statusHistoryWithDates[0].createdOn;
-    } else if (statusHistoryWithDates.length > 1) {
-      return this.getLatest(statusHistoryWithDates)[0].createdOn;
+    } else if (statusHistoryWithDates.length > 1 && latestStatusHistory) {
+      return latestStatusHistory.createdOn;
     } else if (caseInstance.status?.createdOn) {
       return caseInstance.status.createdOn;
     } else {

@@ -26,4 +26,12 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+
+  @include layout-bp(lt-sm) {
+    flex-direction: column;
+
+    .mat-h1 {
+      margin-bottom: 16px;
+    }
+  }
 }

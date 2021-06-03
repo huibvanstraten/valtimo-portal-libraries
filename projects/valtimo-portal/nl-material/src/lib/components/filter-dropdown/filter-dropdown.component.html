@@ -15,8 +15,12 @@
   -->
 
 <ng-container *ngIf="options.length > 0 && selected">
-  <mat-form-field>
-    <mat-select [(value)]="selected" (selectionChange)="onSelectionChange($event.value)">
+  <mat-form-field class="filter-dropdown-form-field">
+    <mat-select
+      [(value)]="selected"
+      (selectionChange)="onSelectionChange($event.value)"
+      [panelClass]="'filter-dropdown-panel'"
+    >
       <mat-option *ngFor="let option of options" [value]="option.value">
         {{option.translationKey | translate}}
       </mat-option>

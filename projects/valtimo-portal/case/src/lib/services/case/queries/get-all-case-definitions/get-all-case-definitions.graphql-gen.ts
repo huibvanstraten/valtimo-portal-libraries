@@ -49,6 +49,10 @@ export interface CaseInstance {
   userId: Scalars['String'];
 }
 
+export interface CaseInstanceOrderingInput {
+  createdOn: Sort;
+}
+
 export interface FormDefinition {
   __typename?: 'FormDefinition';
   formDefinition: Scalars['JSON'];
@@ -102,6 +106,11 @@ export interface Query {
 }
 
 
+export interface QueryAllCaseInstancesArgs {
+  orderBy: CaseInstanceOrderingInput;
+}
+
+
 export interface QueryGetCaseInstanceArgs {
   id: Scalars['UUID'];
 }
@@ -114,6 +123,11 @@ export interface QueryFindTasksArgs {
 
 export interface QueryGetFormDefinitionArgs {
   name: Scalars['String'];
+}
+
+export enum Sort {
+  Asc = 'ASC',
+  Desc = 'DESC'
 }
 
 export interface Status {

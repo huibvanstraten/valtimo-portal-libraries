@@ -20,7 +20,7 @@ import {catchError, map} from 'rxjs/operators';
 import {combineLatest, Observable, of} from 'rxjs';
 import {CreateCaseGQL, CreateCaseMutation} from './mutations';
 import {FetchResult} from '@apollo/client/core';
-import {CaseDefinition, CaseInstance, Exact} from '@valtimo-portal/graphql';
+import {CaseDefinition, CaseInstance, Sort} from '@valtimo-portal/graphql';
 import {GetAllCaseInstancesQuery} from './queries/get-all-case-instances/get-all-case-instances.graphql-gen';
 import {QueryRef} from 'apollo-angular';
 import {NotificationService} from '@valtimo-portal/shared';
@@ -38,7 +38,7 @@ interface ObjectWithCreatedOnDate {
 })
 export class CaseService {
 
-  private caseInstancesQueryRef!: QueryRef<GetAllCaseInstancesQuery, Exact<{ [key: string]: never; }>>;
+  private caseInstancesQueryRefs: { [key: string]: QueryRef<GetAllCaseInstancesQuery, any> } = {};
 
   constructor(
     private readonly getAllCaseDefinitionsGQL: GetAllCaseDefinitionsGQL,
@@ -62,13 +62,14 @@ export class CaseService {
       );
   }
 
-  getAllCaseInstances(): Observable<Array<PortalCaseInstance>> {
-    if (!this.caseInstancesQueryRef) {
-      this.caseInstancesQueryRef = this.getAllCaseInstancesGQL.watch();
+  getAllCaseInstances(sort: Sort = Sort.Desc): Observable<Array<PortalCaseInstance>> {
+    if (!this.caseInstancesQueryRefs[sort]) {
+      this.caseInstancesQueryRefs[sort] = this.getAllCaseInstancesGQL.watch({sort});
     } else {
-      this.caseInstancesQueryRef.refetch();
+      this.caseInstancesQueryRefs[sort].refetch();
     }
-    return this.caseInstancesQueryRef.valueChanges
+
+    return this.caseInstancesQueryRefs[sort].valueChanges
       .pipe(
         map((res) => res.data.allCaseInstances?.map((caseInstance) => {
             return caseInstance && this.mapCaseInstance(caseInstance as CaseInstance);
@@ -82,8 +83,8 @@ export class CaseService {
       );
   }
 
-  getAllCasePreviews(): Observable<Array<CasePreview>> {
-    return combineLatest([this.getAllCaseDefinitions(), this.getAllCaseInstances()])
+  getAllCasePreviews(sort: Sort = Sort.Desc): Observable<Array<CasePreview>> {
+    return combineLatest([this.getAllCaseDefinitions(), this.getAllCaseInstances(sort)])
       .pipe(
         map(([definitions, caseInstances]) => {
           return caseInstances.map((instance) => {

@@ -35,5 +35,9 @@
   "tips": {
     "title": "Useful tips",
     "tip": "Tip"
+  },
+  "filters": {
+    "dateAsc": "Date (ascending)",
+    "dateDesc": "Date (descending)"
   }
 }

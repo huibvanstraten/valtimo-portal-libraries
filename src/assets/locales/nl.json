@@ -35,5 +35,9 @@
   "tips": {
     "title": "Handige tips",
     "tip": "Tip"
+  },
+  "filters": {
+    "dateAsc": "Datum (oud eerst)",
+    "dateDesc": "Datum (nieuw eerst)"
   }
 }

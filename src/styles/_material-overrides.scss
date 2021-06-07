@@ -157,6 +157,10 @@ nl-material-user-menu {
     border: 0;
   }
 
+  .mat-form-field-appearance-legacy .mat-form-field-wrapper {
+    padding: 0;
+  }
+
   .mat-form-field-flex {
     display: flex;
     align-items: center;

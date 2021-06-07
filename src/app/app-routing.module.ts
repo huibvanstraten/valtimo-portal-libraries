@@ -40,13 +40,12 @@ const routes: Array<PortalRoute> = [
     }
   },
   {
-    path: 'notifications',
-    loadChildren: () => import('./modules/notifications/notifications.module').then(m => m.NotificationsModule),
+    path: 'tasks', loadChildren: () => import('./modules/tasks/tasks.module').then(m => m.TasksModule),
     canActivate: [KeycloakAppAuthGuard],
     data: {
-      title: 'TITLES.notifications',
-      icon: 'bell',
-      animation: 'NotificationsPage'
+      title: 'TITLES.tasks',
+      icon: 'tasks',
+      animation: 'TasksPage'
     }
   },
   {
@@ -56,15 +55,6 @@ const routes: Array<PortalRoute> = [
       title: 'TITLES.cases',
       icon: 'briefcase',
       animation: 'CasesPage'
-    }
-  },
-  {
-    path: 'tasks', loadChildren: () => import('./modules/tasks/tasks.module').then(m => m.TasksModule),
-    canActivate: [KeycloakAppAuthGuard],
-    data: {
-      title: 'TITLES.tasks',
-      icon: 'tasks',
-      animation: 'TasksPage'
     }
   },
   {

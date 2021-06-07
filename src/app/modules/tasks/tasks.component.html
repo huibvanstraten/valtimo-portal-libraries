@@ -21,6 +21,7 @@
   >
     <ng-container *ngIf="(loading$ | async) === false; else loading">
       <ng-container *ngIf="obs.tasks && obs.tasks[0]; else noData">
+        <ng-container *ngTemplateOutlet="title"></ng-container>
         <ng-container *ngIf="obs.openTasks && obs.openTasks[0]">
           <ng-container *ngTemplateOutlet="openTasks;context:{tasks: obs.openTasks}"></ng-container>
         </ng-container>
@@ -47,6 +48,14 @@
     fxLayout="column"
   >
     <h2 class="mat-h2">{{'tasks.noData' | translate}}</h2>
+  </div>
+</ng-template>
+
+<ng-template #title>
+  <div
+    fxFlex="100"
+  >
+    <h1 class="mat-h1 primary-bold large">{{'TITLES.tasks' | translate}}</h1>
   </div>
 </ng-template>
 

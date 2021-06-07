@@ -156,14 +156,21 @@ export class CaseService {
       ...(caseInstance.statusHistory ? caseInstance.statusHistory : []),
     ];
 
+    const latestCompletedStatusIndex = statusDefinition.reduce((acc: number, curr, index) => {
+      if (caseInstanceStatuses.find((status) => status.name === curr)) {
+        return index;
+      }
+      return acc;
+    }, 0);
+
     return {
       id: caseInstance.id,
       caseDefinitionId: caseInstance.caseDefinitionId,
-      statuses: statusDefinition.map((statusName) => {
+      statuses: statusDefinition.map((statusName, index) => {
         const findCaseInstanceStatus = caseInstanceStatuses.find((instanceStatus) => instanceStatus.name === statusName);
 
         return {
-          completed: !!findCaseInstanceStatus,
+          completed: index <= latestCompletedStatusIndex,
           date: findCaseInstanceStatus?.createdOn,
           id: statusName
         };

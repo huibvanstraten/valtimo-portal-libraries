@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {CardType, CasePreviewMode} from '../../enums';
 import {SidenavService} from '../../services';
 import {Observable} from 'rxjs';
@@ -9,10 +9,12 @@ import {CasePreviewStatus} from '@valtimo-portal/case';
   templateUrl: './case-status.component.html',
   styleUrls: ['../case-preview/case-preview.component.scss']
 })
-export class CaseStatusComponent {
+export class CaseStatusComponent implements OnInit {
   @Input() statuses: Array<CasePreviewStatus> = [];
   @Input() mode: CasePreviewMode = CasePreviewMode.clipping;
   @Input() caseDefinitionId = '';
+
+  lastCompletedIndex = 0;
 
   readonly casePreviewClippingType = CardType.casePreviewClipping;
   readonly casePreviewCurrentType = CardType.casePreviewCurrent;
@@ -26,6 +28,10 @@ export class CaseStatusComponent {
     this.currentLang$ = this.sidenavService.currentLang$;
   }
 
+  ngOnInit(): void {
+    this.lastCompletedIndex = this.getIndexOfLastCompletedStatus();
+  }
+
   isClippingPreview(): boolean {
     return this.mode === this.clippingPreviewMode;
   }
@@ -34,12 +40,13 @@ export class CaseStatusComponent {
     return this.mode === this.currentPreviewMode;
   }
 
-  getUncompletedStatuses(): Array<CasePreviewStatus> {
-    return this.statuses.filter((status) => !status.completed);
-  }
-
   getLastCompletedStatus(): Array<CasePreviewStatus> {
     const completedStatuses = this.statuses.filter((status) => status.completed);
     return [{date: new Date(), id: '', completed: true}, completedStatuses[completedStatuses.length - 1]];
+  }
+
+  private getIndexOfLastCompletedStatus(): number {
+    const completedStatuses = this.statuses.filter((status) => status.completed);
+    return (completedStatuses.length - 1) || 0;
   }
 }

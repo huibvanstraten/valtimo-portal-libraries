@@ -40,21 +40,21 @@ const routes: Array<PortalRoute> = [
     }
   },
   {
-    path: 'tasks', loadChildren: () => import('./modules/tasks/tasks.module').then(m => m.TasksModule),
-    canActivate: [KeycloakAppAuthGuard],
-    data: {
-      title: 'TITLES.tasks',
-      icon: 'tasks',
-      animation: 'TasksPage'
-    }
-  },
-  {
     path: 'cases', loadChildren: () => import('./modules/cases/cases.module').then(m => m.CasesModule),
     canActivate: [KeycloakAppAuthGuard],
     data: {
       title: 'TITLES.cases',
       icon: 'briefcase',
       animation: 'CasesPage'
+    }
+  },
+  {
+    path: 'tasks', loadChildren: () => import('./modules/tasks/tasks.module').then(m => m.TasksModule),
+    canActivate: [KeycloakAppAuthGuard],
+    data: {
+      title: 'TITLES.tasks',
+      icon: 'tasks',
+      animation: 'TasksPage'
     }
   },
   {

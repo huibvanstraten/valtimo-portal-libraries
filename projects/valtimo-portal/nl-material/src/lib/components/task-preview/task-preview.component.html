@@ -1,6 +1,9 @@
 <div @fadeIn>
   <ng-container *ngIf="(currentLang$ | async) as currentLang">
     <ng-container
+      *ngTemplateOutlet="icon;context:{preview: preview}">
+    </ng-container>
+    <ng-container
       *ngTemplateOutlet="body;context:{currentLang: currentLang, preview: preview}">
     </ng-container>
     <ng-container
@@ -8,6 +11,15 @@
     </ng-container>
   </ng-container>
 </div>
+
+<ng-template #icon let-preview="preview">
+  <div class="circle-icon-container">
+    <div *ngIf="!preview.isCompleted" class="notification"></div>
+    <div class="circle-icon">
+      <mat-icon fontSet="fa" fontIcon="fa-comment-alt"></mat-icon>
+    </div>
+  </div>
+</ng-template>
 
 <ng-template #body let-currentLang="currentLang" let-preview="preview">
   <div

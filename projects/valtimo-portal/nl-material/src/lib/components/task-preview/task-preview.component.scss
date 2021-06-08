@@ -1,2 +1,35 @@
 @import "colors";
 @import "variables";
+
+$icon-size: 64px;
+
+.circle-icon-container {
+  width: $icon-size;
+  height: $icon-size;
+  position: relative;
+
+  .notification {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: $nl-material-warn;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+  }
+
+  .circle-icon {
+    width: $icon-size;
+    height: $icon-size;
+    border-radius: 50%;
+    background-color: $nl-light-gray;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .mat-icon {
+      color: $nl-dark-gray;
+      width: 20px;
+    }
+  }
+}

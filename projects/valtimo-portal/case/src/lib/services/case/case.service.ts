@@ -156,14 +156,21 @@ export class CaseService {
       ...(caseInstance.statusHistory ? caseInstance.statusHistory : []),
     ];
 
+    const latestCompletedStatusIndex = statusDefinition.reduce((acc: number, curr, index) => {
+      if (caseInstanceStatuses.find((status) => status.name === curr)) {
+        return index;
+      }
+      return acc;
+    }, 0);
+
     return {
       id: caseInstance.id,
       caseDefinitionId: caseInstance.caseDefinitionId,
-      statuses: statusDefinition.map((statusName) => {
+      statuses: statusDefinition.map((statusName, index) => {
         const findCaseInstanceStatus = caseInstanceStatuses.find((instanceStatus) => instanceStatus.name === statusName);
 
         return {
-          completed: !!findCaseInstanceStatus,
+          completed: index <= latestCompletedStatusIndex,
           date: findCaseInstanceStatus?.createdOn,
           id: statusName
         };
@@ -189,11 +196,12 @@ export class CaseService {
   private getLatestCaseInstanceDate(caseInstance: PortalCaseInstance): Date {
     const statusHistoryWithDates = caseInstance.statusHistory?.filter(
       (history) => history.createdOn) as Array<ObjectWithCreatedOnDate> || [];
+    const latestStatusHistory = this.getLatest(statusHistoryWithDates);
 
     if (statusHistoryWithDates.length === 1) {
       return statusHistoryWithDates[0].createdOn;
-    } else if (statusHistoryWithDates.length > 1) {
-      return this.getLatest(statusHistoryWithDates)[0].createdOn;
+    } else if (statusHistoryWithDates.length > 1 && latestStatusHistory) {
+      return latestStatusHistory.createdOn;
     } else if (caseInstance.status?.createdOn) {
       return caseInstance.status.createdOn;
     } else {

@@ -30,14 +30,17 @@
 </ul>
 
 <ng-template #clippingIcons let-status="status" let-i="i">
-  <div [ngClass]="{'empty': !status.completed}" class="circle-icon">
-    <mat-icon *ngIf="status.completed" fontIcon="fa-check" fontSet="fa"></mat-icon>
+  <div [ngClass]="{'empty': !status.completed || i === lastCompletedIndex}" class="circle-icon">
     <mat-icon
-      *ngIf="getUncompletedStatuses()[0].id === status.id"
+      *ngIf="status.completed && i !== lastCompletedIndex"
+      fontIcon="fa-check"
+      fontSet="fa"
+    ></mat-icon>
+    <mat-icon
+      *ngIf="i === lastCompletedIndex"
       fontIcon="fa-arrow-right"
       fontSet="fa"
-    >
-    </mat-icon>
+    ></mat-icon>
   </div>
 </ng-template>
 

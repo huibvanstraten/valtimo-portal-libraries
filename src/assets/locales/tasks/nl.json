@@ -3,6 +3,8 @@
     "noDataError": "Er ging iets mis bij het ophalen van jouw taken.",
     "noData": "Er zijn geen taken beschikbaar.",
     "openTasks": "Recent",
-    "completedTasks": "Ouder"
+    "completedTasks": "Ouder",
+    "reminderTitle": "Herinnering",
+    "reminder": "De taak '{{task}}' voor jouw aanvraag '{{case}}' staat nog open. Vergeet deze niet te voltooien."
   }
 }

@@ -97,10 +97,8 @@
   <ng-container *ngTemplateOutlet="completedTasksTitle"></ng-container>
   <div
     *ngFor="let task of tasks"
-    fxFlex.gt-md="25"
-    fxFlex.md="33.3"
-    fxFlex.sm="50"
-    fxFlex.xs="100"
+    fxFlex="100"
+    fxFlex.gt-sm="50"
     fxLayout="column"
   >
     <nl-material-task-preview [preview]="task"></nl-material-task-preview>

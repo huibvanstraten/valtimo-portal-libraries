@@ -18,7 +18,7 @@ import {Component} from '@angular/core';
 import {routes} from '@app/app-routing.module';
 import {NavigationMenuItem} from '@valtimo-portal/nl-material';
 import {Router, RouterOutlet} from '@angular/router';
-import {slideInAnimation} from '@app/animations';
+import {routeAnimations} from '@app/animations';
 import {environment} from '../environments/environment';
 
 @Component({
@@ -26,7 +26,7 @@ import {environment} from '../environments/environment';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
   animations: [
-    slideInAnimation
+    routeAnimations
   ]
 })
 export class AppComponent {

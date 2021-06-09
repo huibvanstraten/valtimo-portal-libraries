@@ -14,4 +14,4 @@
  * limitations under the License.
  */
 
-export * from './slide-in-animation';
+export * from './route-animations';

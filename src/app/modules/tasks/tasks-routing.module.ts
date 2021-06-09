@@ -29,7 +29,7 @@ const routes: Routes = [
     canActivate: [KeycloakAppAuthGuard],
     data: {
       title: 'TITLES.task',
-      animation: 'DetailPage',
+      animation: 'TaskPage',
     }
   }
 ];

@@ -110,7 +110,6 @@ export class CaseComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.langChangeSubscription?.unsubscribe();
     this.breadcrumbsService.clearBreadcrumbReplacement(this.breadcrumbPosition);
-
   }
 
   openLangChangeSubscription(): void {

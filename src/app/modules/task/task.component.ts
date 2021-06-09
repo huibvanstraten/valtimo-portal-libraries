@@ -55,7 +55,7 @@ export class TaskComponent implements OnInit, OnDestroy {
     private readonly localizeRouterService: LocalizeRouterService,
     private readonly router: Router,
     private readonly breadcrumbsService: BreadcrumbsService,
-    private readonly translateService: TranslateService,
+    private readonly translateService: TranslateService
   ) {
   }
 

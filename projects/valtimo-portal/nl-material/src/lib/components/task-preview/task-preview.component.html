@@ -1,14 +1,14 @@
-<div @fadeIn>
-  <ng-container *ngIf="(currentLang$ | async) as currentLang">
+<div @fadeIn class="task-preview mat-typography" *ngIf="(currentLang$ | async) as currentLang">
+  <div class="body-icon-container">
     <ng-container
       *ngTemplateOutlet="icon;context:{preview: preview}">
     </ng-container>
     <ng-container
       *ngTemplateOutlet="body;context:{currentLang: currentLang, preview: preview}">
     </ng-container>
-    <ng-container
-      *ngTemplateOutlet="currentTaskActions;context:{currentLang: currentLang, preview: preview}">
-    </ng-container>
+  </div>
+  <ng-container
+    *ngTemplateOutlet="currentTaskActions;context:{currentLang: currentLang, preview: preview}">
   </ng-container>
 </div>
 
@@ -25,12 +25,11 @@
   <div
     class="body"
   >
-     <span>
-       {{'tasks.reminder' | translate:
+     <span [innerHTML]="'tasks.reminder' | translate:
        {
          task: (preview.caseDefinitionId + '.tasks.' + preview.taskDefinitionKey | translate),
          case: (preview.caseDefinitionId + '.title' | translate)
-       } }}
+       }">
      </span>
     <div class="tags">
       <span>
@@ -48,7 +47,7 @@
     class="current-task-actions"
   >
     <button
-      *ngIf="!preview.isCompleted"
+      [disabled]="preview.isCompleted"
       mat-button
       [routerLink]="taskRoute$ | async"
       [queryParams]="{id:preview.taskId}"

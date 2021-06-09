@@ -5,6 +5,6 @@
     "openTasks": "Recent",
     "completedTasks": "Ouder",
     "reminderTitle": "Herinnering",
-    "reminder": "De taak '{{task}}' voor jouw aanvraag '{{case}}' staat nog open. Vergeet deze niet te voltooien."
+    "reminder": "De taak <b>{{task}}</b> voor jouw aanvraag <b>{{case}}</b> staat nog open. Vergeet deze niet te voltooien."
   }
 }

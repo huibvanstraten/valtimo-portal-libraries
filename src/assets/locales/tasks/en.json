@@ -5,6 +5,6 @@
     "openTasks": "Recent",
     "completedTasks": "Older",
     "reminderTitle": "Reminder",
-    "reminder": "The task '{{task}}' for your case '{{case}}' is still open. Do not forget to complete it."
+    "reminder": "The task <b>{{task}}</b> for your case <b>{{case}}</b> is still open. Do not forget to complete it."
   }
 }

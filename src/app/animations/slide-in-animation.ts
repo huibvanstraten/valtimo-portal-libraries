@@ -71,7 +71,7 @@ export const slideInAnimation =
       query(':enter', animateChild()),
     ]),
     // Fade only no slide
-    transition('DetailPage => *, * => DetailPage', [
+    transition('DetailPage <=> *', [
       style({position: 'relative'}),
       query(':enter, :leave', [
         style({
@@ -88,10 +88,10 @@ export const slideInAnimation =
       query(':leave', animateChild(), {optional: true}),
       group([
         query(':leave', [
-          animate('200ms ease-out', style({opacity: 0}))
+          animate('250ms ease-out', style({opacity: 0}))
         ], {optional: true}),
         query(':enter', [
-          animate('200ms ease-out', style({opacity: 1}))
+          animate('250ms ease-out', style({opacity: 1}))
         ])
       ]),
       query(':enter', animateChild()),

@@ -2,7 +2,9 @@
   "tasks": {
     "noDataError": "Something went wrong while retrieving your tasks.",
     "noData": "There are no tasks available.",
-    "openTasks": "Open tasks",
-    "completedTasks": "Completed tasks"
+    "openTasks": "Recent",
+    "completedTasks": "Older",
+    "reminderTitle": "Reminder",
+    "reminder": "The task <b>{{task}}</b> for your case <b>{{case}}</b> is still open. Do not forget to complete it."
   }
 }

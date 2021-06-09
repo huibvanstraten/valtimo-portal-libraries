@@ -40,16 +40,6 @@ const routes: Array<PortalRoute> = [
     }
   },
   {
-    path: 'notifications',
-    loadChildren: () => import('./modules/notifications/notifications.module').then(m => m.NotificationsModule),
-    canActivate: [KeycloakAppAuthGuard],
-    data: {
-      title: 'TITLES.notifications',
-      icon: 'bell',
-      animation: 'NotificationsPage'
-    }
-  },
-  {
     path: 'cases', loadChildren: () => import('./modules/cases/cases.module').then(m => m.CasesModule),
     canActivate: [KeycloakAppAuthGuard],
     data: {

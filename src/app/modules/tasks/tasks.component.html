@@ -21,12 +21,11 @@
   >
     <ng-container *ngIf="(loading$ | async) === false; else loading">
       <ng-container *ngIf="obs.tasks && obs.tasks[0]; else noData">
+        <ng-container *ngTemplateOutlet="title"></ng-container>
         <ng-container *ngIf="obs.openTasks && obs.openTasks[0]">
-          <ng-container *ngTemplateOutlet="openTasksTitle"></ng-container>
           <ng-container *ngTemplateOutlet="openTasks;context:{tasks: obs.openTasks}"></ng-container>
         </ng-container>
         <ng-container *ngIf="obs.completedTasks && obs.completedTasks[0]">
-          <ng-container *ngTemplateOutlet="completedTasksTitle"></ng-container>
           <ng-container *ngTemplateOutlet="completedTasks;context:{tasks: obs.completedTasks}"></ng-container>
         </ng-container>
       </ng-container>
@@ -52,22 +51,32 @@
   </div>
 </ng-template>
 
+<ng-template #title>
+  <div
+    fxFlex="100"
+  >
+    <h1 class="mat-h1 primary-bold large">{{'TITLES.tasks' | translate}}</h1>
+  </div>
+</ng-template>
+
 <ng-template #openTasksTitle>
   <div
     fxFlex="100"
   >
-    <h1 class="mat-h1 primary-bold large">{{'tasks.openTasks' | translate}}</h1>
+    <div class="title-container">
+      <h1 class="mat-h1 primary-bold">{{'tasks.openTasks' | translate}}</h1>
+    </div>
   </div>
 </ng-template>
 
 <ng-template #openTasks let-tasks="tasks">
+  <ng-container *ngTemplateOutlet="openTasksTitle"></ng-container>
   <div
     *ngFor="let task of tasks"
-    fxFlex.gt-md="25"
-    fxFlex.md="33.3"
-    fxFlex.sm="50"
-    fxFlex.xs="100"
+    fxFlex="100"
+    fxFlex.gt-sm="50"
     fxLayout="column"
+    class="task-preview-container"
   >
     <nl-material-task-preview [preview]="task"></nl-material-task-preview>
   </div>
@@ -77,18 +86,20 @@
   <div
     fxFlex="100"
   >
-    <h1 class="mat-h1 primary-bold large">{{'tasks.completedTasks' | translate}}</h1>
+    <div class="title-container">
+      <h1 class="mat-h1 primary-bold">{{'tasks.completedTasks' | translate}}</h1>
+    </div>
   </div>
 </ng-template>
 
 <ng-template #completedTasks let-tasks="tasks">
+  <ng-container *ngTemplateOutlet="completedTasksTitle"></ng-container>
   <div
     *ngFor="let task of tasks"
-    fxFlex.gt-md="25"
-    fxFlex.md="33.3"
-    fxFlex.sm="50"
-    fxFlex.xs="100"
+    fxFlex="100"
+    fxFlex.gt-sm="50"
     fxLayout="column"
+    class="task-preview-container"
   >
     <nl-material-task-preview [preview]="task"></nl-material-task-preview>
   </div>

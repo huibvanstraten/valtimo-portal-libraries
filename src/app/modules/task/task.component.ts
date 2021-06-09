@@ -14,19 +14,21 @@
  * limitations under the License.
  */
 
-import {Component} from '@angular/core';
-import {TaskService} from '@valtimo-portal/task';
-import {map, take, tap} from 'rxjs/operators';
-import {BehaviorSubject, combineLatest} from 'rxjs';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {PortalTask, TaskService} from '@valtimo-portal/task';
+import {map, switchMap, take, tap} from 'rxjs/operators';
+import {BehaviorSubject, combineLatest, Subscription} from 'rxjs';
 import {ActivatedRoute, Router} from '@angular/router';
 import {LocalizeRouterService} from '@gilsdav/ngx-translate-router';
+import {BreadcrumbsService} from '@valtimo-portal/nl-material';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-task',
   templateUrl: './task.component.html',
   styleUrls: ['./task.component.scss']
 })
-export class TaskComponent {
+export class TaskComponent implements OnInit, OnDestroy {
 
   loading$ = new BehaviorSubject<boolean>(true);
 
@@ -37,15 +39,33 @@ export class TaskComponent {
       map(([params, tasks]) => tasks?.find((task) => task.taskId === params?.id)),
       tap((task) => {
         this.loading$.next(false);
+        if (task) {
+          this.setBreadcrumbTitle(task);
+        }
       })
     );
+
+  private langChangeSubscription!: Subscription;
+
+  private readonly breadcrumbPosition = 2;
 
   constructor(
     private readonly taskService: TaskService,
     private readonly route: ActivatedRoute,
     private readonly localizeRouterService: LocalizeRouterService,
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly breadcrumbsService: BreadcrumbsService,
+    private readonly translateService: TranslateService
   ) {
+  }
+
+  ngOnInit(): void {
+    this.openLangChangeSubscription();
+  }
+
+  ngOnDestroy(): void {
+    this.langChangeSubscription?.unsubscribe();
+    this.breadcrumbsService.clearBreadcrumbReplacement(this.breadcrumbPosition);
   }
 
   handleSubmit(submission: any): void {
@@ -62,5 +82,29 @@ export class TaskComponent {
           });
         }
       );
+  }
+
+  private openLangChangeSubscription(): void {
+    this.langChangeSubscription = this.translateService.onLangChange
+      .pipe(
+        switchMap(() => this.task$),
+      ).subscribe((task) => {
+        if (task) {
+          this.setBreadcrumbTitle(task);
+        }
+      });
+  }
+
+  private setBreadcrumbTitle(task: PortalTask): void {
+    const translatedTitle = this.translateService.instant(
+      `${task.caseDefinitionId}.tasks.${task.taskDefinitionKey}`
+    );
+
+    this.breadcrumbsService.setBreadcrumbReplacement(
+      {
+        positionInUrl: this.breadcrumbPosition,
+        replacementTitle: translatedTitle
+      }
+    );
   }
 }

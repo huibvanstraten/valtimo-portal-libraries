@@ -9,7 +9,12 @@
     "statuses": {
       "portal-case-created": "Case opened",
       "portal-case-in-progress": "Case is in progress",
-      "Case is in progress": "Case is in progress"
+      "Case is in progress": "Case is in progress",
+      "a": "Status 1",
+      "b": "Status 2",
+      "c": "Status 3",
+      "d": "Status 4",
+      "e": "Status 5"
     },
     "properties": {
       "firstName": "First name",

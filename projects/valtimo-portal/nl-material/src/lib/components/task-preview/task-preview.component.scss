@@ -1,47 +1,67 @@
 @import "colors";
 @import "variables";
 
-.current-task-actions {
+$icon-size: 64px;
+
+.task-preview {
   display: flex;
+  flex-direction: row;
   width: 100%;
-  margin-top: 24px;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: -24px !important;
 
-  span {
-    line-height: $font-larger;
-    font-size: $font-smaller;
-  }
+  .body-icon-container {
+    display: flex;
+    flex-direction: row;
 
-  span, svg {
-    color: $nl-material-warn-dark;
-  }
+    .body {
+      font-size: $font-medium;
+      line-height: $font-large;
+      color: $nl-dark-gray;
+    }
 
-  button {
-    margin-right: -8px;
-    margin-left: auto;
-  }
-}
+    .tags {
+      font-size: $font-smaller;
+      line-height: $font-larger;
+      color: $nl-darker-gray;
+      margin-top: 10px;
 
-.top-right-fold {
-  background-color: $nl-material-warn-fold;
-  position: absolute;
-  top: 0;
-  right: 0;
-  border-radius: 5px;
-  width: 24px;
-  height: 24px;
-}
+      span:not(:last-child):after {
+        content: " \00b7";
+      }
+    }
 
-.completed {
-  .top-right-fold {
-    background-color: $nl-material-primary-fold;
-  }
+    .circle-icon-container {
+      width: $icon-size;
+      height: $icon-size;
+      position: relative;
+      margin-right: 32px;
 
-  .current-task-actions {
-    span, svg {
-      color: $nl-material-primary;
+      .notification {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background-color: $nl-material-warn;
+        position: absolute;
+        top: 5px;
+        right: 5px;
+      }
+
+      .circle-icon {
+        width: $icon-size;
+        height: $icon-size;
+        border-radius: 50%;
+        background-color: $nl-light-gray;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .mat-icon {
+          color: $nl-dark-gray;
+          width: 20px;
+        }
+      }
     }
   }
+
+
 }
+

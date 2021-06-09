@@ -19,18 +19,20 @@ import {RouterModule, Routes} from '@angular/router';
 import {TasksComponent} from './tasks.component';
 import {KeycloakAppAuthGuard} from '@valtimo-portal/authentication';
 
-const routes: Routes = [{
-  path: '', component: TasksComponent, canActivate: [KeycloakAppAuthGuard],
-},
+const routes: Routes = [
+  {
+    path: '', component: TasksComponent, canActivate: [KeycloakAppAuthGuard],
+  },
   {
     path: 'task',
     loadChildren: () => import('@task/task.module').then(m => m.TaskModule),
     canActivate: [KeycloakAppAuthGuard],
     data: {
       title: 'TITLES.task',
-      animation: 'DetailPage',
+      animation: 'TaskPage',
     }
-  }];
+  }
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

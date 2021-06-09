@@ -1,34 +1,53 @@
-<div @fadeIn>
-  <nl-material-card
-    *ngIf="(currentLang$ | async) as currentLang"
-    [buttonText]="'home.preview.primaryButtonText' | translate"
-    [secondaryButtonText]="'home.preview.secondaryButtonText' | translate"
-    [title]="preview.caseDefinitionId + '.tasks.' + preview.taskDefinitionKey | translate"
-    [subtitle]="preview.caseDefinitionId + '.title' | translate"
-    (primaryButtonClick)="navigateToTask()"
-    [type]="!preview.isCompleted ? taskPreviewType : taskPreviewCompletedType"
-    [ngClass]="{'completed': preview.isCompleted}"
-  >
-    <ng-container *ngTemplateOutlet="extras"></ng-container>
+<div @fadeIn class="task-preview mat-typography" *ngIf="(currentLang$ | async) as currentLang">
+  <div class="body-icon-container">
     <ng-container
-      *ngTemplateOutlet="currentTaskActions;context:{currentLang: currentLang, preview: preview}">
+      *ngTemplateOutlet="icon;context:{preview: preview}">
     </ng-container>
-  </nl-material-card>
+    <ng-container
+      *ngTemplateOutlet="body;context:{currentLang: currentLang, preview: preview}">
+    </ng-container>
+  </div>
+  <ng-container
+    *ngTemplateOutlet="currentTaskActions;context:{currentLang: currentLang, preview: preview}">
+  </ng-container>
 </div>
 
-<ng-template #extras>
-  <div class="top-right-fold"></div>
+<ng-template #icon let-preview="preview">
+  <div class="circle-icon-container">
+    <div *ngIf="!preview.isCompleted" class="notification"></div>
+    <div class="circle-icon">
+      <mat-icon fontSet="fa" fontIcon="fa-comment-alt"></mat-icon>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #body let-currentLang="currentLang" let-preview="preview">
+  <div
+    class="body"
+  >
+     <span [innerHTML]="'tasks.reminder' | translate:
+       {
+         task: (preview.caseDefinitionId + '.tasks.' + preview.taskDefinitionKey | translate),
+         case: (preview.caseDefinitionId + '.title' | translate)
+       }">
+     </span>
+    <div class="tags">
+      <span>
+        {{preview.createdOn | date: 'shortDate' : '' : currentLang}}
+      </span>
+      <span>
+        {{'tasks.reminderTitle' | translate}}
+      </span>
+    </div>
+  </div>
 </ng-template>
 
 <ng-template #currentTaskActions let-currentLang="currentLang" let-preview="preview">
   <div
     class="current-task-actions"
   >
-      <span>
-        {{preview.createdOn | date: 'shortDate' : '' : currentLang}}
-      </span>
     <button
-      *ngIf="!preview.isCompleted"
+      [disabled]="preview.isCompleted"
       mat-button
       [routerLink]="taskRoute$ | async"
       [queryParams]="{id:preview.taskId}"

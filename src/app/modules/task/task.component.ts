@@ -17,7 +17,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {PortalTask, TaskService} from '@valtimo-portal/task';
 import {map, switchMap, take, tap} from 'rxjs/operators';
-import {BehaviorSubject, combineLatest, Subscription} from 'rxjs';
+import {BehaviorSubject, combineLatest, Observable, Subscription} from 'rxjs';
 import {ActivatedRoute, Router} from '@angular/router';
 import {LocalizeRouterService} from '@gilsdav/ngx-translate-router';
 import {BreadcrumbsService} from '@valtimo-portal/nl-material';
@@ -45,6 +45,8 @@ export class TaskComponent implements OnInit, OnDestroy {
       })
     );
 
+  title$!: Observable<string>;
+
   private langChangeSubscription!: Subscription;
 
   private readonly breadcrumbPosition = 2;
@@ -57,6 +59,7 @@ export class TaskComponent implements OnInit, OnDestroy {
     private readonly breadcrumbsService: BreadcrumbsService,
     private readonly translateService: TranslateService
   ) {
+    this.title$ = this.breadcrumbsService.getBreadcrumbReplacement(this.breadcrumbPosition);
   }
 
   ngOnInit(): void {

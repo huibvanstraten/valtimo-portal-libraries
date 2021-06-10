@@ -12,6 +12,10 @@
     border: solid 1px $nl-medium-gray;
     margin: 0 auto;
     max-width: $formio-max-width;
+
+    &.is-wizard {
+      max-width: $formio-wizard-max-width;
+    }
   }
 
   .mat-h1 {

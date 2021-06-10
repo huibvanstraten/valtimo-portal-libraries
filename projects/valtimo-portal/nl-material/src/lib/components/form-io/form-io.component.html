@@ -1,4 +1,4 @@
-<div class="mat-form-io-container mat-typography" @fadeInSlow>
+<div class="mat-form-io-container mat-typography" @fadeInSlow [ngClass]="{'is-wizard': formIsWizard$ | async}">
   <h1 class="mat-h1">{{title}}</h1>
   <ng-container *ngIf="formDefinition$ | async as formDefinition; else loading">
     <formio

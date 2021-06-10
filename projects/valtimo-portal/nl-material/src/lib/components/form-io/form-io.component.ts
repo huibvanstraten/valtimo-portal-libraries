@@ -3,7 +3,8 @@ import {FormioForm, FormioRefreshValue} from '@formio/angular';
 import {fadeInAnimations} from '../../animations';
 import {FormStylingService, FormTranslationService} from '@valtimo-portal/form';
 import {SidenavService} from '../../services';
-import {BehaviorSubject, Subscription} from 'rxjs';
+import {BehaviorSubject, Observable, Subscription} from 'rxjs';
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'nl-material-form-io',
@@ -21,6 +22,15 @@ export class FormIoComponent implements OnInit, OnDestroy {
   @Output() submission = new EventEmitter<any>();
 
   formDefinition$ = new BehaviorSubject<FormioForm | undefined>(undefined);
+
+  formIsWizard$: Observable<boolean> = this.formDefinition$.pipe(
+    map((definition) => {
+      if (definition) {
+        return definition.display === 'wizard';
+      }
+      return false;
+    })
+  );
 
   refresh = new EventEmitter<FormioRefreshValue>();
 

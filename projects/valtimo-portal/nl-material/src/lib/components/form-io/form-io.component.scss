@@ -135,4 +135,32 @@
       }
     }
   }
+
+  .btn-wizard-nav-cancel, .btn-wizard-nav-next, .btn-wizard-nav-previous, .btn-wizard-nav-submit {
+    opacity: 0;
+    transition: opacity 0.35s ease-in-out;
+  }
+
+  .list-inline:last-child {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    padding: 0;
+    margin: 0;
+    background: none;
+    box-shadow: none;
+    padding: 1.5em 0 0 !important;
+    display: flex;
+    justify-content: flex-end;
+    border-top: 1px solid $nl-medium-gray;
+    margin-top: 24px;
+
+    li {
+      &::marker {
+        color: transparent;
+      }
+
+      margin-left: 16px;
+    }
+  }
 }

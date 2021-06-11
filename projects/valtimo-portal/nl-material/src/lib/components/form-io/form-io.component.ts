@@ -14,7 +14,7 @@ import {fadeInAnimations} from '../../animations';
 import {FormStylingService, FormTranslationService} from '@valtimo-portal/form';
 import {SidenavService} from '../../services';
 import {BehaviorSubject, Observable, Subscription} from 'rxjs';
-import {map} from 'rxjs/operators';
+import {map, take} from 'rxjs/operators';
 import {DOCUMENT} from '@angular/common';
 
 @Component({
@@ -74,6 +74,23 @@ export class FormIoComponent implements OnInit, OnDestroy, AfterViewInit {
     this.submission.emit(submission);
   }
 
+  setWizardButtonClasses(): void {
+    this.formIsWizard$.pipe(take(1)).subscribe((isWizard) => {
+      if (isWizard) {
+        const cancelButtons = Array.from(this.document.querySelectorAll('.btn-wizard-nav-cancel'));
+        const nextButtons = Array.from(this.document.querySelectorAll('.btn-wizard-nav-next'));
+        const previousButtons = Array.from(this.document.querySelectorAll('.btn-wizard-nav-previous'));
+        const submitButtons = Array.from(this.document.querySelectorAll('.btn-wizard-nav-submit'));
+        const wizardButtons = [...cancelButtons, ...nextButtons, ...previousButtons, ...submitButtons];
+
+        wizardButtons.forEach((button) => {
+          button.setAttribute('class', 'mat-flat-button mat-primary');
+          (button as any).style.opacity = '1';
+        });
+      }
+    });
+  }
+
   private getProcessedDefinition(): FormioForm {
     const translatedForm = this.formTranslationService.translateForm(this.definition, this.caseDefinitionId);
     return this.formStylingService.styleForm(translatedForm);
@@ -85,13 +102,5 @@ export class FormIoComponent implements OnInit, OnDestroy, AfterViewInit {
         {form: this.getProcessedDefinition()}
       );
     });
-  }
-
-  private setWizardButtonClasses(): void {
-    const cancelButtons = Array.from(this.document.querySelectorAll('.btn-wizard-nav-cancel'));
-    const nextButtons = Array.from(this.document.querySelectorAll('.btn-wizard-nav-next'));
-    const previousButton = Array.from(this.document.querySelectorAll('.btn-wizard-nav-previous'));
-    const wizardButtons = [...cancelButtons, ...nextButtons, ...previousButton];
-    console.log(wizardButtons);
   }
 }

@@ -6,6 +6,8 @@
       (submit)="handleSubmit($event)"
       [readOnly]="submitting"
       [refresh]="refresh"
+      (nextPage)="setWizardButtonClasses()"
+      (prevPage)="setWizardButtonClasses()"
     >
     </formio>
   </ng-container>

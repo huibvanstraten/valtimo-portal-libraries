@@ -85,3 +85,45 @@
     margin-top: 8px;
   }
 }
+
+.is-wizard {
+  .pagination {
+    padding-left: 23px;
+    font-size: $font-smaller;
+  }
+
+  .page-item {
+    height: 40px;
+    color: $nl-dark-gray;
+
+    .page-link {
+      position: relative;
+      margin-left: 8px;
+      top: 2px;
+    }
+
+    &::marker {
+      font-size: $font-medium;
+    }
+
+    &.active {
+      color: $nl-material-accent;
+
+      &::marker {
+        color: $nl-material-accent;
+      }
+
+      &:before {
+        content: "";
+        height: 15px;
+        width: 15px;
+        border-radius: 50%;
+        border: 1px solid $nl-material-accent;
+        display: flex;
+        position: absolute;
+        margin-left: -23px;
+        margin-top: 2px;
+      }
+    }
+  }
+}

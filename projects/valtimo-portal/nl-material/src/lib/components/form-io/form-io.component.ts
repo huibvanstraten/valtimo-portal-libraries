@@ -1,10 +1,21 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewEncapsulation} from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  EventEmitter,
+  Inject,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+  ViewEncapsulation
+} from '@angular/core';
 import {FormioForm, FormioRefreshValue} from '@formio/angular';
 import {fadeInAnimations} from '../../animations';
 import {FormStylingService, FormTranslationService} from '@valtimo-portal/form';
 import {SidenavService} from '../../services';
 import {BehaviorSubject, Observable, Subscription} from 'rxjs';
 import {map} from 'rxjs/operators';
+import {DOCUMENT} from '@angular/common';
 
 @Component({
   selector: 'nl-material-form-io',
@@ -13,7 +24,7 @@ import {map} from 'rxjs/operators';
   encapsulation: ViewEncapsulation.None,
   animations: fadeInAnimations
 })
-export class FormIoComponent implements OnInit, OnDestroy {
+export class FormIoComponent implements OnInit, OnDestroy, AfterViewInit {
   @Input() definition!: FormioForm;
   @Input() caseDefinitionId!: string;
   @Input() title!: string;
@@ -39,7 +50,8 @@ export class FormIoComponent implements OnInit, OnDestroy {
   constructor(
     private readonly formTranslationService: FormTranslationService,
     private readonly formStylingService: FormStylingService,
-    private readonly sidenavService: SidenavService
+    private readonly sidenavService: SidenavService,
+    @Inject(DOCUMENT) private readonly document: HTMLDocument
   ) {
     this.currentLangSubscription = this.sidenavService.currentLang$.subscribe(() => {
       this.emitFormRefresh();
@@ -48,6 +60,10 @@ export class FormIoComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.formDefinition$.next(this.getProcessedDefinition());
+  }
+
+  ngAfterViewInit(): void {
+    this.setWizardButtonClasses();
   }
 
   ngOnDestroy(): void {
@@ -69,5 +85,13 @@ export class FormIoComponent implements OnInit, OnDestroy {
         {form: this.getProcessedDefinition()}
       );
     });
+  }
+
+  private setWizardButtonClasses(): void {
+    const cancelButtons = Array.from(this.document.querySelectorAll('.btn-wizard-nav-cancel'));
+    const nextButtons = Array.from(this.document.querySelectorAll('.btn-wizard-nav-next'));
+    const previousButton = Array.from(this.document.querySelectorAll('.btn-wizard-nav-previous'));
+    const wizardButtons = [...cancelButtons, ...nextButtons, ...previousButton];
+    console.log(wizardButtons);
   }
 }

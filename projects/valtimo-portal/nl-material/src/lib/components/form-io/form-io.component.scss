@@ -141,6 +141,10 @@
     transition: opacity 0.35s ease-in-out;
   }
 
+  .btn-wizard-nav-cancel {
+    display: none;
+  }
+
   .list-inline:last-child {
     display: flex;
     width: 100%;

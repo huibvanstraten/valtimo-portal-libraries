@@ -77,11 +77,10 @@ export class FormIoComponent implements OnInit, OnDestroy, AfterViewInit {
   setWizardButtonClasses(): void {
     this.formIsWizard$.pipe(take(1)).subscribe((isWizard) => {
       if (isWizard) {
-        const cancelButtons = Array.from(this.document.querySelectorAll('.btn-wizard-nav-cancel'));
         const nextButtons = Array.from(this.document.querySelectorAll('.btn-wizard-nav-next'));
         const previousButtons = Array.from(this.document.querySelectorAll('.btn-wizard-nav-previous'));
         const submitButtons = Array.from(this.document.querySelectorAll('.btn-wizard-nav-submit'));
-        const wizardButtons = [...cancelButtons, ...nextButtons, ...previousButtons, ...submitButtons];
+        const wizardButtons = [...nextButtons, ...previousButtons, ...submitButtons];
 
         wizardButtons.forEach((button) => {
           button.setAttribute('class', 'mat-flat-button mat-primary');

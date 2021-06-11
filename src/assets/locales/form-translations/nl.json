@@ -1,6 +1,9 @@
 {
   "formTranslations": {
     "submit": "Indienen",
-    "page": "Pagina {{value}}"
+    "page": "Pagina {{value}}",
+    "Submit Form": "Indienen",
+    "Next": "Volgende",
+    "Previous": "Vorige"
   }
 }

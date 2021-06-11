@@ -1,6 +1,9 @@
 {
   "formTranslations": {
     "submit": "Submit",
-    "page": "Page {{value}}"
+    "page": "Page {{value}}",
+    "Submit Form": "Submit",
+    "Next": "Next",
+    "Previous": "Previous"
   }
 }

@@ -16,6 +16,7 @@ import {SidenavService} from '../../services';
 import {BehaviorSubject, Observable, Subscription} from 'rxjs';
 import {map, take} from 'rxjs/operators';
 import {DOCUMENT} from '@angular/common';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'nl-material-form-io',
@@ -51,6 +52,7 @@ export class FormIoComponent implements OnInit, OnDestroy, AfterViewInit {
     private readonly formTranslationService: FormTranslationService,
     private readonly formStylingService: FormStylingService,
     private readonly sidenavService: SidenavService,
+    private readonly translateService: TranslateService,
     @Inject(DOCUMENT) private readonly document: HTMLDocument
   ) {
     this.currentLangSubscription = this.sidenavService.currentLang$.subscribe(() => {
@@ -63,7 +65,7 @@ export class FormIoComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.setWizardButtonClasses();
+    this.setWizardButtons();
   }
 
   ngOnDestroy(): void {
@@ -74,7 +76,7 @@ export class FormIoComponent implements OnInit, OnDestroy, AfterViewInit {
     this.submission.emit(submission);
   }
 
-  setWizardButtonClasses(): void {
+  setWizardButtons(): void {
     this.formIsWizard$.pipe(take(1)).subscribe((isWizard) => {
       if (isWizard) {
         const nextButtons = Array.from(this.document.querySelectorAll('.btn-wizard-nav-next'));
@@ -85,6 +87,7 @@ export class FormIoComponent implements OnInit, OnDestroy, AfterViewInit {
         wizardButtons.forEach((button) => {
           button.setAttribute('class', 'mat-flat-button mat-primary');
           (button as any).style.opacity = '1';
+          button.textContent = this.translateService.instant(`formTranslations.${button.textContent}`);
         });
       }
     });

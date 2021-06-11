@@ -73,6 +73,15 @@
       color: $nl-darker-gray;
       font-style: italic;
     }
+
+    &.formio-error-wrapper {
+      border-radius: 5px;
+      background-color: $nl-material-warn-background;
+
+      .field-required:after, .tab-error:after, .formio-errors .error {
+        color: $nl-material-warn;
+      }
+    }
   }
 
   .formio-component-button.mat-flat-button {
@@ -99,7 +108,7 @@
     .page-link {
       position: relative;
       margin-left: 8px;
-      top: 2px;
+      top: 1px;
     }
 
     &::marker {

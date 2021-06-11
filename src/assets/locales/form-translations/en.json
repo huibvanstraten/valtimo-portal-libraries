@@ -1,5 +1,6 @@
 {
   "formTranslations": {
-    "submit": "Submit"
+    "submit": "Submit",
+    "page": "Page {{value}}"
   }
 }

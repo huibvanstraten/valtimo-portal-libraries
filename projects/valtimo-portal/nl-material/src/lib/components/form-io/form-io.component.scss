@@ -6,6 +6,8 @@
 @import 'variables';
 @import "mixins";
 
+$wizard-nav-width: 250px;
+
 .mat-form-io-container {
   @include layout-bp(gt-xs) {
     padding: 26px;
@@ -165,6 +167,27 @@
       }
 
       margin-left: 16px;
+    }
+  }
+
+  @include layout-bp(gt-sm) {
+    .formio-form {
+      > div:first-child {
+        display: flex;
+        flex-flow: row wrap;
+
+        nav {
+          width: $wizard-nav-width;
+        }
+
+        .wizard-page {
+          width: calc(100% - #{$wizard-nav-width});
+        }
+
+        ul.list-inline {
+          margin-left: $wizard-nav-width;
+        }
+      }
     }
   }
 }

@@ -41,6 +41,8 @@ import {Environment} from '@valtimo-portal/shared';
 import {registerLocaleData} from '@angular/common';
 import localeEn from '@angular/common/locales/en';
 import localeNl from '@angular/common/locales/nl';
+import {formioAppConfig} from '@app/config';
+import {FormioAppConfig} from '@formio/angular';
 
 export const HttpLoaderFactory = (http: HttpClient, env: Environment) =>
   new MultiTranslateHttpLoader(http, env.translation.resources);
@@ -54,7 +56,8 @@ export const HttpLoaderFactory = (http: HttpClient, env: Environment) =>
       multi: true,
       deps: [KeycloakService, 'environment'],
     },
-    KeycloakAppAuthGuard
+    KeycloakAppAuthGuard,
+    {provide: FormioAppConfig, useValue: formioAppConfig}
   ],
   declarations: [
     AppComponent,

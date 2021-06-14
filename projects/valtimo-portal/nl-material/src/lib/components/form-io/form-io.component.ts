@@ -1,9 +1,22 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewEncapsulation} from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  EventEmitter,
+  Inject,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+  ViewEncapsulation
+} from '@angular/core';
 import {FormioForm, FormioRefreshValue} from '@formio/angular';
 import {fadeInAnimations} from '../../animations';
 import {FormStylingService, FormTranslationService} from '@valtimo-portal/form';
 import {SidenavService} from '../../services';
-import {BehaviorSubject, Subscription} from 'rxjs';
+import {BehaviorSubject, Observable, Subscription} from 'rxjs';
+import {map, take} from 'rxjs/operators';
+import {DOCUMENT} from '@angular/common';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'nl-material-form-io',
@@ -12,7 +25,7 @@ import {BehaviorSubject, Subscription} from 'rxjs';
   encapsulation: ViewEncapsulation.None,
   animations: fadeInAnimations
 })
-export class FormIoComponent implements OnInit, OnDestroy {
+export class FormIoComponent implements OnInit, OnDestroy, AfterViewInit {
   @Input() definition!: FormioForm;
   @Input() caseDefinitionId!: string;
   @Input() title!: string;
@@ -22,6 +35,15 @@ export class FormIoComponent implements OnInit, OnDestroy {
 
   formDefinition$ = new BehaviorSubject<FormioForm | undefined>(undefined);
 
+  formIsWizard$: Observable<boolean> = this.formDefinition$.pipe(
+    map((definition) => {
+      if (definition) {
+        return definition.display === 'wizard';
+      }
+      return false;
+    })
+  );
+
   refresh = new EventEmitter<FormioRefreshValue>();
 
   currentLangSubscription!: Subscription;
@@ -29,7 +51,9 @@ export class FormIoComponent implements OnInit, OnDestroy {
   constructor(
     private readonly formTranslationService: FormTranslationService,
     private readonly formStylingService: FormStylingService,
-    private readonly sidenavService: SidenavService
+    private readonly sidenavService: SidenavService,
+    private readonly translateService: TranslateService,
+    @Inject(DOCUMENT) private readonly document: HTMLDocument
   ) {
     this.currentLangSubscription = this.sidenavService.currentLang$.subscribe(() => {
       this.emitFormRefresh();
@@ -40,12 +64,33 @@ export class FormIoComponent implements OnInit, OnDestroy {
     this.formDefinition$.next(this.getProcessedDefinition());
   }
 
+  ngAfterViewInit(): void {
+    this.setWizardButtons();
+  }
+
   ngOnDestroy(): void {
     this.currentLangSubscription.unsubscribe();
   }
 
   handleSubmit(submission: any): void {
     this.submission.emit(submission);
+  }
+
+  setWizardButtons(): void {
+    this.formIsWizard$.pipe(take(1)).subscribe((isWizard) => {
+      if (isWizard) {
+        const nextButtons = Array.from(this.document.querySelectorAll('.btn-wizard-nav-next'));
+        const previousButtons = Array.from(this.document.querySelectorAll('.btn-wizard-nav-previous'));
+        const submitButtons = Array.from(this.document.querySelectorAll('.btn-wizard-nav-submit'));
+        const wizardButtons = [...nextButtons, ...previousButtons, ...submitButtons];
+
+        wizardButtons.forEach((button) => {
+          button.setAttribute('class', 'mat-flat-button mat-primary');
+          (button as any).style.opacity = '1';
+          button.textContent = this.translateService.instant(`formTranslations.${button.textContent}`);
+        });
+      }
+    });
   }
 
   private getProcessedDefinition(): FormioForm {

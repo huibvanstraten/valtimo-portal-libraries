@@ -14,17 +14,18 @@
  * limitations under the License.
  */
 
+@use '~@angular/material' as mat;
 @import '~@angular/material/theming';
 
-@include mat-core();
+@include mat.core();
 
 @import 'palettes';
 
-$nl-material-primary: mat-palette($nl-material-primary-palette);
-$nl-material-accent: mat-palette($nl-material-accent-palette);
-$nl-material-warn: mat-palette($nl-material-warn-palette);
+$nl-material-primary: mat.define-palette($nl-material-primary-palette);
+$nl-material-accent: mat.define-palette($nl-material-accent-palette);
+$nl-material-warn: mat.define-palette($nl-material-warn-palette);
 
-$nl-material-theme: mat-light-theme((
+$nl-material-theme: mat.define-light-theme((
   color: (
     primary: $nl-material-primary,
     accent: $nl-material-accent,
@@ -32,4 +33,4 @@ $nl-material-theme: mat-light-theme((
   )
 ));
 
-@include angular-material-theme($nl-material-theme);
+@include mat.all-component-themes($nl-material-theme);

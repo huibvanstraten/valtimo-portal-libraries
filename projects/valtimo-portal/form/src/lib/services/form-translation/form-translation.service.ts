@@ -32,15 +32,24 @@ export class FormTranslationService {
   }
 
   translateForm(form: FormioForm, caseDefinitionId: string): FormioForm {
-    const translateFunction = (component: ExtendedComponentSchema): ExtendedComponentSchema => ({
-      ...component,
-      ...(component.label && {label: `${this.getTranslation(`${component.key}`, caseDefinitionId) || component.label}`})
-    });
+    const translateFunction = (component: ExtendedComponentSchema): ExtendedComponentSchema => {
+      const translation = this.getTranslation(`${component.key}`, caseDefinitionId);
+      return {
+        ...component,
+        ...(component.label && {label: `${translation || component.label}`}),
+        ...(component.title && {title: `${translation || component.title}`})
+      };
+    };
 
     return this.formMappingService.mapComponents(form, translateFunction);
   }
 
   private getTranslation(text: string, caseDefinitionId: string): string | boolean {
+    const numbersInText = text.replace(/[^0-9]/g, '');
+    const genericKeyWithoutNumber = `formTranslations.${text.replace(numbersInText, '')}`;
+    const genericTranslationWithoutNumber = this.translateService.instant(
+      genericKeyWithoutNumber, {value: numbersInText});
+
     const genericKey = `formTranslations.${text}`;
     const genericTranslation = this.translateService.instant(genericKey);
 
@@ -49,6 +58,8 @@ export class FormTranslationService {
 
     if (definitionKey !== definitionTranslation) {
       return definitionTranslation;
+    } else if (genericKeyWithoutNumber !== genericTranslationWithoutNumber) {
+      return genericTranslationWithoutNumber;
     } else if (genericKey !== genericTranslation) {
       return genericTranslation;
     } else {

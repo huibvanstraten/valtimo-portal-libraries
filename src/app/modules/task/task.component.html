@@ -41,7 +41,7 @@
     <nl-material-form-io
       [definition]="task.formDefinition"
       [caseDefinitionId]="task.caseDefinitionId"
-      [title]=" ''"
+      [title]="(title$ | async) || ''"
       [submitting]="(submitting$ | async) !== false"
       (submission)="handleSubmit($event)"
     ></nl-material-form-io>

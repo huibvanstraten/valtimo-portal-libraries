@@ -1,9 +1,12 @@
+@use '~@angular/material' as mat;
 @import '~@angular/material/theming';
 
-@include mat-core();
+@include mat.core();
 @import 'colors';
 @import 'variables';
 @import "mixins";
+
+$wizard-nav-width: 250px;
 
 .mat-form-io-container {
   @include layout-bp(gt-xs) {
@@ -12,6 +15,10 @@
     border: solid 1px $nl-medium-gray;
     margin: 0 auto;
     max-width: $formio-max-width;
+
+    &.is-wizard {
+      max-width: $formio-wizard-max-width;
+    }
   }
 
   .mat-h1 {
@@ -68,6 +75,15 @@
       color: $nl-darker-gray;
       font-style: italic;
     }
+
+    &.formio-error-wrapper {
+      border-radius: 5px;
+      background-color: $nl-material-warn-background;
+
+      .field-required:after, .tab-error:after, .formio-errors .error {
+        color: $nl-material-warn;
+      }
+    }
   }
 
   .formio-component-button.mat-flat-button {
@@ -78,5 +94,100 @@
 
   .form-radio {
     margin-top: 8px;
+  }
+}
+
+.is-wizard {
+  .pagination {
+    padding-left: 23px;
+    font-size: $font-smaller;
+  }
+
+  .page-item {
+    height: 40px;
+    color: $nl-dark-gray;
+
+    .page-link {
+      position: relative;
+      margin-left: 8px;
+      top: 1px;
+    }
+
+    &::marker {
+      font-size: $font-medium;
+    }
+
+    &.active {
+      color: $nl-material-accent;
+
+      &::marker {
+        color: $nl-material-accent;
+      }
+
+      &:before {
+        content: "";
+        height: 15px;
+        width: 15px;
+        border-radius: 50%;
+        border: 1px solid $nl-material-accent;
+        display: flex;
+        position: absolute;
+        margin-left: -23px;
+        margin-top: 2px;
+      }
+    }
+  }
+
+  .btn-wizard-nav-cancel, .btn-wizard-nav-next, .btn-wizard-nav-previous, .btn-wizard-nav-submit {
+    opacity: 0;
+    transition: opacity 0.35s ease-in-out;
+  }
+
+  .btn-wizard-nav-cancel {
+    display: none;
+  }
+
+  .list-inline:last-child {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    padding: 0;
+    margin: 0;
+    background: none;
+    box-shadow: none;
+    padding: 1.5em 0 0 !important;
+    display: flex;
+    justify-content: flex-end;
+    border-top: 1px solid $nl-medium-gray;
+    margin-top: 24px;
+
+    li {
+      &::marker {
+        color: transparent;
+      }
+
+      margin-left: 16px;
+    }
+  }
+
+  @include layout-bp(gt-sm) {
+    .formio-form {
+      > div:first-child {
+        display: flex;
+        flex-flow: row wrap;
+
+        nav {
+          width: $wizard-nav-width;
+        }
+
+        .wizard-page {
+          width: calc(100% - #{$wizard-nav-width});
+        }
+
+        ul.list-inline {
+          margin-left: $wizard-nav-width;
+        }
+      }
+    }
   }
 }

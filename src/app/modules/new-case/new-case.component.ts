@@ -17,7 +17,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {BreadcrumbsService} from '@valtimo-portal/nl-material';
 import {FormService} from '@valtimo-portal/form';
-import {BehaviorSubject, Observable, Subscription} from 'rxjs';
+import {BehaviorSubject, Observable, Subject, Subscription} from 'rxjs';
 import {ActivatedRoute, Router} from '@angular/router';
 import {TranslateService} from '@ngx-translate/core';
 import {map, switchMap, take} from 'rxjs/operators';
@@ -41,7 +41,9 @@ export class NewCaseComponent implements OnInit, OnDestroy {
 
   title$!: Observable<string>;
 
-  submitting$ = new BehaviorSubject<boolean>(false);
+  readonly submitting$ = new BehaviorSubject<boolean>(false);
+
+  readonly reset$ = new Subject<boolean>();
 
   private langChangeSubscription!: Subscription;
 
@@ -85,13 +87,17 @@ export class NewCaseComponent implements OnInit, OnDestroy {
       .subscribe((params) => {
           this.caseService.submitCase(submission.data, params.id).subscribe((res) => {
             const id = params.id;
-            const caseId = res.data?.processSubmission.caseId;
+            const caseId = res?.data?.processSubmission.caseId;
 
-            this.submitting$.next(false);
-            this.router.navigate(
-              [`${this.localizeRouterService.translateRoute('/cases/newCase/caseConfirmation')}`],
-              {queryParams: {id, caseId}}
-            );
+            if (caseId) {
+              this.submitting$.next(false);
+              this.router.navigate(
+                [`${this.localizeRouterService.translateRoute('/cases/newCase/caseConfirmation')}`],
+                {queryParams: {id, caseId}}
+              );
+            } else {
+              this.reset$.next(true);
+            }
           });
         }
       );

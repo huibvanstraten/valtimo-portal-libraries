@@ -89,8 +89,9 @@ export class NewCaseComponent implements OnInit, OnDestroy {
             const id = params.id;
             const caseId = res?.data?.processSubmission.caseId;
 
+            this.submitting$.next(false);
+
             if (caseId) {
-              this.submitting$.next(false);
               this.router.navigate(
                 [`${this.localizeRouterService.translateRoute('/cases/newCase/caseConfirmation')}`],
                 {queryParams: {id, caseId}}

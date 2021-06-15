@@ -75,7 +75,13 @@ export class TaskService {
     );
   }
 
-  completeTask(submission: any, taskId: string): Observable<FetchResult<CompleteTaskMutation>> {
-    return this.completeTaskGQL.mutate({submission, taskId});
+  completeTask(submission: any, taskId: string): Observable<FetchResult<CompleteTaskMutation> | undefined> {
+    return this.completeTaskGQL.mutate({submission, taskId}).pipe(
+      catchError(() => {
+          this.notificationService.show(this.translateService.instant('formErrors.validationGeneric'));
+          return of(undefined);
+        }
+      )
+    );
   }
 }

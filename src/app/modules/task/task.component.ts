@@ -17,7 +17,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {PortalTask, TaskService} from '@valtimo-portal/task';
 import {map, switchMap, take, tap} from 'rxjs/operators';
-import {BehaviorSubject, combineLatest, Observable, Subscription} from 'rxjs';
+import {BehaviorSubject, combineLatest, Observable, Subject, Subscription} from 'rxjs';
 import {ActivatedRoute, Router} from '@angular/router';
 import {LocalizeRouterService} from '@gilsdav/ngx-translate-router';
 import {BreadcrumbsService} from '@valtimo-portal/nl-material';
@@ -46,6 +46,8 @@ export class TaskComponent implements OnInit, OnDestroy {
     );
 
   title$!: Observable<string>;
+
+  readonly reset$ = new Subject<boolean>();
 
   private langChangeSubscription!: Subscription;
 
@@ -77,11 +79,16 @@ export class TaskComponent implements OnInit, OnDestroy {
     this.route.queryParams
       .pipe(take(1))
       .subscribe((params) => {
-          this.taskService.completeTask(submission.data, params.id).subscribe(() => {
+          this.taskService.completeTask(submission.data, params.id).subscribe((res) => {
             this.submitting$.next(false);
-            this.router.navigateByUrl(
-              `${this.localizeRouterService.translateRoute('/tasks')}`
-            );
+
+            if (res) {
+              this.router.navigateByUrl(
+                `${this.localizeRouterService.translateRoute('/tasks')}`
+              );
+            } else {
+              this.reset$.next(true);
+            }
           });
         }
       );

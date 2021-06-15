@@ -9,11 +9,11 @@ import {
   Output,
   ViewEncapsulation
 } from '@angular/core';
-import {FormioForm, FormioRefreshValue} from '@formio/angular';
+import {FormioForm, FormioOptions, FormioRefreshValue} from '@formio/angular';
 import {fadeInAnimations} from '../../animations';
 import {FormStylingService, FormTranslationService} from '@valtimo-portal/form';
 import {SidenavService} from '../../services';
-import {BehaviorSubject, Observable, Subscription} from 'rxjs';
+import {BehaviorSubject, Observable, Subject, Subscription} from 'rxjs';
 import {map, take} from 'rxjs/operators';
 import {DOCUMENT} from '@angular/common';
 import {TranslateService} from '@ngx-translate/core';
@@ -30,6 +30,7 @@ export class FormIoComponent implements OnInit, OnDestroy, AfterViewInit {
   @Input() caseDefinitionId!: string;
   @Input() title!: string;
   @Input() submitting = false;
+  @Input() reset$!: Subject<boolean>;
 
   @Output() submission = new EventEmitter<any>();
 
@@ -46,7 +47,13 @@ export class FormIoComponent implements OnInit, OnDestroy, AfterViewInit {
 
   refresh = new EventEmitter<FormioRefreshValue>();
 
-  currentLangSubscription!: Subscription;
+  private currentLangSubscription!: Subscription;
+
+  private resetSubscription!: Subscription;
+
+  readonly options: FormioOptions = {
+    disableAlerts: true
+  };
 
   constructor(
     private readonly formTranslationService: FormTranslationService,
@@ -62,6 +69,7 @@ export class FormIoComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngOnInit(): void {
     this.formDefinition$.next(this.getProcessedDefinition());
+    this.setResetSubscription();
   }
 
   ngAfterViewInit(): void {
@@ -70,6 +78,7 @@ export class FormIoComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngOnDestroy(): void {
     this.currentLangSubscription.unsubscribe();
+    this.resetSubscription?.unsubscribe();
   }
 
   handleSubmit(submission: any): void {
@@ -104,5 +113,13 @@ export class FormIoComponent implements OnInit, OnDestroy, AfterViewInit {
         {form: this.getProcessedDefinition()}
       );
     });
+  }
+
+  private setResetSubscription(): void {
+    if (this.reset$) {
+      this.resetSubscription = this.reset$.subscribe(() => {
+        this.emitFormRefresh();
+      });
+    }
   }
 }

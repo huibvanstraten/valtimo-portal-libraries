@@ -146,8 +146,14 @@ export class CaseService {
     );
   }
 
-  submitCase(submission: any, caseDefinitionId: string): Observable<FetchResult<CreateCaseMutation>> {
-    return this.createCaseGQL.mutate({submission, caseDefinitionId});
+  submitCase(submission: any, caseDefinitionId: string): Observable<FetchResult<CreateCaseMutation> | undefined> {
+    return this.createCaseGQL.mutate({submission, caseDefinitionId}).pipe(
+      catchError(() => {
+          this.notificationService.show(this.translateService.instant('formErrors.validationGeneric'));
+          return of(undefined);
+        }
+      )
+    );
   }
 
   getCaseInstancePreview(caseInstance: PortalCaseInstance, statusDefinition: Array<string>): CasePreview {

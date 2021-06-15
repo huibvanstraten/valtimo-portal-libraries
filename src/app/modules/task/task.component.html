@@ -44,6 +44,7 @@
       [title]="(title$ | async) || ''"
       [submitting]="(submitting$ | async) !== false"
       (submission)="handleSubmit($event)"
+      [reset$]="reset$"
     ></nl-material-form-io>
   </div>
 </ng-template>

@@ -78,6 +78,21 @@ export class TaskService {
     );
   }
 
+  findMostRecentTask(hideError = false): Observable<PortalTask | undefined> {
+    return this.findAllTasks(hideError).pipe(
+      map((tasks) => {
+        const openTasks = tasks?.filter((task) => !task.isCompleted);
+        const sortedOpenTasks = openTasks?.sort((a, b) => a.createdOn.getTime() - b.createdOn.getTime());
+
+        if (sortedOpenTasks && sortedOpenTasks.length > 0) {
+          return sortedOpenTasks[0];
+        } else {
+          return undefined;
+        }
+      })
+    );
+  }
+
   completeTask(submission: any, taskId: string): Observable<FetchResult<CompleteTaskMutation> | undefined> {
     return this.completeTaskGQL.mutate({submission, taskId}).pipe(
       catchError(() => {

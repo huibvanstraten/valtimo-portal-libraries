@@ -21,6 +21,7 @@ import {KeycloakService} from 'keycloak-angular';
 import {CasePreview, CaseService} from '@valtimo-portal/case';
 import {tap} from 'rxjs/operators';
 import {PortalTask, TaskService} from '@valtimo-portal/task';
+import {TaskPreviewMode} from '../../../../projects/valtimo-portal/nl-material/src/lib';
 
 @Component({
   selector: 'app-home',
@@ -51,6 +52,8 @@ export class HomeComponent implements OnInit {
 
   readonly introductionType = CardType.introduction;
   readonly reminderType = CardType.reminder;
+
+  readonly taskPreviewModeReminder = TaskPreviewMode.reminder;
 
   constructor(
     private readonly keycloakService: KeycloakService,

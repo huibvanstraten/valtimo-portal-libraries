@@ -5,7 +5,7 @@ import {fadeInAnimations} from '../../animations';
 import {LocalizeRouterService} from '@gilsdav/ngx-translate-router';
 import {Router} from '@angular/router';
 import {PortalTask} from '@valtimo-portal/task';
-import {CardType} from '../../enums';
+import {CardType, TaskPreviewMode} from '../../enums';
 
 
 @Component({
@@ -16,6 +16,8 @@ import {CardType} from '../../enums';
 })
 export class TaskPreviewComponent implements OnInit, OnDestroy {
   @Input() preview!: PortalTask;
+  @Input() mode: TaskPreviewMode = TaskPreviewMode.overview;
+
   currentLang$!: Observable<string>;
 
   routeLangSubscription!: Subscription;
@@ -24,6 +26,10 @@ export class TaskPreviewComponent implements OnInit, OnDestroy {
 
   readonly taskPreviewType = CardType.taskPreview;
   readonly taskPreviewCompletedType = CardType.taskPreviewCompleted;
+  readonly reminderType = CardType.reminder;
+
+  readonly overviewMode = TaskPreviewMode.overview;
+  readonly reminderMode = TaskPreviewMode.reminder;
 
   constructor(
     private readonly sidenavService: SidenavService,

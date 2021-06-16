@@ -15,6 +15,10 @@
       "secondaryButtonText": "Bekijk aanvraag",
       "primaryButtonText": "Stel een vraag",
       "noData": "Er is geen recente aanvraag om te tonen."
+    },
+    "taskPreview": {
+      "primaryButtonText": "Ga naar taak",
+      "noData": "Er is geen recente taak om te tonen."
     }
   }
 }

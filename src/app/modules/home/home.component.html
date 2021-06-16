@@ -57,32 +57,27 @@
     <ng-container *ngIf="{latestTask: latestTask$ | async} as obs">
       <ng-container *ngIf="(loadingLatestTask$ | async) === false; else latestTaskLoading">
         <ng-container *ngIf="obs.latestTask; else noLatestTask">
-          <nl-material-task-preview [preview]="obs.latestTask"></nl-material-task-preview>
+          <nl-material-task-preview
+            [mode]="taskPreviewModeReminder"
+            [preview]="obs.latestTask"
+          ></nl-material-task-preview>
         </ng-container>
       </ng-container>
     </ng-container>
-    <!--    <nl-material-card-->
-    <!--      [type]="reminderType"-->
-    <!--      [title]="'home.reminder.title' | translate"-->
-    <!--      [buttonText]="'home.reminder.buttonText' | translate"-->
-    <!--      icon="exclamation-triangle"-->
-    <!--    >-->
-    <!--      {{'home.reminder.content' | translate}}-->
-    <!--    </nl-material-card>-->
   </div>
 </ng-template>
 
 <ng-template #latestTaskLoading>
   <div class="no-data-container">
-    <h1 class="mat-h1">{{'home.preview.title' | translate}}</h1>
+    <h1 class="mat-h1">{{'tasks.reminderTitle' | translate}}</h1>
     <nl-material-spinner></nl-material-spinner>
   </div>
 </ng-template>
 
 <ng-template #noLatestTask>
   <div class="no-data-container">
-    <h1 class="mat-h1">{{'home.preview.title' | translate}}</h1>
-    <h1 class="mat-h2">{{'home.preview.noData' | translate}}</h1>
+    <h1 class="mat-h1">{{'tasks.reminderTitle' | translate}}</h1>
+    <h1 class="mat-h2">{{'home.taskPreview.noData' | translate}}</h1>
   </div>
 </ng-template>
 

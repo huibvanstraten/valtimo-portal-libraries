@@ -1,4 +1,18 @@
-<div @fadeIn class="task-preview mat-typography" *ngIf="(currentLang$ | async) as currentLang">
+<div *ngIf="mode === reminderMode">
+  <nl-material-card
+    [type]="reminderType"
+    [title]="'tasks.reminderTitle' | translate"
+    [buttonText]="'home.taskPreview.primaryButtonText' | translate"
+    (primaryButtonClick)="navigateToTask()"
+    icon="exclamation-triangle"
+  >
+    <ng-container
+      *ngTemplateOutlet="reminderText;context:{preview: preview}">
+    </ng-container>
+  </nl-material-card>
+</div>
+
+<div @fadeIn class="task-preview mat-typography" *ngIf="mode === overviewMode && (currentLang$ | async) as currentLang">
   <div class="body-icon-container">
     <ng-container
       *ngTemplateOutlet="icon;context:{preview: preview}">
@@ -25,12 +39,9 @@
   <div
     class="body"
   >
-     <span [innerHTML]="'tasks.reminder' | translate:
-       {
-         task: (preview.caseDefinitionId + '.tasks.' + preview.taskDefinitionKey | translate),
-         case: (preview.caseDefinitionId + '.title' | translate)
-       }">
-     </span>
+    <ng-container
+      *ngTemplateOutlet="reminderText;context:{preview: preview}">
+    </ng-container>
     <div class="tags">
       <span>
         {{preview.createdOn | date: 'shortDate' : '' : currentLang}}
@@ -55,4 +66,13 @@
       <mat-icon fontIcon="fa-arrow-right" fontSet="fa"></mat-icon>
     </button>
   </div>
+</ng-template>
+
+<ng-template #reminderText let-preview="preview">
+  <span [innerHTML]="'tasks.reminder' | translate:
+       {
+         task: (preview.caseDefinitionId + '.tasks.' + preview.taskDefinitionKey | translate),
+         case: (preview.caseDefinitionId + '.title' | translate)
+       }">
+     </span>
 </ng-template>

@@ -64,7 +64,10 @@ export class TaskService {
     }
 
     return this.findAllTasksQueryRef.valueChanges.pipe(
-      map((res) => res.data.findAllTasks?.map((task) => ({...task, createdOn: new Date(task.createdOn)}))),
+      map((res) =>
+        res.data.findAllTasks?.map((task) =>
+          ({...task, createdOn: new Date(task.createdOn)}))
+      ),
       catchError(() => {
           if (!hideError) {
             this.notificationService.show(this.translateService.instant('tasks.noDataError'));

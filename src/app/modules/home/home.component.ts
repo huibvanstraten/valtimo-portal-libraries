@@ -15,13 +15,12 @@
  */
 
 import {Component, OnInit} from '@angular/core';
-import {AnimatedDotsService, CardType} from '@valtimo-portal/nl-material';
+import {AnimatedDotsService, CardType, TaskPreviewMode} from '@valtimo-portal/nl-material';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {KeycloakService} from 'keycloak-angular';
 import {CasePreview, CaseService} from '@valtimo-portal/case';
 import {tap} from 'rxjs/operators';
 import {PortalTask, TaskService} from '@valtimo-portal/task';
-import {TaskPreviewMode} from '../../../../projects/valtimo-portal/nl-material/src/lib';
 
 @Component({
   selector: 'app-home',

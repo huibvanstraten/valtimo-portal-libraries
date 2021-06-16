@@ -1,4 +1,4 @@
-<div *ngIf="mode === reminderMode">
+<div @fadeIn *ngIf="mode === reminderMode">
   <nl-material-card
     [type]="reminderType"
     [title]="'tasks.reminderTitle' | translate"

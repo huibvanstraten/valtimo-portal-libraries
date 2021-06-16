@@ -6,9 +6,7 @@
       (submit)="handleSubmit($event)"
       [readOnly]="submitting"
       [refresh]="refresh"
-      (nextPage)="setWizardButtons()"
-      (prevPage)="setWizardButtons()"
-      (change)="setWizardButtons()"
+      (render)="setWizardButtons()"
       [options]="options"
     >
     </formio>

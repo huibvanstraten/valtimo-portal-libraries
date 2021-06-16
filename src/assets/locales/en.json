@@ -23,7 +23,7 @@
   "headerMenu": {
     "language": "Language",
     "user": "User",
-    "welcome": "welcome",
+    "welcome": "Welcome",
     "logout": "Sign out",
     "loggingOut": "Signing out..."
   },

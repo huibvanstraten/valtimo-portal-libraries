@@ -19,11 +19,11 @@
     <div fxLayout="row wrap">
       <ng-container *ngIf="obs.case; else noData">
         <ng-container *ngTemplateOutlet="title;context:{case: obs.case}"></ng-container>
-        <ng-container *ngTemplateOutlet="status;context:{case: obs.case}"></ng-container>
+        <ng-container *ngTemplateOutlet="statusAndTips;context:{case: obs.case}"></ng-container>
         <ng-container *ngTemplateOutlet="details;context:{case:obs.case}"></ng-container>
       </ng-container>
     </div>
-    <div fxLayout="row wrap" *ngIf="obs.case">
+    <div fxLayout="row wrap" *ngIf="obs.case" fxHide.gt-xs="true">
       <ng-container *ngTemplateOutlet="tips"></ng-container>
     </div>
   </ng-container>
@@ -55,15 +55,15 @@
   </div>
 </ng-template>
 
-<ng-template #status let-case="case">
+<ng-template #statusAndTips let-case="case">
   <div
     fxFlex.gt-sm="33.3"
     fxFlex.sm="50"
     fxFlex="100"
     *ngIf="previewStatuses$ | async as statuses"
   >
-    <h1 class="mat-h1 primary-bold">{{'case.status' | translate}}</h1>
     <div class="case-status">
+      <h1 class="mat-h1 primary-bold">{{'case.status' | translate}}</h1>
       <nl-material-card [type]="caseStatusType">
         <nl-material-case-status
           [caseDefinitionId]="case.caseDefinitionId"
@@ -72,6 +72,10 @@
         >
         </nl-material-case-status>
       </nl-material-card>
+    </div>
+    <div class="tips" fxHide.xs="true" style="margin-top: 16px">
+      <h1 class="mat-h1 primary-bold">{{'tips.title' | translate}}</h1>
+      <nl-material-tips></nl-material-tips>
     </div>
   </div>
 </ng-template>
@@ -96,11 +100,9 @@
 <ng-template #tips>
   <div
     fxFlex.gt-sm="33.3"
-    fxFlex.xs="100"
     fxLayout="column"
   >
     <h1 class="mat-h1 primary-bold">{{'tips.title' | translate}}</h1>
     <nl-material-tips></nl-material-tips>
   </div>
 </ng-template>
-

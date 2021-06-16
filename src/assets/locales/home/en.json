@@ -15,6 +15,10 @@
       "secondaryButtonText": "Go to case",
       "primaryButtonText": "Ask a question",
       "noData": "There is no recent case to show."
+    },
+    "taskPreview": {
+      "primaryButtonText": "Go to task",
+      "noData": "There is no recent task to show."
     }
   }
 }

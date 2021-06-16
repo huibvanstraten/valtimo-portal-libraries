@@ -64,7 +64,10 @@ export class TaskService {
     }
 
     return this.findAllTasksQueryRef.valueChanges.pipe(
-      map((res) => res.data.findAllTasks?.map((task) => ({...task, createdOn: new Date(task.createdOn)}))),
+      map((res) =>
+        res.data.findAllTasks?.map((task) =>
+          ({...task, createdOn: new Date(task.createdOn)}))
+      ),
       catchError(() => {
           if (!hideError) {
             this.notificationService.show(this.translateService.instant('tasks.noDataError'));
@@ -72,6 +75,21 @@ export class TaskService {
           return of([]);
         }
       )
+    );
+  }
+
+  findMostRecentTask(hideError = false): Observable<PortalTask | undefined> {
+    return this.findAllTasks(hideError).pipe(
+      map((tasks) => {
+        const openTasks = tasks?.filter((task) => !task.isCompleted);
+        const sortedOpenTasks = openTasks?.sort((a, b) => a.createdOn.getTime() - b.createdOn.getTime());
+
+        if (sortedOpenTasks && sortedOpenTasks.length > 0) {
+          return sortedOpenTasks[0];
+        } else {
+          return undefined;
+        }
+      })
     );
   }
 

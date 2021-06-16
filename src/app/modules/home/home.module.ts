@@ -19,10 +19,18 @@ import {CommonModule} from '@angular/common';
 
 import {HomeRoutingModule} from './home-routing.module';
 import {HomeComponent} from './home.component';
-import {CardModule, CasePreviewModule, NewCaseMenuModule, SpinnerModule, TipsModule} from '@valtimo-portal/nl-material';
+import {
+  CardModule,
+  CasePreviewModule,
+  NewCaseMenuModule,
+  SpinnerModule,
+  TaskPreviewModule,
+  TipsModule
+} from '@valtimo-portal/nl-material';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {TranslateModule} from '@ngx-translate/core';
 import {CaseServiceModule} from '@valtimo-portal/case';
+import {TaskServiceModule} from '@valtimo-portal/task';
 
 @NgModule({
   declarations: [HomeComponent],
@@ -36,7 +44,9 @@ import {CaseServiceModule} from '@valtimo-portal/case';
     CasePreviewModule,
     TipsModule,
     CaseServiceModule,
-    SpinnerModule
+    SpinnerModule,
+    TaskServiceModule,
+    TaskPreviewModule
   ]
 })
 export class HomeModule {

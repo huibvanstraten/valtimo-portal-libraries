@@ -15,11 +15,12 @@
  */
 
 import {Component, OnInit} from '@angular/core';
-import {AnimatedDotsService, CardType} from '@valtimo-portal/nl-material';
+import {AnimatedDotsService, CardType, TaskPreviewMode} from '@valtimo-portal/nl-material';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {KeycloakService} from 'keycloak-angular';
 import {CasePreview, CaseService} from '@valtimo-portal/case';
 import {tap} from 'rxjs/operators';
+import {PortalTask, TaskService} from '@valtimo-portal/task';
 
 @Component({
   selector: 'app-home',
@@ -28,6 +29,7 @@ import {tap} from 'rxjs/operators';
 })
 export class HomeComponent implements OnInit {
 
+  loadingLatestCaseInstance$ = new BehaviorSubject<boolean>(true);
   latestCaseInstancePreview$: Observable<CasePreview | undefined> = this.caseService.getLatestCasePreview()
     .pipe(
       tap(() => {
@@ -35,7 +37,13 @@ export class HomeComponent implements OnInit {
       })
     );
 
-  loadingLatestCaseInstance$ = new BehaviorSubject<boolean>(true);
+  loadingLatestTask$ = new BehaviorSubject<boolean>(true);
+  latestTask$: Observable<PortalTask | undefined> = this.taskService.findMostRecentTask(true)
+    .pipe(
+      tap(() => {
+        this.loadingLatestTask$.next(false);
+      })
+    );
 
   dots$!: Observable<string>;
 
@@ -44,10 +52,13 @@ export class HomeComponent implements OnInit {
   readonly introductionType = CardType.introduction;
   readonly reminderType = CardType.reminder;
 
+  readonly taskPreviewModeReminder = TaskPreviewMode.reminder;
+
   constructor(
     private readonly keycloakService: KeycloakService,
     private readonly animatedDotsService: AnimatedDotsService,
-    private readonly caseService: CaseService
+    private readonly caseService: CaseService,
+    private readonly taskService: TaskService
   ) {
     this.dots$ = this.animatedDotsService.dots$;
   }

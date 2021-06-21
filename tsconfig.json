@@ -60,6 +60,10 @@
       "@valtimo-portal/task": [
         "dist/valtimo-portal/task/valtimo-portal-task",
         "dist/valtimo-portal/task"
+      ],
+      "@valtimo-portal/pages": [
+        "dist/valtimo-portal/pages/valtimo-portal-pages",
+        "dist/valtimo-portal/pages"
       ]
     },
     "baseUrl": "./",

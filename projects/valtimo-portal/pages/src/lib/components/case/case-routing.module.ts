@@ -14,5 +14,23 @@
  * limitations under the License.
  */
 
-export * from './animations';
-export * from './components';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
+import {CaseComponent} from './case.component';
+import {LocalizeRouterModule} from '@gilsdav/ngx-translate-router';
+import {KeycloakAppAuthGuard} from '@valtimo-portal/authentication';
+
+const routes: Routes = [
+  {
+    path: '',
+    component: CaseComponent,
+    canActivate: [KeycloakAppAuthGuard],
+  }
+];
+
+@NgModule({
+  imports: [RouterModule.forChild(routes), LocalizeRouterModule.forChild(routes)],
+  exports: [RouterModule]
+})
+export class CaseRoutingModule {
+}

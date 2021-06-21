@@ -14,5 +14,4 @@
  * limitations under the License.
  */
 
-export * from './animations';
-export * from './components';
+export * from './route-animations';

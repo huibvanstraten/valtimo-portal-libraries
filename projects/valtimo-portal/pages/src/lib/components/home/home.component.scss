@@ -1,4 +1,4 @@
-/*
+/*!
  * Copyright 2015-2021 Ritense BV, the Netherlands.
  *
  * Licensed under EUPL, Version 1.2 (the "License");
@@ -14,5 +14,16 @@
  * limitations under the License.
  */
 
-export * from './animations';
-export * from './components';
+@import "colors";
+@import "variables";
+
+.no-data-container {
+  .mat-h1 {
+    color: $nl-material-primary;
+    font-weight: bold;
+  }
+
+  @include layout-bp(gt-xs) {
+    padding: 26px;
+  }
+}

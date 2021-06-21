@@ -37,11 +37,10 @@ import {environment} from '../environments';
 import {KeycloakAngularModule, KeycloakService} from 'keycloak-angular';
 import {initializeKeycloak, KeycloakAppAuthGuard} from '@valtimo-portal/authentication';
 import {GraphQLModule} from '@valtimo-portal/graphql';
-import {Environment} from '@valtimo-portal/shared';
+import {Environment, formioAppConfig} from '@valtimo-portal/shared';
 import {registerLocaleData} from '@angular/common';
 import localeEn from '@angular/common/locales/en';
 import localeNl from '@angular/common/locales/nl';
-import {formioAppConfig} from '@app/config';
 import {FormioAppConfig} from '@formio/angular';
 
 export const HttpLoaderFactory = (http: HttpClient, env: Environment) =>

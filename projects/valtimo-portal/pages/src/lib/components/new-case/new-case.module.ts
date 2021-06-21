@@ -14,5 +14,23 @@
  * limitations under the License.
  */
 
-export * from './animations';
-export * from './components';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+
+import {NewCaseRoutingModule} from './new-case-routing.module';
+import {NewCaseComponent} from './new-case.component';
+import {FormIoModule, SpinnerModule} from '@valtimo-portal/nl-material';
+import {FormServiceModule} from '@valtimo-portal/form';
+
+@NgModule({
+  declarations: [NewCaseComponent],
+  imports: [
+    CommonModule,
+    NewCaseRoutingModule,
+    FormIoModule,
+    FormServiceModule,
+    SpinnerModule
+  ]
+})
+export class NewCaseModule {
+}

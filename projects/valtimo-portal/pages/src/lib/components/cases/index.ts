@@ -14,5 +14,5 @@
  * limitations under the License.
  */
 
-export * from './animations';
-export * from './components';
+export * from './cases.component';
+export * from './cases.module';

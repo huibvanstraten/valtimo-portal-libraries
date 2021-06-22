@@ -18,7 +18,7 @@ import {Component} from '@angular/core';
 import {routes} from '@app/app-routing.module';
 import {NavigationMenuItem} from '@valtimo-portal/nl-material';
 import {Router, RouterOutlet} from '@angular/router';
-import {routeAnimations} from '@app/animations';
+import {routeAnimations} from '@valtimo-portal/pages';
 import {environment} from '../environments/environment';
 
 @Component({

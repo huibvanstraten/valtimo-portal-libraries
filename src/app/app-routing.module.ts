@@ -30,7 +30,7 @@ import {KeycloakAppAuthGuard} from '@valtimo-portal/authentication';
 
 const routes: Array<PortalRoute> = [
   {
-    path: '', loadChildren: () => import('./modules/home/home.module').then(m => m.HomeModule),
+    path: '', loadChildren: () => import('@valtimo-portal/pages').then(m => m.HomeModule),
     canActivate: [KeycloakAppAuthGuard],
     data: {
       title: 'TITLES.home',
@@ -40,7 +40,7 @@ const routes: Array<PortalRoute> = [
     }
   },
   {
-    path: 'cases', loadChildren: () => import('./modules/cases/cases.module').then(m => m.CasesModule),
+    path: 'cases', loadChildren: () => import('@valtimo-portal/pages').then(m => m.CasesModule),
     canActivate: [KeycloakAppAuthGuard],
     data: {
       title: 'TITLES.cases',
@@ -49,7 +49,7 @@ const routes: Array<PortalRoute> = [
     }
   },
   {
-    path: 'tasks', loadChildren: () => import('./modules/tasks/tasks.module').then(m => m.TasksModule),
+    path: 'tasks', loadChildren: () => import('@valtimo-portal/pages').then(m => m.TasksModule),
     canActivate: [KeycloakAppAuthGuard],
     data: {
       title: 'TITLES.tasks',

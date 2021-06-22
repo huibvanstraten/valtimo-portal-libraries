@@ -8,6 +8,7 @@ module.exports = {
     "<rootDir>/projects/valtimo-portal/nl-material/src",
     "<rootDir>/projects/valtimo-portal/shared/src",
     "<rootDir>/projects/valtimo-portal/task/src",
+    "<rootDir>/projects/valtimo-portal/pages/src",
   ],
   modulePathIgnorePatterns: ['<rootDir>/dist'],
   testPathIgnorePatterns: ['<rootDir>/src/environments'],
@@ -26,7 +27,8 @@ module.exports = {
     "@valtimo-portal/form": "<rootDir>/projects/valtimo-portal/form/src/lib",
     "@valtimo-portal/graphql": "<rootDir>/projects/valtimo-portal/graphql/src/lib",
     "@valtimo-portal/nl-material": "<rootDir>/projects/valtimo-portal/nl-material/src/lib",
-    "@valtimo-portal/task": "<rootDir>/projects/valtimo-portal/task/src/lib"
+    "@valtimo-portal/task": "<rootDir>/projects/valtimo-portal/task/src/lib",
+    "@valtimo-portal/pages": "<rootDir>/projects/valtimo-portal/pages/src/lib"
   },
   preset: 'jest-preset-angular',
   setupFilesAfterEnv: ['<rootDir>/setup-jest.ts'],

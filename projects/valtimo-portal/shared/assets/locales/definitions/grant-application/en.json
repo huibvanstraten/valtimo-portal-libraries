@@ -1,0 +1,12 @@
+{
+  "grant-application": {
+    "wouldLikeTo": "apply for a grant",
+    "new": "New grant application",
+    "my": "My grant application",
+    "statuses": {
+      "submitted": "Application submitted",
+      "processed": "Application processed",
+      "plan": "Project plan submitted"
+    }
+  }
+}

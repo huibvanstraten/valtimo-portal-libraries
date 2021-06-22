@@ -1,0 +1,135 @@
+<!--
+  ~ Copyright 2015-2021 Ritense BV, the Netherlands.
+  ~
+  ~ Licensed under EUPL, Version 1.2 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ https://joinup.ec.europa.eu/collection/eupl/eupl-text-eupl-12
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" basis,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<div fxFlex fxLayout="column" fxLayoutGap="16px" class="module-container">
+  <div fxLayout="row wrap">
+    <ng-container *ngTemplateOutlet="introduction"></ng-container>
+  </div>
+  <div fxLayout="row wrap">
+    <ng-container *ngTemplateOutlet="reminder"></ng-container>
+    <ng-container *ngTemplateOutlet="casePreview"></ng-container>
+    <ng-container *ngTemplateOutlet="newCase"></ng-container>
+  </div>
+  <div fxLayout="row wrap">
+    <ng-container *ngTemplateOutlet="tips"></ng-container>
+  </div>
+</div>
+
+<ng-template #introduction>
+  <div
+    fxFlex="60"
+    fxFlex.sm="70"
+    fxFlex.xs="100"
+    fxLayout="column"
+  >
+    <ng-container *ngIf="{firstName: userFirstName$ | async, dots: dots$ | async} as obs">
+      <nl-material-card
+        [type]="introductionType"
+        [title]="'home.introduction.title' | translate:{firstName: (obs.firstName || obs.dots)}"
+        [subtitle]="'home.introduction.subtitle' | translate"
+      >
+        {{'home.introduction.content' | translate}}
+      </nl-material-card>
+    </ng-container>
+
+  </div>
+</ng-template>
+
+<ng-template #reminder>
+  <div
+    fxFlex.gt-sm="33.3"
+    fxFlex.xs="100"
+    fxLayout="column"
+  >
+    <ng-container *ngIf="{latestTask: latestTask$ | async} as obs">
+      <ng-container *ngIf="(loadingLatestTask$ | async) === false; else latestTaskLoading">
+        <ng-container *ngIf="obs.latestTask; else noLatestTask">
+          <nl-material-task-preview
+            [mode]="taskPreviewModeReminder"
+            [preview]="obs.latestTask"
+          ></nl-material-task-preview>
+        </ng-container>
+      </ng-container>
+    </ng-container>
+  </div>
+</ng-template>
+
+<ng-template #latestTaskLoading>
+  <div class="no-data-container">
+    <h1 class="mat-h1">{{'tasks.reminderTitle' | translate}}</h1>
+    <nl-material-spinner></nl-material-spinner>
+  </div>
+</ng-template>
+
+<ng-template #noLatestTask>
+  <div class="no-data-container">
+    <h1 class="mat-h1">{{'tasks.reminderTitle' | translate}}</h1>
+    <h1 class="mat-h2">{{'home.taskPreview.noData' | translate}}</h1>
+  </div>
+</ng-template>
+
+<ng-template #casePreview>
+  <div
+    fxFlex.gt-sm="33.3"
+    fxFlex.sm="50"
+    fxFlex.xs="100"
+    fxLayout="column"
+  >
+    <ng-container *ngIf="{latestCaseInstancePreview: latestCaseInstancePreview$ | async} as obs">
+      <ng-container *ngIf="(loadingLatestCaseInstance$ | async) === false; else latestCaseInstanceLoading">
+        <ng-container *ngIf="obs.latestCaseInstancePreview; else noLatestCaseInstancePreview">
+          <nl-material-case-preview [preview]="obs.latestCaseInstancePreview"></nl-material-case-preview>
+        </ng-container>
+      </ng-container>
+    </ng-container>
+  </div>
+</ng-template>
+
+<ng-template #latestCaseInstanceLoading>
+  <div class="no-data-container">
+    <h1 class="mat-h1">{{'home.preview.title' | translate}}</h1>
+    <nl-material-spinner></nl-material-spinner>
+  </div>
+</ng-template>
+
+<ng-template #noLatestCaseInstancePreview>
+  <div class="no-data-container">
+    <h1 class="mat-h1">{{'home.preview.title' | translate}}</h1>
+    <h1 class="mat-h2">{{'home.preview.noData' | translate}}</h1>
+  </div>
+</ng-template>
+
+<ng-template #newCase>
+  <div
+    fxFlex.gt-sm="33.3"
+    fxFlex.sm="50"
+    fxFlex.xs="100"
+    fxLayout="column"
+  >
+    <nl-material-new-case-menu></nl-material-new-case-menu>
+  </div>
+</ng-template>
+
+<ng-template #tips>
+  <div
+    fxFlex="100"
+    fxFlex.gt-sm="33.3"
+    fxLayout="column"
+  >
+    <h1 class="mat-h1 primary-bold">{{'tips.title' | translate}}</h1>
+    <nl-material-tips></nl-material-tips>
+  </div>
+</ng-template>

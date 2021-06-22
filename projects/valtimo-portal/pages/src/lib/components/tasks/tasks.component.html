@@ -1,0 +1,106 @@
+<!--
+  ~ Copyright 2015-2021 Ritense BV, the Netherlands.
+  ~
+  ~ Licensed under EUPL, Version 1.2 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ https://joinup.ec.europa.eu/collection/eupl/eupl-text-eupl-12
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" basis,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<div fxFlex fxLayout="column" fxLayoutGap="16px" class="module-container">
+  <div
+    fxLayout="row wrap"
+    *ngIf="{tasks: tasks$ | async, openTasks: openTasks$ | async, completedTasks: completedTasks$ | async} as obs"
+  >
+    <ng-container *ngIf="(loading$ | async) === false; else loading">
+      <ng-container *ngIf="obs.tasks && obs.tasks[0]; else noData">
+        <ng-container *ngTemplateOutlet="title"></ng-container>
+        <ng-container *ngIf="obs.openTasks && obs.openTasks[0]">
+          <ng-container *ngTemplateOutlet="openTasks;context:{tasks: obs.openTasks}"></ng-container>
+        </ng-container>
+        <ng-container *ngIf="obs.completedTasks && obs.completedTasks[0]">
+          <ng-container *ngTemplateOutlet="completedTasks;context:{tasks: obs.completedTasks}"></ng-container>
+        </ng-container>
+      </ng-container>
+    </ng-container>
+  </div>
+</div>
+
+<ng-template #loading>
+  <div
+    fxFlex="100"
+    fxLayout="column"
+  >
+    <nl-material-spinner></nl-material-spinner>
+  </div>
+</ng-template>
+
+<ng-template #noData>
+  <div
+    fxFlex="100"
+    fxLayout="column"
+  >
+    <h2 class="mat-h2">{{'tasks.noData' | translate}}</h2>
+  </div>
+</ng-template>
+
+<ng-template #title>
+  <div
+    fxFlex="100"
+  >
+    <h1 class="mat-h1 primary-bold large">{{'TITLES.tasks' | translate}}</h1>
+  </div>
+</ng-template>
+
+<ng-template #openTasksTitle>
+  <div
+    fxFlex="100"
+  >
+    <div class="title-container">
+      <h1 class="mat-h1 primary-bold">{{'tasks.openTasks' | translate}}</h1>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #openTasks let-tasks="tasks">
+  <ng-container *ngTemplateOutlet="openTasksTitle"></ng-container>
+  <div
+    *ngFor="let task of tasks"
+    fxFlex="100"
+    fxFlex.gt-sm="50"
+    fxLayout="column"
+    class="task-preview-container"
+  >
+    <nl-material-task-preview [preview]="task"></nl-material-task-preview>
+  </div>
+</ng-template>
+
+<ng-template #completedTasksTitle>
+  <div
+    fxFlex="100"
+  >
+    <div class="title-container">
+      <h1 class="mat-h1 primary-bold">{{'tasks.completedTasks' | translate}}</h1>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #completedTasks let-tasks="tasks">
+  <ng-container *ngTemplateOutlet="completedTasksTitle"></ng-container>
+  <div
+    *ngFor="let task of tasks"
+    fxFlex="100"
+    fxFlex.gt-sm="50"
+    fxLayout="column"
+    class="task-preview-container"
+  >
+    <nl-material-task-preview [preview]="task"></nl-material-task-preview>
+  </div>
+</ng-template>

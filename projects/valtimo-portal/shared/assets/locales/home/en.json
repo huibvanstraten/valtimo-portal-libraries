@@ -1,0 +1,24 @@
+{
+  "home": {
+    "introduction": {
+      "title": "Hi, {{firstName}}",
+      "subtitle": "How can we help you?",
+      "content": "On this website you can handle your municipal affairs. You can request services, talk to a municipal official, and view the progress of your requests online. Of course you're always welcome at your local municipality, if this has your preference."
+    },
+    "reminder": {
+      "title": "Don't forget to submit your project idea before the 31st of April",
+      "content": "Your grant application still lacks a project idea. Make sure you submit this before the 31st of April, so that we can process your application.",
+      "buttonText": "Submit project idea"
+    },
+    "preview": {
+      "title": "Recent case",
+      "secondaryButtonText": "Go to case",
+      "primaryButtonText": "Ask a question",
+      "noData": "There is no recent case to show."
+    },
+    "taskPreview": {
+      "primaryButtonText": "Go to task",
+      "noData": "There is no recent task to show."
+    }
+  }
+}

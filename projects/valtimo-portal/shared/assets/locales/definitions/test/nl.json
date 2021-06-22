@@ -1,0 +1,21 @@
+{
+  "test": {
+    "title": "Aanvraag testdossier",
+    "wouldLikeTo": "een testdossier openen",
+    "new": "Nieuw testdossier",
+    "my": "Mijn testdossier",
+    "confirmed": "Testdossier geopend",
+    "isConfirmed": "Jouw testdossier is geopend",
+    "statuses": {
+      "portal-case-created": "Aanvraag ingediend",
+      "portal-case-in-progress": "Aanvraag is in behandeling"
+    },
+    "properties": {
+      "firstName": "Voornaam",
+      "age": "Leeftijd"
+    },
+    "tips": [
+      "Welkom bij onze applicatie! We hebben een testproces voor je klaargezet, zodat je alvast een beetje rond kunt kijken."
+    ]
+  }
+}

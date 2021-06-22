@@ -15,3 +15,4 @@
  */
 
 export * from './formio-config';
+export * from './default-translation-resources';

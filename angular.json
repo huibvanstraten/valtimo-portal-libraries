@@ -35,8 +35,13 @@
               "src/assets",
               {
                 "glob": "**/*",
-                "input": "./src/assets/locales",
+                "input": "dist/valtimo-portal/shared/assets/locales",
                 "output": "./translate/"
+              },
+              {
+                "glob": "**/*",
+                "input": "dist/valtimo-portal/nl-material/assets/img",
+                "output": "./img/"
               }
             ],
             "styles": [

@@ -1,8 +1,0 @@
-{
-  "cases": {
-    "noDataError": "Something went wrong while retrieving your cases.",
-    "noData": "There is no case data available.",
-    "title": "Current cases",
-    "noDate": "Date unknown"
-  }
-}

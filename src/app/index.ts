@@ -14,7 +14,5 @@
  * limitations under the License.
  */
 
-export * from './modules';
 export * from './app.component';
 export * from './app.module';
-export * from './animations';

@@ -18,7 +18,7 @@ import {Component} from '@angular/core';
 import {routes} from '@app/app-routing.module';
 import {NavigationMenuItem} from '@valtimo-portal/nl-material';
 import {Router, RouterOutlet} from '@angular/router';
-import {routeAnimations} from '@valtimo-portal/pages';
+import {AppInitializationService, routeAnimations} from '@valtimo-portal/pages';
 import {environment} from '../environments/environment';
 
 @Component({
@@ -31,34 +31,22 @@ import {environment} from '../environments/environment';
 })
 export class AppComponent {
   readonly title = 'valtimo-portal';
+
   readonly imgSrc = environment.styling.logoImagePath;
 
-  readonly navigationMenuItems: Array<NavigationMenuItem> = routes
-    .filter((route) => !route.data?.hideInNav)
-    .map((route) => ({
-      link: String(route.path),
-      title: String(route.data?.title),
-      icon: String(route.data?.icon),
-      isHome: route.data?.isHome
-    }));
+  readonly navigationMenuItems!: Array<NavigationMenuItem>;
 
   readonly locales: Array<string> = environment.translation.supportedLocales;
 
   constructor(
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly appInitializationService: AppInitializationService
   ) {
-    const entryUrlStorageKey = `${environment.authentication.config.entryUrlStorageKey}`;
-    const entryUrl = sessionStorage.getItem(entryUrlStorageKey);
-    const entryUrlRouterLink = entryUrl?.split(window.location.host)[1];
-
-    if (environment.authentication.config.redirectToEntryUrl && entryUrlRouterLink) {
-      this.router.navigateByUrl(entryUrlRouterLink);
-    }
-
-    sessionStorage.removeItem(entryUrlStorageKey);
+    this.appInitializationService.navigateToEntryUrl(environment);
+    this.navigationMenuItems = this.appInitializationService.getNavigationMenuItems(routes);
   }
 
   prepareRoute(outlet: RouterOutlet): any {
-    return outlet && outlet.activatedRouteData && outlet.activatedRouteData.animation;
+    return this.appInitializationService.prepareRoute(outlet);
   }
 }

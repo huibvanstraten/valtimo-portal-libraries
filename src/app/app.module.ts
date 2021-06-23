@@ -32,16 +32,14 @@ import {
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {MultiTranslateHttpLoader} from 'ngx-translate-multi-http-loader';
-import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
+import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {environment} from '../environments';
 import {KeycloakAngularModule, KeycloakService} from 'keycloak-angular';
 import {initializeKeycloak, KeycloakAppAuthGuard} from '@valtimo-portal/authentication';
 import {GraphQLModule} from '@valtimo-portal/graphql';
 import {Environment, formioAppConfig} from '@valtimo-portal/shared';
-import {registerLocaleData} from '@angular/common';
-import localeEn from '@angular/common/locales/en';
-import localeNl from '@angular/common/locales/nl';
 import {FormioAppConfig} from '@formio/angular';
+import {AppInitializationService} from '@valtimo-portal/pages';
 
 export const HttpLoaderFactory = (http: HttpClient, env: Environment) =>
   new MultiTranslateHttpLoader(http, env.translation.resources);
@@ -88,26 +86,7 @@ export const HttpLoaderFactory = (http: HttpClient, env: Environment) =>
   bootstrap: [AppComponent]
 })
 export class AppModule {
-  constructor(private translateService: TranslateService) {
-    const translationEnv = environment.translation;
-    const defaultLocaleIndex = translationEnv.defaultLocaleIndex || 0;
-    const href = window.location.href;
-
-    translateService.setDefaultLang(translationEnv.supportedLocales[defaultLocaleIndex]);
-
-    environment.translation.supportedLocales.forEach((locale) => {
-      switch (locale) {
-        case 'nl':
-          registerLocaleData(localeNl, 'nl');
-          break;
-        case 'en':
-          registerLocaleData(localeEn, 'en');
-          break;
-      }
-    });
-
-    if (!href.toLowerCase().includes('callback') && !href.toLowerCase().includes('#state')) {
-      sessionStorage.setItem(`${environment.authentication.config.entryUrlStorageKey}`, href);
-    }
+  constructor(private readonly appInitializationService: AppInitializationService) {
+    this.appInitializationService.initializeAppModule(environment);
   }
 }

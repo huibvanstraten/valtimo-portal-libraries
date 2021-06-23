@@ -14,6 +14,4 @@
  * limitations under the License.
  */
 
-export * from './animations';
-export * from './components';
-export * from './services';
+export * from './app-initialization.service';

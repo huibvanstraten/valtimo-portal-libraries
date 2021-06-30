@@ -33,9 +33,9 @@ export const environment: Environment = {
   authentication: {
     provider: AuthenticationProvider.keycloak,
     config: {
-      url: 'https://keycloak.test.valtimo.nl/auth',
+      url: 'https://keycloak.valtimo.nl/auth',
       realm: 'valtimo',
-      clientId: 'valtimo-console',
+      clientId: 'valtimo-console-stable',
       redirectUri: '/keycloak/callback',
       redirectToEntryUrl: true,
       entryUrlStorageKey: 'entryUrl'

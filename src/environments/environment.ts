@@ -25,7 +25,8 @@ export const environment: Environment = {
     production: false,
   },
   styling: {
-    logoImagePath: 'assets/img/logo/dh.svg'
+    logoImagePath: 'assets/img/logo/dh.svg',
+    faviconImagePath: 'https://www.valtimo.nl/wp-content/uploads/valtimo-fav.png'
   },
   translation: {
     supportedLocales: ['nl', 'en'],

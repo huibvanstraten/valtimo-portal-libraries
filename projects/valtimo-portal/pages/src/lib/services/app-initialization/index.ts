@@ -15,3 +15,5 @@
  */
 
 export * from './app-initialization.service';
+export * from './page-title.service';
+export * from './icon.service';

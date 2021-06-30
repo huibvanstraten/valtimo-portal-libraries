@@ -29,6 +29,7 @@ export interface Environment {
   };
   styling: {
     logoImagePath: string;
+    faviconImagePath?: string;
   };
   authentication: Authentication;
   api: {

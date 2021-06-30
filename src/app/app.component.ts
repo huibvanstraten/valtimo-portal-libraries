@@ -18,7 +18,7 @@ import {Component} from '@angular/core';
 import {routes} from '@app/app-routing.module';
 import {NavigationMenuItem} from '@valtimo-portal/nl-material';
 import {Router, RouterOutlet} from '@angular/router';
-import {AppInitializationService, routeAnimations} from '@valtimo-portal/pages';
+import {AppInitializationService, IconService, PageTitleService, routeAnimations} from '@valtimo-portal/pages';
 import {environment} from '../environments/environment';
 
 @Component({
@@ -40,10 +40,20 @@ export class AppComponent {
 
   constructor(
     private readonly router: Router,
-    private readonly appInitializationService: AppInitializationService
+    private readonly appInitializationService: AppInitializationService,
+    private readonly pageTitleService: PageTitleService,
+    private readonly iconService: IconService
   ) {
     this.appInitializationService.navigateToEntryUrl(environment);
     this.navigationMenuItems = this.appInitializationService.getNavigationMenuItems(routes);
+
+    if (environment.styling.faviconImagePath) {
+      this.iconService.setFavicon(environment.styling.faviconImagePath)
+    }
+  }
+
+  ngOnInit() {
+    this.pageTitleService.setPageTitle()
   }
 
   prepareRoute(outlet: RouterOutlet): any {

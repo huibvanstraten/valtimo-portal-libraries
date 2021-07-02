@@ -14,12 +14,14 @@
  * limitations under the License.
  */
 
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {routes} from '@app/app-routing.module';
 import {NavigationMenuItem} from '@valtimo-portal/nl-material';
 import {Router, RouterOutlet} from '@angular/router';
 import {AppInitializationService, IconService, PageTitleService, routeAnimations} from '@valtimo-portal/pages';
 import {environment} from '../environments/environment';
+import {KeycloakService} from 'keycloak-angular';
+import {from, Observable} from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -29,7 +31,7 @@ import {environment} from '../environments/environment';
     routeAnimations
   ]
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   readonly title = 'valtimo-portal';
 
   readonly imgSrc = environment.styling.logoImagePath;
@@ -38,9 +40,12 @@ export class AppComponent {
 
   readonly locales: Array<string> = environment.translation.supportedLocales;
 
+  readonly isLoggedIn$: Observable<boolean> = from(this.keycloakService.isLoggedIn());
+
   constructor(
     private readonly router: Router,
     private readonly appInitializationService: AppInitializationService,
+    private readonly keycloakService: KeycloakService,
     private readonly pageTitleService: PageTitleService,
     private readonly iconService: IconService
   ) {
@@ -48,12 +53,12 @@ export class AppComponent {
     this.navigationMenuItems = this.appInitializationService.getNavigationMenuItems(routes);
 
     if (environment.styling.faviconImagePath) {
-      this.iconService.setFavicon(environment.styling.faviconImagePath)
+      this.iconService.setFavicon(environment.styling.faviconImagePath);
     }
   }
 
-  ngOnInit() {
-    this.pageTitleService.setPageTitle()
+  ngOnInit(): void {
+    this.pageTitleService.setPageTitle();
   }
 
   prepareRoute(outlet: RouterOutlet): any {

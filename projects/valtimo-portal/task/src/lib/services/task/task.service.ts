@@ -26,6 +26,7 @@ import {Exact} from '@valtimo-portal/graphql';
 import {CompleteTaskGQL} from './mutations';
 import {FetchResult} from '@apollo/client/core';
 import {CompleteTaskMutation} from './mutations/complete-task/complete-task.graphql-gen';
+import {FindPublicTaskGQL} from './queries/find-public-task';
 
 @Injectable({
   providedIn: 'root'
@@ -37,6 +38,7 @@ export class TaskService {
   constructor(
     private readonly findTasksGQL: FindTasksGQL,
     private readonly findAllTasksGQL: FindAllTasksGQL,
+    private readonly findPublicTaskGQL: FindPublicTaskGQL,
     private readonly completeTaskGQL: CompleteTaskGQL,
     private readonly notificationService: NotificationService,
     private readonly translateService: TranslateService
@@ -45,7 +47,8 @@ export class TaskService {
 
   findTasks(caseId: string, hideError = false): Observable<Array<PortalTask> | null | undefined> {
     return this.findTasksGQL.fetch({caseId}).pipe(
-      map((res) => res.data.findTasks?.map((task) => ({...task, createdOn: new Date(task.createdOn)}))),
+      map((res) => res.data.findTasks?.map((task) =>
+        ({...task, createdOn: new Date(task.createdOn), caseDefinitionId: `${task.caseDefinitionId}`}))),
       catchError(() => {
           if (!hideError) {
             this.notificationService.show(this.translateService.instant('tasks.noDataError'));
@@ -66,7 +69,7 @@ export class TaskService {
     return this.findAllTasksQueryRef.valueChanges.pipe(
       map((res) =>
         res.data.findAllTasks?.map((task) =>
-          ({...task, createdOn: new Date(task.createdOn)}))
+          ({...task, createdOn: new Date(task.createdOn), caseDefinitionId: `${task.caseDefinitionId}`}))
       ),
       catchError(() => {
           if (!hideError) {
@@ -97,6 +100,30 @@ export class TaskService {
     return this.completeTaskGQL.mutate({submission, taskId}).pipe(
       catchError(() => {
           this.notificationService.show(this.translateService.instant('formErrors.validationGeneric'));
+          return of(undefined);
+        }
+      )
+    );
+  }
+
+  findPublicTask(taskId: string, hideError = false): Observable<PortalTask | undefined> {
+    return this.findPublicTaskGQL.fetch({taskId}).pipe(
+      map((res) => {
+        const task = res.data.findPublicTask;
+        if (task) {
+          return {
+            ...task,
+            createdOn: new Date(task.createdOn),
+            caseDefinitionId: `${task.caseDefinitionId}`
+          };
+        } else {
+          return undefined;
+        }
+      }),
+      catchError(() => {
+          if (!hideError) {
+            this.notificationService.show(this.translateService.instant('publicTask.noDataError'));
+          }
           return of(undefined);
         }
       )

@@ -99,6 +99,8 @@ export interface Query {
   findAllTasks?: Maybe<Array<TaskInstance>>;
   /** find all available tasks for external case id */
   findTasks?: Maybe<Array<TaskInstance>>;
+  /** find public task with id */
+  findPublicTask: TaskInstance;
   /** find all form definitions from repository */
   allFormDefinitions: Array<FormDefinition>;
   /** find single form definition from repository */
@@ -121,6 +123,11 @@ export interface QueryFindTasksArgs {
 }
 
 
+export interface QueryFindPublicTaskArgs {
+  taskId: Scalars['UUID'];
+}
+
+
 export interface QueryGetFormDefinitionArgs {
   name: Scalars['String'];
 }
@@ -138,7 +145,7 @@ export interface Status {
 
 export interface TaskInstance {
   __typename?: 'TaskInstance';
-  caseDefinitionId: Scalars['String'];
+  caseDefinitionId?: Maybe<Scalars['String']>;
   createdOn: Scalars['String'];
   externalCaseId: Scalars['String'];
   externalTaskId: Scalars['String'];

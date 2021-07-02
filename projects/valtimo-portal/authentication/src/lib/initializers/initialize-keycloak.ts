@@ -24,10 +24,9 @@ export const initializeKeycloak = (keycloak: KeycloakService, environment: Envir
     keycloak.init({
       config,
       initOptions: {
-        onLoad: 'login-required',
         checkLoginIframe: false,
         flow: 'standard',
-        redirectUri: `${config.redirectUri}`
+        redirectUri: `${config.redirectUri}`,
       },
     });
 };

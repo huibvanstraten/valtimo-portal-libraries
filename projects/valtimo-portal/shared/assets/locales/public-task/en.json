@@ -1,0 +1,7 @@
+{
+  "publicTask": {
+    "noDataError": "Something went wrong while retrieving your task.",
+    "noData": "There is no task available.",
+    "success": "Task completed successfully."
+  }
+}

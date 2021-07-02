@@ -20,6 +20,7 @@ export const defaultTranslationResources = [
   {prefix: './translate/cases/', suffix: '.json'},
   {prefix: './translate/case/', suffix: '.json'},
   {prefix: './translate/tasks/', suffix: '.json'},
+  {prefix: './translate/public-task/', suffix: '.json'},
   {prefix: './translate/case-confirmation/', suffix: '.json'},
   {prefix: './translate/form-translations/', suffix: '.json'},
   {prefix: './translate/form-errors/', suffix: '.json'},

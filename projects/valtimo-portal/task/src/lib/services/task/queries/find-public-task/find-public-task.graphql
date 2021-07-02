@@ -1,0 +1,10 @@
+query FindPublicTask($taskId: UUID!) {
+  findPublicTask(taskId: $taskId) @namedClient(name: "portal-api") {
+    isCompleted
+    createdOn
+    formDefinition
+    taskId
+    caseDefinitionId
+    taskDefinitionKey
+  }
+}

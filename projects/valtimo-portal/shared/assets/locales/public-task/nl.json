@@ -1,0 +1,7 @@
+{
+  "publicTask": {
+    "noDataError": "Er ging iets mis bij het ophalen van jouw taak.",
+    "noData": "Er is geen taak beschikbaar.",
+    "success": "Taak succesvol afgerond."
+  }
+}

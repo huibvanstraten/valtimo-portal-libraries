@@ -14,11 +14,5 @@
  * limitations under the License.
  */
 
-export * from './new-case';
-export * from './cases';
-export * from './home';
-export * from './tasks';
-export * from './case';
-export * from './case-confirmation';
-export * from './task';
-export * from './public-task';
+export * from './public-task.component';
+export * from './public-task.module';

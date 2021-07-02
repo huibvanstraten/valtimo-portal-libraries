@@ -156,49 +156,28 @@ export interface TaskInstance {
 }
 
 
-export type GetAllCaseInstancesQueryVariables = Types.Exact<{
-  sort: Types.Sort;
+export type FindPublicTaskQueryVariables = Types.Exact<{
+  taskId: Types.Scalars['UUID'];
 }>;
 
 
-export type GetAllCaseInstancesQuery = (
+export type FindPublicTaskQuery = (
   { __typename?: 'Query' }
-  & { allCaseInstances: Array<(
-    { __typename?: 'CaseInstance' }
-    & Pick<Types.CaseInstance, 'caseDefinitionId' | 'createdOn' | 'externalId' | 'id' | 'submission' | 'userId'>
-    & { status?: Types.Maybe<(
-      { __typename?: 'Status' }
-      & Pick<Types.Status, 'createdOn' | 'name'>
-    )>, statusHistory?: Types.Maybe<Array<(
-      { __typename?: 'HistoricStatus' }
-      & Pick<Types.HistoricStatus, 'createdOn'>
-      & { status: (
-        { __typename?: 'Status' }
-        & Pick<Types.Status, 'name'>
-      ) }
-    )>> }
-  )> }
+  & { findPublicTask: (
+    { __typename?: 'TaskInstance' }
+    & Pick<Types.TaskInstance, 'isCompleted' | 'createdOn' | 'formDefinition' | 'taskId' | 'caseDefinitionId' | 'taskDefinitionKey'>
+  ) }
 );
 
-export const GetAllCaseInstancesDocument = gql`
-    query GetAllCaseInstances($sort: Sort!) {
-  allCaseInstances(orderBy: {createdOn: $sort}) {
-    caseDefinitionId
+export const FindPublicTaskDocument = gql`
+    query FindPublicTask($taskId: UUID!) {
+  findPublicTask(taskId: $taskId) {
+    isCompleted
     createdOn
-    externalId
-    id
-    submission
-    userId
-    status {
-      createdOn
-      name
-    }
-    statusHistory {
-      createdOn
-      status {
-        name
-      }
-    }
+    formDefinition
+    taskId
+    caseDefinitionId
+    taskDefinitionKey
   }
 }
     `;
@@ -206,8 +185,8 @@ export const GetAllCaseInstancesDocument = gql`
   @Injectable({
     providedIn: 'root'
   })
-  export class GetAllCaseInstancesGQL extends Apollo.Query<GetAllCaseInstancesQuery, GetAllCaseInstancesQueryVariables> {
-    document = GetAllCaseInstancesDocument;
+  export class FindPublicTaskGQL extends Apollo.Query<FindPublicTaskQuery, FindPublicTaskQueryVariables> {
+    document = FindPublicTaskDocument;
     client = 'portal-api';
     constructor(apollo: Apollo.Apollo) {
       super(apollo);

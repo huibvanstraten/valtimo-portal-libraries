@@ -40,6 +40,7 @@ import {GraphQLModule} from '@valtimo-portal/graphql';
 import {Environment, formioAppConfig} from '@valtimo-portal/shared';
 import {FormioAppConfig} from '@formio/angular';
 import {AppInitializationService} from '@valtimo-portal/pages';
+import {FlexLayoutModule} from '@angular/flex-layout';
 
 export const HttpLoaderFactory = (http: HttpClient, env: Environment) =>
   new MultiTranslateHttpLoader(http, env.translation.resources);
@@ -82,6 +83,7 @@ export const HttpLoaderFactory = (http: HttpClient, env: Environment) =>
     BreadcrumbsModule,
     GraphQLModule,
     AnimatedDotsServiceModule,
+    FlexLayoutModule
   ],
   bootstrap: [AppComponent]
 })

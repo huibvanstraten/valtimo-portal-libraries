@@ -14,7 +14,7 @@
   ~ limitations under the License.
   -->
 
-<div fxFlex fxLayout="column" fxLayoutGap="16px" class="module-container" *ngIf="{task: task$ | async} as obs">
+<div fxFlex fxLayout="column" fxLayoutGap="16px" class="module-container" *ngIf="{task: publicTask$ | async} as obs">
   <ng-container *ngIf="(loading$ | async) === false; else loading">
     <div fxLayout="row wrap">
       <ng-container *ngIf="obs.task; else noData">
@@ -37,7 +37,7 @@
 </ng-template>
 
 <ng-template #task let-task="task">
-  <div fxFlex="100" fxLayout="column">
+  <div fxFlex="100" fxLayout="column" *ngIf="(success$ | async) === false; else success">
     <nl-material-form-io
       [definition]="task.formDefinition"
       [caseDefinitionId]="task.caseDefinitionId"
@@ -46,5 +46,11 @@
       (submission)="handleSubmit($event)"
       [reset$]="reset$"
     ></nl-material-form-io>
+  </div>
+</ng-template>
+
+<ng-template #success>
+  <div fxFlex="100" fxLayout="column">
+    <h2 class="mat-h2">{{'publicTask.success' | translate}}</h2>
   </div>
 </ng-template>

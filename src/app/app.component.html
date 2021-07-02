@@ -14,8 +14,8 @@
   ~ limitations under the License.
   -->
 
-<div class="page-container">
-  <header>
+<div class="page-container" *ngIf="{isLoggedIn: isLoggedIn$ | async} as obs">
+  <header [fxHide]="obs.isLoggedIn === false">
     <nl-material-toolbar>
       <nl-material-navigation-menu></nl-material-navigation-menu>
       <nl-material-header-logo [logoImagePath]="imgSrc"></nl-material-header-logo>
@@ -23,7 +23,7 @@
     </nl-material-toolbar>
   </header>
   <nl-material-sidenav [items]="navigationMenuItems">
-    <nl-material-breadcrumbs></nl-material-breadcrumbs>
+    <nl-material-breadcrumbs [fxHide]="obs.isLoggedIn === false"></nl-material-breadcrumbs>
     <main [@routeAnimations]="prepareRoute(outlet)">
       <router-outlet #outlet="outlet"></router-outlet>
     </main>

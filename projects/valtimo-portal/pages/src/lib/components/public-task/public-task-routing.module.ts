@@ -14,11 +14,17 @@
  * limitations under the License.
  */
 
-export * from './new-case';
-export * from './cases';
-export * from './home';
-export * from './tasks';
-export * from './case';
-export * from './case-confirmation';
-export * from './task';
-export * from './public-task';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
+import {PublicTaskComponent} from './public-task.component';
+
+const routes: Routes = [{
+  path: '', component: PublicTaskComponent,
+}];
+
+@NgModule({
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule]
+})
+export class PublicTaskRoutingModule {
+}

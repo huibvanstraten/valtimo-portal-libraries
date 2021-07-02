@@ -8,7 +8,8 @@
     "tasks": "taken",
     "newCase": "nieuwe-aanvraag",
     "case": "aanvraag",
-    "caseConfirmation": "aanvraag-verstuurd"
+    "caseConfirmation": "aanvraag-verstuurd",
+    "publicTask": "publieke-taak"
   },
   "TITLES": {
     "home": "Home",
@@ -18,7 +19,8 @@
     "newCase": "Nieuwe aanvraag",
     "case": "Aanvraag",
     "task": "Taak",
-    "caseConfirmation": "Aanvraag verstuurd"
+    "caseConfirmation": "Aanvraag verstuurd",
+    "publicTask": "Taak"
   },
   "headerMenu": {
     "language": "Taal",

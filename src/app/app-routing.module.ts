@@ -58,6 +58,15 @@ const routes: Array<PortalRoute> = [
     }
   },
   {
+    path: 'publicTask', loadChildren: () => import('@valtimo-portal/pages').then(m => m.PublicTaskModule),
+    data: {
+      hideInNav: true,
+      title: 'TITLES.publicTask',
+      icon: 'tasks',
+      animation: 'TasksPage'
+    }
+  },
+  {
     path: '', redirectTo: '/', pathMatch: 'full', data: {hideInNav: true}
   },
   {

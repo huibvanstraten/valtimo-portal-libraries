@@ -17,9 +17,9 @@
 import {Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {UserMenuMode} from '../../enums';
 import {KeycloakService} from 'keycloak-angular';
-import {BehaviorSubject, combineLatest, Observable, Subject, Subscription} from 'rxjs';
+import {BehaviorSubject, combineLatest, from, Observable, Subject, Subscription} from 'rxjs';
 import {TranslateService} from '@ngx-translate/core';
-import {map} from 'rxjs/operators';
+import {map, take} from 'rxjs/operators';
 import {AnimatedDotsService, SidenavService} from '../../services';
 import {MatSelect} from '@angular/material/select';
 
@@ -65,13 +65,10 @@ export class UserMenuComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.setUserName();
     if (this.close$) {
       this.openCloseSelectSubscription();
     }
-
-    this.keycloakService.loadUserProfile().then((profile) => {
-      this.userFirstName$.next(`${profile.firstName}`);
-    });
   }
 
   ngOnDestroy(): void {
@@ -89,6 +86,16 @@ export class UserMenuComponent implements OnInit, OnDestroy {
   private openCloseSelectSubscription(): void {
     this.closeMenuSubscription = this.close$.subscribe(() => {
       this.matSelect?.close();
+    });
+  }
+
+  private setUserName(): void {
+    from(this.keycloakService.isLoggedIn()).pipe(take(1)).subscribe((isLoggedIn) => {
+      if (isLoggedIn) {
+        this.keycloakService.loadUserProfile().then((profile) => {
+          this.userFirstName$.next(`${profile.firstName}`);
+        });
+      }
     });
   }
 }

@@ -8,7 +8,8 @@
     "tasks": "tasks",
     "newCase": "new-case",
     "case": "case",
-    "caseConfirmation": "case-confirmation"
+    "caseConfirmation": "case-confirmation",
+    "publicTask": "public-task"
   },
   "TITLES": {
     "home": "Home",
@@ -18,7 +19,8 @@
     "newCase": "New case",
     "case": "Case",
     "task": "Task",
-    "caseConfirmation": "Case submitted"
+    "caseConfirmation": "Case submitted",
+    "publicTask": "Task"
   },
   "headerMenu": {
     "language": "Language",

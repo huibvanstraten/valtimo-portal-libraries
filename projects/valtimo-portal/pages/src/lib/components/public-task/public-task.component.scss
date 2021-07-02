@@ -1,4 +1,4 @@
-/*
+/*!
  * Copyright 2015-2021 Ritense BV, the Netherlands.
  *
  * Licensed under EUPL, Version 1.2 (the "License");
@@ -14,11 +14,6 @@
  * limitations under the License.
  */
 
-export * from './new-case';
-export * from './cases';
-export * from './home';
-export * from './tasks';
-export * from './case';
-export * from './case-confirmation';
-export * from './task';
-export * from './public-task';
+.mat-h2 {
+  text-align: center;
+}

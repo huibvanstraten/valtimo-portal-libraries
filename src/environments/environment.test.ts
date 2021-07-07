@@ -28,7 +28,12 @@ export const environment: Environment = {
     supportedLocales: ['nl', 'en'],
     defaultLocaleIndex: 0,
     resources: [
-      ...defaultTranslationResources
+      ...defaultTranslationResources,
+      {prefix: './custom-translate/definitions/form-example/', suffix: '.json'},
+      {prefix: './custom-translate/definitions/grant-application/', suffix: '.json'},
+      {prefix: './custom-translate/definitions/person/', suffix: '.json'},
+      {prefix: './custom-translate/definitions/test/', suffix: '.json'},
+      {prefix: './custom-translate/definitions/bezwaar/', suffix: '.json'}
     ]
   },
   authentication: {

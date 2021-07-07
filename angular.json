@@ -40,6 +40,11 @@
               },
               {
                 "glob": "**/*",
+                "input": "src/assets/locales",
+                "output": "./custom-translate/"
+              },
+              {
+                "glob": "**/*",
                 "input": "dist/valtimo-portal/nl-material/assets/img",
                 "output": "./img/"
               }

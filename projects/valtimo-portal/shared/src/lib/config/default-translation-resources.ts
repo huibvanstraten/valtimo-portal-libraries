@@ -23,10 +23,5 @@ export const defaultTranslationResources = [
   {prefix: './translate/public-task/', suffix: '.json'},
   {prefix: './translate/case-confirmation/', suffix: '.json'},
   {prefix: './translate/form-translations/', suffix: '.json'},
-  {prefix: './translate/form-errors/', suffix: '.json'},
-  {prefix: './translate/definitions/form-example/', suffix: '.json'},
-  {prefix: './translate/definitions/grant-application/', suffix: '.json'},
-  {prefix: './translate/definitions/person/', suffix: '.json'},
-  {prefix: './translate/definitions/test/', suffix: '.json'},
-  {prefix: './translate/definitions/bezwaar/', suffix: '.json'}
+  {prefix: './translate/form-errors/', suffix: '.json'}
 ];

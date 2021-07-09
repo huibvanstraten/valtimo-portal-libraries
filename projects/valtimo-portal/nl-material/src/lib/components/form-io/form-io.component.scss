@@ -6,6 +6,8 @@
 @import 'variables';
 @import "mixins";
 
+/* Form.io styling overrides */
+
 $wizard-nav-width: 250px;
 
 .mat-form-io-container {
@@ -84,6 +86,37 @@ $wizard-nav-width: 250px;
         color: $nl-material-warn;
       }
     }
+
+    .formio-choices {
+      padding: 16px 10px;
+      border-radius: 5px;
+      background-color: $nl-light-gray;
+      margin-top: 8px;
+    }
+
+    .choices__list {
+      margin-left: -10px;
+
+      .choices__input {
+        width: 100%;
+        margin: 0;
+      }
+
+      .choices__item {
+        padding-left: 16px;
+      }
+    }
+  }
+
+  .input-group {
+    display: flex;
+
+    div[ref=suffix] {
+      display: flex;
+      align-items: center;
+      margin-left: 16px;
+      cursor: pointer;
+    }
   }
 
   .formio-component-button.mat-flat-button {
@@ -96,6 +129,8 @@ $wizard-nav-width: 250px;
     margin-top: 8px;
   }
 }
+
+/* Form.io wizard specific styling */
 
 .is-wizard {
   .pagination {

@@ -9,9 +9,9 @@ import {
   Output,
   ViewEncapsulation
 } from '@angular/core';
-import {FormioForm, FormioOptions, FormioRefreshValue} from '@formio/angular';
+import {FormioForm, FormioOptions, FormioRefreshValue, FormioSubmission} from '@formio/angular';
 import {fadeInAnimations} from '../../animations';
-import {FormStylingService, FormTranslationService} from '@valtimo-portal/form';
+import {FormMappingService, FormStylingService, FormTranslationService} from '@valtimo-portal/form';
 import {SidenavService} from '../../services';
 import {BehaviorSubject, Observable, Subject, Subscription} from 'rxjs';
 import {map, take} from 'rxjs/operators';
@@ -58,6 +58,7 @@ export class FormIoComponent implements OnInit, OnDestroy, AfterViewInit {
   constructor(
     private readonly formTranslationService: FormTranslationService,
     private readonly formStylingService: FormStylingService,
+    private readonly formMappingService: FormMappingService,
     private readonly sidenavService: SidenavService,
     private readonly translateService: TranslateService,
     @Inject(DOCUMENT) private readonly document: HTMLDocument
@@ -81,8 +82,9 @@ export class FormIoComponent implements OnInit, OnDestroy, AfterViewInit {
     this.resetSubscription?.unsubscribe();
   }
 
-  handleSubmit(submission: any): void {
-    this.submission.emit(submission);
+  handleSubmit(submission: FormioSubmission): void {
+    const mappedSubmission = this.formMappingService.mapSubmission(submission);
+    this.submission.emit(mappedSubmission);
   }
 
   setWizardButtons(): void {

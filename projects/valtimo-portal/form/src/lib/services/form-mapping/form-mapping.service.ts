@@ -15,7 +15,7 @@
  */
 
 import {Injectable} from '@angular/core';
-import {FormioForm} from '@formio/angular';
+import {FormioForm, FormioSubmission} from '@formio/angular';
 import {ExtendedComponentSchema} from 'formiojs';
 
 @Injectable({
@@ -46,5 +46,18 @@ export class FormMappingService {
       components: form.components?.map((component) =>
         recursiveMappingFunction(component))
     };
+  }
+
+  mapSubmission(submission: FormioSubmission): FormioSubmission {
+    const dataKeysToFilter = ['submit'];
+    const submissionDataCopy = {...submission.data};
+
+    dataKeysToFilter.forEach((keyToFilter) => {
+      if (submissionDataCopy[keyToFilter]) {
+        delete submissionDataCopy[keyToFilter];
+      }
+    });
+
+    return {...submission, data: submissionDataCopy};
   }
 }

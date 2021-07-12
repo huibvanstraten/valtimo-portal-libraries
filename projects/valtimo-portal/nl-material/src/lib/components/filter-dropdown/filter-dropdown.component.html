@@ -20,6 +20,7 @@
       [(value)]="selected"
       (selectionChange)="onSelectionChange($event.value)"
       [panelClass]="'filter-dropdown-panel'"
+      [disabled]="disabled"
     >
       <mat-option *ngFor="let option of options" [value]="option.value">
         {{'filters.' + option.translationKey | translate}}

@@ -97,6 +97,22 @@ export class CaseService {
       );
   }
 
+  getOpenCasePreviews(sort: Sort = Sort.Desc): Observable<Array<CasePreview>> {
+    return this.getAllCasePreviews(sort).pipe(
+      map((casePreviews) => {
+        return casePreviews.filter((casePreview) => !this.checkIfCasePreviewCompleted(casePreview));
+      })
+    );
+  }
+
+  getCompletedCasePreviews(sort: Sort = Sort.Desc): Observable<Array<CasePreview>> {
+    return this.getAllCasePreviews(sort).pipe(
+      map((casePreviews) => {
+        return casePreviews.filter((casePreview) => this.checkIfCasePreviewCompleted(casePreview));
+      })
+    );
+  }
+
   getLatestCaseInstance(): Observable<PortalCaseInstance | undefined> {
     return this.getAllCaseInstances().pipe(
       map((caseInstances) => {
@@ -218,6 +234,11 @@ export class CaseService {
   private getLatest(array: Array<ObjectWithCreatedOnDate>): ObjectWithCreatedOnDate {
     return array.sort((a, b) =>
       a.createdOn.getTime() - b.createdOn.getTime())[0];
+  }
+
+  private checkIfCasePreviewCompleted(casePreview: CasePreview): boolean {
+    const casePreviewStatuses = casePreview.statuses;
+    return casePreviewStatuses[casePreviewStatuses.length - 1].completed;
   }
 }
 

@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {CasePreviewMode, DropdownOption} from '@valtimo-portal/nl-material';
 import {CasePreview, CaseService} from '@valtimo-portal/case';
-import {take, tap} from 'rxjs/operators';
-import {BehaviorSubject, Subscription} from 'rxjs';
+import {switchMap, tap} from 'rxjs/operators';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {Sort} from '@valtimo-portal/graphql';
 
 @Component({
@@ -26,58 +26,39 @@ import {Sort} from '@valtimo-portal/graphql';
   templateUrl: './cases.component.html',
   styleUrls: ['./cases.component.scss']
 })
-export class CasesComponent implements OnInit, OnDestroy {
-
-  loading$ = new BehaviorSubject<boolean>(true);
-
-  sortSwitch$ = new BehaviorSubject<boolean>(false);
+export class CasesComponent {
 
   currentPreviewMode = CasePreviewMode.current;
-
-  readonly casePreviews$ = new BehaviorSubject<Array<CasePreview>>([]);
 
   readonly sortOptions: Array<DropdownOption> = [
     {translationKey: 'dateDesc', value: Sort.Desc, default: true},
     {translationKey: 'dateAsc', value: Sort.Asc}
   ];
 
-  private casePreviewsSubscription!: Subscription;
+  openCasesLoading$ = new BehaviorSubject<boolean>(true);
+  completedCasesLoading$ = new BehaviorSubject<boolean>(true);
 
-  private readonly sort$ = new BehaviorSubject<Sort>(this.sortOptions[0].value);
+  private readonly openCasesSort$ = new BehaviorSubject<Sort>(this.sortOptions[0].value);
+  private readonly completedCasesSort$ = new BehaviorSubject<Sort>(this.sortOptions[0].value);
+
+  readonly openCases$: Observable<Array<CasePreview>> = this.openCasesSort$.pipe(
+    switchMap((sort) => this.caseService.getOpenCasePreviews(sort)),
+    tap(() => this.openCasesLoading$.next(false))
+  );
+
+  readonly completedCases$: Observable<Array<CasePreview>> = this.completedCasesSort$.pipe(
+    switchMap((sort) => this.caseService.getCompletedCasePreviews(sort)),
+    tap(() => this.completedCasesLoading$.next(false))
+  );
 
   constructor(private readonly caseService: CaseService) {
   }
 
-  ngOnInit(): void {
-    this.setCasePreviewsSubscription();
+  openCasesSortChange(sort: Sort): void {
+    this.openCasesSort$.next(sort);
   }
 
-  ngOnDestroy(): void {
-    this.closeCasePreviewsSubscription();
-  }
-
-  sortChange(sort: Sort): void {
-    this.sort$.next(sort);
-    this.sortSwitch$.next(true);
-    this.setCasePreviewsSubscription();
-  }
-
-  private setCasePreviewsSubscription(): void {
-    this.closeCasePreviewsSubscription();
-
-    this.sort$.pipe(take(1)).subscribe((sort) => {
-      this.casePreviewsSubscription = this.caseService.getAllCasePreviews(sort)
-        .pipe(
-          tap((casePreviews) => {
-            this.casePreviews$.next(casePreviews);
-            this.loading$.next(false);
-            this.sortSwitch$.next(false);
-          })
-        ).subscribe();
-    });
-  }
-
-  private closeCasePreviewsSubscription(): void {
-    this.casePreviewsSubscription?.unsubscribe();
+  completedCasesSortChange(sort: Sort): void {
+    this.completedCasesSort$.next(sort);
   }
 }

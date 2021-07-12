@@ -15,17 +15,35 @@
   -->
 
 <div fxFlex fxLayout="column" fxLayoutGap="16px" class="module-container">
-  <div fxLayout="row wrap" *ngIf="{cases: casePreviews$ | async} as obs">
-    <ng-container *ngIf="(loading$ | async) === false; else loading">
-      <ng-container *ngIf="obs.cases && obs.cases[0]; else noData">
-        <ng-container *ngTemplateOutlet="openCasesTitle"></ng-container>
-        <ng-container *ngIf="(sortSwitch$ | async) === false; else loading">
-          <ng-container *ngTemplateOutlet="openCases;context:{cases: obs.cases}"></ng-container>
-        </ng-container>
+  <ng-container *ngTemplateOutlet="openCases"></ng-container>
+  <ng-container *ngTemplateOutlet="completedCases"></ng-container>
+</div>
+
+<ng-template #openCases>
+  <div fxLayout="row wrap" *ngIf="{openCases: openCases$ | async} as obs">
+    <ng-container
+      *ngTemplateOutlet="openCasesTitle;context:{caseDataAvailable: obs.openCases && obs.openCases[0]}">
+    </ng-container>
+    <ng-container *ngIf="(openCasesLoading$ | async) === false; else loading">
+      <ng-container *ngIf="obs.openCases && obs.openCases[0]; else noData">
+        <ng-container *ngTemplateOutlet="cases;context:{cases: obs.openCases}"></ng-container>
       </ng-container>
     </ng-container>
   </div>
-</div>
+</ng-template>
+
+<ng-template #completedCases>
+  <div fxLayout="row wrap" *ngIf="{completedCases: completedCases$ | async} as obs" class="completed-cases-row">
+    <ng-container
+      *ngTemplateOutlet="completedCasesTitle;context:{caseDataAvailable: obs.completedCases && obs.completedCases[0]}">
+    </ng-container>
+    <ng-container *ngIf="(completedCasesLoading$ | async) === false; else loading">
+      <ng-container *ngIf="obs.completedCases && obs.completedCases[0]; else noData">
+        <ng-container *ngTemplateOutlet="cases;context:{cases: obs.completedCases}"></ng-container>
+      </ng-container>
+    </ng-container>
+  </div>
+</ng-template>
 
 <ng-template #loading>
   <div
@@ -45,21 +63,39 @@
   </div>
 </ng-template>
 
-<ng-template #openCasesTitle>
+<ng-template #openCasesTitle let-caseDataAvailable="caseDataAvailable">
   <div
     fxFlex="100"
   >
     <div class="title-container">
-      <h1 class="mat-h1 primary-bold large">{{'cases.title' | translate}}</h1>
+      <h1 class="mat-h1 primary-bold large">{{'cases.openCasesTitle' | translate}}</h1>
       <nl-material-filter-dropdown
         [options]="sortOptions"
-        (selectionChange)="sortChange($event)">
+        (selectionChange)="openCasesSortChange($event)"
+        [disabled]="!caseDataAvailable || ((openCasesLoading$ | async) === true)"
+      >
       </nl-material-filter-dropdown>
     </div>
   </div>
 </ng-template>
 
-<ng-template #openCases let-cases="cases">
+<ng-template #completedCasesTitle let-caseDataAvailable="caseDataAvailable">
+  <div
+    fxFlex="100"
+  >
+    <div class="title-container">
+      <h1 class="mat-h1 primary-bold large">{{'cases.completedCasesTitle' | translate}}</h1>
+      <nl-material-filter-dropdown
+        [options]="sortOptions"
+        (selectionChange)="completedCasesSortChange($event)"
+        [disabled]="!caseDataAvailable || ((completedCasesLoading$ | async) === true)"
+      >
+      </nl-material-filter-dropdown>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #cases let-cases="cases">
   <div
     *ngFor="let case of cases"
     fxFlex.gt-sm="33.3"

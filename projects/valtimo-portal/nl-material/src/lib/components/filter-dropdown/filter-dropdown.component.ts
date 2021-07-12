@@ -23,6 +23,7 @@ import {DropdownOption} from '../../interfaces';
   styleUrls: ['./filter-dropdown.component.scss']
 })
 export class FilterDropdownComponent implements OnInit {
+  @Input() disabled = false;
   @Input() options: Array<DropdownOption> = [];
   @Output() selectionChange = new EventEmitter<any>();
 

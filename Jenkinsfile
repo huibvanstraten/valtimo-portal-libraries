@@ -12,6 +12,8 @@ pipeline {
     }
 
     environment {
+        NPM_REPOSITORY='https://repo.ritense.com/repository/npm-ritense-private/'
+        NEXUS_REPOSITORY_NPM_TOKEN = credentials('npm-publish')
         REPO_URL = 'git@bitbucket.org:ritense/portal-libraries-ecs-configuration.git'
         AWSPROFILE = 'ritense'
         SERVICENAME = 'portal-libraries'
@@ -54,6 +56,11 @@ pipeline {
             steps {
                 sh "./gradlew buildArtifacts -Pprod -Pversion=${env.SANITIZED_VERSION} -Penv=${env.RELEASE_SCOPE}"
             }
+        }
+        stage('Publish artifacts') {
+          steps {
+            sh "export NPM_TOKEN=${NEXUS_REPOSITORY_NPM_TOKEN} NPM_REPOSITORY=${NPM_REPOSITORY} && npm run publishLibs"
+          }
         }
         stage('Push image') {
             steps {

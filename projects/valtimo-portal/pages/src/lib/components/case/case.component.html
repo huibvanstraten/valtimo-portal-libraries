@@ -73,7 +73,7 @@
         </nl-material-case-status>
       </nl-material-card>
     </div>
-    <div class="tips" fxHide.xs="true" style="margin-top: 16px">
+    <div class="tips" fxHide.xs="true" style="margin-top: 32px">
       <h1 class="mat-h1 primary-bold">{{'tips.title' | translate}}</h1>
       <nl-material-tips></nl-material-tips>
     </div>
@@ -90,10 +90,12 @@
   >
     <h1 class="mat-h1 primary-bold">{{'case.details' | translate}}</h1>
     <nl-material-case-details
+      *ngIf="!caseDetailsOverrideComponent"
       [caseDetails]="caseDetails"
       [caseDefinitionId]="case.caseDefinitionId"
     >
     </nl-material-case-details>
+    <ng-container #caseDetails></ng-container>
   </div>
 </ng-template>
 

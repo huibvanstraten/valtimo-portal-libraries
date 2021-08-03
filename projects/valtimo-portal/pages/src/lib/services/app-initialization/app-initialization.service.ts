@@ -37,7 +37,6 @@ export class AppInitializationService {
   initializeAppModule(environment: Environment): void {
     const translationEnv = environment.translation;
     const defaultLocaleIndex = translationEnv.defaultLocaleIndex || 0;
-    const href = window.location.href;
 
     this.translateService.setDefaultLang(translationEnv.supportedLocales[defaultLocaleIndex]);
 
@@ -51,10 +50,6 @@ export class AppInitializationService {
           break;
       }
     });
-
-    if (!href.toLowerCase().includes('callback') && !href.toLowerCase().includes('#state')) {
-      sessionStorage.setItem(`${environment.authentication.config.entryUrlStorageKey}`, href);
-    }
   }
 
   getNavigationMenuItems(routes: Array<PortalRoute>): Array<NavigationMenuItem> {
@@ -76,8 +71,6 @@ export class AppInitializationService {
     if (environment.authentication.config.redirectToEntryUrl && entryUrlRouterLink) {
       this.router.navigateByUrl(entryUrlRouterLink);
     }
-
-    sessionStorage.removeItem(entryUrlStorageKey);
   }
 
   prepareRoute(outlet: RouterOutlet): any {

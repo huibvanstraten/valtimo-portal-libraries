@@ -14,6 +14,21 @@
  * limitations under the License.
  */
 
-export * from './portal-case-instance';
-export * from './case-preview';
-export * from './case-detail';
+import {ComponentFactoryResolver, Injectable, ViewContainerRef} from '@angular/core';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class CaseDetailsService {
+
+  constructor(private readonly componentFactoryResolver: ComponentFactoryResolver) {
+  }
+
+  async loadComponent(viewContainerRef: ViewContainerRef, overrideComponent: any): Promise<any> {
+    viewContainerRef.clear();
+
+    return viewContainerRef.createComponent(
+      this.componentFactoryResolver.resolveComponentFactory(overrideComponent)
+    );
+  }
+}

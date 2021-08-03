@@ -14,6 +14,26 @@
  * limitations under the License.
  */
 
-export * from './portal-case-instance';
-export * from './case-preview';
-export * from './case-detail';
+import {TestBed} from '@angular/core/testing';
+import {TranslateModule} from '@ngx-translate/core';
+import {CaseMappingService} from './case-mapping.service';
+
+describe('CaseMappingService', () => {
+  let service: CaseMappingService;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [
+        TranslateModule.forRoot()
+      ],
+    });
+    service = TestBed.inject(CaseMappingService);
+  });
+
+  afterEach(() => {
+  });
+
+  it('should be created', () => {
+    expect(service).toBeTruthy();
+  });
+});

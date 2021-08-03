@@ -1,6 +1,8 @@
 <table *ngIf="caseDetails.length > 0; else notAvailable" class="mat-table">
   <tr class="mat-row" *ngFor="let detail of caseDetails">
-    <td class="mat-cell">{{caseDefinitionId + '.properties.' + detail.key | translate }}</td>
+    <td class="mat-cell" [style.paddingLeft.px]="detail.level * 16" [ngClass]="{'heading': detail.isHeading}">
+      {{ caseDefinitionId + '.properties.' + detail.key | translate }}
+    </td>
     <td class="mat-cell"> {{detail.value}}</td>
   </tr>
 </table>

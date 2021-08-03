@@ -17,6 +17,7 @@
 import {Authentication} from '../types';
 import {GraphQLNamedClient} from './graphql';
 import {ITranslationResource} from 'ngx-translate-multi-http-loader';
+import {ComponentType} from '@angular/cdk/overlay';
 
 export interface Environment {
   flags: {
@@ -36,5 +37,8 @@ export interface Environment {
     graphql: {
       clients: Array<GraphQLNamedClient>
     }
+  };
+  viewOverrides?: {
+    caseDetails?: ComponentType<any>;
   };
 }

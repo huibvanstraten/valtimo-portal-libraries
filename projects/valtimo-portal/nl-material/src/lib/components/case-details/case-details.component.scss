@@ -20,6 +20,10 @@
         font-weight: bold;
         padding-left: 32px;
       }
+
+      &.heading {
+        color: $nl-material-primary;
+      }
     }
 
     &:last-child {

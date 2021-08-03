@@ -14,6 +14,18 @@
  * limitations under the License.
  */
 
-export * from './portal-case-instance';
-export * from './case-preview';
-export * from './case-detail';
+import {TestBed} from '@angular/core/testing';
+import {PageTitleService} from './page-title.service';
+
+describe('PageTitleService', () => {
+  let service: PageTitleService;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({});
+    service = TestBed.inject(PageTitleService);
+  });
+
+  it('should be created', () => {
+    expect(service).toBeTruthy();
+  });
+});

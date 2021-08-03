@@ -15,7 +15,7 @@
  */
 
 import {Inject, Injectable, Renderer2, RendererFactory2} from '@angular/core';
-import {DOCUMENT} from "@angular/common";
+import {DOCUMENT} from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -34,14 +34,14 @@ export class IconService {
    * Get the favicon of the current HTML document.
    */
   getFavicon(): HTMLLinkElement | null {
-    return this.document.querySelector<HTMLLinkElement>("link[rel*='icon']");
+    return this.document.querySelector<HTMLLinkElement>('link[rel*=\'icon\']');
   }
 
   /**
    * Set the title of the current HTML document.
    * @param iconURL - Default favicon URL
    */
-  setFavicon(iconURL: string) {
+  setFavicon(iconURL: string): void {
     const link: HTMLLinkElement = this.getFavicon() || this.renderer.createElement('link');
     this.appendLinkTag(link, iconURL);
   }
@@ -51,7 +51,7 @@ export class IconService {
    * @param link - DOM element
    * @param iconURL - favicon URL
    */
-  private appendLinkTag(link: HTMLLinkElement, iconURL: string) {
+  private appendLinkTag(link: HTMLLinkElement, iconURL: string): void {
     link.type = 'image/x-icon';
     link.rel = 'shortcut icon';
     link.href = iconURL;

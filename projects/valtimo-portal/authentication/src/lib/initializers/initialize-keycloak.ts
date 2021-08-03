@@ -19,6 +19,11 @@ import {Environment} from '@valtimo-portal/shared';
 
 export const initializeKeycloak = (keycloak: KeycloakService, environment: Environment) => {
   const config = environment.authentication.config;
+  const href = window.location.href;
+
+  if (!href.toLowerCase().includes('callback') && !href.toLowerCase().includes('#state')) {
+    sessionStorage.setItem(`${environment.authentication.config.entryUrlStorageKey}`, href);
+  }
 
   return () =>
     keycloak.init({

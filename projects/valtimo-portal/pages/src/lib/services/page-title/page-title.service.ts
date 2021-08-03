@@ -36,9 +36,9 @@ export class PageTitleService {
   setPageTitle(): void {
     this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(() => {
       this.getChild(this.activatedRoute).data.subscribe(data => {
-        this.title.setTitle(this.translateService.instant(data.title))
-      })
-    })
+        this.title.setTitle(this.translateService.instant(data.title));
+      });
+    });
   }
 
   private getChild(activatedRoute: ActivatedRoute): ActivatedRoute {

@@ -14,6 +14,18 @@
  * limitations under the License.
  */
 
-export * from './portal-case-instance';
-export * from './case-preview';
-export * from './case-detail';
+import {TestBed} from '@angular/core/testing';
+import {IconService} from './icon.service';
+
+describe('IconService', () => {
+  let service: IconService;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({});
+    service = TestBed.inject(IconService);
+  });
+
+  it('should be created', () => {
+    expect(service).toBeTruthy();
+  });
+});

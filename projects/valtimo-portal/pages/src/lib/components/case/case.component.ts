@@ -14,20 +14,23 @@
  * limitations under the License.
  */
 
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {CasePreviewStatus, CaseService, PortalCaseInstance} from '@valtimo-portal/case';
+import {AfterViewChecked, Component, Inject, OnDestroy, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
+import {CaseDetail, CaseMappingService, CasePreviewStatus, CaseService, PortalCaseInstance} from '@valtimo-portal/case';
 import {map, switchMap, tap} from 'rxjs/operators';
-import {BreadcrumbsService, CardType, CaseDetail, CasePreviewMode} from '@valtimo-portal/nl-material';
+import {BreadcrumbsService, CardType, CasePreviewMode} from '@valtimo-portal/nl-material';
 import {ActivatedRoute} from '@angular/router';
 import {BehaviorSubject, combineLatest, merge, Observable, Subscription} from 'rxjs';
 import {TranslateService} from '@ngx-translate/core';
+import {CaseDetailsService} from '../../services/case-details';
+import {Environment} from '@valtimo-portal/shared';
 
 @Component({
   selector: 'page-case',
   templateUrl: './case.component.html',
   styleUrls: ['./case.component.scss']
 })
-export class CaseComponent implements OnInit, OnDestroy {
+export class CaseComponent implements OnInit, OnDestroy, AfterViewChecked {
+  @ViewChild('caseDetails', {read: ViewContainerRef}) caseDetailsVcRef!: ViewContainerRef;
 
   title$!: Observable<string>;
 
@@ -48,25 +51,7 @@ export class CaseComponent implements OnInit, OnDestroy {
   caseDetails$: Observable<Array<CaseDetail>> = merge(this.translateService.onLangChange, this.case$)
     .pipe(
       switchMap(() => this.case$),
-      map((caseInstance) => {
-        return Object.keys(caseInstance.submission)
-            .map((key) => {
-              return {key, value: caseInstance.submission[key]};
-            })
-            .filter((detail) => detail.key !== 'submit')
-            .map((detail) => {
-              const value = `${detail.value}`.trim().toLocaleLowerCase();
-
-              if (value === 'true') {
-                return {...detail, value: this.translateService.instant('case.true')};
-              } else if (value === 'false') {
-                return {...detail, value: this.translateService.instant('case.false')};
-              }
-
-              return detail;
-            })
-          || [];
-      })
+      map((caseInstance) => this.caseMappingService.mapCaseInstanceToCaseDetails(caseInstance))
     );
 
   previewStatuses$: Observable<Array<CasePreviewStatus>> = combineLatest(
@@ -89,21 +74,35 @@ export class CaseComponent implements OnInit, OnDestroy {
   readonly clippingPreviewMode = CasePreviewMode.clipping;
   readonly caseStatusType = CardType.caseStatus;
 
+  readonly caseDetailsOverrideComponent = this.environment.viewOverrides?.caseDetails;
+
   private langChangeSubscription!: Subscription;
+
+  private caseDetailsVcRefReady = false;
 
   private readonly breadcrumbPosition = 2;
 
   constructor(
+    @Inject('environment') private readonly environment: Environment,
     private readonly caseService: CaseService,
     private readonly route: ActivatedRoute,
     private readonly breadcrumbsService: BreadcrumbsService,
     private readonly translateService: TranslateService,
+    private readonly caseMappingService: CaseMappingService,
+    private readonly caseDetailsService: CaseDetailsService
   ) {
     this.title$ = this.breadcrumbsService.getBreadcrumbReplacement(this.breadcrumbPosition);
   }
 
   ngOnInit(): void {
     this.openLangChangeSubscription();
+  }
+
+  ngAfterViewChecked(): void {
+    if (!this.caseDetailsVcRefReady && this.caseDetailsOverrideComponent && this.caseDetailsVcRef) {
+      this.caseDetailsVcRefReady = true;
+      this.caseDetailsService.loadComponent(this.caseDetailsVcRef, this.caseDetailsOverrideComponent);
+    }
   }
 
   ngOnDestroy(): void {

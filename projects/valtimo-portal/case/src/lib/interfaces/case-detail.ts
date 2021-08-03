@@ -14,6 +14,9 @@
  * limitations under the License.
  */
 
-export * from './portal-case-instance';
-export * from './case-preview';
-export * from './case-detail';
+export interface CaseDetail {
+  key: string;
+  value: string;
+  level: number;
+  isHeading?: boolean;
+}

@@ -16,6 +16,5 @@
 
 export * from './navigation-menu';
 export * from './breadcrumbs';
-export * from './case-detail';
 export * from './tip';
 export * from './dropdown-option';

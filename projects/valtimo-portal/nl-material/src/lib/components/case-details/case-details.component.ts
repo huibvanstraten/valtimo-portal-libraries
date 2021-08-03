@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {CaseDetail} from '../../interfaces';
+import {CaseDetail} from '@valtimo-portal/case';
 
 @Component({
   selector: 'nl-material-case-details',

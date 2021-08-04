@@ -18,7 +18,8 @@
     },
     "properties": {
       "firstName": "First name",
-      "age": "Age"
+      "age": "Age",
+      "email": "E-mail"
     },
     "tips": [
       "Please fill in your personal details completely and accurately. In this way, we can help you as quickly as possible.",

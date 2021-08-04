@@ -18,7 +18,8 @@
     },
     "properties": {
       "firstName": "Voornaam",
-      "age": "Leeftijd"
+      "age": "Leeftijd",
+      "email": "E-mail"
     },
     "tips": [
       "Vul alsjeblieft jouw persoonsgegevens zo compleet en accuraat mogelijk in. Zo kunnen we jou het snelst helpen.",

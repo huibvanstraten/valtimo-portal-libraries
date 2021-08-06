@@ -1,0 +1,5 @@
+mutation CompletePublicTask($submission: JSON!, $taskExternalId: String!) {
+  completePublicTask(submission: $submission, taskExternalId:  $taskExternalId) @namedClient(name: "portal-api") {
+    taskId
+  }
+}

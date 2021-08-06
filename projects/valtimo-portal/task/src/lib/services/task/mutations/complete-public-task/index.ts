@@ -14,5 +14,4 @@
  * limitations under the License.
  */
 
-export * from './complete-task';
-export * from './complete-public-task';
+export {CompletePublicTaskGQL} from './complete-public-task.graphql-gen';

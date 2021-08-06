@@ -1,4 +1,4 @@
-query FindPublicTask($taskId: UUID!) {
+query FindPublicTask($taskId: String!) {
   findPublicTask(taskId: $taskId) @namedClient(name: "portal-api") {
     isCompleted
     createdOn

@@ -1,3 +1,8 @@
+import * as Types from '@valtimo-portal/graphql';
+
+import { gql } from 'apollo-angular';
+import { Injectable } from '@angular/core';
+import * as Apollo from 'apollo-angular';
 export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
@@ -14,6 +19,8 @@ export interface Scalars {
   /** A type representing a formatted java.util.UUID */
   UUID: any;
 }
+
+
 
 
 
@@ -157,3 +164,36 @@ export interface TaskInstance {
   taskId: Scalars['UUID'];
 }
 
+
+export type CompletePublicTaskMutationVariables = Types.Exact<{
+  submission: Types.Scalars['JSON'];
+  taskExternalId: Types.Scalars['String'];
+}>;
+
+
+export type CompletePublicTaskMutation = (
+  { __typename?: 'Mutation' }
+  & { completePublicTask: (
+    { __typename?: 'TaskInstance' }
+    & Pick<Types.TaskInstance, 'taskId'>
+  ) }
+);
+
+export const CompletePublicTaskDocument = gql`
+    mutation CompletePublicTask($submission: JSON!, $taskExternalId: String!) {
+  completePublicTask(submission: $submission, taskExternalId: $taskExternalId) {
+    taskId
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class CompletePublicTaskGQL extends Apollo.Mutation<CompletePublicTaskMutation, CompletePublicTaskMutationVariables> {
+    document = CompletePublicTaskDocument;
+    client = 'portal-api';
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }

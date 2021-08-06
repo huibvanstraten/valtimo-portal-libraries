@@ -23,10 +23,11 @@ import {TranslateService} from '@ngx-translate/core';
 import {PortalTask} from '../../interfaces';
 import {QueryRef} from 'apollo-angular';
 import {Exact} from '@valtimo-portal/graphql';
-import {CompleteTaskGQL} from './mutations';
+import {CompletePublicTaskGQL, CompleteTaskGQL} from './mutations';
 import {FetchResult} from '@apollo/client/core';
 import {CompleteTaskMutation} from './mutations/complete-task/complete-task.graphql-gen';
 import {FindPublicTaskGQL} from './queries/find-public-task';
+import {CompletePublicTaskMutation} from "./mutations/complete-public-task/complete-public-task.graphql-gen";
 
 @Injectable({
   providedIn: 'root'
@@ -40,6 +41,7 @@ export class TaskService {
     private readonly findAllTasksGQL: FindAllTasksGQL,
     private readonly findPublicTaskGQL: FindPublicTaskGQL,
     private readonly completeTaskGQL: CompleteTaskGQL,
+    private readonly completePublicTaskGQL: CompletePublicTaskGQL,
     private readonly notificationService: NotificationService,
     private readonly translateService: TranslateService
   ) {
@@ -98,6 +100,16 @@ export class TaskService {
 
   completeTask(submission: any, taskId: string): Observable<FetchResult<CompleteTaskMutation> | undefined> {
     return this.completeTaskGQL.mutate({submission, taskId}).pipe(
+      catchError(() => {
+          this.notificationService.show(this.translateService.instant('formErrors.validationGeneric'));
+          return of(undefined);
+        }
+      )
+    );
+  }
+
+  completePublicTask(submission: any, taskExternalId: string): Observable<FetchResult<CompletePublicTaskMutation> | undefined> {
+    return this.completePublicTaskGQL.mutate({submission, taskExternalId}).pipe(
       catchError(() => {
           this.notificationService.show(this.translateService.instant('formErrors.validationGeneric'));
           return of(undefined);

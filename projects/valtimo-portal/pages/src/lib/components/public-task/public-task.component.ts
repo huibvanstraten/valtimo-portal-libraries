@@ -77,7 +77,7 @@ export class PublicTaskComponent implements OnInit, OnDestroy {
     this.route.queryParams
       .pipe(take(1))
       .subscribe((params) => {
-          this.taskService.completeTask(submission.data, params.id).subscribe((res) => {
+          this.taskService.completePublicTask(submission.data, params.id).subscribe((res) => {
             this.submitting$.next(false);
 
             if (res) {

@@ -25,6 +25,7 @@ export interface Scalars {
 
 
 
+
 export interface CaseCreated {
   __typename?: 'CaseCreated';
   caseId: Scalars['UUID'];
@@ -72,6 +73,8 @@ export interface Mutation {
   processSubmission: CaseCreated;
   /** Complete task mutation */
   completeTask: TaskInstance;
+  /** Mutation used to complete public tasks */
+  completePublicTask: TaskInstance;
 }
 
 
@@ -87,6 +90,12 @@ export interface MutationCompleteTaskArgs {
   submission: Scalars['JSON'];
 }
 
+
+export interface MutationCompletePublicTaskArgs {
+  taskExternalId: Scalars['String'];
+  submission: Scalars['JSON'];
+}
+
 export interface Query {
   __typename?: 'Query';
   /** retrieves all available case definitions */
@@ -96,7 +105,7 @@ export interface Query {
   /** retrieves single case instance from repository */
   getCaseInstance?: Maybe<CaseInstance>;
   /** find all available tasks */
-  findAllTasks?: Maybe<Array<TaskInstance>>;
+  findAllTasks: Array<TaskInstance>;
   /** find all available tasks for external case id */
   findTasks?: Maybe<Array<TaskInstance>>;
   /** find public task with id */
@@ -124,7 +133,7 @@ export interface QueryFindTasksArgs {
 
 
 export interface QueryFindPublicTaskArgs {
-  taskId: Scalars['UUID'];
+  taskId: Scalars['String'];
 }
 
 

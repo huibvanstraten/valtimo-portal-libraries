@@ -3,6 +3,7 @@
   <ng-container *ngIf="formDefinition$ | async as formDefinition; else loading">
     <formio
       [form]="formDefinition"
+      [submission]="submissionData"
       (submit)="handleSubmit($event)"
       [readOnly]="submitting"
       [refresh]="refresh"

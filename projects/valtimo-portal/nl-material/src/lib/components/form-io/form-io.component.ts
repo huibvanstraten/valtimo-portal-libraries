@@ -28,6 +28,7 @@ import {TranslateService} from '@ngx-translate/core';
 export class FormIoComponent implements OnInit, OnDestroy, AfterViewInit {
   @Input() definition!: FormioForm;
   @Input() caseDefinitionId!: string;
+  @Input() submissionData?: object | {} = {};
   @Input() title!: string;
   @Input() submitting = false;
   @Input() reset$!: Subject<boolean>;

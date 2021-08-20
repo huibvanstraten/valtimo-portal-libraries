@@ -1,5 +1,6 @@
 import groovy.json.JsonOutput
 import groovy.json.JsonSlurper
+import java.time.LocalDate
 
 pipeline {
     agent { label 'nodeJS14' }
@@ -27,8 +28,7 @@ pipeline {
         RITENSE_BUILDSERVER = credentials('RITENSE_BUILDSERVER')
         RELEASE_SCOPE = "Test"
 
-        VERSION = "${env.BRANCH_NAME}-${BUILD_NUMBER}"
-        SANITIZED_VERSION = VERSION.replaceAll("[\\/\\+\\|<>,;]", "-").toLowerCase();
+        SANITIZED_VERSION = "${LocalDate.now().toString().replace('-', '.')}.${BUILD_NUMBER}"
     }
 
     stages {

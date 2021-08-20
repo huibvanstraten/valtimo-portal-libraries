@@ -24,6 +24,7 @@
     "build:task": "ng build @valtimo-portal/task",
     "build:nl-material": "ng build @valtimo-portal/nl-material",
     "build:pages": "ng build @valtimo-portal/pages",
+    "updateVersion": "node ./scripts/libs.update.version.js",
     "serve:app": "wait-on dist/valtimo-portal/pages/public-api.d.ts && npm run start",
     "publishLibs": "node ./scripts/libs.publish.all.js",
     "watchAll:clean": "npm run clean",

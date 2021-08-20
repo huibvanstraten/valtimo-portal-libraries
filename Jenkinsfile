@@ -57,6 +57,11 @@ pipeline {
                 sh "./gradlew buildArtifacts -Pprod -Pversion=${env.SANITIZED_VERSION} -Penv=${env.RELEASE_SCOPE}"
             }
         }
+        stage('Update versions') {
+          steps {
+            sh "export PROJECT_VERSION=${SANITIZED_VERSION} && npm run updateVersion"
+          }
+        }
         stage('Publish artifacts') {
           steps {
             sh "export NPM_TOKEN=${NEXUS_REPOSITORY_NPM_TOKEN} NPM_REPOSITORY=${NPM_REPOSITORY} && npm run publishLibs"

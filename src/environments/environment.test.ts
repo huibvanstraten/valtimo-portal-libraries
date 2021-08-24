@@ -53,5 +53,9 @@ export const environment: Environment = {
         {name: 'portal-api', uri: 'https://portal.test.valtimo.nl/graphql'}
       ]
     }
+  },
+  formioAppConfig: {
+    appUrl: 'https://portal.test.valtimo.nl',
+    apiUrl: 'https://portal.test.valtimo.nl'
   }
 };

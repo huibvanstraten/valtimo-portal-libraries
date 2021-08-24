@@ -37,7 +37,7 @@ import {environment} from '../environments';
 import {KeycloakAngularModule, KeycloakService} from 'keycloak-angular';
 import {initializeKeycloak, KeycloakAppAuthGuard} from '@valtimo-portal/authentication';
 import {GraphQLModule} from '@valtimo-portal/graphql';
-import {Environment, formioAppConfig} from '@valtimo-portal/shared';
+import {Environment} from '@valtimo-portal/shared';
 import {FormioAppConfig} from '@formio/angular';
 import {AppInitializationService} from '@valtimo-portal/pages';
 import {FlexLayoutModule} from '@angular/flex-layout';
@@ -55,7 +55,7 @@ export const HttpLoaderFactory = (http: HttpClient, env: Environment) =>
       deps: [KeycloakService, 'environment'],
     },
     KeycloakAppAuthGuard,
-    {provide: FormioAppConfig, useValue: formioAppConfig}
+    {provide: FormioAppConfig, useValue: environment.formioAppConfig}
   ],
   declarations: [
     AppComponent,

@@ -57,6 +57,10 @@ export const environment: Environment = {
         {name: 'portal-api', uri: 'http://localhost:4201/graphql'}
       ]
     }
+  },
+  formioAppConfig: {
+    appUrl: 'http://localhost:4201',
+    apiUrl: 'http://localhost:4201'
   }
 };
 

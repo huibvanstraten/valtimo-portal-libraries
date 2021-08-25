@@ -44,5 +44,5 @@ export interface Environment {
     caseDetails?: ComponentType<any>;
   };
   formioAppConfig: FormioAppConfig;
-  customFormioComponentRegisterFunctions?: Array<(injector: Injector) => void>;
+  customFormioComponentRegistrations?: Array<{ selector: string; function: (injector: Injector) => void }>;
 }

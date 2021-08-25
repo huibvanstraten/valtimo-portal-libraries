@@ -34,8 +34,10 @@ import {Environment} from '@valtimo-portal/shared';
 })
 export class FormIoModule {
   constructor(@Inject('environment') private readonly environment: Environment, private readonly injector: Injector) {
-    environment.customFormioComponentRegisterFunctions?.forEach((registerFunction) => {
-      registerFunction(injector);
+    environment.customFormioComponentRegistrations?.forEach((registration) => {
+      if (!customElements?.get(registration.selector)) {
+        registration.function(injector);
+      }
     });
   }
 }

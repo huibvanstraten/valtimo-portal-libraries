@@ -14,12 +14,13 @@
  * limitations under the License.
  */
 
-import {NgModule} from '@angular/core';
+import {Inject, Injector, NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormIoComponent} from './form-io.component';
 import {MatIconModule} from '@angular/material/icon';
 import {FormioModule as AngularFormioModule} from '@formio/angular';
 import {SpinnerModule} from '../spinner';
+import {Environment} from '@valtimo-portal/shared';
 
 @NgModule({
   declarations: [FormIoComponent],
@@ -32,4 +33,9 @@ import {SpinnerModule} from '../spinner';
   exports: [FormIoComponent]
 })
 export class FormIoModule {
+  constructor(@Inject('environment') private readonly environment: Environment, private readonly injector: Injector) {
+    environment.customFormioComponentRegisterFunctions?.forEach((registerFunction) => {
+      registerFunction(injector);
+    });
+  }
 }

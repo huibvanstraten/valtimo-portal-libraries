@@ -19,6 +19,7 @@ import {GraphQLNamedClient} from './graphql';
 import {ITranslationResource} from 'ngx-translate-multi-http-loader';
 import {ComponentType} from '@angular/cdk/overlay';
 import {FormioAppConfig} from '@formio/angular';
+import {Injector} from '@angular/core';
 
 export interface Environment {
   flags: {
@@ -43,4 +44,5 @@ export interface Environment {
     caseDetails?: ComponentType<any>;
   };
   formioAppConfig: FormioAppConfig;
+  customFormioComponentRegisterFunctions?: Array<(injector: Injector) => void>;
 }

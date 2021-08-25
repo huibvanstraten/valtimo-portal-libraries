@@ -68,6 +68,7 @@
     "@formio/angular": "^5.1.0",
     "@gilsdav/ngx-translate-router": "^3.1.6",
     "@ngx-translate/core": "^13.0.0",
+    "@webcomponents/custom-elements": "^1.5.0",
     "apollo-angular": "^2.4.0",
     "graphql": "^15.5.0",
     "keycloak-angular": "^8.1.0",
